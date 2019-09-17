@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on blockの巣</title>
+    <link>https://block-cube-lib.github.io/posts/</link>
+    <description>Recent content in Posts on blockの巣</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Tue, 17 Sep 2019 21:12:20 +0900</lastBuildDate>
+    
+	<atom:link href="https://block-cube-lib.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>サイト開設しました</title>
+      <link>https://block-cube-lib.github.io/posts/open-website/</link>
+      <pubDate>Tue, 17 Sep 2019 21:12:20 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/posts/open-website/</guid>
+      <description>自分一人用のサイトが欲しくて開設しました。
+しばらくは頻繁に見た目が変わったりすることもあるかもしれないです。
+サイト名も変わるかもしれないです。</description>
+    </item>
+    
+  </channel>
+</rss>
