@@ -87,5 +87,16 @@ Link  Twitter GitHub Qiita Crieit Amazon欲しい物リスト
   最終更新: 2019/09/18</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://block-cube-lib.github.io/privacy_policy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/privacy_policy/</guid>
+      <description>Privacy Policy アクセス解析について 当サイトではアクセス解析ツール「Google アナリティクス」を使用しています。
+このGoogleアナリティクスはトラフィックデータの収集のためにCookieを使用しています。 このトラフィックデータは匿名で収集されており、個人を特定するものではありません。 この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。 詳しくは下記をご確認ください
+ Google アナリティクス ポリシーと規約  最終更新: 2019/09/26</description>
+    </item>
+    
   </channel>
 </rss>
