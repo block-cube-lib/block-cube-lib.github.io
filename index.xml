@@ -6,10 +6,35 @@
     <description>Recent content on blockの巣</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 25 Sep 2019 22:01:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 01 Dec 2019 22:00:00 +0900</lastBuildDate>
     
 	<atom:link href="https://block-cube-lib.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git Author</title>
+      <link>https://block-cube-lib.github.io/documentation/git-author/</link>
+      <pubDate>Sun, 01 Dec 2019 22:00:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/documentation/git-author/</guid>
+      <description>git authorの日本語ドキュメントです。
+リポジトリ
+Overview  コマンド一発でuser.nameとuser.emailを取得または設定できます 過去のコミットのAuthorを書き換えることができます  Description git authorまたはgit author getでuser.nameとuser.emailを取得できます。
+git set foo foo@abc.comでuser.nameとuser.emailを設定できます。
+git replace foo foo@abc.com bar bar@xyz.comで 過去のコミットのauthorとcommiterのfoo &amp;lt;foo@abc.com&amp;gt;をbar &amp;lt;bar@xyz.com&amp;gt;に置き換えます。
+置き換え後の名前とメールアドレス(bar bar@xyz.com)は省略可能で、省略した場合はgit author getで取得できるauthorに置き換えます。 Installation Cargoが使える必要があります。
+cargo install git-author でインストールできます。
+License MIT</description>
+    </item>
+    
+    <item>
+      <title>Works</title>
+      <link>https://block-cube-lib.github.io/works/</link>
+      <pubDate>Fri, 29 Nov 2019 14:12:40 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/works/</guid>
+      <description> 個人  git author  Project Cube  イカボット  Tortoise Games  オレンジマラソン  </description>
+    </item>
     
     <item>
       <title>Unite Tokyo 2019 Day1に参加しました</title>

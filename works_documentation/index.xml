@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Works_documentations on blockの巣</title>
+    <link>https://block-cube-lib.github.io/works_documentation/</link>
+    <description>Recent content in Works_documentations on blockの巣</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Mon, 02 Dec 2019 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://block-cube-lib.github.io/works_documentation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git Author</title>
+      <link>https://block-cube-lib.github.io/works_documentation/git-author/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/works_documentation/git-author/</guid>
+      <description> git authorの日本語ドキュメントです。
+Overview  コマンド一発でuser.nameとuser.emailを取得または設定できます 過去のコミットのAuthorを書き換えることができます  Description Installation Cargoが使える必要があります。
+$ cargo install git-author でインストールできます。
+License </description>
+    </item>
+    
+  </channel>
+</rss>
