@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git author on blockの巣</title>
+    <link>https://block-cube-lib.github.io/tags/git-author/</link>
+    <description>Recent content in git author on blockの巣</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 03 Dec 2019 12:40:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://block-cube-lib.github.io/tags/git-author/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PONOS Advent Calendar 2019に参加しました</title>
+      <link>https://block-cube-lib.github.io/posts/ponos-advent-calendar-2019/</link>
+      <pubDate>Tue, 03 Dec 2019 12:40:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/posts/ponos-advent-calendar-2019/</guid>
+      <description>gitで複数のユーザーを使い分ける人用のサブコマンドgit authorを作ってcrates.ioで公開したのでその記事を書きました。
+gitで複数のユーザーを使い分ける人用サブコマンド(git author)を作った
+gitのサブコマンド開発もcrates.ioでの公開も初めてだったので色々と苦労しました。
+その話もそのうち書きます。</description>
+    </item>
+    
+  </channel>
+</rss>
