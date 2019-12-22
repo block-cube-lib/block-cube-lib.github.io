@@ -6,7 +6,7 @@
     <description>Recent content in Tags on blockの巣</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 03 Dec 2019 12:40:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 22 Dec 2019 23:50:00 +0900</lastBuildDate>
     
 	<atom:link href="https://block-cube-lib.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>Advent Calendar</title>
       <link>https://block-cube-lib.github.io/tags/advent-calendar/</link>
-      <pubDate>Tue, 03 Dec 2019 12:40:00 +0900</pubDate>
+      <pubDate>Sun, 22 Dec 2019 23:50:00 +0900</pubDate>
       
       <guid>https://block-cube-lib.github.io/tags/advent-calendar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keyboard</title>
+      <link>https://block-cube-lib.github.io/tags/keyboard/</link>
+      <pubDate>Sun, 22 Dec 2019 23:50:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/tags/keyboard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PONOS Advent Calendar 2019</title>
+      <link>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2019/</link>
+      <pubDate>Tue, 03 Dec 2019 12:40:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2019/</guid>
       <description></description>
     </item>
     
@@ -35,15 +53,6 @@
       <pubDate>Tue, 03 Dec 2019 12:40:00 +0900</pubDate>
       
       <guid>https://block-cube-lib.github.io/tags/git-author/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>PONOS Advent Calendar 2019</title>
-      <link>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2019/</link>
-      <pubDate>Tue, 03 Dec 2019 12:40:00 +0900</pubDate>
-      
-      <guid>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2019/</guid>
       <description></description>
     </item>
     

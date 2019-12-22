@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Advent Calendar on blockの巣</title>
-    <link>https://block-cube-lib.github.io/tags/advent-calendar/</link>
-    <description>Recent content in Advent Calendar on blockの巣</description>
+    <title>keyboard on blockの巣</title>
+    <link>https://block-cube-lib.github.io/tags/keyboard/</link>
+    <description>Recent content in keyboard on blockの巣</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <lastBuildDate>Sun, 22 Dec 2019 23:50:00 +0900</lastBuildDate>
     
-	<atom:link href="https://block-cube-lib.github.io/tags/advent-calendar/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://block-cube-lib.github.io/tags/keyboard/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -37,18 +37,6 @@ BLEで無線化した Iris無線化ログ
 &amp;mdash; block (@block_cube_lib) September 2, 2019  今後やりたいこと ノートPCに乗せて作業したりメモとったりすることがあるのでこんな感じのキーボードブリッジを作りたいです。
 あと1からキーボードを自作したいです。Irisには概ね満足していますが、もう少しだけキーを増やしたいのとBLE接続関係のキーを専用のボタンなどにしたいです。
 あとは電池基盤をキーボードのPCBに一体化するか、モバイルバッテリーから電力供給するかしたいです。できるなら光らせたい。</description>
-    </item>
-    
-    <item>
-      <title>PONOS Advent Calendar 2019に参加しました</title>
-      <link>https://block-cube-lib.github.io/posts/ponos-advent-calendar-2019/</link>
-      <pubDate>Tue, 03 Dec 2019 12:40:00 +0900</pubDate>
-      
-      <guid>https://block-cube-lib.github.io/posts/ponos-advent-calendar-2019/</guid>
-      <description>gitで複数のユーザーを使い分ける人用のサブコマンドgit authorを作ってcrates.ioで公開したのでその記事を書きました。
-gitで複数のユーザーを使い分ける人用サブコマンド(git author)を作った
-gitのサブコマンド開発もcrates.ioでの公開も初めてだったので色々と苦労しました。
-その話もそのうち書きます。</description>
     </item>
     
   </channel>
