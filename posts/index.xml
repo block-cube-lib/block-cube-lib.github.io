@@ -6,10 +6,45 @@
     <description>Recent content in Posts on blockの巣</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 22 Dec 2019 23:50:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 24 Dec 2019 18:30:00 +0900</lastBuildDate>
     
 	<atom:link href="https://block-cube-lib.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unity×KYOTO Vol.0で発表しました</title>
+      <link>https://block-cube-lib.github.io/posts/unity-kyoto-0/</link>
+      <pubDate>Tue, 24 Dec 2019 18:30:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/posts/unity-kyoto-0/</guid>
+      <description>2019/12/19に京都で行われたUnity×KYOTO Vol.0で 「Universal Render Pipelineでポストプロセス」というタイトルで発表しました。
+スライドは既に公開されています。
+発表の様子 こういう場で発表するのは人生初なので緊張しましたが、主観では特に失敗なく終われたと思っています。
+後の自分のためにも経緯とか準備の話とか書いていきます。
+発表者決定まで Ponosから発表者が出るまでの経緯や自分が所属しているスタジオに声がかかった経緯は詳しくは知らないので省略します。
+スタジオ内のUnityエンジニアに「発表したい人いたら立候補して」みたいな連絡があったので、それはそれは悩んで立候補しました。
+自分が発表するって決まったときは緊張で手汗がすごかったです。発表するって決まっただけなのに。
+あと50分枠1人では無理だと思ったこともありエンジニアのリーダーと僕で25分ずつで分けることにしました。ありがとうリーダー。
+これが11/19なので発表の1月前です。
+発表準備 テーマ(タイトル)決定まで イベントやるよって情報を公開するために何を発表するかを公開する必要があります。
+つまりタイトルくらいは先に決めておく必要があるわけです。
+しかし自分が持ってる情報で他の人が興味を持つものが思いつきませんでした。 そのため
+ まず間違いなくDOTSを目的に来る人がいる
+→それなら新しい機能のほうが興味を引けるはず 見た目でわかりやすいものが良さそう Shader Graph使いたい  などからUniversal Render Pipelineで何かしらやる。いけそうならポストプロセスって感じで決めました。 このときが11/22です。既に3日経過。
+PostProcessing Stack V3でカスタムエフェクトの追加ができないと気づくまで Universal Render Pipeline(URP)がLightweight Render Pipeline(LWRP)の後継的なポジションなのは知っていましたが、 それ以外は全くわかってないので調べつつ作ってました。
+PostProcessing Stackの存在を知った時点で
+「ちょこっとコード書いたら後はShader Graphで遊んでるくらいでどうにかなるやろ」
+などと考えてました。なりませんでした。
+発表内容にあるように、PostProcessing Stack V3でカスタムエフェクトが追加できなかったからです。
+Unity Blogの 軽量レンダーパイプラインからユニバーサルレンダーパイプラインへに
+ ただし、現在ポストプロセッシングはカスタムエフェクトに対応していません（今後追加される予定です）。
+ と書いてあるのを見逃しており、PostProcessing Stack V3にカスタムエフェクトを追加できないかと調べていました。
+最終的にUniversal Render Pipelineのコードを読んで「あれ？これ無理じゃね？」って気づいたあたりで先程の記事を読み直し無理だと知りました。
+最初からよく読んでいればこんなに時間はかからなかったのに…
+この時点でポストプロセスのネタのままいけるか不安になってました。 多分ここらへんで11月終わりそうになってました。
+RenderObjectsを使うと決めるまで Unity-Technologies/UniversalRenderingExamples を見て、RendererFeatureを自作すればかなり自由にいろいろできることが判明したのですが、
+ コードの解説ばかりになりそうなので聞く人が面白くないかもしれない SceneColorノードでレンダリング結果を取得できる 本番まで準備期間が少ない  などからRenderObjectsを使用しコードを書かなくても良い、コードの解説も不要な内容にしました。</description>
+    </item>
     
     <item>
       <title>HHKBから自作キーボードに乗り換えた話</title>
