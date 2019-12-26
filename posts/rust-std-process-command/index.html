@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="generator" content="Hugo 0.58.2" />
+
+  
+  <meta name="description" content="京都でプログラマをしてる立方体のサイト">
+  
+
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="https://block-cube-lib.github.io/apple-touch-icon.png">
+
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="https://block-cube-lib.github.io/favicon-32x32.png">
+
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="https://block-cube-lib.github.io/favicon-16x16.png">
+
+  
+  <link rel="manifest" href="https://block-cube-lib.github.io/site.webmanifest">
+
+  
+  <link rel="mask-icon" href="https://block-cube-lib.github.io/safari-pinned-tab.svg" color="#5bbad5">
+
+  <meta name="msapplication-TileColor" content="#da532c">
+
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <link rel="stylesheet" href="https://block-cube-lib.github.io/css/bootstrap.min.css" />
+
+  
+  <title>Rustのstd::process::Commandで引っかかったところ | blockの巣</title>
+  
+
+  <style>
+body {
+  min-width: 300px;
+}
+
+.custom-navbar {
+  margin-bottom: 1em;
+  height: 60px;
+}
+
+.custom-navbar a {
+  display: inline-block; 
+  padding: 18px 0;
+  margin-right: 1em; 
+  font-weight: bold; 
+}
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  text-decoration: none; 
+}
+
+@media print {
+  .custom-navbar {
+    display: none;
+  }
+}
+
+article {
+  padding-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+body {
+  background-color: #fff;
+}
+
+
+
+body {
+  color: #212529;
+}
+
+
+
+a {
+  color: #007bff;
+}
+
+
+
+a:hover,
+a:focus {
+  color: #0056b3;
+}
+
+
+
+.custom-navbar {
+  background-color: #212529;
+}
+
+
+
+.custom-navbar a {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+
+.custom-navbar a:hover,
+.custom-navbar a:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+
+
+.container {
+  max-width: 800px;
+}
+
+
+
+pre {
+  display: block;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  padding: 2px 4px;
+  color: inherit; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+
+
+blockquote,
+.blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 1em;
+  border-left: 5px solid #6c757d;
+}
+
+</style>
+</head>
+
+<body>
+  <nav class="custom-navbar">
+  <div class="container">
+    
+    <a href="/">Posts</a>
+    
+    <a href="/tags/">Tags</a>
+    
+    <a href="/about/">About</a>
+    
+    <a href="/works/">Works</a>
+    
+    <a href="/privacy_policy/">Privacy Policy</a>
+    
+  </div>
+</nav>
+  
+  <div class="container">
+    <article>
+      <h1>Rustのstd::process::Commandで引っかかったところ</h1>
+
+
+<p><a href="https://github.com/block-cube-lib/git-author-rs">git-author</a>というgitのサブコマンドを作っているときに<code>std::process::Command</code>を使用したのですが、<code>output()</code>の返り値ので引っかかったことがあったのでメモがてら書いていきます。</p>
+
+<hr />
+
+<h2 id="output-が-ok-を返してもコマンドの実行に成功したとは限らない"><code>output()</code>が<code>Ok</code>を返してもコマンドの実行に成功したとは限らない</h2>
+
+<p>例えば<code>git config --local user.name</code>と同じことをしようと思うと</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// outputはio::Result&lt;Output&gt;型
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> std::process::Command::new(<span style="color:#e6db74">&#34;git&#34;</span>)
+            .arg(<span style="color:#e6db74">&#34;config&#34;</span>)
+            .arg(<span style="color:#e6db74">&#34;--local&#34;</span>)
+            .arg(<span style="color:#e6db74">&#34;user.name&#34;</span>)
+            .output();
+</code></pre></div>
+<p>となります。</p>
+
+<p><code>output()</code>は<code>Result</code>型を返すのでコマンド実行に失敗すれば<code>Err</code>が返ってくるのだろうと考えていましが、実行に失敗しても<code>Ok</code>が返ってくるパターンがありました。</p>
+
+<p>例えば</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// `git hoge`を実行
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> std::process::Command::new(<span style="color:#e6db74">&#34;git&#34;</span>).arg(<span style="color:#e6db74">&#34;hoge&#34;</span>).output();
+<span style="color:#66d9ef">let</span> output <span style="color:#f92672">=</span> result.unwrap();
+</code></pre></div>
+<p>のように存在しないサブコマンド<code>hoge</code>を実行しようとするとコマンドの実行結果は失敗なのにも関わらず<code>output()</code>は<code>Ok</code>を返します。
+ただし<code>output.stdout</code>は空のままで<code>output.stderr</code>に文字列が入っています。</p>
+
+<hr />
+
+<p>また、先程の</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// `git config --local user.name`を実行
+</span><span style="color:#75715e"></span>std::process::Command::new(<span style="color:#e6db74">&#34;git&#34;</span>)
+.arg(<span style="color:#e6db74">&#34;config&#34;</span>)
+.arg(<span style="color:#e6db74">&#34;--local&#34;</span>)
+.arg(<span style="color:#e6db74">&#34;user.name&#34;</span>)
+.output();
+</code></pre></div>
+<p>も、ローカルの<code>user.name</code>が設定されていない時は失敗として扱われますが、<code>output()</code>は<code>Ok</code>を返します。</p>
+
+<h2 id="err-を返すとき"><code>Err</code>を返すとき</h2>
+
+<p>ではどのようなときに<code>Err</code>を返すかというと</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">// `fuga`を実行
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> output <span style="color:#f92672">=</span> std::process::Command::new(<span style="color:#e6db74">&#34;fuga&#34;</span>).output();
+</code></pre></div>
+<p>のように存在しないコマンドを実行しようとしたときに<code>Err</code>を返しました。</p>
+
+<h2 id="結論">結論</h2>
+
+<p>実行に成功したかどうかを確認したい時は<code>output()</code>の返り値が<code>Ok</code>かどうかに加えて<code>status.success()</code>がtrueかどうかを確認しましょう。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> std::process::Command::new(<span style="color:#e6db74">&#34;command&#34;</span>).output();
+<span style="color:#66d9ef">if</span> <span style="color:#66d9ef">let</span> Ok(output) <span style="color:#f92672">=</span> result {
+    <span style="color:#66d9ef">if</span> output.status.success() {
+        <span style="color:#75715e">// 成功
+</span><span style="color:#75715e"></span>    }
+    <span style="color:#66d9ef">else</span> {
+        <span style="color:#75715e">// 失敗
+</span><span style="color:#75715e"></span>    }
+}
+<span style="color:#66d9ef">else</span> {
+    <span style="color:#75715e">// 失敗
+</span><span style="color:#75715e"></span>}
+</code></pre></div>
+    </article>
+  </div>
+
+  
+  
+  
+  <script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-148823095-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#216942",
+      "text": "#b2d192"
+    },
+    "button": {
+      "background": "#afed71"
+    }
+  }
+})});
+</script>
+
+</body>
+
+</html>

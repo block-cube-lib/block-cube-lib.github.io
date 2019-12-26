@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rust on blockの巣</title>
+    <link>https://block-cube-lib.github.io/tags/rust/</link>
+    <description>Recent content in Rust on blockの巣</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 26 Dec 2019 18:30:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://block-cube-lib.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rustのstd::process::Commandで引っかかったところ</title>
+      <link>https://block-cube-lib.github.io/posts/rust-std-process-command/</link>
+      <pubDate>Thu, 26 Dec 2019 18:30:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/posts/rust-std-process-command/</guid>
+      <description>git-authorというgitのサブコマンドを作っているときにstd::process::Commandを使用したのですが、output()の返り値ので引っかかったことがあったのでメモがてら書いていきます。
+output()がOkを返してもコマンドの実行に成功したとは限らない 例えばgit config --local user.nameと同じことをしようと思うと
+// outputはio::Result&amp;lt;Output&amp;gt;型 let result = std::process::Command::new(&amp;#34;git&amp;#34;) .arg(&amp;#34;config&amp;#34;) .arg(&amp;#34;--local&amp;#34;) .arg(&amp;#34;user.name&amp;#34;) .output();  となります。
+output()はResult型を返すのでコマンド実行に失敗すればErrが返ってくるのだろうと考えていましが、実行に失敗してもOkが返ってくるパターンがありました。
+例えば
+// `git hoge`を実行 let result = std::process::Command::new(&amp;#34;git&amp;#34;).arg(&amp;#34;hoge&amp;#34;).output(); let output = result.unwrap();  のように存在しないサブコマンドhogeを実行しようとするとコマンドの実行結果は失敗なのにも関わらずoutput()はOkを返します。 ただしoutput.stdoutは空のままでoutput.stderrに文字列が入っています。
+また、先程の
+// `git config --local user.name`を実行 std::process::Command::new(&amp;#34;git&amp;#34;) .arg(&amp;#34;config&amp;#34;) .arg(&amp;#34;--local&amp;#34;) .arg(&amp;#34;user.name&amp;#34;) .output();  も、ローカルのuser.nameが設定されていない時は失敗として扱われますが、output()はOkを返します。
+Errを返すとき ではどのようなときにErrを返すかというと
+// `fuga`を実行 let output = std::process::Command::new(&amp;#34;fuga&amp;#34;).output();  のように存在しないコマンドを実行しようとしたときにErrを返しました。
+結論 実行に成功したかどうかを確認したい時はoutput()の返り値がOkかどうかに加えてstatus.success()がtrueかどうかを確認しましょう。
+let result = std::process::Command::new(&amp;#34;command&amp;#34;).output(); if let Ok(output) = result { if output.</description>
+    </item>
+    
+  </channel>
+</rss>
