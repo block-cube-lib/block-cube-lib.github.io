@@ -6,10 +6,24 @@
     <description>Recent content on blockの巣</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 26 Dec 2019 18:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jan 2020 13:10:00 +0900</lastBuildDate>
     
 	<atom:link href="https://block-cube-lib.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Git Author</title>
+      <link>https://block-cube-lib.github.io/documentation/git-author/</link>
+      <pubDate>Wed, 08 Jan 2020 13:10:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/documentation/git-author/</guid>
+      <description>git author ver 2.0.0の日本語ドキュメントです。
+リポジトリ
+旧バージョン(ver 1.0)のドキュメントはこちら
+Overview  コマンド一発でuser.nameとuser.emailを取得または設定できます コマンド一発でuser.nameとuser.emailを削除できます 過去のコミットのAuthor/Committerを書き換えることができます  Installation Cargoが使える必要があります。
+$ cargo install git-author  でインストールできます。
+Usage # get $ git author [config file location] $ git author get [config file location] # set $ git author set [config file location] &amp;lt;name&amp;gt; &amp;lt;email&amp;gt; # unset $ git author unset [config file location] ## replace-simple $ git author replace simple &amp;lt;old-name&amp;gt; &amp;lt;old-email&amp;gt; [new-name] [new-email] ## replace-detail $ git author replace detail --filter-author &amp;lt;name&amp;gt; &amp;lt;email&amp;gt; --filter-committer &amp;lt;name&amp;gt; &amp;lt;email&amp;gt; --replace-target &amp;lt;replace-target&amp;gt; Description get $ git author [config file location] $ git author get [config file location] git authorまたはgit author getでuser.</description>
+    </item>
     
     <item>
       <title>Rustのstd::process::Commandで引っかかったところ</title>
@@ -108,10 +122,10 @@ gitのサブコマンド開発もcrates.ioでの公開も初めてだったの�
     
     <item>
       <title>Git Author</title>
-      <link>https://block-cube-lib.github.io/documentation/git-author/</link>
+      <link>https://block-cube-lib.github.io/documentation/archive/git-author-1.0/</link>
       <pubDate>Sun, 01 Dec 2019 22:00:00 +0900</pubDate>
       
-      <guid>https://block-cube-lib.github.io/documentation/git-author/</guid>
+      <guid>https://block-cube-lib.github.io/documentation/archive/git-author-1.0/</guid>
       <description>git authorの日本語ドキュメントです。
 リポジトリ
 Overview  コマンド一発でuser.nameとuser.emailを取得または設定できます 過去のコミットのAuthorを書き換えることができます  Description git authorまたはgit author getでuser.nameとuser.emailを取得できます。
