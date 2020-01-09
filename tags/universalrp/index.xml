@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UniversalRP on blockの巣</title>
+    <link>https://block-cube-lib.github.io/tags/universalrp/</link>
+    <description>Recent content in UniversalRP on blockの巣</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 09 Jan 2020 19:07:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://block-cube-lib.github.io/tags/universalrp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cameraに設定されたRendererをスクリプトから変更する</title>
+      <link>https://block-cube-lib.github.io/posts/unity-change-camera-renderer-from-script/</link>
+      <pubDate>Thu, 09 Jan 2020 19:07:00 +0900</pubDate>
+      
+      <guid>https://block-cube-lib.github.io/posts/unity-change-camera-renderer-from-script/</guid>
+      <description>確認したUnityのバージョン
+2019.3.0f1(β版)
+UniversalRPからカメラにRendererを設定できるようになりました。
+しかしCameraクラスにはRendererを設定するような項目はありません。
+ではどうやってRendererを変更するのかというと
+UniversalAdditionalCameraData.SetRendererという関数を使用します。
+実はUniversalRPではCameraを追加すると一緒にUniversalAdditionalCameraDataというコンポーネントがついてきます。
+この中にSetRendererという関数があるので、その関数を使用することでScriptからRendererを変更できます。
+// UniversalAdditionalCameraDataを使用するには // using UnityEngine.Rendering.Universal;が必要 var cameraData = camera.GetComponent&amp;lt;UniversalAdditionalCameraData&amp;gt;(); cameraData.SetRenderer(rendererIndex); // Rendererのindexを指定する  SetRendererの引数はRendererのindexです。
+手元で試したところ
+ 0 &amp;lt;= index &amp;amp;&amp;amp; index &amp;lt; 登録されているRendererの数-1
+正常に設定される 登録されているRendererの数 &amp;lt;= index
+警告が出され続ける(その間デフォルトのRendererが使われる) index == -1
+デフォルトが設定される index &amp;lt;= -2
+例外が発生  が確認できました</description>
+    </item>
+    
+  </channel>
+</rss>

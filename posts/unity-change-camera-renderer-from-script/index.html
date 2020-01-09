@@ -34,13 +34,7 @@
   <link rel="stylesheet" href="https://block-cube-lib.github.io/css/bootstrap.min.css" />
 
   
-  
-  
-    
-      
-    
-  
-  <title>Posts | blockの巣</title>
+  <title>Cameraに設定されたRendererをスクリプトから変更する | blockの巣</title>
   
 
   <style>
@@ -191,124 +185,40 @@ blockquote,
   
   <div class="container">
     <article>
-      
+      <h1>Cameraに設定されたRendererをスクリプトから変更する</h1>
+<p>確認したUnityのバージョン<br />
+2019.3.0f1(β版)</p>
 
-  
-    
-  
+<p>UniversalRPからカメラにRendererを設定できるようになりました。<br />
+しかしCameraクラスにはRendererを設定するような項目はありません。</p>
 
-<h1>Posts</h1>
+<p>ではどうやってRendererを変更するのかというと<br />
+<code>UniversalAdditionalCameraData.SetRenderer</code>という関数を使用します。</p>
 
+<p>実はUniversalRPではCameraを追加すると一緒に<code>UniversalAdditionalCameraData</code>というコンポーネントがついてきます。<br />
+<img src="/image/universal_additional_camera_data.png" alt="image" /></p>
 
+<p>この中に<code>SetRenderer</code>という関数があるので、その関数を使用することでScriptからRendererを変更できます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#75715e">// UniversalAdditionalCameraDataを使用するには
+</span><span style="color:#75715e">// using UnityEngine.Rendering.Universal;が必要
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> cameraData = camera.GetComponent&lt;UniversalAdditionalCameraData&gt;();
+cameraData.SetRenderer(rendererIndex); <span style="color:#75715e">// Rendererのindexを指定する
+</span></code></pre></div>
+<p><code>SetRenderer</code>の引数はRendererのindexです。<br />
+手元で試したところ</p>
 
-  <p>
-    <a href="https://block-cube-lib.github.io/posts/unity-change-camera-renderer-from-script/">Cameraに設定されたRendererをスクリプトから変更する</a>
-    
-    
-    <br>
-    <small class="text-secondary">2020/01/09</small>
-    
+<ul>
+<li><code>0 &lt;= index &amp;&amp; index &lt; 登録されているRendererの数-1</code><br />
+正常に設定される</li>
+<li><code>登録されているRendererの数 &lt;= index</code><br />
+警告が出され続ける(その間デフォルトのRendererが使われる)</li>
+<li><code>index == -1</code><br />
+デフォルトが設定される</li>
+<li><code>index &lt;= -2</code><br />
+例外が発生</li>
+</ul>
 
-<small><code><a href="https://block-cube-lib.github.io/tags/unity">Unity</a></code></small>
-
-
-<small><code><a href="https://block-cube-lib.github.io/tags/universalrp">UniversalRP</a></code></small>
-
-    
-  </p>
-
-  <p>
-    <a href="https://block-cube-lib.github.io/posts/rust-std-process-command/">Rustのstd::process::Commandで引っかかったところ</a>
-    
-    
-    <br>
-    <small class="text-secondary">2019/12/26</small>
-    
-
-<small><code><a href="https://block-cube-lib.github.io/tags/rust">Rust</a></code></small>
-
-    
-  </p>
-
-  <p>
-    <a href="https://block-cube-lib.github.io/posts/unity-kyoto-0/">Unity×KYOTO Vol.0で発表しました</a>
-    
-    
-    <br>
-    <small class="text-secondary">2019/12/24</small>
-    
-
-<small><code><a href="https://block-cube-lib.github.io/tags/unity">Unity</a></code></small>
-
-
-<small><code><a href="https://block-cube-lib.github.io/tags/unitykyoto">UnityKyoto</a></code></small>
-
-    
-  </p>
-
-  <p>
-    <a href="https://block-cube-lib.github.io/posts/keyboard-advent-calendar-2019/">HHKBから自作キーボードに乗り換えた話</a>
-    
-    
-    <br>
-    <small class="text-secondary">2019/12/22</small>
-    
-
-<small><code><a href="https://block-cube-lib.github.io/tags/keyboard">keyboard</a></code></small>
-
-
-<small><code><a href="https://block-cube-lib.github.io/tags/advent-calendar">Advent Calendar</a></code></small>
-
-    
-  </p>
-
-  <p>
-    <a href="https://block-cube-lib.github.io/posts/ponos-advent-calendar-2019/">PONOS Advent Calendar 2019に参加しました</a>
-    
-    
-    <br>
-    <small class="text-secondary">2019/12/03</small>
-    
-
-<small><code><a href="https://block-cube-lib.github.io/tags/git">git</a></code></small>
-
-
-<small><code><a href="https://block-cube-lib.github.io/tags/git-author">git author</a></code></small>
-
-
-<small><code><a href="https://block-cube-lib.github.io/tags/advent-calendar">Advent Calendar</a></code></small>
-
-
-<small><code><a href="https://block-cube-lib.github.io/tags/ponos-advent-calendar-2019">PONOS Advent Calendar 2019</a></code></small>
-
-    
-  </p>
-
-  <p>
-    <a href="https://block-cube-lib.github.io/posts/unite2019/">Unite Tokyo 2019 Day1に参加しました</a>
-    
-    
-    <br>
-    <small class="text-secondary">2019/09/25</small>
-    
-
-<small><code><a href="https://block-cube-lib.github.io/tags/unity">Unity</a></code></small>
-
-
-<small><code><a href="https://block-cube-lib.github.io/tags/unite">Unite</a></code></small>
-
-    
-  </p>
-
-  <p>
-    <a href="https://block-cube-lib.github.io/posts/open-website/">サイト開設しました</a>
-    
-    
-    <br>
-    <small class="text-secondary">2019/09/17</small>
-    
-    
-  </p>
+<p>が確認できました</p>
 
     </article>
   </div>
