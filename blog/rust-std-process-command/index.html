@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>blockの巣</title>
+  <link rel="stylesheet" type="text/css" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  Rustのstd::process::Commandで引っかかったところ
+</h1>
+
+  <span class = "date">2019&#x2F;12&#x2F;26 18:30</span>
+
+<section class="tags">
+  
+  
+  
+  <span class = "tag">
+    <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;rust&#x2F;">Rust</a> 
+  </span>
+
+  
+
+</section>
+<p><p><a href="https://github.com/block-cube-lib/git-author-rs">git-author</a>というgitのサブコマンドを作っているときに<code>std::process::Command</code>を使用したのですが、<code>output()</code>の返り値ので引っかかったことがあったのでメモがてら書いていきます。</p>
+<hr />
+<h2 id="output-gaokwofan-sitemokomandonoshi-xing-nicheng-gong-sitatohaxian-ranai"><code>output()</code>が<code>Ok</code>を返してもコマンドの実行に成功したとは限らない</h2>
+<p>例えば<code>git config --local user.name</code>と同じことをしようと思うと</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#65737e;">// outputはio::Result&lt;Output&gt;型
+</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result = std::process::Command::new(&quot;</span><span style="color:#a3be8c;">git</span><span style="color:#c0c5ce;">&quot;)
+            .</span><span style="color:#96b5b4;">arg</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">config</span><span style="color:#c0c5ce;">&quot;)
+            .</span><span style="color:#96b5b4;">arg</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">--local</span><span style="color:#c0c5ce;">&quot;)
+            .</span><span style="color:#96b5b4;">arg</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">user.name</span><span style="color:#c0c5ce;">&quot;)
+            .</span><span style="color:#96b5b4;">output</span><span style="color:#c0c5ce;">();
+</span></code></pre>
+<p>となります。</p>
+<p><code>output()</code>は<code>Result</code>型を返すのでコマンド実行に失敗すれば<code>Err</code>が返ってくるのだろうと考えていましが、実行に失敗しても<code>Ok</code>が返ってくるパターンがありました。</p>
+<p>例えば</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#65737e;">// `git hoge`を実行
+</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result = std::process::Command::new(&quot;</span><span style="color:#a3be8c;">git</span><span style="color:#c0c5ce;">&quot;).</span><span style="color:#96b5b4;">arg</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">hoge</span><span style="color:#c0c5ce;">&quot;).</span><span style="color:#96b5b4;">output</span><span style="color:#c0c5ce;">();
+</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> output = result.</span><span style="color:#96b5b4;">unwrap</span><span style="color:#c0c5ce;">();
+</span></code></pre>
+<p>のように存在しないサブコマンド<code>hoge</code>を実行しようとするとコマンドの実行結果は失敗なのにも関わらず<code>output()</code>は<code>Ok</code>を返します。
+ただし<code>output.stdout</code>は空のままで<code>output.stderr</code>に文字列が入っています。</p>
+<hr />
+<p>また、先程の</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#65737e;">// `git config --local user.name`を実行
+</span><span style="color:#c0c5ce;">std::process::Command::new(&quot;</span><span style="color:#a3be8c;">git</span><span style="color:#c0c5ce;">&quot;)
+.</span><span style="color:#96b5b4;">arg</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">config</span><span style="color:#c0c5ce;">&quot;)
+.</span><span style="color:#96b5b4;">arg</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">--local</span><span style="color:#c0c5ce;">&quot;)
+.</span><span style="color:#96b5b4;">arg</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">user.name</span><span style="color:#c0c5ce;">&quot;)
+.</span><span style="color:#96b5b4;">output</span><span style="color:#c0c5ce;">();
+</span></code></pre>
+<p>も、ローカルの<code>user.name</code>が設定されていない時は失敗として扱われますが、<code>output()</code>は<code>Ok</code>を返します。</p>
+<h2 id="errwofan-sutoki"><code>Err</code>を返すとき</h2>
+<p>ではどのようなときに<code>Err</code>を返すかというと</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#65737e;">// `fuga`を実行
+</span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> output = std::process::Command::new(&quot;</span><span style="color:#a3be8c;">fuga</span><span style="color:#c0c5ce;">&quot;).</span><span style="color:#96b5b4;">output</span><span style="color:#c0c5ce;">();
+</span></code></pre>
+<p>のように存在しないコマンドを実行しようとしたときに<code>Err</code>を返しました。</p>
+<h2 id="jie-lun">結論</h2>
+<p>実行に成功したかどうかを確認したい時は<code>output()</code>の返り値が<code>Ok</code>かどうかに加えて<code>status.success()</code>がtrueかどうかを確認しましょう。</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> result = std::process::Command::new(&quot;</span><span style="color:#a3be8c;">command</span><span style="color:#c0c5ce;">&quot;).</span><span style="color:#96b5b4;">output</span><span style="color:#c0c5ce;">();
+</span><span style="color:#b48ead;">if let </span><span style="color:#c0c5ce;">Ok(output) = result {
+    </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> output.status.</span><span style="color:#96b5b4;">success</span><span style="color:#c0c5ce;">() {
+        </span><span style="color:#65737e;">// 成功
+    </span><span style="color:#c0c5ce;">}
+    </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
+        </span><span style="color:#65737e;">// 失敗
+    </span><span style="color:#c0c5ce;">}
+}
+</span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
+    </span><span style="color:#65737e;">// 失敗
+</span><span style="color:#c0c5ce;">}
+</span></code></pre></p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="Rustのstd::process::Commandで引っかかったところ | blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+</body>
+
+</html>

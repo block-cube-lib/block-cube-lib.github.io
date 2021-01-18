@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>blockの巣</title>
+  <link rel="stylesheet" type="text/css" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  Cameraに設定されたRendererをスクリプトから変更する
+</h1>
+
+  <span class = "date">2020&#x2F;01&#x2F;09 19:07</span>
+
+<section class="tags">
+  
+  
+  
+  <span class = "tag">
+    <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;unity&#x2F;">Unity</a> 
+  </span>
+
+  
+  
+  <span class = "tag">
+    <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;universalrp&#x2F;">UniversalRP</a> 
+  </span>
+
+  
+
+</section>
+<p><p>確認したUnityのバージョン<br />
+2019.3.0f1(β版)</p>
+<p>UniversalRPからカメラにRendererを設定できるようになりました。<br />
+しかしCameraクラスにはRendererを設定するような項目はありません。</p>
+<p>ではどうやってRendererを変更するのかというと<br />
+<code>UniversalAdditionalCameraData.SetRenderer</code>という関数を使用します。</p>
+<p>実はUniversalRPではCameraを追加すると一緒に<code>UniversalAdditionalCameraData</code>というコンポーネントがついてきます。<br />
+<img src="/image/universal_additional_camera_data.png" alt="image" /></p>
+<p>この中に<code>SetRenderer</code>という関数があるので、その関数を使用することでScriptからRendererを変更できます。</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">// UniversalAdditionalCameraDataを使用するには
+// using UnityEngine.Rendering.Universal;が必要
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">cameraData </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">camera</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GetComponent</span><span style="color:#c0c5ce;">&lt;UniversalAdditionalCameraData&gt;();
+</span><span style="color:#bf616a;">cameraData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">SetRenderer</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">rendererIndex</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// Rendererのindexを指定する
+</span></code></pre>
+<p><code>SetRenderer</code>の引数はRendererのindexです。<br />
+手元で試したところ</p>
+<ul>
+<li><code>0 &lt;= index &amp;&amp; index &lt; 登録されているRendererの数-1</code><br />
+正常に設定される</li>
+<li><code>登録されているRendererの数 &lt;= index</code><br />
+警告が出され続ける(その間デフォルトのRendererが使われる)</li>
+<li><code>index == -1</code><br />
+デフォルトが設定される</li>
+<li><code>index &lt;= -2</code><br />
+例外が発生</li>
+</ul>
+<p>が確認できました</p>
+</p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="Cameraに設定されたRendererをスクリプトから変更する | blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+</body>
+
+</html>
