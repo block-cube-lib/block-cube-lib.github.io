@@ -10,6 +10,10 @@
         <loc>https://block-cube-lib.github.io/blog/</loc>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/change-site-generator/</loc>
+        <lastmod>2021-01-19T22:10:00+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/keyboard-advent-calendar-2019/</loc>
         <lastmod>2019-12-22T23:50:00+09:00</lastmod>
     </url>
@@ -80,6 +84,9 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/universalrp/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/zola/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/works/</loc>
