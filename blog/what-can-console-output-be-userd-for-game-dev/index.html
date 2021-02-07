@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>blockの巣</title>
+  <link rel="stylesheet" type="text/css" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  黒い画面に文字を出すことがゲーム開発の何に使えるのか(役立つのか)
+</h1>
+
+  <span class = "date">2021&#x2F;02&#x2F;07 23:29</span>
+
+<section class="tags">
+  
+  
+  
+  <span class = "tag">
+    <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;game-development&#x2F;">Game Development</a> 
+  </span>
+
+  
+
+</section>
+<p><h2 id="qian-zhi-ki">前置き</h2>
+<p>「ゲーム作りたいからプログラミング勉強しよう」という動機でプログラミングを始めたけれど<br />
+「ずっと黒い画面に文字出してばっかりでつまらん。これゲーム開発の何の役に立つんだ」ってなってる人向けです。<br />
+最初からゲームエンジンを使っている人は対象外。</p>
+<p>黒い画面に文字を出すのはHello Worldとかのことです。
+C++ならこういうコード。</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cpp" data-lang="cpp"><span style="color:#b48ead;">#include </span><span style="color:#c0c5ce;">&lt;</span><span style="color:#a3be8c;">iostream</span><span style="color:#c0c5ce;">&gt;
+
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">()
+{
+  std::cout &lt;&lt; &quot;</span><span style="color:#a3be8c;">Hello World</span><span style="color:#c0c5ce;">&quot; &lt;&lt; std::endl;
+}
+</span></code></pre>
+<p>上のコードを実行すると黒い画面に<code>Hello World</code>と出力されます。</p>
+<p>まあこんなことができたところでこんなんゲーム関係ないってなりますよね。<br />
+それが何に使えて何の役に立つのかって話です。</p>
+<h2 id="sebuji-neng-wozuo-runonishi-eru">セーブ機能を作るのに使える</h2>
+<p>上のコードだと「黒い画面」に「Hello Worldという文字列を出力する」という処理になるわけですが、<br />
+出力先を「黒い画面」から「ファイル」に変更すれば、「ファイル」に「Hello Worldという文字列を出力する」という処理になりますし、<br />
+更に出力内容を「ゲームを復元するのに必要なデータ」にすれば「ファイル」に「ゲームを復元するのに必要なデータ出力する」という処理となり、つまりはセーブ処理になります。</p>
+<h2 id="debatuguniyi-li-tu">デバッグに役立つ</h2>
+<p>ゲームの開発中に「この処理にちゃんと到達しているのか」「今のプレイヤーのHPはいくつか」などを確認したいことがあります。そのときに文字列を出力する方法を知っていれば知りたい情報を画面に出すことができます。<br />
+「プレイヤーのHPくらいゲーム画面に表示すればいいでしょ」ってなるかも知れませんが、ゲーム画面に表示する機能の実装前での確認や、画面に表示しているHPと実際のHPが本当に同じかなどのチェックに使えます。</p>
+<p>「printfデバッグ」でググるといろんな情報が出てきます。否定的な意見も多いと思いますが結構馬鹿にできないです。</p>
+<h2 id="atogaki">あとがき</h2>
+<p>例が少ないとは思いますがこんなことに役立つよって話でした。
+自分の経験だけで言えば黒い画面に向かっていた時間はほぼ全部ゲーム開発に活きています。</p>
+</p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="黒い画面に文字を出すことがゲーム開発の何に使えるのか(役立つのか) | blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+</body>
+
+</html>
