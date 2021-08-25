@@ -46,40 +46,36 @@
 </ul>
 <h2 id="installation">Installation</h2>
 <p>Cargoが使える必要があります。</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">$ cargo install git-author
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ cargo install git-author
 </span></code></pre>
 <p>でインストールできます。</p>
 <h2 id="usage">Usage</h2>
-<pre style="background-color:#2b303b;">
-<code class="language-sh" data-lang="sh"><span style="color:#65737e;"># get
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git author </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">config file location</span><span style="color:#b48ead;">]
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git author get </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">config file location</span><span style="color:#b48ead;">]
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#65737e;"># get
+</span><span style="color:#bf616a;">$</span><span> git author </span><span style="color:#b48ead;">[</span><span>config file location</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">$</span><span> git author get </span><span style="color:#b48ead;">[</span><span>config file location</span><span style="color:#b48ead;">]
 </span><span style="color:#65737e;"># set
-</span><span style="color:#c0c5ce;">$ git author set </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">config file location</span><span style="color:#b48ead;">] </span><span style="color:#c0c5ce;">&lt;name&gt; &lt;email&gt;
+</span><span style="color:#bf616a;">$</span><span> git author set </span><span style="color:#b48ead;">[</span><span>config file location</span><span style="color:#b48ead;">] </span><span>&lt;name&gt; &lt;email&gt;
 </span><span style="color:#65737e;"># unset
-</span><span style="color:#c0c5ce;">$ git author unset </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">config file location</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">$</span><span> git author unset </span><span style="color:#b48ead;">[</span><span>config file location</span><span style="color:#b48ead;">]
 </span><span style="color:#65737e;">## replace-simple
-</span><span style="color:#c0c5ce;">$ git author replace simple &lt;old-name&gt; &lt;old-email&gt; </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">new-name</span><span style="color:#b48ead;">] [</span><span style="color:#c0c5ce;">new-email</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">$</span><span> git author replace simple &lt;old-name&gt; &lt;old-email&gt; </span><span style="color:#b48ead;">[</span><span>new-name</span><span style="color:#b48ead;">] [</span><span>new-email</span><span style="color:#b48ead;">]
 </span><span style="color:#65737e;">## replace-detail
-</span><span style="color:#c0c5ce;">$ git author replace detail</span><span style="color:#bf616a;"> --filter-author </span><span style="color:#c0c5ce;">&lt;name&gt; &lt;email&gt; --filter-committer &lt;name&gt; &lt;email&gt; --replace-target &lt;replace-target&gt;
-</span></code></pre><h2 id="description">Description</h2>
+</span><span style="color:#bf616a;">$</span><span> git author replace detail</span><span style="color:#bf616a;"> --filter-author </span><span>&lt;name&gt; &lt;email&gt; --filter-committer &lt;name&gt; &lt;email&gt; --replace-target &lt;replace-target&gt;
+</span></code></pre>
+<h2 id="description">Description</h2>
 <h3 id="get">get</h3>
-<pre style="background-color:#2b303b;">
-<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git author </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">config file location</span><span style="color:#b48ead;">]
-</span><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git author get </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">config file location</span><span style="color:#b48ead;">]
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> git author </span><span style="color:#b48ead;">[</span><span>config file location</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">$</span><span> git author get </span><span style="color:#b48ead;">[</span><span>config file location</span><span style="color:#b48ead;">]
 </span></code></pre>
 <p><code>git author</code>または<code>git author get</code>でuser.nameとuser.emailを取得できます。<br />
 <img src="/image/works/git-author/2.0/get.png" alt="get" /></p>
 <h3 id="set">set</h3>
-<pre style="background-color:#2b303b;">
-<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git author set </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">config file location</span><span style="color:#b48ead;">] </span><span style="color:#c0c5ce;">&lt;name&gt; &lt;email&gt;
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> git author set </span><span style="color:#b48ead;">[</span><span>config file location</span><span style="color:#b48ead;">] </span><span>&lt;name&gt; &lt;email&gt;
 </span></code></pre>
 <p>user.nameとuser.emailを設定できます。<br />
 <img src="/image/works/git-author/2.0/set.png" alt="set" /></p>
 <h3 id="unset">unset</h3>
-<pre style="background-color:#2b303b;">
-<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git author unset </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">config file location</span><span style="color:#b48ead;">]
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> git author unset </span><span style="color:#b48ead;">[</span><span>config file location</span><span style="color:#b48ead;">]
 </span></code></pre>
 <p>user.nameとuser.emailの設定を削除できます。<br />
 <img src="/image/works/git-author/2.0/unset.png" alt="unset" /></p>
@@ -87,15 +83,13 @@
 <p>過去のコミットのAuthorとCommitterを書き換えます。<br />
 サブコマンドとして<code>simple</code>と<code>detail</code>が存在します。</p>
 <h4 id="simple">simple</h4>
-<pre style="background-color:#2b303b;">
-<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git author replace simple &lt;old-name&gt; &lt;old-email&gt; </span><span style="color:#b48ead;">[</span><span style="color:#c0c5ce;">new-name</span><span style="color:#b48ead;">] [</span><span style="color:#c0c5ce;">new-email</span><span style="color:#b48ead;">]
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> git author replace simple &lt;old-name&gt; &lt;old-email&gt; </span><span style="color:#b48ead;">[</span><span>new-name</span><span style="color:#b48ead;">] [</span><span>new-email</span><span style="color:#b48ead;">]
 </span></code></pre>
 <p>過去のコミットのAuthor/Committerの<code>old-name &lt;old-email&gt;</code>を<code>new-name &lt;new-email&gt;</code>に置き換えます。<br />
 <code>new-name</code>と<code>new-email</code>を省略した場合は<code>git author</code>で取得できるnameとemailを使用します。<br />
 <img src="/image/works/git-author/2.0/replace-simple.png" alt="replace-simple" /></p>
 <h4 id="detail">detail</h4>
-<pre style="background-color:#2b303b;">
-<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span style="color:#c0c5ce;"> git author replace detail</span><span style="color:#bf616a;"> --filter-author </span><span style="color:#c0c5ce;">&lt;name&gt; &lt;email&gt; --filter-committer &lt;name&gt; &lt;email&gt; --replace-target &lt;replace-target&gt;
+<pre data-lang="sh" style="background-color:#2b303b;color:#c0c5ce;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#bf616a;">$</span><span> git author replace detail</span><span style="color:#bf616a;"> --filter-author </span><span>&lt;name&gt; &lt;email&gt; --filter-committer &lt;name&gt; &lt;email&gt; --replace-target &lt;replace-target&gt;
 </span></code></pre>
 <p>指定した条件のコミットのAuthorとCommitterのいずれかまたは両方のnameとemailを置き換えます。</p>
 <h5 id="options">options</h5>

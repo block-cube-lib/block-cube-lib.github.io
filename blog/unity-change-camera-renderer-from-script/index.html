@@ -43,13 +43,13 @@
   
   
   <span class = "tag">
-    <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;unity&#x2F;">Unity</a> 
+    <a href="https://block-cube-lib.github.io/tags/unity/">Unity</a> 
   </span>
 
   
   
   <span class = "tag">
-    <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;universalrp&#x2F;">UniversalRP</a> 
+    <a href="https://block-cube-lib.github.io/tags/universalrp/">UniversalRP</a> 
   </span>
 
   
@@ -64,11 +64,10 @@
 <p>実はUniversalRPではCameraを追加すると一緒に<code>UniversalAdditionalCameraData</code>というコンポーネントがついてきます。<br />
 <img src="/image/universal_additional_camera_data.png" alt="image" /></p>
 <p>この中に<code>SetRenderer</code>という関数があるので、その関数を使用することでScriptからRendererを変更できます。</p>
-<pre style="background-color:#2b303b;">
-<code class="language-cs" data-lang="cs"><span style="color:#65737e;">// UniversalAdditionalCameraDataを使用するには
-// using UnityEngine.Rendering.Universal;が必要
-</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">cameraData </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">camera</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GetComponent</span><span style="color:#c0c5ce;">&lt;UniversalAdditionalCameraData&gt;();
-</span><span style="color:#bf616a;">cameraData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">SetRenderer</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">rendererIndex</span><span style="color:#c0c5ce;">); </span><span style="color:#65737e;">// Rendererのindexを指定する
+<pre data-lang="cs" style="background-color:#2b303b;color:#c0c5ce;" class="language-cs "><code class="language-cs" data-lang="cs"><span style="color:#65737e;">// UniversalAdditionalCameraDataを使用するには
+</span><span style="color:#65737e;">// using UnityEngine.Rendering.Universal;が必要
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">cameraData </span><span>= </span><span style="color:#bf616a;">camera</span><span>.</span><span style="color:#bf616a;">GetComponent</span><span>&lt;UniversalAdditionalCameraData&gt;();
+</span><span style="color:#bf616a;">cameraData</span><span>.</span><span style="color:#bf616a;">SetRenderer</span><span>(</span><span style="color:#bf616a;">rendererIndex</span><span>); </span><span style="color:#65737e;">// Rendererのindexを指定する
 </span></code></pre>
 <p><code>SetRenderer</code>の引数はRendererのindexです。<br />
 手元で試したところ</p>
