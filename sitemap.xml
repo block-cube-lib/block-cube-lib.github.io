@@ -34,6 +34,10 @@
         <lastmod>2019-12-03T12:40:00+09:00</lastmod>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/ponos-advent-calendar-2021/</loc>
+        <lastmod>2021-12-07T23:40:00+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/rust-std-process-command/</loc>
         <lastmod>2019-12-26T18:30:00+09:00</lastmod>
     </url>
@@ -87,6 +91,9 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2019/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2021/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/rust/</loc>
