@@ -26,6 +26,10 @@
         <lastmod>2021-08-25T22:20:00+09:00</lastmod>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-1/</loc>
+        <lastmod>2022-01-21T22:28:00+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/keyboard-advent-calendar-2019/</loc>
         <lastmod>2019-12-22T23:50:00+09:00</lastmod>
     </url>
@@ -82,6 +86,9 @@
         <loc>https://block-cube-lib.github.io/tags/c/</loc>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/tags/compile-time-ray-tracing-in-rust/</loc>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/tags/game-development/</loc>
     </url>
     <url>
@@ -101,6 +108,9 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2021/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/ray-tracing/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/rust-advent-calendar-2021/</loc>
