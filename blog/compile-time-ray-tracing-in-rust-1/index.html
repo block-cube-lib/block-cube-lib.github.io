@@ -61,11 +61,14 @@
   
 
 </section>
-<p><p>Rustでコンパイル時レイトレーシングはじめました。<br />
+<p><p>最終更新: 2022-01-21T23:52:00+09:00</p>
+<p>Rustでコンパイル時レイトレーシングはじめました。<br />
 <a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a>はGitHubで公開しています。</p>
 <p><a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html">Ray Tracing in One Weekend</a>の内容に合わせて実装していきます。<br />
 この記事では「2. Output an Image」のx,yによって色を変えて出力する部分までの解説を行います。<br />
 まだレイトレーシングは登場しません。</p>
+<p>レンダリング結果<br />
+<img src="/image/compile-time-ray-tracing-in-rust/listing1.png" alt="レンダリング結果" /></p>
 <h2 id="ray-tracing-in-one-weekendtonobian-geng-dian"><a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html">Ray Tracing in One Weekend</a>との変更点</h2>
 <p>元コードではPPMファイルを書き出していますが、環境によってはチェックしづらいのでpngで書き出すように変更しています。<br />
 また元コードはC++で書かれていますが、私はRustで書いています。</p>
