@@ -61,7 +61,10 @@
   
 
 </section>
-<p><p>最終更新: 2022-01-21T23:52:00+09:00</p>
+<p><p>更新履歴<br />
+2022-01-21T23:52:00+09:00: レンダリング結果追加<br />
+2022-01-20T11:24:00+09:00: コード修正 &amp; レンダリング結果修正</p>
+<hr />
 <p>Rustでコンパイル時レイトレーシングはじめました。<br />
 <a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a>はGitHubで公開しています。</p>
 <p><a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html">Ray Tracing in One Weekend</a>の内容に合わせて実装していきます。<br />
@@ -105,7 +108,7 @@
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
 </span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
-</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt; j {
+</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
 </span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
 </span><span>            </span><span style="color:#b48ead;">let</span><span> r = (i as </span><span style="color:#b48ead;">f64</span><span>) / ((</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>);
 </span><span>            </span><span style="color:#b48ead;">let</span><span> g = j as </span><span style="color:#b48ead;">f64 </span><span>/ (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
@@ -166,7 +169,7 @@
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
 </span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
-</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt; j {
+</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
 </span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
 </span><span>            </span><span style="color:#b48ead;">let</span><span> r = (i as </span><span style="color:#b48ead;">f64</span><span>) / ((</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>);
 </span><span>            </span><span style="color:#b48ead;">let</span><span> g = j as </span><span style="color:#b48ead;">f64 </span><span>/ (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
