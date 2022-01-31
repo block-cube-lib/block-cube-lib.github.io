@@ -61,7 +61,9 @@
   
 
 </section>
-<p><p><a href="../compile-time-ray-tracing-in-rust-1">前回記事</a></p>
+<p><p>更新履歴<br />
+2022-01-21T20:48:00+09:00: <code>Vec3</code>に<code>Add</code>と<code>Sub</code>が実装されていなかったのを修正</p>
+<p><a href="../compile-time-ray-tracing-in-rust-1">前回記事</a></p>
 <p>今回は<code>Vec3</code>の定義とピクセルのバッファの型にタプルを使っていた部分を<code>Color</code>(<code>Vec3</code>)に置き換えるところまで行います。
 なのでまだレイトレーシングらしい処理は出てこず、レンダリング結果も前回と変わりません。</p>
 <p>今回追加したファイルは<code>lib.rs</code>, <code>util.rs</code>, <code>vec3.rs</code>です。<br />
@@ -129,7 +131,7 @@
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use crate</span><span>::util::*;
 </span><span style="color:#b48ead;">use </span><span>std::ops::*;
 </span><span>
-</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, PartialEq, Clone, Copy)]
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, PartialEq, Copy)]
 </span><span style="color:#b48ead;">pub struct </span><span>Vec3 {
 </span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
 </span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
@@ -139,6 +141,24 @@
 </span><span style="color:#b48ead;">impl </span><span>const std::default::Default for Vec3 {
 </span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">default</span><span>() -&gt; </span><span style="color:#b48ead;">Self </span><span>{
 </span><span>        Vec3::</span><span style="color:#d08770;">ZERO
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>const Clone for Vec3 {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">clone</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        Vec3 {
+</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x,
+</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y,
+</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z,
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">clone_from</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">source</span><span>: &amp;</span><span style="color:#b48ead;">Self</span><span>) {
+</span><span>        *</span><span style="color:#bf616a;">self </span><span>= Vec3 {
+</span><span>            x: source.x,
+</span><span>            y: source.y,
+</span><span>            z: source.z,
+</span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
@@ -189,11 +209,39 @@
 </span><span>    }
 </span><span>}
 </span><span>
+</span><span style="color:#b48ead;">impl </span><span>const Add&lt;Vec3&gt; for Vec3 {
+</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = </span><span style="color:#b48ead;">Self</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">add</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
+</span><span>        Vec3 {
+</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x + rhs.x,
+</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y + rhs.y,
+</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z + rhs.z,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>const Sub&lt;Vec3&gt; for Vec3 {
+</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = </span><span style="color:#b48ead;">Self</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">sub</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
+</span><span>        Vec3 {
+</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x - rhs.x,
+</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y - rhs.y,
+</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z - rhs.z,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
 </span><span style="color:#b48ead;">impl </span><span>const Mul&lt;</span><span style="color:#b48ead;">f64</span><span>&gt; for Vec3 {
 </span><span>    </span><span style="color:#b48ead;">type </span><span>Output = Vec3;
 </span><span>
 </span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">mul</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
-</span><span>        Vec3::new(</span><span style="color:#bf616a;">self</span><span>.x * rhs, </span><span style="color:#bf616a;">self</span><span>.y * rhs, </span><span style="color:#bf616a;">self</span><span>.z * rhs)
+</span><span>        Vec3 {
+</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x * rhs,
+</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y * rhs,
+</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z * rhs,
+</span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
@@ -207,7 +255,11 @@
 </span><span>    </span><span style="color:#b48ead;">type </span><span>Output = Vec3;
 </span><span>
 </span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">div</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
-</span><span>        Vec3::new(</span><span style="color:#bf616a;">self</span><span>.x / rhs, </span><span style="color:#bf616a;">self</span><span>.y / rhs, </span><span style="color:#bf616a;">self</span><span>.z / rhs)
+</span><span>        Vec3 {
+</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x / rhs,
+</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y / rhs,
+</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z / rhs,
+</span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
