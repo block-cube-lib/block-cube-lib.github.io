@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148823095-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-148823095-1');
+    window['ga-disable-UA-148823095-1'] = true;
+  </script>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>blockの巣</title>
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  Rustでコンパイル時レイトレーシング4
+</h1>
+
+  <span class = "date">2022&#x2F;02&#x2F;04 00:20</span>
+
+<section class="tags">
+  
+  
+  
+  <span class = "tag">
+    <a href="https://block-cube-lib.github.io/tags/compile-time-ray-tracing-in-rust/">Compile Time Ray Tracing in Rust</a> 
+  </span>
+
+  
+  
+  <span class = "tag">
+    <a href="https://block-cube-lib.github.io/tags/ray-tracing/">Ray Tracing</a> 
+  </span>
+
+  
+  
+  <span class = "tag">
+    <a href="https://block-cube-lib.github.io/tags/rust/">Rust</a> 
+  </span>
+
+  
+
+</section>
+<p><p><a href="../compile-time-ray-tracing-in-rust-4">前回記事</a><br />
+<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/8e6403ea89951efbc82ac5028e30c7df8fd59c38">リポジトリ</a></p>
+<p>今回はレイを飛ばして球にヒットした箇所を赤色でレンダリングするところまでです。<br />
+今回は新しい<code>feature</code>の追加はありません。</p>
+<p>レンダリング結果<br />
+<img src="/image/compile-time-ray-tracing-in-rust/image3.png" alt="レンダリング結果" /></p>
+<p>レイと球の交差判定の実装の意味については<a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere">参考元</a>を確認してください。</p>
+<h2 id="jin-hui-nobian-geng-dian">今回の変更点</h2>
+<ul>
+<li>球とレイの交差判定を行う<code>hit_sphere</code>関数を追加</li>
+<li>レイがヒットした箇所を赤色でレンダリングする</li>
+</ul>
+<h3 id="hit-sphere">hit_sphere</h3>
+<p><code>hit_sphere</code>の内容は以下の通りです。
+<code>const fn</code>にするだけで通常の関数と変わりなく書けています。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">hit_sphere</span><span>(</span><span style="color:#bf616a;">center</span><span>: &amp;Point3, </span><span style="color:#bf616a;">radius</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">r</span><span>: &amp;Ray) -&gt; </span><span style="color:#b48ead;">bool </span><span>{
+</span><span>    </span><span style="color:#b48ead;">let</span><span> oc = r.</span><span style="color:#96b5b4;">origin</span><span>() - center.</span><span style="color:#96b5b4;">clone</span><span>();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> a = </span><span style="color:#96b5b4;">dot</span><span>(&amp;r.</span><span style="color:#96b5b4;">direction</span><span>(), &amp;r.</span><span style="color:#96b5b4;">direction</span><span>());
+</span><span>    </span><span style="color:#b48ead;">let</span><span> b = </span><span style="color:#d08770;">2.0 </span><span>* </span><span style="color:#96b5b4;">dot</span><span>(&amp;oc, &amp;r.</span><span style="color:#96b5b4;">direction</span><span>());
+</span><span>    </span><span style="color:#b48ead;">let</span><span> c = </span><span style="color:#96b5b4;">dot</span><span>(&amp;oc, &amp;oc) - radius * radius;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> discriminant = b * b - </span><span style="color:#d08770;">4.0 </span><span>* a * c;
+</span><span>    discriminant &gt; </span><span style="color:#d08770;">0.0
+</span><span>}
+</span></code></pre>
+<h3 id="ray-color">ray_color</h3>
+<p>座標(0.0, 0.0, 1.0)の半径0.5の球にレイがヒットするかを確認し、ヒットしていた場合は赤色を返しそれ以外の場合は背景色を返します。<br />
+前回からの変更点は<code>hit_sphere</code>呼び出しと<code>return</code>の箇所が増えたくらいです。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_color</span><span>(</span><span style="color:#bf616a;">ray</span><span>: &amp;Ray) -&gt; Color {
+</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">hit_sphere</span><span>(&amp;Point3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>), </span><span style="color:#d08770;">0.5</span><span>, &amp;ray) {
+</span><span>        </span><span style="color:#b48ead;">return </span><span>Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">let</span><span> unit_direction = </span><span style="color:#96b5b4;">unit_vector</span><span>(&amp;ray.</span><span style="color:#96b5b4;">direction</span><span>());
+</span><span>    </span><span style="color:#b48ead;">let</span><span> t = </span><span style="color:#d08770;">0.5 </span><span>* unit_direction.y + </span><span style="color:#d08770;">1.0</span><span>;
+</span><span>    (</span><span style="color:#d08770;">1.0 </span><span>- t) * Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>) + t * Color::new(</span><span style="color:#d08770;">0.5</span><span>, </span><span style="color:#d08770;">0.7</span><span>, </span><span style="color:#d08770;">1.0</span><span>)
+</span><span>}
+</span></code></pre>
+<h2 id="matome">まとめ</h2>
+<p>ようやくレイトレーシングっぽさが出てきました。<br />
+今回追加された<code>hit_sphere</code>は<code>const fn</code>になっただけで通常の関数と変わるところはないです。<br />
+今は<code>const fn</code>の中で<code>if</code>を使うのは<code>stable</code>の中でもできるので<code>feature</code>を追加する必要がないのは嬉しいです。</p>
+<hr />
+<p>次回はヒットした球を単色ではなく球の法線を描画します。</p>
+</p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="Rustでコンパイル時レイトレーシング4 | blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "UA-148823095-1";
+    const ga_accept_message = `サイトを見てもらえていることがわかるとテンション上がるので同意してほしいです。
+当サイトではアクセス解析ツール「Google Analytics」を使用しています。このGoogleアナリティクスはトラフィックデータの収集のためにCookieを使用します。`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
