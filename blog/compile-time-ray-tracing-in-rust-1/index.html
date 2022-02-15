@@ -72,11 +72,13 @@
 
 </section>
 <p><p>更新履歴<br />
+2022-02-16T01:07:00+09:00: レンダリング結果の上下が逆だったのを修正<br />
 2022-01-21T23:52:00+09:00: レンダリング結果追加<br />
 2022-01-20T11:24:00+09:00: コード修正 &amp; レンダリング結果修正</p>
 <hr />
 <p>Rustでコンパイル時レイトレーシングはじめました。<br />
-<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a>はGitHubで公開しています。</p>
+<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a>はGitHubで公開しています。<br />
+記事の内容はコミットID<code>82481b974f2684a73a4940a85f92de74f9f05b7e</code>のものです。</p>
 <p><a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html">Ray Tracing in One Weekend</a>の内容に合わせて実装していきます。<br />
 この記事では「2. Output an Image」のx,yによって色を変えて出力する部分までの解説を行います。<br />
 まだレイトレーシングは登場しません。</p>
@@ -117,6 +119,7 @@
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>); </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
 </span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
 </span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
@@ -128,8 +131,9 @@
 </span><span>                (g * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
 </span><span>                (b * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
 </span><span>            );
-</span><span>            pixel_colors[j as </span><span style="color:#b48ead;">usize </span><span>* </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>+ i] = (r, g, b);
+</span><span>            pixel_colors[pixel_index] = (r, g, b);
 </span><span>            i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
 </span><span>        }
 </span><span>        i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
@@ -178,6 +182,7 @@
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>); </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
 </span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
 </span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
@@ -189,8 +194,9 @@
 </span><span>                (g * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
 </span><span>                (b * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
 </span><span>            );
-</span><span>            pixel_colors[j as </span><span style="color:#b48ead;">usize </span><span>* </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>+ i] = (r, g, b);
+</span><span>            pixel_colors[pixel_index] = (r, g, b);
 </span><span>            i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
 </span><span>        }
 </span><span>        i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>        j -= </span><span style="color:#d08770;">1</span><span>;

@@ -72,10 +72,12 @@
 
 </section>
 <p><p>更新履歴<br />
+2022-02-16T01:38:00+09:00: 背景のグラデーションの向きの修正とリポジトリへのリンクを修正<br />
 2022-02-05T12:52:00+09:00: 背景色が間違っていたのを修正 </p>
 <hr />
 <p><a href="../compile-time-ray-tracing-in-rust-2">前回記事</a><br />
-<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/f742634a84aadda4ff24f28549645123831141de">リポジトリ</a></p>
+<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a><br />
+記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/a22c5917e25e505aaeefe75e34121e1817f9ae6c"><code>a22c5917e25e505aaeefe75e34121e1817f9ae6c</code></a>のものです。</p>
 <p>今回はようやくレイを飛ばすところまで行けました！<br />
 といってもオブジェクトにヒットするとかはしておらずレイの向きによって色が変わっているだけなのでまだレイトレーシングっぽくないですね。</p>
 <p>レンダリング結果<br />
@@ -184,6 +186,7 @@
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [Color::</span><span style="color:#d08770;">ZERO</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
 </span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
 </span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
@@ -193,8 +196,9 @@
 </span><span>                &amp;origin,
 </span><span>                &amp;(lower_left_corner + u * horizontal + v * vertical - origin),
 </span><span>            );
-</span><span>            pixel_colors[j as </span><span style="color:#b48ead;">usize </span><span>* </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>+ i] = </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r);
+</span><span>            pixel_colors[pixel_index] = </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r);
 </span><span>            i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
 </span><span>        }
 </span><span>        i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
@@ -238,6 +242,7 @@
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [Color::</span><span style="color:#d08770;">ZERO</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>;
 </span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
 </span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
 </span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
@@ -247,8 +252,9 @@
 </span><span>                &amp;origin,
 </span><span>                &amp;(lower_left_corner + u * horizontal + v * vertical - origin),
 </span><span>            );
-</span><span>            pixel_colors[j as </span><span style="color:#b48ead;">usize </span><span>* </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>+ i] = </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r);
+</span><span>            pixel_colors[pixel_index] = </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r);
 </span><span>            i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
 </span><span>        }
 </span><span>        i = </span><span style="color:#d08770;">0</span><span>;
 </span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
