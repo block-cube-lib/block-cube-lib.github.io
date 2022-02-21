@@ -16,14 +16,17 @@ function onResetButtonClicked() {
 }
 
 function showAcceptMenu() {
-  const acceptMenu = document.createElement('div');
-  acceptMenu.setAttribute('id', 'ga_cookie_accept_menu');
-  acceptMenu.innerHTML = ga_accept_message.replace('\n', "<br>") + `<br><a href="${privacy_policy_url}">プライバシーポリシー</a>`;
+  const acceptMenu = document.getElementById('ga_cookie_accept_menu');
+  acceptMenu.innerHTML = ga_accept_message.replace('/\n/g', '<br>') + `<br><a href="${privacy_policy_url}">Privacy Policy</a>`;
   const acceptButtons = document.createElement('div');
   acceptButtons.setAttribute('id', 'ga_cookie_accept_buttons');
   acceptButtons.innerHTML = '<button onClick="onAcceptButtonClicked()">同意する</button>  <button onClick="onDenyButtonClicked()">同意しない</button>';
   acceptMenu.appendChild(acceptButtons);
-  document.body.appendChild(acceptMenu);
+}
+
+function hideAcceptMenu() {
+  const acceptMenu = document.getElementById('ga_cookie_accept_menu');
+  acceptMenu.style.display = "none";
 }
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -34,10 +37,12 @@ window.addEventListener('DOMContentLoaded', function () {
     case 'true':
       window[disableKey] = false;
       addResetButton();
+      hideAcceptMenu();
       break;
     case 'false':
       window[disableKey] = true;
       addResetButton();
+      hideAcceptMenu();
       break;
     default:
       showAcceptMenu();
@@ -47,5 +52,5 @@ window.addEventListener('DOMContentLoaded', function () {
 
 function addResetButton() {
   const p = document.getElementById("ga_cookie_accept_reset_button_parent");
-  p.innerHTML = '<button onClick="onResetButtonClicked()">Cookie使用の同意状態をリセットする</button>';
+  p.innerHTML = '<button onClick="onResetButtonClicked()">データ収集の同意の状態をリセットする</button>';
 }
