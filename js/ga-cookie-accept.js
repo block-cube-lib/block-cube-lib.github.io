@@ -36,13 +36,13 @@ window.addEventListener('DOMContentLoaded', function () {
   switch (gaCookieAccept) {
     case 'true':
       window[disableKey] = false;
-      addResetButton();
       hideAcceptMenu();
+      addResetButton();
       break;
     case 'false':
       window[disableKey] = true;
-      addResetButton();
       hideAcceptMenu();
+      addResetButton();
       break;
     default:
       showAcceptMenu();
@@ -52,5 +52,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
 function addResetButton() {
   const p = document.getElementById("ga_cookie_accept_reset_button_parent");
-  p.innerHTML = '<button onClick="onResetButtonClicked()">データ収集の同意の状態をリセットする</button>';
+  if (p !== undefined && p !== null)
+  {
+    p.innerHTML = '<button onClick="onResetButtonClicked()">データ収集の同意の状態をリセットする</button>';
+  }
 }
