@@ -50,6 +50,10 @@
         <lastmod>2022-01-27T13:25:00+09:00</lastmod>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/create-todays-muscle-training/</loc>
+        <lastmod>2022-03-07T13:00:00+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/google-analytics/</loc>
         <lastmod>2022-02-03T10:53:00+09:00</lastmod>
     </url>
@@ -156,6 +160,9 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/universalrp/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/yew/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/zola/</loc>
