@@ -73,7 +73,7 @@
 </span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) {}
 </span><span>}
 </span></code></pre>
-<p><code>N &lt; 5</code>などの条件に当てはまるときだけ<code>Foo</code>を実装したい場合にどうすればよいかという話です。</p>
+<p>以下のように<code>N &lt; 5</code>などの条件に当てはまるときだけ<code>Foo</code>を実装したい場合にどうすればよいかという話です。</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>ArrayWrapper([]).</span><span style="color:#96b5b4;">foo</span><span>();              </span><span style="color:#65737e;">// OK
 </span><span>ArrayWrapper([</span><span style="color:#d08770;">0</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>();             </span><span style="color:#65737e;">// OK
 </span><span>ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>();          </span><span style="color:#65737e;">// OK
