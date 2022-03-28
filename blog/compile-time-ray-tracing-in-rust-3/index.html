@@ -20,9 +20,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="
   
-    更新履歴
-2022-02-16T01:38:00+09:00: 背景のグラデーションの向きの修正とリポジトリへのリンクを修正
-2022-02-05T12:52:00+09:00: …
+    前回記事
+リポジトリ
+記事の内容はコミットIDa22c5917e25e505aaeefe75e34121e1817f9ae6cのものです。
+今回はようやくレイを飛ばすところまで行け…
   
 ">
 
@@ -38,9 +39,10 @@
           <meta property="og:type" constnt="article">
       
     
-    <meta property="og:description" content="更新履歴
-2022-02-16T01:38:00+09:00: 背景のグラデーションの向きの修正とリポジトリへのリンクを修正
-2022-02-05T12:52:00+09:00: …">
+    <meta property="og:description" content="前回記事
+リポジトリ
+記事の内容はコミットIDa22c5917e25e505aaeefe75e34121e1817f9ae6cのものです。
+今回はようやくレイを飛ばすところまで行け…">
     <!-- begin twitter ogp -->
     
       <meta name="twitter:card" content="summary_large_image">
@@ -83,9 +85,35 @@
 <h1 class="title">
   Rustでコンパイル時レイトレーシング3
 </h1>
-
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
   <span class = "date">2022&#x2F;02&#x2F;04 00:20</span>
-
+</td>
+        <td>公開</td>
+      </tr>
+      
+        
+        <tr>
+          <td>
+  <span class = "date">2022&#x2F;02&#x2F;05 12:52</span>
+</td>
+          <td class="update_history_content"><p>背景色が間違っていたのを修正</p>
+</td>
+        </tr>
+        
+        <tr>
+          <td>
+  <span class = "date">2022&#x2F;02&#x2F;16 01:38</span>
+</td>
+          <td class="update_history_content"><p>背景のグラデーションの向きの修正とリポジトリへのリンクを修正</p>
+</td>
+        </tr>
+        
+      
+    </table>
+  </section>
 <section class="tags">
   
   
@@ -109,11 +137,7 @@
   
 
 </section>
-<p><p>更新履歴<br />
-2022-02-16T01:38:00+09:00: 背景のグラデーションの向きの修正とリポジトリへのリンクを修正<br />
-2022-02-05T12:52:00+09:00: 背景色が間違っていたのを修正 </p>
-<hr />
-<p><a href="../compile-time-ray-tracing-in-rust-2">前回記事</a><br />
+<p><p><a href="../compile-time-ray-tracing-in-rust-2">前回記事</a><br />
 <a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a><br />
 記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/a22c5917e25e505aaeefe75e34121e1817f9ae6c"><code>a22c5917e25e505aaeefe75e34121e1817f9ae6c</code></a>のものです。</p>
 <p>今回はようやくレイを飛ばすところまで行けました！<br />
@@ -325,9 +349,13 @@
   
   <script>
     const ga_tracking_id = "UA-148823095-1";
-    const ga_accept_message = `当サイトではアクセス解析ツールGoogle Analyticsを使用しています。Google Analyticsはトラフィックデータの収集のためにCookieを使用します。
-データ収集の同意の状態はPrivacy Policyからいつでもリセットできます。
-サイトの閲覧数などを確認したいので同意していただけると嬉しいです。`;
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
     const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
   </script>
   <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>

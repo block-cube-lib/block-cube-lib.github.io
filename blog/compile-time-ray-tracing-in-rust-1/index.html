@@ -20,9 +20,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="
   
-    更新履歴
-2022-02-16T01:07:00+09:00: レンダリング結果の上下が逆だったのを修正
-2022-01-21T23:52:00+09:00: レンダリング結果追加…
+    Rustでコンパイル時レイトレーシングはじめました。
+リポジトリはGitHubで公開しています。
+記事の内容はコミットID82481b974f2684a73a4940a85f92d…
   
 ">
 
@@ -38,9 +38,9 @@
           <meta property="og:type" constnt="article">
       
     
-    <meta property="og:description" content="更新履歴
-2022-02-16T01:07:00+09:00: レンダリング結果の上下が逆だったのを修正
-2022-01-21T23:52:00+09:00: レンダリング結果追加…">
+    <meta property="og:description" content="Rustでコンパイル時レイトレーシングはじめました。
+リポジトリはGitHubで公開しています。
+記事の内容はコミットID82481b974f2684a73a4940a85f92d…">
     <!-- begin twitter ogp -->
     
       <meta name="twitter:card" content="summary_large_image">
@@ -83,9 +83,43 @@
 <h1 class="title">
   Rustでコンパイル時レイトレーシング1
 </h1>
-
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
   <span class = "date">2022&#x2F;01&#x2F;21 22:28</span>
-
+</td>
+        <td>公開</td>
+      </tr>
+      
+        
+        <tr>
+          <td>
+  <span class = "date">2022&#x2F;01&#x2F;20 11:24</span>
+</td>
+          <td class="update_history_content"><p>コード修正 &amp; レンダリング結果修正</p>
+</td>
+        </tr>
+        
+        <tr>
+          <td>
+  <span class = "date">2022&#x2F;01&#x2F;21 23:52</span>
+</td>
+          <td class="update_history_content"><p>レンダリング結果追加</p>
+</td>
+        </tr>
+        
+        <tr>
+          <td>
+  <span class = "date">2022&#x2F;02&#x2F;16 01:07</span>
+</td>
+          <td class="update_history_content"><p>レンダリング結果の上下が逆だったのを修正</p>
+</td>
+        </tr>
+        
+      
+    </table>
+  </section>
 <section class="tags">
   
   
@@ -109,12 +143,7 @@
   
 
 </section>
-<p><p>更新履歴<br />
-2022-02-16T01:07:00+09:00: レンダリング結果の上下が逆だったのを修正<br />
-2022-01-21T23:52:00+09:00: レンダリング結果追加<br />
-2022-01-20T11:24:00+09:00: コード修正 &amp; レンダリング結果修正</p>
-<hr />
-<p>Rustでコンパイル時レイトレーシングはじめました。<br />
+<p><p>Rustでコンパイル時レイトレーシングはじめました。<br />
 <a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a>はGitHubで公開しています。<br />
 記事の内容はコミットID<code>82481b974f2684a73a4940a85f92de74f9f05b7e</code>のものです。</p>
 <p><a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html">Ray Tracing in One Weekend</a>の内容に合わせて実装していきます。<br />
@@ -291,9 +320,13 @@
   
   <script>
     const ga_tracking_id = "UA-148823095-1";
-    const ga_accept_message = `当サイトではアクセス解析ツールGoogle Analyticsを使用しています。Google Analyticsはトラフィックデータの収集のためにCookieを使用します。
-データ収集の同意の状態はPrivacy Policyからいつでもリセットできます。
-サイトの閲覧数などを確認したいので同意していただけると嬉しいです。`;
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
     const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
   </script>
   <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>

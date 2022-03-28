@@ -17,7 +17,7 @@ function onResetButtonClicked() {
 
 function showAcceptMenu() {
   const acceptMenu = document.getElementById('ga_cookie_accept_menu');
-  acceptMenu.innerHTML = ga_accept_message.replace('/\n/g', '<br>') + `<br><a href="${privacy_policy_url}">Privacy Policy</a>`;
+  acceptMenu.innerHTML = ga_accept_message + `<a href="${privacy_policy_url}">Privacy Policy</a>`;
   const acceptButtons = document.createElement('div');
   acceptButtons.setAttribute('id', 'ga_cookie_accept_buttons');
   acceptButtons.innerHTML = '<button onClick="onAcceptButtonClicked()">同意する</button>  <button onClick="onDenyButtonClicked()">同意しない</button>';
