@@ -22,8 +22,8 @@
   
     前回記事
 リポジトリ
-(要更新)記事の内容はコミットIDbcc80697fd56821fc0f2ef09a2f092284c9bf3aeのものです。
-今回は複数オブジェクトでワール…
+記事の内容はコミットIDbcc80697fd56821fc0f2ef09a2f092284c9bf3aeのものです。
+今回は複数オブジェクトでワールドを作りレ…
   
 ">
 
@@ -41,8 +41,8 @@
     
     <meta property="og:description" content="前回記事
 リポジトリ
-(要更新)記事の内容はコミットIDbcc80697fd56821fc0f2ef09a2f092284c9bf3aeのものです。
-今回は複数オブジェクトでワール…">
+記事の内容はコミットIDbcc80697fd56821fc0f2ef09a2f092284c9bf3aeのものです。
+今回は複数オブジェクトでワールドを作りレ…">
     <!-- begin twitter ogp -->
     
       <meta name="twitter:card" content="summary_large_image">
@@ -121,7 +121,7 @@
 </section>
 <p><p><a href="../compile-time-ray-tracing-in-rust-5">前回記事</a><br />
 <a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a><br />
-(要更新)記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/bcc80697fd56821fc0f2ef09a2f092284c9bf3ae"><code>bcc80697fd56821fc0f2ef09a2f092284c9bf3ae</code></a>のものです。</p>
+記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/bcc80697fd56821fc0f2ef09a2f092284c9bf3ae"><code>bcc80697fd56821fc0f2ef09a2f092284c9bf3ae</code></a>のものです。</p>
 <p>今回は複数オブジェクトでワールドを作りレイが交差するかを判定するところまでです。</p>
 <p>レンダリング結果<br />
 <img src="/image/compile-time-ray-tracing-in-rust/image5.png" alt="レンダリング結果" /></p>
@@ -134,7 +134,7 @@
 <li>レイとの交差判定を単一の球とではなくワールドと行うようにする</li>
 </ul>
 <p>です。</p>
-<p>また参照元の<a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html" title="Ray Tracing in One Weekend">Ray Tracing in One Weekend</a>と大きく変わっている箇所もいくつかあります。</p>
+<p>また参考元の<a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html" title="Ray Tracing in One Weekend">Ray Tracing in One Weekend</a>と大きく変わっている箇所もいくつかあります。</p>
 <h3 id="spherexing-wozhui-jia">Sphere型を追加</h3>
 <p>今までは関数に中心座標と半径を渡して計算していましたが今回から球が複数登場するため<code>Sphere</code>型を定義しています。<br />
 中心座標と半径を持っているだけの<code>struct</code>です。</p>
@@ -283,9 +283,9 @@
 </span></code></pre>
 <p>しかしそうすると<code>HittableList</code>が<code>Hittable</code>の配列を持つには<code>[Box&lt;Hittable&gt;; N]</code>のように必要があります。<br />
 前述したように<code>const fn</code>の中で動的メモリ確保が行えず<code>Box</code>を使用することはできないのでこのような実装はできませんでした。そのため<code>Hittable</code>は<code>Enum</code>として実装しています。
-また参照元では<code>hittable_list</code>も<code>hittable</code>を継承していますが、<code>Hittable</code>に<code>HittableList</code>を追加すると<code>Hittable</code>, <code>HittableList</code>のサイズが未定となってしまい<code>Box</code>を使用する必要が出てくるため<code>HittableList</code>は<code>Hittable</code>に含んでいません。</p>
+また参考元では<code>hittable_list</code>も<code>hittable</code>を継承していますが、<code>Hittable</code>に<code>HittableList</code>を追加すると<code>Hittable</code>, <code>HittableList</code>のサイズが未定となってしまい<code>Box</code>を使用する必要が出てくるため<code>HittableList</code>は<code>Hittable</code>に含んでいません。</p>
 <h2 id="atogaki">あとがき</h2>
-<p>今回は<code>const fn</code>の縛りによって動的メモリ確保が行えない影響で普通に書くコードや参照元との差が大きくなったと思います。</p>
+<p>今回は<code>const fn</code>の縛りによって動的メモリ確保が行えない影響で普通に書くコードや参考元との差が大きくなったと思います。</p>
 <p>次回はレンダリング後の画像にアンチエイリアシングをかけるところまでやります。<br />
 ついに乱数が必要になります。</p>
 </p>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      Rustでコンパイル時レイトレーシング7 - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    前回記事
+リポジトリ
+記事の内容はコミットID80bd3b43d920d02c989dad6a7723400ab18e8bacのものです。
+今回はアンチエイリアシング処理を追加しま…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;compile-time-ray-tracing-in-rust-7&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9jb21waWxlLXRpbWUtcmF5LXRyYWNpbmctaW4tcnVzdC03Lw==">
+    <meta property="og:title" content= "Rustでコンパイル時レイトレーシング7" >
+    
+      <meta name="ogp_thumbnail" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;image&#x2F;compile-time-ray-tracing-in-rust&#x2F;image6.png">
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="前回記事
+リポジトリ
+記事の内容はコミットID80bd3b43d920d02c989dad6a7723400ab18e8bacのものです。
+今回はアンチエイリアシング処理を追加しま…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "Rustでコンパイル時レイトレーシング7" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  Rustでコンパイル時レイトレーシング7
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2022&#x2F;04&#x2F;07 00:00</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag">
+    <a href="https://block-cube-lib.github.io/tags/compile-time-ray-tracing-in-rust/">Compile Time Ray Tracing in Rust</a> 
+  </span>
+
+  
+  
+  <span class = "tag">
+    <a href="https://block-cube-lib.github.io/tags/ray-tracing/">Ray Tracing</a> 
+  </span>
+
+  
+  
+  <span class = "tag">
+    <a href="https://block-cube-lib.github.io/tags/rust/">Rust</a> 
+  </span>
+
+  
+
+</section>
+<p><p><a href="../compile-time-ray-tracing-in-rust-6">前回記事</a><br />
+<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a><br />
+記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/80bd3b43d920d02c989dad6a7723400ab18e8bac"><code>80bd3b43d920d02c989dad6a7723400ab18e8bac</code></a>のものです。</p>
+<p>今回はアンチエイリアシング処理を追加しました。<br />
+1ピクセルのレンダリングのために乱数で少しずつ散らしたレイを100本飛ばしています。<br />
+手元の環境で前回まではコンパイルに2分かからなかったですが今回からコンパイル時間が10時間を超えるようになりました。</p>
+<p>レンダリング結果<br />
+<img src="/image/compile-time-ray-tracing-in-rust/image6.png" alt="レンダリング結果" /><br />
+前回の結果(下の画像)と比べると球の周囲のジャギーが減っているのがわかると思います。
+<img src="/image/compile-time-ray-tracing-in-rust/image5.png" alt="前回のレンダリング結果" /></p>
+<p>この記事の内容を実装したときのRustのバージョンは<code>1.61.0-nightly (3d6970d50 2022-02-28)</code>です。</p>
+<h2 id="jin-hui-nobian-geng-dian">今回の変更点</h2>
+<p>今回の変更点は</p>
+<ul>
+<li><code>Camera</code>構造体を追加</li>
+<li>乱数生成の仕組みを追加</li>
+<li>アンチエイリアシング処理を追加</li>
+</ul>
+<p>です。</p>
+<h2 id="cameragou-zao-ti-wozhui-jia">Camera構造体を追加</h2>
+<p>今まではカメラの位置やビューポートの情報は<code>main.rs</code>内で変数として持っていましたが今回からは<code>Camera</code>構造体にまとめられています。<br />
+<code>Camera</code>の変数にuvを渡すことで対応するレイを取得する関数があるので<code>main.rs</code>でレイを取得するためのコードが少しシンプルになりました。<br />
+<code>new</code>や<code>get_ray</code>が<code>const fn</code>になっているくらいで参考元と大きな違いはありません。<code>const fn</code>特有の処理もないです。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use crate</span><span>::{Point3, Ray, Vec3};
+</span><span>
+</span><span style="color:#b48ead;">pub struct </span><span>Camera {
+</span><span>    </span><span style="color:#bf616a;">origin</span><span>: Point3,
+</span><span>    </span><span style="color:#bf616a;">lower_left_corner</span><span>: Vec3,
+</span><span>    </span><span style="color:#bf616a;">horizontal</span><span>: Vec3,
+</span><span>    </span><span style="color:#bf616a;">vertical</span><span>: Vec3,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>Camera {
+</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">new</span><span>() -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        </span><span style="color:#b48ead;">let</span><span> aspect_ratio = </span><span style="color:#d08770;">16.0 </span><span>/ </span><span style="color:#d08770;">9.0</span><span>;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> viewport_height = </span><span style="color:#d08770;">2.0</span><span>;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> viewport_width = aspect_ratio * viewport_height;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> focal_length = </span><span style="color:#d08770;">1.0</span><span>;
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">let</span><span> origin = Point3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
+</span><span>        </span><span style="color:#b48ead;">let</span><span> horizontal = Vec3::new(viewport_width, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
+</span><span>        </span><span style="color:#b48ead;">let</span><span> vertical = Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, viewport_height, </span><span style="color:#d08770;">0.0</span><span>);
+</span><span>        </span><span style="color:#b48ead;">let</span><span> lower_left_corner =
+</span><span>            origin - horizontal / </span><span style="color:#d08770;">2.0 </span><span>- vertical / </span><span style="color:#d08770;">2.0 </span><span>- Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, focal_length);
+</span><span>        </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>            origin,
+</span><span>            horizontal,
+</span><span>            vertical,
+</span><span>            lower_left_corner,
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">get_ray</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">u</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">v</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; Ray {
+</span><span>        Ray::new(
+</span><span>            &amp;</span><span style="color:#bf616a;">self</span><span>.origin,
+</span><span>            &amp;(</span><span style="color:#bf616a;">self</span><span>.lower_left_corner + u * </span><span style="color:#bf616a;">self</span><span>.horizontal + v * </span><span style="color:#bf616a;">self</span><span>.vertical - </span><span style="color:#bf616a;">self</span><span>.origin),
+</span><span>        )
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="luan-shu-sheng-cheng-noshi-zu-miwozhui-jia">乱数生成の仕組みを追加</h2>
+<p>乱数生成の仕組みとして<code>Xorshift</code>を追加しました。<br />
+こちらも各関数が<code>const fn</code>になっていますが<code>#![feature(const_mut_refs)]</code>を有効にしているため実行時用の処理と大きな違いはありません。<br />
+最初はstableでも使用できる<code>Xorshift</code>を実装しようと思っていたのですが<code>gen_f64</code>の最終行の浮動小数点の減算がコンパイル時に解決できずに諦めました…<br />
+今回追加した<code>Xorshift</code>が生成する乱数は<code>u32</code>型の値です。そのため<code>u64</code>を取得する場合は<code>u32</code>を2回生成してそれぞれ上位ビットと下位ビットに挿入しています。
+<code>f64</code>が欲しい場合は<code>u64</code>を生成した後にその値をシフト演算でずらしたものを仮数部ととして扱い、指数部と符号を適切な数値で埋めた後に<code>f64</code>に変換してやると1.0~2.0の乱数ができるのでそこから1.0を引くことで0.0~1.0の乱数を取得しています。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">pub struct </span><span>Xorshift {
+</span><span>    </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+</span><span>    </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+</span><span>    </span><span style="color:#bf616a;">z</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+</span><span>    </span><span style="color:#bf616a;">w</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>Xorshift {
+</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">new</span><span>(</span><span style="color:#bf616a;">seed</span><span>: </span><span style="color:#b48ead;">u32</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>            x: </span><span style="color:#d08770;">123456789</span><span>,
+</span><span>            y: </span><span style="color:#d08770;">362436069</span><span>,
+</span><span>            z: </span><span style="color:#d08770;">521288629</span><span>,
+</span><span>            w: seed,
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">gen_u32</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">u32 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">let</span><span> t = </span><span style="color:#bf616a;">self</span><span>.x ^ (</span><span style="color:#bf616a;">self</span><span>.x &lt;&lt; </span><span style="color:#d08770;">11</span><span>);
+</span><span>        </span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#bf616a;">self</span><span>.y;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> y = </span><span style="color:#bf616a;">self</span><span>.z;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> z = </span><span style="color:#bf616a;">self</span><span>.w;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> w = (</span><span style="color:#bf616a;">self</span><span>.w ^ (</span><span style="color:#bf616a;">self</span><span>.w &gt;&gt; </span><span style="color:#d08770;">19</span><span>)) ^ (t ^ (t &gt;&gt; </span><span style="color:#d08770;">8</span><span>));
+</span><span>        *</span><span style="color:#bf616a;">self </span><span>= </span><span style="color:#b48ead;">Self </span><span>{ x, y, z, w };
+</span><span>        w
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">gen_u64</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">u64 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">let</span><span> v1 = </span><span style="color:#bf616a;">self</span><span>.</span><span style="color:#96b5b4;">gen_u32</span><span>();
+</span><span>        </span><span style="color:#b48ead;">let</span><span> v2 = </span><span style="color:#bf616a;">self</span><span>.</span><span style="color:#96b5b4;">gen_u32</span><span>();
+</span><span>        </span><span style="color:#b48ead;">let</span><span> v = </span><span style="color:#b48ead;">unsafe </span><span>{ std::mem::transmute::&lt;[</span><span style="color:#b48ead;">u32</span><span>; </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#b48ead;">u64</span><span>&gt;([v1, v2]) };
+</span><span>        v
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">gen_f64</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
+</span><span>        </span><span style="color:#b48ead;">const</span><span> A: </span><span style="color:#b48ead;">u16 </span><span>= </span><span style="color:#d08770;">0x0001</span><span>;
+</span><span>        </span><span style="color:#b48ead;">const</span><span> B: [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">2</span><span>] = </span><span style="color:#b48ead;">unsafe </span><span>{ std::mem::transmute::&lt;</span><span style="color:#b48ead;">u16</span><span>, [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">2</span><span>]&gt;(A) };
+</span><span>        </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IS_LE</span><span>: </span><span style="color:#b48ead;">bool </span><span>= B[</span><span style="color:#d08770;">0</span><span>] == </span><span style="color:#d08770;">0x01</span><span>;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> v = </span><span style="color:#bf616a;">self</span><span>.</span><span style="color:#96b5b4;">gen_u64</span><span>();
+</span><span>        </span><span style="color:#b48ead;">let</span><span> v = </span><span style="color:#b48ead;">if </span><span style="color:#d08770;">IS_LE </span><span>{
+</span><span>            </span><span style="color:#b48ead;">let</span><span> v = (v &gt;&gt; </span><span style="color:#d08770;">12</span><span>) | </span><span style="color:#d08770;">0x3ff0000000000000</span><span>;
+</span><span>            </span><span style="color:#b48ead;">unsafe </span><span>{ std::mem::transmute::&lt;</span><span style="color:#b48ead;">u64</span><span>, </span><span style="color:#b48ead;">f64</span><span>&gt;(v) }
+</span><span>        } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>            </span><span style="color:#b48ead;">let</span><span> v = [
+</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">56</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">48</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">40</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">32</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">24</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">16</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">8</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>                (v &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>            ];
+</span><span>            </span><span style="color:#b48ead;">unsafe </span><span>{ std::mem::transmute::&lt;[</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">8</span><span>], </span><span style="color:#b48ead;">f64</span><span>&gt;(v) }
+</span><span>        };
+</span><span>        v - </span><span style="color:#d08770;">1.0
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>コードを読んで気づくかもしれませんが<code>gen_f64</code>は途中からリトルエンディアンとビッグエンディアンで処理が別れています。しかし手元にビッグエンディアンの環境がなかったのでチェックできていません。</p>
+<h2 id="antieiriasinguchu-li-wozhui-jia">アンチエイリアシング処理を追加</h2>
+<p>1ピクセルのレンダリングのために乱数で少しずつ散らしたレイを100本飛ばしその平均を取ることでアンチエイリアシング処理を行っています。<br />
+<code>ray_trace</code>関数の中で<code>ray_color</code>の返り値に<code>let scale = 1.0 / SAMPLES_PER_PIXEL as f64;</code>をかけてやったものを<code>SAMPLES_PER_PIXEL</code>回行いそれらを合計することで少しずつずれたレイトレースの結果の平均を取っています。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">/* 省略 */
+</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">SAMPLES_PER_PIXEL</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">100</span><span>;
+</span><span style="color:#65737e;">/* 省略 */
+</span><span>
+</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] {
+</span><span>    </span><span style="color:#65737e;">/* 省略 */
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> cam = Camera::new();
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> rng = Xorshift::new(include!(&quot;</span><span style="color:#a3be8c;">rand_seed.txt</span><span>&quot;));
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [Color::</span><span style="color:#d08770;">ZERO</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#b48ead;">let</span><span> scale = </span><span style="color:#d08770;">1.0 </span><span>/ </span><span style="color:#d08770;">SAMPLES_PER_PIXEL </span><span>as </span><span style="color:#b48ead;">f64</span><span>;
+</span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
+</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
+</span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
+</span><span>            </span><span style="color:#b48ead;">let mut</span><span> s = </span><span style="color:#d08770;">0</span><span>;
+</span><span>            </span><span style="color:#b48ead;">let mut</span><span> pixel_color = Color::</span><span style="color:#d08770;">ZERO</span><span>;
+</span><span>            </span><span style="color:#b48ead;">while</span><span> s &lt; </span><span style="color:#d08770;">SAMPLES_PER_PIXEL </span><span>{
+</span><span>                </span><span style="color:#b48ead;">let</span><span> u = (i as </span><span style="color:#b48ead;">f64 </span><span>+ rng.</span><span style="color:#96b5b4;">gen_f64</span><span>()) / (</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
+</span><span>                </span><span style="color:#b48ead;">let</span><span> v = (j as </span><span style="color:#b48ead;">f64 </span><span>+ rng.</span><span style="color:#96b5b4;">gen_f64</span><span>()) / (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
+</span><span>                </span><span style="color:#b48ead;">let</span><span> r = cam.</span><span style="color:#96b5b4;">get_ray</span><span>(u, v);
+</span><span>                pixel_color = pixel_color + </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r, &amp;world) * scale;
+</span><span>                s += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            }
+</span><span>            pixel_colors[pixel_index] = pixel_color;
+</span><span>            i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
+</span><span>        }
+</span><span>        i = </span><span style="color:#d08770;">0</span><span>;
+</span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>    }
+</span><span>    pixel_colors
+</span><span>}
+</span></code></pre>
+<h3 id="xorshiftnoseedzhi-nituite">Xorshiftのseed値について</h3>
+<p>今回追加した<code>Xorshift</code>は<code>Xorshift::new(seed)</code>のようにシード値を渡すことができるようになっています。<br />
+上記のコードでは<code>Xorshift::new(include!(&quot;rand_seed.txt&quot;))</code>と<code>rand_seed.txt</code>というテキストファイルの中身をそのまま渡しており、このテキストファイルの中身は<code>u32</code>型の整数値が入っています。<br />
+<code>rand_seed.txt</code>の中身を自分で決めたくなかったので下記のようなビルドスクリプトを用意してコンパイル時に生成するようにしています。値は現在時刻を元に決めています。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>anyhow::Result;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() -&gt; Result&lt;()&gt; {
+</span><span>    </span><span style="color:#b48ead;">use </span><span>std::fs::File;
+</span><span>    </span><span style="color:#b48ead;">use </span><span>std::io::Write as _;
+</span><span>    </span><span style="color:#b48ead;">use </span><span>std::time::SystemTime;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> n = SystemTime::now().</span><span style="color:#96b5b4;">duration_since</span><span>(SystemTime::</span><span style="color:#d08770;">UNIX_EPOCH</span><span>)?;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> seed = (n.</span><span style="color:#96b5b4;">as_secs</span><span>() &amp; </span><span style="color:#d08770;">0xffffffff</span><span>) as </span><span style="color:#b48ead;">u32</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> file = File::options()
+</span><span>        .</span><span style="color:#96b5b4;">write</span><span>(</span><span style="color:#d08770;">true</span><span>)
+</span><span>        .</span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#d08770;">false</span><span>)
+</span><span>        .</span><span style="color:#96b5b4;">create</span><span>(</span><span style="color:#d08770;">true</span><span>)
+</span><span>        .</span><span style="color:#96b5b4;">open</span><span>(&quot;</span><span style="color:#a3be8c;">./src/rand_seed.txt</span><span>&quot;)?;
+</span><span>    write!(file, &quot;</span><span style="color:#d08770;">{}</span><span>&quot;, seed)?;
+</span><span>
+</span><span>    Ok(())
+</span><span>}
+</span></code></pre>
+<h2 id="atogaki">あとがき</h2>
+<p><code>Xorshift</code>がstable Rustの<code>const fn</code>で使えるものにできなかったのが少し悔しいです。整数型限定ならできるのですが…</p>
+<p>手元の環境でコンパイル時間が10時間を超えるようになり「コンパイル時レイトレーシング感」が増してきました。
+そろそろ分割してコンパイルすることを検討する必要がありそうです。</p>
+</p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="Rustでコンパイル時レイトレーシング7 - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
