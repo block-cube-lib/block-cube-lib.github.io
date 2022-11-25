@@ -131,50 +131,7 @@
   
 
 </section>
-<p><p><a href="../compile-time-ray-tracing-in-rust-3">前回記事</a><br />
-<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a><br />
-記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/5a83e208d92fdecd8ffa71ce33d02ef561d1057f"><code>5a83e208d92fdecd8ffa71ce33d02ef561d1057f</code></a>のものです。</p>
-<p>今回はレイを飛ばして球にヒットした箇所を赤色でレンダリングするところまでです。<br />
-今回は新しい<code>feature</code>の追加はありません。</p>
-<p>レンダリング結果<br />
-<img src="/image/compile-time-ray-tracing-in-rust/image3.png" alt="レンダリング結果" /></p>
-<p>レイと球の交差判定の実装の意味については<a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere">参考元</a>を確認してください。</p>
-<h2 id="jin-hui-nobian-geng-dian">今回の変更点</h2>
-<ul>
-<li>球とレイの交差判定を行う<code>hit_sphere</code>関数を追加</li>
-<li>レイがヒットした箇所を赤色でレンダリングする</li>
-</ul>
-<h3 id="hit-sphere">hit_sphere</h3>
-<p><code>hit_sphere</code>の内容は以下の通りです。
-<code>const fn</code>にするだけで通常の関数と変わりなく書けています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">hit_sphere</span><span>(</span><span style="color:#bf616a;">center</span><span>: &amp;Point3, </span><span style="color:#bf616a;">radius</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">r</span><span>: &amp;Ray) -&gt; </span><span style="color:#b48ead;">bool </span><span>{
-</span><span>    </span><span style="color:#b48ead;">let</span><span> oc = r.</span><span style="color:#96b5b4;">origin</span><span>() - center.</span><span style="color:#96b5b4;">clone</span><span>();
-</span><span>    </span><span style="color:#b48ead;">let</span><span> a = </span><span style="color:#96b5b4;">dot</span><span>(&amp;r.</span><span style="color:#96b5b4;">direction</span><span>(), &amp;r.</span><span style="color:#96b5b4;">direction</span><span>());
-</span><span>    </span><span style="color:#b48ead;">let</span><span> b = </span><span style="color:#d08770;">2.0 </span><span>* </span><span style="color:#96b5b4;">dot</span><span>(&amp;oc, &amp;r.</span><span style="color:#96b5b4;">direction</span><span>());
-</span><span>    </span><span style="color:#b48ead;">let</span><span> c = </span><span style="color:#96b5b4;">dot</span><span>(&amp;oc, &amp;oc) - radius * radius;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> discriminant = b * b - </span><span style="color:#d08770;">4.0 </span><span>* a * c;
-</span><span>    discriminant &gt; </span><span style="color:#d08770;">0.0
-</span><span>}
-</span></code></pre>
-<h3 id="ray-color">ray_color</h3>
-<p>座標(0.0, 0.0, 1.0)の半径0.5の球にレイがヒットするかを確認し、ヒットしていた場合は赤色を返しそれ以外の場合は背景色を返します。<br />
-前回からの変更点は<code>hit_sphere</code>呼び出しと<code>return</code>の箇所が増えたくらいです。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_color</span><span>(</span><span style="color:#bf616a;">ray</span><span>: &amp;Ray) -&gt; Color {
-</span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">hit_sphere</span><span>(&amp;Point3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>), </span><span style="color:#d08770;">0.5</span><span>, &amp;ray) {
-</span><span>        </span><span style="color:#b48ead;">return </span><span>Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
-</span><span>    }
-</span><span>    </span><span style="color:#b48ead;">let</span><span> unit_direction = </span><span style="color:#96b5b4;">unit_vector</span><span>(&amp;ray.</span><span style="color:#96b5b4;">direction</span><span>());
-</span><span>    </span><span style="color:#b48ead;">let</span><span> t = </span><span style="color:#d08770;">0.5 </span><span>* unit_direction.y + </span><span style="color:#d08770;">1.0</span><span>;
-</span><span>    (</span><span style="color:#d08770;">1.0 </span><span>- t) * Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>) + t * Color::new(</span><span style="color:#d08770;">0.5</span><span>, </span><span style="color:#d08770;">0.7</span><span>, </span><span style="color:#d08770;">1.0</span><span>)
-</span><span>}
-</span></code></pre>
-<h2 id="matome">まとめ</h2>
-<p>ようやくレイトレーシングっぽさが出てきました。<br />
-今回追加された<code>hit_sphere</code>は<code>const fn</code>になっただけで通常の関数と変わるところはないです。<br />
-今は<code>const fn</code>の中で<code>if</code>を使うのは<code>stable</code>の中でもできるので<code>feature</code>を追加する必要がないのは嬉しいです。</p>
-<hr />
-<p>次回はヒットした球を単色ではなく球の法線を描画します。</p>
-</p>
+<p><p><a href="../compile-time-ray-tracing-in-rust-3">前回記事</a><br /><a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a>記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/5a83e208d92fdecd8ffa71ce33d02ef561d1057f"><code>5a83e208d92fdecd8ffa71ce33d02ef561d1057f</code></a>のものです。</p><p>今回はレイを飛ばして球にヒットした箇所を赤色でレンダリングするところまでです。<br>今回は新しい<code>feature</code>の追加はありません。</p><p>レンダリング結果<br><img src="/image/compile-time-ray-tracing-in-rust/image3.png" alt="レンダリング結果" /></p><p>レイと球の交差判定の実装の意味については<a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere">参考元</a>を確認してください。</p><h2 id="jin-hui-nobian-geng-dian">今回の変更点</h2><ul><li>球とレイの交差判定を行う<code>hit_sphere</code>関数を追加</li><li>レイがヒットした箇所を赤色でレンダリングする</li></ul><h3 id="hit-sphere">hit_sphere</h3><p><code>hit_sphere</code>の内容は以下の通りです。<code>const fn</code>にするだけで通常の関数と変わりなく書けています。</p><pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">hit_sphere</span><span>(</span><span style="color:#bf616a;">center</span><span>: &amp;Point3, </span><span style="color:#bf616a;">radius</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">r</span><span>: &amp;Ray) -&gt; </span><span style="color:#b48ead;">bool </span><span>{<br></span><span>    </span><span style="color:#b48ead;">let</span><span> oc = r.</span><span style="color:#96b5b4;">origin</span><span>() - center.</span><span style="color:#96b5b4;">clone</span><span>();<br></span><span>    </span><span style="color:#b48ead;">let</span><span> a = </span><span style="color:#96b5b4;">dot</span><span>(&amp;r.</span><span style="color:#96b5b4;">direction</span><span>(), &amp;r.</span><span style="color:#96b5b4;">direction</span><span>());<br></span><span>    </span><span style="color:#b48ead;">let</span><span> b = </span><span style="color:#d08770;">2.0 </span><span>* </span><span style="color:#96b5b4;">dot</span><span>(&amp;oc, &amp;r.</span><span style="color:#96b5b4;">direction</span><span>());<br></span><span>    </span><span style="color:#b48ead;">let</span><span> c = </span><span style="color:#96b5b4;">dot</span><span>(&amp;oc, &amp;oc) - radius * radius;<br></span><span>    </span><span style="color:#b48ead;">let</span><span> discriminant = b * b - </span><span style="color:#d08770;">4.0 </span><span>* a * c;<br></span><span>    discriminant &gt; </span><span style="color:#d08770;">0.0<br></span><span>}<br></span></code></pre><h3 id="ray-color">ray_color</h3><p>座標(0.0, 0.0, 1.0)の半径0.5の球にレイがヒットするかを確認し、ヒットしていた場合は赤色を返しそれ以外の場合は背景色を返します。<br>前回からの変更点は<code>hit_sphere</code>呼び出しと<code>return</code>の箇所が増えたくらいです。</p><pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_color</span><span>(</span><span style="color:#bf616a;">ray</span><span>: &amp;Ray) -&gt; Color {<br></span><span>    </span><span style="color:#b48ead;">if </span><span style="color:#96b5b4;">hit_sphere</span><span>(&amp;Point3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>), </span><span style="color:#d08770;">0.5</span><span>, &amp;ray) {<br></span><span>        </span><span style="color:#b48ead;">return </span><span>Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);<br></span><span>    }<br></span><span>    </span><span style="color:#b48ead;">let</span><span> unit_direction = </span><span style="color:#96b5b4;">unit_vector</span><span>(&amp;ray.</span><span style="color:#96b5b4;">direction</span><span>());<br></span><span>    </span><span style="color:#b48ead;">let</span><span> t = </span><span style="color:#d08770;">0.5 </span><span>* unit_direction.y + </span><span style="color:#d08770;">1.0</span><span>;<br></span><span>    (</span><span style="color:#d08770;">1.0 </span><span>- t) * Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>) + t * Color::new(</span><span style="color:#d08770;">0.5</span><span>, </span><span style="color:#d08770;">0.7</span><span>, </span><span style="color:#d08770;">1.0</span><span>)<br></span><span>}<br></span></code></pre><h2 id="matome">まとめ</h2><p>ようやくレイトレーシングっぽさが出てきました。<br>今回追加された<code>hit_sphere</code>は<code>const fn</code>になっただけで通常の関数と変わるところはないです。<br>今は<code>const fn</code>の中で<code>if</code>を使うのは<code>stable</code>の中でもできるので<code>feature</code>を追加する必要がないのは嬉しいです。</p><hr /><p>次回はヒットした球を単色ではなく球の法線を描画します。</p></p>
 <hr>
 <p class="share_buttons">
   <a class="twitter-share-button" data-text="Rustでコンパイル時レイトレーシング4 - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>

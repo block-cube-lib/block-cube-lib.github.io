@@ -109,51 +109,7 @@
   
 
 </section>
-<p><p>コードの解説とかはないです。</p>
-<hr />
-<h2 id="zuo-tutanomono">作ったのもの</h2>
-<p>自分で負荷を選んで抽選ボタンを押すと筋トレの内容が抽選されるので出てきた内容をこなすだけというものです。<br />
-日付が変わると再抽選できるようになります。<br />
-<a href="https://block-cube-lib.github.io/todays-muscle-training/">日替わり筋肉メイカー</a><br />
-<a href="https://block-cube-lib.github.io/todays-muscle-training/">リポジトリ</a></p>
-<h2 id="zuo-tutali-you">作った理由</h2>
-<p>筋トレをサボりがちなので楽しく達成感付きでやりたい&amp;Webアプリ作りたいという理由です。
-筋トレの内容を抽選するだけなら診断メーカーとかでも良いのですが負荷は自分で決めたかったのでやっぱり作ることにしました。</p>
-<h2 id="yewwoxuan-ndali-you">Yewを選んだ理由</h2>
-<p><code>Seed</code>と迷ったのですが、最近<code>Yew</code>の名前を目にすることが増えたので日本語の参考になる記事が増えてるならそっちでいいかというくらいの決め方です。<br />
-べつにこだわりがあったわけではありません。<br />
-これくらいの規模なら<code>HTML</code> + <code>JavaScript</code>だけで作れると思いますが<code>Rust</code>でWebアプリ作りたかったので…</p>
-<h2 id="ku-lao-sitadian">苦労した点</h2>
-<ul>
-<li><code>HTML</code>/<code>CSS</code>/<code>JavaScript</code>わからん</li>
-<li><code>Yew</code>のドキュメント読めない(現在は解決済み)</li>
-<li><code>Yew</code>(というか<code>WebAssembly</code>)で使えない処理がある</li>
-</ul>
-<h3 id="html-css-javascriptwakaran">HTML/CSS/JavaScriptわからん</h3>
-<p>これは普段書かないので毎回調べながらというのが面倒でした。<br />
-(特にCSSが思うようにならない)</p>
-<h3 id="yewnodokiyumentodu-menai-xian-zai-hajie-jue-ji-mi">Yewのドキュメント読めない(現在は解決済み)</h3>
-<p>なぜか開発中に<code>Yew</code>の<a href="https://yew.rs/docs/getting-started/introduction">ドキュメント</a>のサイトでスクロールが正常にできずいつまでもベージ最上部に戻されるという謎の現象に見舞われていました。<br />
-そのため公式のドキュメント以外に他の方が公開してくれている記事などを読んで開発していました。<br />
-欲しい機能っぽいものを見つけても使い方がわからない場合は勘で書いてコンパイルエラーを読んで修正していく、みたいな進め方をしていました。よくこんなのでリリースできたな。</p>
-<h3 id="yew-toiukawebassembly-deshi-enaiji-neng-gaaru"><code>Yew</code>(というか<code>WebAssembly</code>)で使えない機能がある</h3>
-<p>例えば自分が使いたいものだと<code>chrono</code>を使用して現在の日付を取得したかったのですが、どうも<code>WebAssembly</code>がターゲットだと使えないらしく<code>js_sys</code>クレートを使用して<code>JavaScript</code>側の日付取得処理を呼び出したりしていました。</p>
-<h2 id="depuroi">デプロイ</h2>
-<p>mainブランチに変更があれば<code>GitHub Actions</code>でビルドして<code>GitHub Pages</code>にデプロイしています。
-<a href="https://qiita.com/suzuki_sh/items/c53a6056bb4377a50861">Rust + Yew で静的ページをGitHub Pagesにデプロイ</a>という内容を公開していくれている方がいたので<code>gh-pages.yml</code>をほぼそのまま使わせていただきました。<br />
-自分がやることはmainブランチの変更をpushするだけでなのでとても楽です。</p>
-<h2 id="yewwoshi-tutemitagan-xiang">Yewを使ってみた感想</h2>
-<p>機能単位で<code>Component</code>として定義する、Messageで変更などを飛ばす、といった点は慣れれば非常に使いやすかったです。<br />
-コード内に<code>html!</code>マクロで<code>HTML</code>をほぼそのまま書けるしその中に<code>Rust</code>のコードを書けるという点も便利でした。<br />
-ちょっとしたコンポーネントならわざわざ<code>Component</code>トレイトを実装しなくても<code>function_component(コンポーネント名)</code>をつけた関数で実装できるのも手間や記述量が減ってよかったです。</p>
-<h2 id="atogaki">あとがき</h2>
-<p>初のWebアプリ作成でした。小規模なものでもリリースできると楽しいですね。
-<code>HTML</code>/<code>CSS</code>/<code>JavaScript</code>はたまにちょっと触る程度なので毎回苦労してます。<br />
-<code>Yew</code>のドキュメントが読めないのは本当にキツかったです。今はドキュメントを読めるようになっているので少し読んでは「こんな機能あったのか」みたいなことになっているのでそのうちリファクタリングするとおもいます。<br />
-デプロイに関してはすごい楽でした。<code>GitHub Pages</code>や<code>GitHub Actions</code>は便利ですね。<br />
-<code>Yew</code>の使用感に関してですが、以前<code>Vue</code>に少しだけ触れたことがあるのですが<code>Yew</code>のホットリロードは<code>Vue</code>と比べると遅いのは少し気になりました。
-ですが、好きな言語で開発できる&amp;<code>Rust</code>のコンパイルのメッセージを見ながら開発・修正ができることを考えたら許容範囲だと感じました。</p>
-</p>
+<p><p>コードの解説とかはないです。</p><hr /><h2 id="zuo-tutanomono">作ったのもの</h2><p>自分で負荷を選んで抽選ボタンを押すと筋トレの内容が抽選されるので出てきた内容をこなすだけというものです。<br>日付が変わると再抽選できるようになります。<br><a href="https://block-cube-lib.github.io/todays-muscle-training/">日替わり筋肉メイカー</a><br /><a href="https://block-cube-lib.github.io/todays-muscle-training/">リポジトリ</a></p><h2 id="zuo-tutali-you">作った理由</h2><p>筋トレをサボりがちなので楽しく達成感付きでやりたい&amp;Webアプリ作りたいという理由です。<br>筋トレの内容を抽選するだけなら診断メーカーとかでも良いのですが負荷は自分で決めたかったのでやっぱり作ることにしました。</p><h2 id="yewwoxuan-ndali-you">Yewを選んだ理由</h2><p><code>Seed</code>と迷ったのですが、最近<code>Yew</code>の名前を目にすることが増えたので日本語の参考になる記事が増えてるならそっちでいいかというくらいの決め方です。<br>べつにこだわりがあったわけではありません。<br>これくらいの規模なら<code>HTML</code> + <code>JavaScript</code>だけで作れると思いますが<code>Rust</code>でWebアプリ作りたかったので…</p><h2 id="ku-lao-sitadian">苦労した点</h2><ul><li><code>HTML</code>/<code>CSS</code>/<code>JavaScript</code>わからん</li><li><code>Yew</code>のドキュメント読めない(現在は解決済み)</li><li><code>Yew</code>(というか<code>WebAssembly</code>)で使えない処理がある</li></ul><h3 id="html-css-javascriptwakaran">HTML/CSS/JavaScriptわからん</h3><p>これは普段書かないので毎回調べながらというのが面倒でした。<br>(特にCSSが思うようにならない)</p><h3 id="yewnodokiyumentodu-menai-xian-zai-hajie-jue-ji-mi">Yewのドキュメント読めない(現在は解決済み)</h3><p>なぜか開発中に<code>Yew</code>の<a href="https://yew.rs/docs/getting-started/introduction">ドキュメント</a>のサイトでスクロールが正常にできずいつまでもベージ最上部に戻されるという謎の現象に見舞われていました。<br>そのため公式のドキュメント以外に他の方が公開してくれている記事などを読んで開発していました。<br>欲しい機能っぽいものを見つけても使い方がわからない場合は勘で書いてコンパイルエラーを読んで修正していく、みたいな進め方をしていました。よくこんなのでリリースできたな。</p><h3 id="yew-toiukawebassembly-deshi-enaiji-neng-gaaru"><code>Yew</code>(というか<code>WebAssembly</code>)で使えない機能がある</h3><p>例えば自分が使いたいものだと<code>chrono</code>を使用して現在の日付を取得したかったのですが、どうも<code>WebAssembly</code>がターゲットだと使えないらしく<code>js_sys</code>クレートを使用して<code>JavaScript</code>側の日付取得処理を呼び出したりしていました。</p><h2 id="depuroi">デプロイ</h2><p>mainブランチに変更があれば<code>GitHub Actions</code>でビルドして<code>GitHub Pages</code>にデプロイしています。<br><a href="https://qiita.com/suzuki_sh/items/c53a6056bb4377a50861">Rust + Yew で静的ページをGitHub Pagesにデプロイ</a>という内容を公開していくれている方がいたので<code>gh-pages.yml</code>をほぼそのまま使わせていただきました。<br>自分がやることはmainブランチの変更をpushするだけでなのでとても楽です。</p><h2 id="yewwoshi-tutemitagan-xiang">Yewを使ってみた感想</h2><p>機能単位で<code>Component</code>として定義する、Messageで変更などを飛ばす、といった点は慣れれば非常に使いやすかったです。<br>コード内に<code>html!</code>マクロで<code>HTML</code>をほぼそのまま書けるしその中に<code>Rust</code>のコードを書けるという点も便利でした。<br>ちょっとしたコンポーネントならわざわざ<code>Component</code>トレイトを実装しなくても<code>function_component(コンポーネント名)</code>をつけた関数で実装できるのも手間や記述量が減ってよかったです。</p><h2 id="atogaki">あとがき</h2><p>初のWebアプリ作成でした。小規模なものでもリリースできると楽しいですね。<br><code>HTML</code>/<code>CSS</code>/<code>JavaScript</code>はたまにちょっと触る程度なので毎回苦労してます。<br><code>Yew</code>のドキュメントが読めないのは本当にキツかったです。今はドキュメントを読めるようになっているので少し読んでは「こんな機能あったのか」みたいなことになっているのでそのうちリファクタリングするとおもいます。<br>デプロイに関してはすごい楽でした。<code>GitHub Pages</code>や<code>GitHub Actions</code>は便利ですね。<br><code>Yew</code>の使用感に関してですが、以前<code>Vue</code>に少しだけ触れたことがあるのですが<code>Yew</code>のホットリロードは<code>Vue</code>と比べると遅いのは少し気になりました。ですが、好きな言語で開発できる&amp;<code>Rust</code>のコンパイルのメッセージを見ながら開発・修正ができることを考えたら許容範囲だと感じました。</p></p>
 <hr>
 <p class="share_buttons">
   <a class="twitter-share-button" data-text="Yewで日替わりの筋トレのお題を出すWebアプリ作った - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
