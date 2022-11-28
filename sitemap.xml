@@ -19,10 +19,6 @@
         <lastmod>2021-06-10T20:48:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/blog-ogp/</loc>
-        <lastmod>2022-03-26T22:02:00+09:00</lastmod>
-    </url>
-    <url>
         <loc>https://block-cube-lib.github.io/blog/change-site-generator/</loc>
         <lastmod>2021-01-19T22:10:00+09:00</lastmod>
     </url>
@@ -115,10 +111,6 @@
         <lastmod>2022-04-25T21:30:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/watch-log-become-a-programmer-who-can-write-shaders-2/</loc>
-        <lastmod>2022-06-17T12:40:00+09:00</lastmod>
-    </url>
-    <url>
         <loc>https://block-cube-lib.github.io/blog/what-can-console-output-be-used-for-game-dev/</loc>
         <lastmod>2021-02-07T23:29:00+09:00</lastmod>
     </url>
@@ -177,9 +169,6 @@
         <loc>https://block-cube-lib.github.io/tags/messagepack/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/ogp/</loc>
-    </url>
-    <url>
         <loc>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2019/</loc>
     </url>
     <url>
@@ -205,9 +194,6 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/universalrp/</loc>
-    </url>
-    <url>
-        <loc>https://block-cube-lib.github.io/tags/watch-log/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/webgl/</loc>
