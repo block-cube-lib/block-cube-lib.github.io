@@ -20,8 +20,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="
   
-    2019&#x2F;12&#x2F;19に京都で行われたUnity×KYOTO Vol.0で「Universal Render Pipelineでポストプロセス」というタイトルで発表しました。
-スライ…
+    2019&#x2F;12&#x2F;19に京都で行われたUnity×KYOTO Vol.0で
+「Universal Render Pipelineでポストプロセス」というタイトルで発表しました。
+スラ…
   
 ">
 
@@ -35,8 +36,9 @@
           <meta property="og:type" constnt="article">
       
     
-    <meta property="og:description" content="2019&amp;#x2F;12&amp;#x2F;19に京都で行われたUnity×KYOTO Vol.0で「Universal Render Pipelineでポストプロセス」というタイトルで発表しました。
-スライ…">
+    <meta property="og:description" content="2019&amp;#x2F;12&amp;#x2F;19に京都で行われたUnity×KYOTO Vol.0で
+「Universal Render Pipelineでポストプロセス」というタイトルで発表しました。
+スラ…">
     <!-- begin twitter ogp -->
     
       <meta name="twitter:card" content="summary_large_image">
@@ -103,7 +105,97 @@
   
 
 </section>
-<p><p>2019/12/19に京都で行われた<a href="https://meetup.unity3d.jp/jp/events/1190">Unity×KYOTO Vol.0</a>で「Universal Render Pipelineでポストプロセス」というタイトルで発表しました。<br /><a href="https://www.slideshare.net/secret/N7PljH1sze5e68">スライド</a>は既に公開されています。</p><p>発表の様子</p><p><img src="/image/unity_kyoto.jpg" alt="発表の様子" /></p><p>こういう場で発表するのは人生初なので緊張しましたが、主観では特に失敗なく終われたと思っています。</p><p>後の自分のためにも経緯とか準備の話とか書いていきます。</p><h2 id="fa-biao-zhe-jue-ding-made">発表者決定まで</h2><p>Ponosから発表者が出るまでの経緯や自分が所属しているスタジオに声がかかった経緯は詳しくは知らないので省略します。</p><p>スタジオ内のUnityエンジニアに「発表したい人いたら立候補して」みたいな連絡があったので、それはそれは悩んで立候補しました。<br>自分が発表するって決まったときは緊張で手汗がすごかったです。発表するって決まっただけなのに。</p><p>あと50分枠1人では無理だと思ったこともありエンジニアのリーダーと僕で25分ずつで分けることにしました。ありがとうリーダー。<br>これが11/19なので発表の1月前です。</p><h2 id="fa-biao-zhun-bei">発表準備</h2><h3 id="tema-taitoru-jue-ding-made">テーマ(タイトル)決定まで</h3><p>イベントやるよって情報を公開するために何を発表するかを公開する必要があります。<br>つまりタイトルくらいは先に決めておく必要があるわけです。<br>しかし自分が持ってる情報で他の人が興味を持つものが思いつきませんでした。<br>そのため</p><ul><li>まず間違いなくDOTSを目的に来る人がいる<br>→それなら新しい機能のほうが興味を引けるはず</li><li>見た目でわかりやすいものが良さそう</li><li>Shader Graph使いたい</li></ul><p>などからUniversal Render Pipelineで何かしらやる。いけそうならポストプロセスって感じで決めました。<br>このときが11/22です。既に3日経過。</p><h3 id="postprocessing-stack-v3dekasutamuehuekutonozhui-jia-gadekinaitoqi-dukumade">PostProcessing Stack V3でカスタムエフェクトの追加ができないと気づくまで</h3><p>Universal Render Pipeline(URP)がLightweight Render Pipeline(LWRP)の後継的なポジションなのは知っていましたが、<br>それ以外は全くわかってないので調べつつ作ってました。<br>PostProcessing Stackの存在を知った時点で<br>「ちょこっとコード書いたら後はShader Graphで遊んでるくらいでどうにかなるやろ」<br>などと考えてました。なりませんでした。<br>発表内容にあるように、PostProcessing Stack V3でカスタムエフェクトが追加できなかったからです。</p><p>Unity Blogの <a href="https://blogs.unity3d.com/jp/2019/09/20/how-the-lightweight-render-pipeline-is-evolving/">軽量レンダーパイプラインからユニバーサルレンダーパイプラインへ</a>に</p><blockquote><p>ただし、現在ポストプロセッシングはカスタムエフェクトに対応していません（今後追加される予定です）。</p></blockquote><p>と書いてあるのを見逃しており、PostProcessing Stack V3にカスタムエフェクトを追加できないかと調べていました。<br>最終的にUniversal Render Pipelineのコードを読んで「あれ？これ無理じゃね？」って気づいたあたりで先程の記事を読み直し無理だと知りました。<br>最初からよく読んでいればこんなに時間はかからなかったのに…<br>この時点でポストプロセスのネタのままいけるか不安になってました。<br>多分ここらへんで11月終わりそうになってました。</p><h3 id="renderobjectswoshi-utojue-merumade">RenderObjectsを使うと決めるまで</h3><p><a href="https://github.com/Unity-Technologies/UniversalRenderingExamples">Unity-Technologies/UniversalRenderingExamples</a>を見て、RendererFeatureを自作すればかなり自由にいろいろできることが判明したのですが、</p><ul><li>コードの解説ばかりになりそうなので聞く人が面白くないかもしれない</li><li><code>SceneColor</code>ノードでレンダリング結果を取得できる</li><li>本番まで準備期間が少ない</li></ul><p>などから<code>RenderObjects</code>を使用しコードを書かなくても良い、コードの解説も不要な内容にしました。<br>発表内容をポストプロセスから変更せずに行けそうで安堵しました。</p><h3 id="rihasaru">リハーサル</h3><p>Unite登壇経験がある方がチームに所属しており、その方から「リハーサルは絶対何度かしたほうが良い」<br>と助言を頂いたのでリハーサルを何度かする事になっていました。</p><h4 id="rihasaru1hui-mu">リハーサル1回目</h4><p>スライドは未完成でしたがとりあえずやってみました。<br>25分枠なのに12分で終わりました。えらいこっちゃ。</p><p>これが12/16日です。本番3日前。</p><h4 id="rihasaru2hui-mu">リハーサル2回目</h4><p>次の日にもう一度リハーサルを行いました。<br>スライドは前日とそんなに変わってない状態です。<br>少しゆっくり話すのを意識しました。<br>13,4分で終わったと思います。</p><p>スライド未完成、時間が10分以上余る状態で本番2日前。</p><hr /><h5 id="suraidowan-cheng">スライド完成</h5><p>リハーサル1,2でもらった意見を元に内容を追加・変更しようやくスライドが完成しました。</p><h4 id="rihasaru3hui-mu">リハーサル3回目</h4><p>ようやく時間が20分を超えました。<br>ここでもらった意見を元に更に追加・修正を行いました。</p><p>本番前日。</p><h4 id="rihasaru4hui-mu">リハーサル4回目</h4><p>本番当日。</p><p>会場までの移動前にもう一度リハーサルを行いました。<br>誤字が見つかったのでやっておいてよかったです。</p><h4 id="ben-fan-hui-chang-yi-dong-hou">本番会場移動後</h4><p>セッティング中に後ろの方の席からだと動画や画像の中の文字が見づらいことがわかったため、細かいところが見えなくてもなんとなくわかるように発表中に話す内容を少し変えることにしました。</p><h2 id="ben-fan">本番</h2><p>緊張しましたが、なんとか大きなミスをせずに乗り切りました。リハーサルでも忘れた「セピア」という単語を本番でも忘れたくらいです。<br>それをネタにしたら一部の方にウケたのでそれはそれで良かったと思ってます。</p><h2 id="ken-qin-hui">懇親会</h2><p>食って飲んで意見交換してと楽しかったです。<br>発表の場では言えない話(悪い話ではない)をしたりできるのが良いですね。</p><h2 id="zhong-watutemite">終わってみて</h2><p>発表準備をするのがこんなに大変だとは思いませんでした。<br>仕事が忙しい時期ならできなかったと思います。</p><p>とても良い経験になったのでまたこういう機会があればやりたいです。</p><p>関係者の方々、リハーサルや準備に付き合ってくれた方々、見に来ていただいた方々、本当にありがとうございました。</p></p>
+<p><p>2019/12/19に京都で行われた<a href="https://meetup.unity3d.jp/jp/events/1190">Unity×KYOTO Vol.0</a>で
+「Universal Render Pipelineでポストプロセス」というタイトルで発表しました。<br />
+<a href="https://www.slideshare.net/secret/N7PljH1sze5e68">スライド</a>は既に公開されています。</p>
+<p>発表の様子
+<img src="/image/unity_kyoto.jpg" alt="発表の様子" /></p>
+<p>こういう場で発表するのは人生初なので緊張しましたが、主観では特に失敗なく終われたと思っています。</p>
+<p>後の自分のためにも経緯とか準備の話とか書いていきます。</p>
+<h2 id="fa-biao-zhe-jue-ding-made">発表者決定まで</h2>
+<p>Ponosから発表者が出るまでの経緯や自分が所属しているスタジオに声がかかった経緯は詳しくは知らないので省略します。</p>
+<p>スタジオ内のUnityエンジニアに「発表したい人いたら立候補して」みたいな連絡があったので、それはそれは悩んで立候補しました。<br />
+自分が発表するって決まったときは緊張で手汗がすごかったです。発表するって決まっただけなのに。</p>
+<p>あと50分枠1人では無理だと思ったこともありエンジニアのリーダーと僕で25分ずつで分けることにしました。ありがとうリーダー。<br />
+これが11/19なので発表の1月前です。</p>
+<h2 id="fa-biao-zhun-bei">発表準備</h2>
+<h3 id="tema-taitoru-jue-ding-made">テーマ(タイトル)決定まで</h3>
+<p>イベントやるよって情報を公開するために何を発表するかを公開する必要があります。<br />
+つまりタイトルくらいは先に決めておく必要があるわけです。<br />
+しかし自分が持ってる情報で他の人が興味を持つものが思いつきませんでした。
+そのため</p>
+<ul>
+<li>まず間違いなくDOTSを目的に来る人がいる<br />
+→それなら新しい機能のほうが興味を引けるはず</li>
+<li>見た目でわかりやすいものが良さそう</li>
+<li>Shader Graph使いたい</li>
+</ul>
+<p>などからUniversal Render Pipelineで何かしらやる。いけそうならポストプロセスって感じで決めました。
+このときが11/22です。既に3日経過。</p>
+<h3 id="postprocessing-stack-v3dekasutamuehuekutonozhui-jia-gadekinaitoqi-dukumade">PostProcessing Stack V3でカスタムエフェクトの追加ができないと気づくまで</h3>
+<p>Universal Render Pipeline(URP)がLightweight Render Pipeline(LWRP)の後継的なポジションなのは知っていましたが、
+それ以外は全くわかってないので調べつつ作ってました。<br />
+PostProcessing Stackの存在を知った時点で<br />
+「ちょこっとコード書いたら後はShader Graphで遊んでるくらいでどうにかなるやろ」<br />
+などと考えてました。なりませんでした。<br />
+発表内容にあるように、PostProcessing Stack V3でカスタムエフェクトが追加できなかったからです。</p>
+<p>Unity Blogの <a href="https://blogs.unity3d.com/jp/2019/09/20/how-the-lightweight-render-pipeline-is-evolving/">軽量レンダーパイプラインからユニバーサルレンダーパイプラインへ</a>に</p>
+<blockquote>
+<p>ただし、現在ポストプロセッシングはカスタムエフェクトに対応していません（今後追加される予定です）。</p>
+</blockquote>
+<p>と書いてあるのを見逃しており、PostProcessing Stack V3にカスタムエフェクトを追加できないかと調べていました。<br />
+最終的にUniversal Render Pipelineのコードを読んで「あれ？これ無理じゃね？」って気づいたあたりで先程の記事を読み直し無理だと知りました。<br />
+最初からよく読んでいればこんなに時間はかからなかったのに…<br />
+この時点でポストプロセスのネタのままいけるか不安になってました。
+多分ここらへんで11月終わりそうになってました。</p>
+<h3 id="renderobjectswoshi-utojue-merumade">RenderObjectsを使うと決めるまで</h3>
+<p><a href="https://github.com/Unity-Technologies/UniversalRenderingExamples">Unity-Technologies/UniversalRenderingExamples</a>
+を見て、RendererFeatureを自作すればかなり自由にいろいろできることが判明したのですが、</p>
+<ul>
+<li>コードの解説ばかりになりそうなので聞く人が面白くないかもしれない</li>
+<li><code>SceneColor</code>ノードでレンダリング結果を取得できる</li>
+<li>本番まで準備期間が少ない</li>
+</ul>
+<p>などから<code>RenderObjects</code>を使用しコードを書かなくても良い、コードの解説も不要な内容にしました。<br />
+発表内容をポストプロセスから変更せずに行けそうで安堵しました。</p>
+<h3 id="rihasaru">リハーサル</h3>
+<p>Unite登壇経験がある方がチームに所属しており、その方から「リハーサルは絶対何度かしたほうが良い」
+と助言を頂いたのでリハーサルを何度かする事になっていました。</p>
+<h4 id="rihasaru1hui-mu">リハーサル1回目</h4>
+<p>スライドは未完成でしたがとりあえずやってみました。<br />
+25分枠なのに12分で終わりました。えらいこっちゃ。</p>
+<p>これが12/16日です。本番3日前。</p>
+<h4 id="rihasaru2hui-mu">リハーサル2回目</h4>
+<p>次の日にもう一度リハーサルを行いました。<br />
+スライドは前日とそんなに変わってない状態です。<br />
+少しゆっくり話すのを意識しました。<br />
+13,4分で終わったと思います。</p>
+<p>スライド未完成、時間が10分以上余る状態で本番2日前。</p>
+<hr />
+<h5 id="suraidowan-cheng">スライド完成</h5>
+<p>リハーサル1,2でもらった意見を元に内容を追加・変更しようやくスライドが完成しました。</p>
+<h4 id="rihasaru3hui-mu">リハーサル3回目</h4>
+<p>ようやく時間が20分を超えました。<br />
+ここでもらった意見を元に更に追加・修正を行いました。</p>
+<p>本番前日。</p>
+<h4 id="rihasaru4hui-mu">リハーサル4回目</h4>
+<p>本番当日。</p>
+<p>会場までの移動前にもう一度リハーサルを行いました。<br />
+誤字が見つかったのでやっておいてよかったです。</p>
+<h4 id="ben-fan-hui-chang-yi-dong-hou">本番会場移動後</h4>
+<p>セッティング中に後ろの方の席からだと動画や画像の中の文字が見づらいことがわかったため、細かいところが見えなくてもなんとなくわかるように発表中に話す内容を少し変えることにしました。</p>
+<h2 id="ben-fan">本番</h2>
+<p>緊張しましたが、なんとか大きなミスをせずに乗り切りました。リハーサルでも忘れた「セピア」という単語を本番でも忘れたくらいです。<br />
+それをネタにしたら一部の方にウケたのでそれはそれで良かったと思ってます。</p>
+<h2 id="ken-qin-hui">懇親会</h2>
+<p>食って飲んで意見交換してと楽しかったです。<br />
+発表の場では言えない話(悪い話ではない)をしたりできるのが良いですね。</p>
+<h2 id="zhong-watutemite">終わってみて</h2>
+<p>発表準備をするのがこんなに大変だとは思いませんでした。<br />
+仕事が忙しい時期ならできなかったと思います。</p>
+<p>とても良い経験になったのでまたこういう機会があればやりたいです。</p>
+<p>関係者の方々、リハーサルや準備に付き合ってくれた方々、見に来ていただいた方々、本当にありがとうございました。</p>
+</p>
 <hr>
 <p class="share_buttons">
   <a class="twitter-share-button" data-text="Unity×KYOTO Vol.0で発表しました - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>

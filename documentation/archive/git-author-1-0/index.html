@@ -90,7 +90,30 @@ Overview
 <section class="update_history">
   
 </section>
-<p><p>git authorの日本語ドキュメントです。<br /><a href="https://github.com/block-cube-lib/git-author-rs">リポジトリ</a></p><h2 id="overview">Overview</h2><ul><li>コマンド一発でuser.nameとuser.emailを取得または設定できます</li><li>過去のコミットのAuthorを書き換えることができます</li></ul><h2 id="description">Description</h2><p><code>git author</code>または<code>git author get</code>でuser.nameとuser.emailを取得できます。<br /><img src="/image/works/git-author/1.0/git-author-get.gif" alt="get-demo" /></p><hr /><p><code>git set foo foo@abc.com</code>でuser.nameとuser.emailを設定できます。<br /><img src="/image/works/git-author/1.0/git-author-set.gif" alt="set-demo" /></p><hr /><p><code>git replace foo foo@abc.com bar bar@xyz.com</code>で<br>過去のコミットのauthorとcommiterの<code>foo &lt;foo@abc.com&gt;</code>を<code>bar &lt;bar@xyz.com&gt;</code>に置き換えます。<br />置き換え後の名前とメールアドレス(<code>bar bar@xyz.com</code>)は省略可能で、省略した場合は<code>git author get</code>で取得できるauthorに置き換えます。<br><img src="/image/works/git-author/1.0/git-author-replace.gif" alt="replace-demo" /></p><h2 id="installation">Installation</h2><p>Cargoが使える必要があります。<br /><code>cargo install git-author</code> でインストールできます。</p><h2 id="license">License</h2><p><a href="https://github.com/block-cube-lib/git-author-rs/blob/master/LICENSE">MIT</a></p></p>
+<p><p>git authorの日本語ドキュメントです。<br />
+<a href="https://github.com/block-cube-lib/git-author-rs">リポジトリ</a></p>
+<h2 id="overview">Overview</h2>
+<ul>
+<li>コマンド一発でuser.nameとuser.emailを取得または設定できます</li>
+<li>過去のコミットのAuthorを書き換えることができます</li>
+</ul>
+<h2 id="description">Description</h2>
+<p><code>git author</code>または<code>git author get</code>でuser.nameとuser.emailを取得できます。<br />
+<img src="/image/works/git-author/1.0/git-author-get.gif" alt="get-demo" /></p>
+<hr />
+<p><code>git set foo foo@abc.com</code>でuser.nameとuser.emailを設定できます。<br />
+<img src="/image/works/git-author/1.0/git-author-set.gif" alt="set-demo" /></p>
+<hr />
+<p><code>git replace foo foo@abc.com bar bar@xyz.com</code>で
+過去のコミットのauthorとcommiterの<code>foo &lt;foo@abc.com&gt;</code>を<code>bar &lt;bar@xyz.com&gt;</code>に置き換えます。<br />
+置き換え後の名前とメールアドレス(<code>bar bar@xyz.com</code>)は省略可能で、省略した場合は<code>git author get</code>で取得できるauthorに置き換えます。
+<img src="/image/works/git-author/1.0/git-author-replace.gif" alt="replace-demo" /></p>
+<h2 id="installation">Installation</h2>
+<p>Cargoが使える必要があります。<br />
+<code>cargo install git-author</code> でインストールできます。</p>
+<h2 id="license">License</h2>
+<p><a href="https://github.com/block-cube-lib/git-author-rs/blob/master/LICENSE">MIT</a></p>
+</p>
 
 
     </div>

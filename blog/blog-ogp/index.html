@@ -13,35 +13,35 @@
   
   <title>
     
-      Google Analyticsでアクセス解析できるようにした - blockの巣
+      ブログからOGP画像を生成するまでにやったこと - blockの巣
     
   </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="
   
-    長らくGoogle Analyticsをオプトインで使えるようにするのが面倒で放置していましたが、誰かに見てもらえているのかわからないのは寂しいので重い腰を上げて設定しました。
-C…
+    ブログの記事からOGP画像を生成できるようにしました。これでSNSに投稿したときなどに記事のタイトルが入った画像がつくようになりました。
+ブログの記事からと書きましたが実はトップペ…
   
 ">
 
    <!-- begin ogp -->
-    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;google-analytics&#x2F;">
-    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9nb29nbGUtYW5hbHl0aWNzLw==">
-    <meta property="og:title" content= "Google Analyticsでアクセス解析できるようにした" >
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;blog-ogp&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9ibG9nLW9ncC8=">
+    <meta property="og:title" content= "ブログからOGP画像を生成するまでにやったこと" >
     
     
       
           <meta property="og:type" constnt="article">
       
     
-    <meta property="og:description" content="長らくGoogle Analyticsをオプトインで使えるようにするのが面倒で放置していましたが、誰かに見てもらえているのかわからないのは寂しいので重い腰を上げて設定しました。
-C…">
+    <meta property="og:description" content="ブログの記事からOGP画像を生成できるようにしました。これでSNSに投稿したときなどに記事のタイトルが入った画像がつくようになりました。
+ブログの記事からと書きましたが実はトップペ…">
     <!-- begin twitter ogp -->
     
       <meta name="twitter:card" content="summary_large_image">
       <meta name="twitter:site" content="@block_cube_lib">
-      <meta name="twitter:title" content= "Google Analyticsでアクセス解析できるようにした" >
+      <meta name="twitter:title" content= "ブログからOGP画像を生成するまでにやったこと" >
     
     <!-- end twitter ogp -->
    <!-- end ogp -->
@@ -77,13 +77,13 @@ C…">
     <div class="container">
       
 <h1 class="title">
-  Google Analyticsでアクセス解析できるようにした
+  ブログからOGP画像を生成するまでにやったこと
 </h1>
   <section class="update_history">
     <table>
       <tr>
         <td>
-  <span class = "date">2022&#x2F;02&#x2F;03 10:53</span>
+  <span class = "date">2022&#x2F;03&#x2F;26 22:02</span>
 </td>
         <td>公開</td>
       </tr>
@@ -94,19 +94,46 @@ C…">
   
   
   
-  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/google-analytics/">Google Analytics</a></span>
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/ogp/">OGP</a></span>
+
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/rust/">Rust</a></span>
+
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/zola/">Zola</a></span>
 
   
 
 </section>
-<p><p>長らくGoogle Analyticsをオプトインで使えるようにするのが面倒で放置していましたが、誰かに見てもらえているのかわからないのは寂しいので重い腰を上げて設定しました。<br />
-Cookieの使用に同意した場合も同意しなかった場合もPrivacy Policyのページでリセットできるようにもしています。<br />
-ここまでしたけど誰もCookieの使用に同意してくれなかったら閲覧数0のままというのが辛いですね。</p>
-<p>久々にJavaScriptを書きました。</p>
+<p><p>ブログの記事からOGP画像を生成できるようにしました。これでSNSに投稿したときなどに記事のタイトルが入った画像がつくようになりました。
+ブログの記事からと書きましたが実はトップページやAboutからも生成されます。</p>
+<p>こういうやつです<br />
+<img src="/image/ogp1.png" alt="op1" />
+<img src="/image/ogp2.png" alt="op2" /></p>
+<p>ブログに載せるようにサイズは小さくしてあります。</p>
+<h2 id="yatutakoto">やったこと</h2>
+<ul>
+<li>ZolaのTemplateの編集
+<ul>
+<li>生成されるHTMLにOGP用のタグが書き出されるようにする</li>
+</ul>
+</li>
+<li>OGP生成
+<ul>
+<li>公開されているブログからOGPのmetaデータを取得する</li>
+<li>取得したmetaデータを元に画像にテキストやサムネイルを書き込む</li>
+</ul>
+</li>
+</ul>
+<h3 id="zolanotemplatenobian-ji">ZolaのTemplateの編集</h3>
+<p>このサイトはZolaというSSGを使用して記事用のMarkdownからHTMLに変換しています。そのためHTMLにOGP用のタグを仕込むにはZolaが書き出しに使用するTemplateファイルを編集する必要があります。</p>
+<h4 id="sheng-cheng-sareruhtmlniogpyong-notagugashu-kichu-sareruyounisuru">生成されるHTMLにOGP用のタグが書き出されるようにする</h4>
 </p>
 <hr>
 <p class="share_buttons">
-  <a class="twitter-share-button" data-text="Google Analyticsでアクセス解析できるようにした - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <a class="twitter-share-button" data-text="ブログからOGP画像を生成するまでにやったこと - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </p>
 

@@ -107,7 +107,34 @@ UniversalRPからカメラにRendererを設定できるようになりました�
   
 
 </section>
-<p><p>確認したUnityのバージョン<br>2019.3.0f1(β版)</p><p>UniversalRPからカメラにRendererを設定できるようになりました。<br>しかしCameraクラスにはRendererを設定するような項目はありません。</p><p>ではどうやってRendererを変更するのかというと<br><code>UniversalAdditionalCameraData.SetRenderer</code>という関数を使用します。</p><p>実はUniversalRPではCameraを追加すると一緒に<code>UniversalAdditionalCameraData</code>というコンポーネントがついてきます。<br><img src="/image/universal_additional_camera_data.png" alt="image" /></p><p>この中に<code>SetRenderer</code>という関数があるので、その関数を使用することでScriptからRendererを変更できます。</p><pre data-lang="cs" style="background-color:#2b303b;color:#c0c5ce;" class="language-cs "><code class="language-cs" data-lang="cs"><span style="color:#65737e;">// UniversalAdditionalCameraDataを使用するには<br></span><span style="color:#65737e;">// using UnityEngine.Rendering.Universal;が必要<br></span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">cameraData </span><span>= </span><span style="color:#bf616a;">camera</span><span>.</span><span style="color:#bf616a;">GetComponent</span><span>&lt;UniversalAdditionalCameraData&gt;();<br></span><span style="color:#bf616a;">cameraData</span><span>.</span><span style="color:#bf616a;">SetRenderer</span><span>(</span><span style="color:#bf616a;">rendererIndex</span><span>); </span><span style="color:#65737e;">// Rendererのindexを指定する<br></span></code></pre><p><code>SetRenderer</code>の引数はRendererのindexです。<br>手元で試したところ</p><ul><li><code>0 &lt;= index &amp;&amp; index &lt; 登録されているRendererの数-1</code>正常に設定される</li><li><code>登録されているRendererの数 &lt;= index</code>警告が出され続ける(その間デフォルトのRendererが使われる)</li><li><code>index == -1</code>デフォルトが設定される</li><li><code>index &lt;= -2</code>例外が発生</li></ul><p>が確認できました</p></p>
+<p><p>確認したUnityのバージョン<br />
+2019.3.0f1(β版)</p>
+<p>UniversalRPからカメラにRendererを設定できるようになりました。<br />
+しかしCameraクラスにはRendererを設定するような項目はありません。</p>
+<p>ではどうやってRendererを変更するのかというと<br />
+<code>UniversalAdditionalCameraData.SetRenderer</code>という関数を使用します。</p>
+<p>実はUniversalRPではCameraを追加すると一緒に<code>UniversalAdditionalCameraData</code>というコンポーネントがついてきます。<br />
+<img src="/image/universal_additional_camera_data.png" alt="image" /></p>
+<p>この中に<code>SetRenderer</code>という関数があるので、その関数を使用することでScriptからRendererを変更できます。</p>
+<pre data-lang="cs" style="background-color:#2b303b;color:#c0c5ce;" class="language-cs "><code class="language-cs" data-lang="cs"><span style="color:#65737e;">// UniversalAdditionalCameraDataを使用するには
+</span><span style="color:#65737e;">// using UnityEngine.Rendering.Universal;が必要
+</span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">cameraData </span><span>= </span><span style="color:#bf616a;">camera</span><span>.</span><span style="color:#bf616a;">GetComponent</span><span>&lt;UniversalAdditionalCameraData&gt;();
+</span><span style="color:#bf616a;">cameraData</span><span>.</span><span style="color:#bf616a;">SetRenderer</span><span>(</span><span style="color:#bf616a;">rendererIndex</span><span>); </span><span style="color:#65737e;">// Rendererのindexを指定する
+</span></code></pre>
+<p><code>SetRenderer</code>の引数はRendererのindexです。<br />
+手元で試したところ</p>
+<ul>
+<li><code>0 &lt;= index &amp;&amp; index &lt; 登録されているRendererの数-1</code><br />
+正常に設定される</li>
+<li><code>登録されているRendererの数 &lt;= index</code><br />
+警告が出され続ける(その間デフォルトのRendererが使われる)</li>
+<li><code>index == -1</code><br />
+デフォルトが設定される</li>
+<li><code>index &lt;= -2</code><br />
+例外が発生</li>
+</ul>
+<p>が確認できました</p>
+</p>
 <hr>
 <p class="share_buttons">
   <a class="twitter-share-button" data-text="Cameraに設定されたRendererをスクリプトから変更する - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
