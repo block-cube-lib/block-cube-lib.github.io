@@ -158,66 +158,66 @@
 <a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a>最初のコミットを見ていただいても大丈夫です。</p>
 <details>
 <summary>コード全文</summary>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_fn_floating_point_arithmetic)] </span><span style="color:#65737e;">// const fnの中で浮動小数点演算を行うために必要
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_fn_floating_point_arithmetic)] </span><span style="color:#999999;">// const fnの中で浮動小数点演算を行うために必要
 </span><span>
-</span><span style="color:#b48ead;">use </span><span>image::ImageFormat;
+</span><span style="color:#c397d8;">use </span><span>image::ImageFormat;
 </span><span>
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IMAGE_WIDTH</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">256</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IMAGE_HEIGHT</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">256</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">PIXEL_COUNT</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>* </span><span style="color:#d08770;">IMAGE_HEIGHT</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IMAGE_WIDTH</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">256</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IMAGE_HEIGHT</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">256</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">* </span><span style="color:#eeeeee;">IMAGE_HEIGHT</span><span>;
 </span><span>
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() -&gt; anyhow::Result&lt;()&gt; {
-</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">PIXEL_COLORS</span><span>: [(</span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>); </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] = </span><span style="color:#96b5b4;">ray_trace</span><span>();
-</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">BUFFER</span><span>: [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>] = </span><span style="color:#96b5b4;">pixels_to_buffer</span><span>(</span><span style="color:#d08770;">PIXEL_COLORS</span><span>);
-</span><span>    </span><span style="color:#b48ead;">let</span><span> img = image::RgbImage::from_raw(</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">BUFFER</span><span>.</span><span style="color:#96b5b4;">to_vec</span><span>())
-</span><span>        .</span><span style="color:#96b5b4;">unwrap</span><span>();
-</span><span>    img.</span><span style="color:#96b5b4;">save_with_format</span><span>(&quot;</span><span style="color:#a3be8c;">./result.png</span><span>&quot;, ImageFormat::Png)?;
+</span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() -&gt; anyhow::</span><span style="color:#e7c547;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">PIXEL_COLORS</span><span>: [(</span><span style="color:#c397d8;">u8</span><span>, </span><span style="color:#c397d8;">u8</span><span>, </span><span style="color:#c397d8;">u8</span><span>); </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">ray_trace</span><span>();
+</span><span>    </span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">BUFFER</span><span>: [</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">pixels_to_buffer</span><span>(</span><span style="color:#eeeeee;">PIXEL_COLORS</span><span>);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> img </span><span style="color:#70c0b1;">= </span><span>image::RgbImage::from_raw(</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u32</span><span>, </span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u32</span><span>, </span><span style="color:#eeeeee;">BUFFER</span><span>.</span><span style="color:#7aa6da;">to_vec</span><span>())
+</span><span>        .</span><span style="color:#7aa6da;">unwrap</span><span>();
+</span><span>    img.</span><span style="color:#7aa6da;">save_with_format</span><span>(</span><span style="color:#b9ca4a;">&quot;./result.png&quot;</span><span>, ImageFormat::Png)</span><span style="color:#70c0b1;">?</span><span>;
 </span><span>
-</span><span>    Ok(())
+</span><span>    </span><span style="color:#e7c547;">Ok</span><span>(())
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_trace</span><span>() -&gt; [(</span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>); </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] {
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>); </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
-</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
-</span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
-</span><span>            </span><span style="color:#b48ead;">let</span><span> r = (i as </span><span style="color:#b48ead;">f64</span><span>) / ((</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>);
-</span><span>            </span><span style="color:#b48ead;">let</span><span> g = j as </span><span style="color:#b48ead;">f64 </span><span>/ (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let</span><span> b = </span><span style="color:#d08770;">0.25</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let </span><span>(r, g, b) = (
-</span><span>                (r * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                (g * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                (b * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_trace</span><span>() -&gt; [(</span><span style="color:#c397d8;">u8</span><span>, </span><span style="color:#c397d8;">u8</span><span>, </span><span style="color:#c397d8;">u8</span><span>); </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] {
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_colors </span><span style="color:#70c0b1;">= </span><span>[(</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">0</span><span>); </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> j </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">i32</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_index </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#999999;">// forが使えないのでwhileで代用
+</span><span>    </span><span style="color:#c397d8;">while </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">&lt;=</span><span> j {
+</span><span>        </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span>{
+</span><span>            </span><span style="color:#c397d8;">let</span><span> r </span><span style="color:#70c0b1;">= </span><span>(i </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>) </span><span style="color:#70c0b1;">/ </span><span>((</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>);
+</span><span>            </span><span style="color:#c397d8;">let</span><span> g </span><span style="color:#70c0b1;">=</span><span> j </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let</span><span> b </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.25</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let </span><span>(r, g, b) </span><span style="color:#70c0b1;">= </span><span>(
+</span><span>                (r </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                (g </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                (b </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
 </span><span>            );
-</span><span>            pixel_colors[pixel_index] = (r, g, b);
-</span><span>            i += </span><span style="color:#d08770;">1</span><span>;
-</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_colors[pixel_index] </span><span style="color:#70c0b1;">= </span><span>(r, g, b);
+</span><span>            i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
+</span><span>            pixel_index </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>        }
-</span><span>        i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>        j </span><span style="color:#70c0b1;">-= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    pixel_colors
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">pixels_to_buffer</span><span>(</span><span style="color:#bf616a;">pixels</span><span>: [(</span><span style="color:#bf616a;">u8</span><span>, </span><span style="color:#bf616a;">u8</span><span>, </span><span style="color:#bf616a;">u8</span><span>); PIXEL_COUNT]) -&gt; [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>] {
-</span><span>    </span><span style="color:#65737e;">//let buf: Vec&lt;_&gt; = PIXEL_COLORS
-</span><span>    </span><span style="color:#65737e;">//    .iter()
-</span><span>    </span><span style="color:#65737e;">//    .map(|&amp;(r, g, b)| [r, g, b])
-</span><span>    </span><span style="color:#65737e;">//    .flatten()
-</span><span>    </span><span style="color:#65737e;">//    .collect();
-</span><span>    </span><span style="color:#65737e;">//buf
+</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">pixels_to_buffer</span><span>(</span><span style="color:#e78c45;">pixels</span><span>: [(</span><span style="color:#e78c45;">u8</span><span>, </span><span style="color:#e78c45;">u8</span><span>, </span><span style="color:#e78c45;">u8</span><span>); PIXEL_COUNT]) -&gt; [</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>] {
+</span><span>    </span><span style="color:#999999;">//let buf: Vec&lt;_&gt; = PIXEL_COLORS
+</span><span>    </span><span style="color:#999999;">//    .iter()
+</span><span>    </span><span style="color:#999999;">//    .map(|&amp;(r, g, b)| [r, g, b])
+</span><span>    </span><span style="color:#999999;">//    .flatten()
+</span><span>    </span><span style="color:#999999;">//    .collect();
+</span><span>    </span><span style="color:#999999;">//buf
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// 上と同じことをしている
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> buf = [</span><span style="color:#d08770;">0</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>{
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">0</span><span>] = pixels[i].</span><span style="color:#d08770;">0</span><span>;
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">1</span><span>] = pixels[i].</span><span style="color:#d08770;">1</span><span>;
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">2</span><span>] = pixels[i].</span><span style="color:#d08770;">2</span><span>;
-</span><span>        i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#999999;">// 上と同じことをしている
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> buf </span><span style="color:#70c0b1;">= </span><span>[</span><span style="color:#e78c45;">0</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span>{
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">0</span><span>] </span><span style="color:#70c0b1;">=</span><span> pixels[i].</span><span style="color:#e78c45;">0</span><span>;
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">1</span><span>] </span><span style="color:#70c0b1;">=</span><span> pixels[i].</span><span style="color:#e78c45;">1</span><span>;
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">2</span><span>] </span><span style="color:#70c0b1;">=</span><span> pixels[i].</span><span style="color:#e78c45;">2</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    buf
 </span><span>}
@@ -227,40 +227,40 @@
 <p>まず最初に書いてある<code>#![feature(const_fn_floating_point_arithmetic)]</code>ですが、コメントにあるようにコンパイル時に<code>const fn</code>の中で浮動小数点演算を行うために必要になります。
 これがないと<code>const fn</code>の中で浮動小数の処理を行えないため有効にしています。</p>
 <hr />
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() -&gt; anyhow::Result&lt;()&gt; {
-</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">PIXEL_COLORS</span><span>: [(</span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>); </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] = </span><span style="color:#96b5b4;">ray_trace</span><span>();
-</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">BUFFER</span><span>: [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>] = </span><span style="color:#96b5b4;">pixels_to_buffer</span><span>(</span><span style="color:#d08770;">PIXEL_COLORS</span><span>);
-</span><span>    </span><span style="color:#b48ead;">let</span><span> img = image::RgbImage::from_raw(</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">BUFFER</span><span>.</span><span style="color:#96b5b4;">to_vec</span><span>())
-</span><span>        .</span><span style="color:#96b5b4;">unwrap</span><span>();
-</span><span>    img.</span><span style="color:#96b5b4;">save_with_format</span><span>(&quot;</span><span style="color:#a3be8c;">./result.png</span><span>&quot;, ImageFormat::Png)?;
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() -&gt; anyhow::</span><span style="color:#e7c547;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">PIXEL_COLORS</span><span>: [(</span><span style="color:#c397d8;">u8</span><span>, </span><span style="color:#c397d8;">u8</span><span>, </span><span style="color:#c397d8;">u8</span><span>); </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">ray_trace</span><span>();
+</span><span>    </span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">BUFFER</span><span>: [</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">pixels_to_buffer</span><span>(</span><span style="color:#eeeeee;">PIXEL_COLORS</span><span>);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> img </span><span style="color:#70c0b1;">= </span><span>image::RgbImage::from_raw(</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u32</span><span>, </span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u32</span><span>, </span><span style="color:#eeeeee;">BUFFER</span><span>.</span><span style="color:#7aa6da;">to_vec</span><span>())
+</span><span>        .</span><span style="color:#7aa6da;">unwrap</span><span>();
+</span><span>    img.</span><span style="color:#7aa6da;">save_with_format</span><span>(</span><span style="color:#b9ca4a;">&quot;./result.png&quot;</span><span>, ImageFormat::Png)</span><span style="color:#70c0b1;">?</span><span>;
 </span><span>
-</span><span>    Ok(())
+</span><span>    </span><span style="color:#e7c547;">Ok</span><span>(())
 </span><span>}
 </span></code></pre>
 <p><code>main()</code>では<code>ray_trace()</code>の結果をimage crateで書き出す形に変換するところままでをコンパイル時に行い、実行時には<code>result.png</code>というファイルを書き出します。</p>
 <hr />
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_trace</span><span>() -&gt; [(</span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>, </span><span style="color:#b48ead;">u8</span><span>); </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] {
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>); </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
-</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
-</span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
-</span><span>            </span><span style="color:#b48ead;">let</span><span> r = (i as </span><span style="color:#b48ead;">f64</span><span>) / ((</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>);
-</span><span>            </span><span style="color:#b48ead;">let</span><span> g = j as </span><span style="color:#b48ead;">f64 </span><span>/ (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let</span><span> b = </span><span style="color:#d08770;">0.25</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let </span><span>(r, g, b) = (
-</span><span>                (r * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                (g * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                (b * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_trace</span><span>() -&gt; [(</span><span style="color:#c397d8;">u8</span><span>, </span><span style="color:#c397d8;">u8</span><span>, </span><span style="color:#c397d8;">u8</span><span>); </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] {
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_colors </span><span style="color:#70c0b1;">= </span><span>[(</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">0</span><span>); </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> j </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">i32</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_index </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#999999;">// forが使えないのでwhileで代用
+</span><span>    </span><span style="color:#c397d8;">while </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">&lt;=</span><span> j {
+</span><span>        </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span>{
+</span><span>            </span><span style="color:#c397d8;">let</span><span> r </span><span style="color:#70c0b1;">= </span><span>(i </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>) </span><span style="color:#70c0b1;">/ </span><span>((</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>);
+</span><span>            </span><span style="color:#c397d8;">let</span><span> g </span><span style="color:#70c0b1;">=</span><span> j </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let</span><span> b </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.25</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let </span><span>(r, g, b) </span><span style="color:#70c0b1;">= </span><span>(
+</span><span>                (r </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                (g </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                (b </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
 </span><span>            );
-</span><span>            pixel_colors[pixel_index] = (r, g, b);
-</span><span>            i += </span><span style="color:#d08770;">1</span><span>;
-</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_colors[pixel_index] </span><span style="color:#70c0b1;">= </span><span>(r, g, b);
+</span><span>            i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
+</span><span>            pixel_index </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>        }
-</span><span>        i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>        j </span><span style="color:#70c0b1;">-= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    pixel_colors
 </span><span>}
@@ -269,22 +269,22 @@
 通常の関数(非<code>const fn</code>)と比べると<code>for</code>が使えないため<code>while</code>で代用している部分が大きな変更点だと思います。<br />
 カウンタ用の変数を自分で定義/インクリメント/リセットしなければならないので面倒ですが、それさえ忘れなければ<code>for</code>を使うのと大差はないです。</p>
 <hr />
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">pixels_to_buffer</span><span>(</span><span style="color:#bf616a;">pixels</span><span>: [(</span><span style="color:#bf616a;">u8</span><span>, </span><span style="color:#bf616a;">u8</span><span>, </span><span style="color:#bf616a;">u8</span><span>); PIXEL_COUNT]) -&gt; [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>] {
-</span><span>    </span><span style="color:#65737e;">//let buf: Vec&lt;_&gt; = PIXEL_COLORS
-</span><span>    </span><span style="color:#65737e;">//    .iter()
-</span><span>    </span><span style="color:#65737e;">//    .map(|&amp;(r, g, b)| [r, g, b])
-</span><span>    </span><span style="color:#65737e;">//    .flatten()
-</span><span>    </span><span style="color:#65737e;">//    .collect();
-</span><span>    </span><span style="color:#65737e;">//buf
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">pixels_to_buffer</span><span>(</span><span style="color:#e78c45;">pixels</span><span>: [(</span><span style="color:#e78c45;">u8</span><span>, </span><span style="color:#e78c45;">u8</span><span>, </span><span style="color:#e78c45;">u8</span><span>); PIXEL_COUNT]) -&gt; [</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>] {
+</span><span>    </span><span style="color:#999999;">//let buf: Vec&lt;_&gt; = PIXEL_COLORS
+</span><span>    </span><span style="color:#999999;">//    .iter()
+</span><span>    </span><span style="color:#999999;">//    .map(|&amp;(r, g, b)| [r, g, b])
+</span><span>    </span><span style="color:#999999;">//    .flatten()
+</span><span>    </span><span style="color:#999999;">//    .collect();
+</span><span>    </span><span style="color:#999999;">//buf
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// 上と同じことをしている
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> buf = [</span><span style="color:#d08770;">0</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>{
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">0</span><span>] = pixels[i].</span><span style="color:#d08770;">0</span><span>;
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">1</span><span>] = pixels[i].</span><span style="color:#d08770;">1</span><span>;
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">2</span><span>] = pixels[i].</span><span style="color:#d08770;">2</span><span>;
-</span><span>        i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#999999;">// 上と同じことをしている
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> buf </span><span style="color:#70c0b1;">= </span><span>[</span><span style="color:#e78c45;">0</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span>{
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">0</span><span>] </span><span style="color:#70c0b1;">=</span><span> pixels[i].</span><span style="color:#e78c45;">0</span><span>;
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">1</span><span>] </span><span style="color:#70c0b1;">=</span><span> pixels[i].</span><span style="color:#e78c45;">1</span><span>;
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">2</span><span>] </span><span style="color:#70c0b1;">=</span><span> pixels[i].</span><span style="color:#e78c45;">2</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    buf
 </span><span>}

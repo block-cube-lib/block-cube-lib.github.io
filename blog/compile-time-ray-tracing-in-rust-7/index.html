@@ -136,28 +136,28 @@
 <p>今まではカメラの位置やビューポートの情報は<code>main.rs</code>内で変数として持っていましたが今回からは<code>Camera</code>構造体にまとめられています。<br />
 <code>Camera</code>の変数にuvを渡すことで対応するレイを取得する関数があるので<code>main.rs</code>でレイを取得するためのコードが少しシンプルになりました。<br />
 <code>new</code>や<code>get_ray</code>が<code>const fn</code>になっているくらいで参考元と大きな違いはありません。<code>const fn</code>特有の処理もないです。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use crate</span><span>::{Point3, Ray, Vec3};
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">use crate</span><span>::{Point3, Ray, Vec3};
 </span><span>
-</span><span style="color:#b48ead;">pub struct </span><span>Camera {
-</span><span>    </span><span style="color:#bf616a;">origin</span><span>: Point3,
-</span><span>    </span><span style="color:#bf616a;">lower_left_corner</span><span>: Vec3,
-</span><span>    </span><span style="color:#bf616a;">horizontal</span><span>: Vec3,
-</span><span>    </span><span style="color:#bf616a;">vertical</span><span>: Vec3,
+</span><span style="color:#c397d8;">pub struct </span><span>Camera {
+</span><span>    </span><span style="color:#d54e53;">origin</span><span>: Point3,
+</span><span>    </span><span style="color:#d54e53;">lower_left_corner</span><span>: Vec3,
+</span><span>    </span><span style="color:#d54e53;">horizontal</span><span>: Vec3,
+</span><span>    </span><span style="color:#d54e53;">vertical</span><span>: Vec3,
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>Camera {
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">new</span><span>() -&gt; </span><span style="color:#b48ead;">Self </span><span>{
-</span><span>        </span><span style="color:#b48ead;">let</span><span> aspect_ratio = </span><span style="color:#d08770;">16.0 </span><span>/ </span><span style="color:#d08770;">9.0</span><span>;
-</span><span>        </span><span style="color:#b48ead;">let</span><span> viewport_height = </span><span style="color:#d08770;">2.0</span><span>;
-</span><span>        </span><span style="color:#b48ead;">let</span><span> viewport_width = aspect_ratio * viewport_height;
-</span><span>        </span><span style="color:#b48ead;">let</span><span> focal_length = </span><span style="color:#d08770;">1.0</span><span>;
+</span><span style="color:#c397d8;">impl </span><span>Camera {
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">new</span><span>() -&gt; </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>        </span><span style="color:#c397d8;">let</span><span> aspect_ratio </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">16.0 </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">9.0</span><span>;
+</span><span>        </span><span style="color:#c397d8;">let</span><span> viewport_height </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">2.0</span><span>;
+</span><span>        </span><span style="color:#c397d8;">let</span><span> viewport_width </span><span style="color:#70c0b1;">=</span><span> aspect_ratio </span><span style="color:#70c0b1;">*</span><span> viewport_height;
+</span><span>        </span><span style="color:#c397d8;">let</span><span> focal_length </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">1.0</span><span>;
 </span><span>
-</span><span>        </span><span style="color:#b48ead;">let</span><span> origin = Point3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
-</span><span>        </span><span style="color:#b48ead;">let</span><span> horizontal = Vec3::new(viewport_width, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
-</span><span>        </span><span style="color:#b48ead;">let</span><span> vertical = Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, viewport_height, </span><span style="color:#d08770;">0.0</span><span>);
-</span><span>        </span><span style="color:#b48ead;">let</span><span> lower_left_corner =
-</span><span>            origin - horizontal / </span><span style="color:#d08770;">2.0 </span><span>- vertical / </span><span style="color:#d08770;">2.0 </span><span>- Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, focal_length);
-</span><span>        </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        </span><span style="color:#c397d8;">let</span><span> origin </span><span style="color:#70c0b1;">= </span><span>Point3::new(</span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>);
+</span><span>        </span><span style="color:#c397d8;">let</span><span> horizontal </span><span style="color:#70c0b1;">= </span><span>Vec3::new(viewport_width, </span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>);
+</span><span>        </span><span style="color:#c397d8;">let</span><span> vertical </span><span style="color:#70c0b1;">= </span><span>Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, viewport_height, </span><span style="color:#e78c45;">0.0</span><span>);
+</span><span>        </span><span style="color:#c397d8;">let</span><span> lower_left_corner </span><span style="color:#70c0b1;">=
+</span><span>            origin </span><span style="color:#70c0b1;">-</span><span> horizontal </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">2.0 </span><span style="color:#70c0b1;">-</span><span> vertical </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">2.0 </span><span style="color:#70c0b1;">- </span><span>Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>, focal_length);
+</span><span>        </span><span style="color:#c397d8;">Self </span><span>{
 </span><span>            origin,
 </span><span>            horizontal,
 </span><span>            vertical,
@@ -165,10 +165,10 @@
 </span><span>        }
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">get_ray</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">u</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">v</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; Ray {
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">get_ray</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">u</span><span>: </span><span style="color:#c397d8;">f64</span><span>, </span><span style="color:#e78c45;">v</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; Ray {
 </span><span>        Ray::new(
-</span><span>            &amp;</span><span style="color:#bf616a;">self</span><span>.origin,
-</span><span>            &amp;(</span><span style="color:#bf616a;">self</span><span>.lower_left_corner + u * </span><span style="color:#bf616a;">self</span><span>.horizontal + v * </span><span style="color:#bf616a;">self</span><span>.vertical - </span><span style="color:#bf616a;">self</span><span>.origin),
+</span><span>            </span><span style="color:#70c0b1;">&amp;</span><span style="color:#d54e53;">self</span><span>.origin,
+</span><span>            </span><span style="color:#70c0b1;">&amp;</span><span>(</span><span style="color:#d54e53;">self</span><span>.lower_left_corner </span><span style="color:#70c0b1;">+</span><span> u </span><span style="color:#70c0b1;">* </span><span style="color:#d54e53;">self</span><span>.horizontal </span><span style="color:#70c0b1;">+</span><span> v </span><span style="color:#70c0b1;">* </span><span style="color:#d54e53;">self</span><span>.vertical </span><span style="color:#70c0b1;">- </span><span style="color:#d54e53;">self</span><span>.origin),
 </span><span>        )
 </span><span>    }
 </span><span>}
@@ -179,62 +179,62 @@
 最初はstableでも使用できる<code>Xorshift</code>を実装しようと思っていたのですが<code>gen_f64</code>の最終行の浮動小数点の減算がコンパイル時に解決できずに諦めました…<br />
 今回追加した<code>Xorshift</code>が生成する乱数は<code>u32</code>型の値です。そのため<code>u64</code>を取得する場合は<code>u32</code>を2回生成してそれぞれ上位ビットと下位ビットに挿入しています。
 <code>f64</code>が欲しい場合は<code>u64</code>を生成した後にその値をシフト演算でずらしたものを仮数部ととして扱い、指数部と符号を適切な数値で埋めた後に<code>f64</code>に変換してやると1.0~2.0の乱数ができるのでそこから1.0を引くことで0.0~1.0の乱数を取得しています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">pub struct </span><span>Xorshift {
-</span><span>    </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
-</span><span>    </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
-</span><span>    </span><span style="color:#bf616a;">z</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
-</span><span>    </span><span style="color:#bf616a;">w</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">pub struct </span><span>Xorshift {
+</span><span>    </span><span style="color:#d54e53;">x</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
+</span><span>    </span><span style="color:#d54e53;">y</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
+</span><span>    </span><span style="color:#d54e53;">z</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
+</span><span>    </span><span style="color:#d54e53;">w</span><span>: </span><span style="color:#c397d8;">u32</span><span>,
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>Xorshift {
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">new</span><span>(</span><span style="color:#bf616a;">seed</span><span>: </span><span style="color:#b48ead;">u32</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
-</span><span>        </span><span style="color:#b48ead;">Self </span><span>{
-</span><span>            x: </span><span style="color:#d08770;">123456789</span><span>,
-</span><span>            y: </span><span style="color:#d08770;">362436069</span><span>,
-</span><span>            z: </span><span style="color:#d08770;">521288629</span><span>,
+</span><span style="color:#c397d8;">impl </span><span>Xorshift {
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">new</span><span>(</span><span style="color:#e78c45;">seed</span><span>: </span><span style="color:#c397d8;">u32</span><span>) -&gt; </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>        </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>            x: </span><span style="color:#e78c45;">123456789</span><span>,
+</span><span>            y: </span><span style="color:#e78c45;">362436069</span><span>,
+</span><span>            z: </span><span style="color:#e78c45;">521288629</span><span>,
 </span><span>            w: seed,
 </span><span>        }
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">gen_u32</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">u32 </span><span>{
-</span><span>        </span><span style="color:#b48ead;">let</span><span> t = </span><span style="color:#bf616a;">self</span><span>.x ^ (</span><span style="color:#bf616a;">self</span><span>.x &lt;&lt; </span><span style="color:#d08770;">11</span><span>);
-</span><span>        </span><span style="color:#b48ead;">let</span><span> x = </span><span style="color:#bf616a;">self</span><span>.y;
-</span><span>        </span><span style="color:#b48ead;">let</span><span> y = </span><span style="color:#bf616a;">self</span><span>.z;
-</span><span>        </span><span style="color:#b48ead;">let</span><span> z = </span><span style="color:#bf616a;">self</span><span>.w;
-</span><span>        </span><span style="color:#b48ead;">let</span><span> w = (</span><span style="color:#bf616a;">self</span><span>.w ^ (</span><span style="color:#bf616a;">self</span><span>.w &gt;&gt; </span><span style="color:#d08770;">19</span><span>)) ^ (t ^ (t &gt;&gt; </span><span style="color:#d08770;">8</span><span>));
-</span><span>        *</span><span style="color:#bf616a;">self </span><span>= </span><span style="color:#b48ead;">Self </span><span>{ x, y, z, w };
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">gen_u32</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>) -&gt; </span><span style="color:#c397d8;">u32 </span><span>{
+</span><span>        </span><span style="color:#c397d8;">let</span><span> t </span><span style="color:#70c0b1;">= </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">^ </span><span>(</span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">&lt;&lt; </span><span style="color:#e78c45;">11</span><span>);
+</span><span>        </span><span style="color:#c397d8;">let</span><span> x </span><span style="color:#70c0b1;">= </span><span style="color:#d54e53;">self</span><span>.y;
+</span><span>        </span><span style="color:#c397d8;">let</span><span> y </span><span style="color:#70c0b1;">= </span><span style="color:#d54e53;">self</span><span>.z;
+</span><span>        </span><span style="color:#c397d8;">let</span><span> z </span><span style="color:#70c0b1;">= </span><span style="color:#d54e53;">self</span><span>.w;
+</span><span>        </span><span style="color:#c397d8;">let</span><span> w </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#d54e53;">self</span><span>.w </span><span style="color:#70c0b1;">^ </span><span>(</span><span style="color:#d54e53;">self</span><span>.w </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">19</span><span>)) </span><span style="color:#70c0b1;">^ </span><span>(t </span><span style="color:#70c0b1;">^ </span><span>(t </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">8</span><span>));
+</span><span>        </span><span style="color:#70c0b1;">*</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">Self </span><span>{ x, y, z, w };
 </span><span>        w
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">gen_u64</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">u64 </span><span>{
-</span><span>        </span><span style="color:#b48ead;">let</span><span> v1 = </span><span style="color:#bf616a;">self</span><span>.</span><span style="color:#96b5b4;">gen_u32</span><span>();
-</span><span>        </span><span style="color:#b48ead;">let</span><span> v2 = </span><span style="color:#bf616a;">self</span><span>.</span><span style="color:#96b5b4;">gen_u32</span><span>();
-</span><span>        </span><span style="color:#b48ead;">let</span><span> v = </span><span style="color:#b48ead;">unsafe </span><span>{ std::mem::transmute::&lt;[</span><span style="color:#b48ead;">u32</span><span>; </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#b48ead;">u64</span><span>&gt;([v1, v2]) };
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">gen_u64</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>) -&gt; </span><span style="color:#c397d8;">u64 </span><span>{
+</span><span>        </span><span style="color:#c397d8;">let</span><span> v1 </span><span style="color:#70c0b1;">= </span><span style="color:#d54e53;">self</span><span>.</span><span style="color:#7aa6da;">gen_u32</span><span>();
+</span><span>        </span><span style="color:#c397d8;">let</span><span> v2 </span><span style="color:#70c0b1;">= </span><span style="color:#d54e53;">self</span><span>.</span><span style="color:#7aa6da;">gen_u32</span><span>();
+</span><span>        </span><span style="color:#c397d8;">let</span><span> v </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">unsafe </span><span>{ std::mem::transmute::&lt;[</span><span style="color:#c397d8;">u32</span><span>; </span><span style="color:#e78c45;">2</span><span>], </span><span style="color:#c397d8;">u64</span><span>&gt;([v1, v2]) };
 </span><span>        v
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">gen_f64</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
-</span><span>        </span><span style="color:#b48ead;">const</span><span> A: </span><span style="color:#b48ead;">u16 </span><span>= </span><span style="color:#d08770;">0x0001</span><span>;
-</span><span>        </span><span style="color:#b48ead;">const</span><span> B: [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">2</span><span>] = </span><span style="color:#b48ead;">unsafe </span><span>{ std::mem::transmute::&lt;</span><span style="color:#b48ead;">u16</span><span>, [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">2</span><span>]&gt;(A) };
-</span><span>        </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IS_LE</span><span>: </span><span style="color:#b48ead;">bool </span><span>= B[</span><span style="color:#d08770;">0</span><span>] == </span><span style="color:#d08770;">0x01</span><span>;
-</span><span>        </span><span style="color:#b48ead;">let</span><span> v = </span><span style="color:#bf616a;">self</span><span>.</span><span style="color:#96b5b4;">gen_u64</span><span>();
-</span><span>        </span><span style="color:#b48ead;">let</span><span> v = </span><span style="color:#b48ead;">if </span><span style="color:#d08770;">IS_LE </span><span>{
-</span><span>            </span><span style="color:#b48ead;">let</span><span> v = (v &gt;&gt; </span><span style="color:#d08770;">12</span><span>) | </span><span style="color:#d08770;">0x3ff0000000000000</span><span>;
-</span><span>            </span><span style="color:#b48ead;">unsafe </span><span>{ std::mem::transmute::&lt;</span><span style="color:#b48ead;">u64</span><span>, </span><span style="color:#b48ead;">f64</span><span>&gt;(v) }
-</span><span>        } </span><span style="color:#b48ead;">else </span><span>{
-</span><span>            </span><span style="color:#b48ead;">let</span><span> v = [
-</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">56</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">48</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">40</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">32</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">24</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">16</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                ((v &gt;&gt; </span><span style="color:#d08770;">8</span><span>) &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
-</span><span>                (v &amp; </span><span style="color:#d08770;">0xff</span><span>) as </span><span style="color:#b48ead;">u8</span><span>,
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">gen_f64</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>) -&gt; </span><span style="color:#c397d8;">f64 </span><span>{
+</span><span>        </span><span style="color:#c397d8;">const</span><span> A: </span><span style="color:#c397d8;">u16 </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0x0001</span><span>;
+</span><span>        </span><span style="color:#c397d8;">const</span><span> B: [</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#e78c45;">2</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">unsafe </span><span>{ std::mem::transmute::&lt;</span><span style="color:#c397d8;">u16</span><span>, [</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#e78c45;">2</span><span>]&gt;(A) };
+</span><span>        </span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IS_LE</span><span>: </span><span style="color:#c397d8;">bool </span><span style="color:#70c0b1;">=</span><span> B[</span><span style="color:#e78c45;">0</span><span>] </span><span style="color:#70c0b1;">== </span><span style="color:#e78c45;">0x01</span><span>;
+</span><span>        </span><span style="color:#c397d8;">let</span><span> v </span><span style="color:#70c0b1;">= </span><span style="color:#d54e53;">self</span><span>.</span><span style="color:#7aa6da;">gen_u64</span><span>();
+</span><span>        </span><span style="color:#c397d8;">let</span><span> v </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">if </span><span style="color:#eeeeee;">IS_LE </span><span>{
+</span><span>            </span><span style="color:#c397d8;">let</span><span> v </span><span style="color:#70c0b1;">= </span><span>(v </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">12</span><span>) </span><span style="color:#70c0b1;">| </span><span style="color:#e78c45;">0x3ff0000000000000</span><span>;
+</span><span>            </span><span style="color:#c397d8;">unsafe </span><span>{ std::mem::transmute::&lt;</span><span style="color:#c397d8;">u64</span><span>, </span><span style="color:#c397d8;">f64</span><span>&gt;(v) }
+</span><span>        } </span><span style="color:#c397d8;">else </span><span>{
+</span><span>            </span><span style="color:#c397d8;">let</span><span> v </span><span style="color:#70c0b1;">= </span><span>[
+</span><span>                ((v </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">56</span><span>) </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                ((v </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">48</span><span>) </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                ((v </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">40</span><span>) </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                ((v </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">32</span><span>) </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                ((v </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">24</span><span>) </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                ((v </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">16</span><span>) </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                ((v </span><span style="color:#70c0b1;">&gt;&gt; </span><span style="color:#e78c45;">8</span><span>) </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
+</span><span>                (v </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>,
 </span><span>            ];
-</span><span>            </span><span style="color:#b48ead;">unsafe </span><span>{ std::mem::transmute::&lt;[</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">8</span><span>], </span><span style="color:#b48ead;">f64</span><span>&gt;(v) }
+</span><span>            </span><span style="color:#c397d8;">unsafe </span><span>{ std::mem::transmute::&lt;[</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#e78c45;">8</span><span>], </span><span style="color:#c397d8;">f64</span><span>&gt;(v) }
 </span><span>        };
-</span><span>        v - </span><span style="color:#d08770;">1.0
+</span><span>        v </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1.0
 </span><span>    }
 </span><span>}
 </span></code></pre>
@@ -242,38 +242,38 @@
 <h2 id="antieiriasinguchu-li-wozhui-jia">アンチエイリアシング処理を追加</h2>
 <p>1ピクセルのレンダリングのために乱数で少しずつ散らしたレイを100本飛ばしその平均を取ることでアンチエイリアシング処理を行っています。<br />
 <code>ray_trace</code>関数の中で<code>ray_color</code>の返り値に<code>let scale = 1.0 / SAMPLES_PER_PIXEL as f64;</code>をかけてやったものを<code>SAMPLES_PER_PIXEL</code>回行いそれらを合計することで少しずつずれたレイトレースの結果の平均を取っています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">/* 省略 */
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">SAMPLES_PER_PIXEL</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">100</span><span>;
-</span><span style="color:#65737e;">/* 省略 */
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#999999;">/* 省略 */
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">SAMPLES_PER_PIXEL</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">100</span><span>;
+</span><span style="color:#999999;">/* 省略 */
 </span><span>
-</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] {
-</span><span>    </span><span style="color:#65737e;">/* 省略 */
+</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] {
+</span><span>    </span><span style="color:#999999;">/* 省略 */
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> cam = Camera::new();
+</span><span>    </span><span style="color:#c397d8;">let</span><span> cam </span><span style="color:#70c0b1;">= </span><span>Camera::new();
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> rng = Xorshift::new(include!(&quot;</span><span style="color:#a3be8c;">rand_seed.txt</span><span>&quot;));
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [Color::</span><span style="color:#d08770;">ZERO</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>; </span><span style="color:#b48ead;">let</span><span> scale = </span><span style="color:#d08770;">1.0 </span><span>/ </span><span style="color:#d08770;">SAMPLES_PER_PIXEL </span><span>as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
-</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
-</span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
-</span><span>            </span><span style="color:#b48ead;">let mut</span><span> s = </span><span style="color:#d08770;">0</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let mut</span><span> pixel_color = Color::</span><span style="color:#d08770;">ZERO</span><span>;
-</span><span>            </span><span style="color:#b48ead;">while</span><span> s &lt; </span><span style="color:#d08770;">SAMPLES_PER_PIXEL </span><span>{
-</span><span>                </span><span style="color:#b48ead;">let</span><span> u = (i as </span><span style="color:#b48ead;">f64 </span><span>+ rng.</span><span style="color:#96b5b4;">gen_f64</span><span>()) / (</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>                </span><span style="color:#b48ead;">let</span><span> v = (j as </span><span style="color:#b48ead;">f64 </span><span>+ rng.</span><span style="color:#96b5b4;">gen_f64</span><span>()) / (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>                </span><span style="color:#b48ead;">let</span><span> r = cam.</span><span style="color:#96b5b4;">get_ray</span><span>(u, v);
-</span><span>                pixel_color = pixel_color + </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r, &amp;world) * scale;
-</span><span>                s += </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> rng </span><span style="color:#70c0b1;">= </span><span>Xorshift::new(include!(</span><span style="color:#b9ca4a;">&quot;rand_seed.txt&quot;</span><span>));
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_colors </span><span style="color:#70c0b1;">= </span><span>[Color::</span><span style="color:#eeeeee;">ZERO</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> j </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">i32</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_index </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>; </span><span style="color:#c397d8;">let</span><span> scale </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">1.0 </span><span style="color:#70c0b1;">/ </span><span style="color:#eeeeee;">SAMPLES_PER_PIXEL </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>    </span><span style="color:#999999;">// forが使えないのでwhileで代用
+</span><span>    </span><span style="color:#c397d8;">while </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">&lt;=</span><span> j {
+</span><span>        </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span>{
+</span><span>            </span><span style="color:#c397d8;">let mut</span><span> s </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let mut</span><span> pixel_color </span><span style="color:#70c0b1;">= </span><span>Color::</span><span style="color:#eeeeee;">ZERO</span><span>;
+</span><span>            </span><span style="color:#c397d8;">while</span><span> s </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">SAMPLES_PER_PIXEL </span><span>{
+</span><span>                </span><span style="color:#c397d8;">let</span><span> u </span><span style="color:#70c0b1;">= </span><span>(i </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">+</span><span> rng.</span><span style="color:#7aa6da;">gen_f64</span><span>()) </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>                </span><span style="color:#c397d8;">let</span><span> v </span><span style="color:#70c0b1;">= </span><span>(j </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">+</span><span> rng.</span><span style="color:#7aa6da;">gen_f64</span><span>()) </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>                </span><span style="color:#c397d8;">let</span><span> r </span><span style="color:#70c0b1;">=</span><span> cam.</span><span style="color:#7aa6da;">get_ray</span><span>(u, v);
+</span><span>                pixel_color </span><span style="color:#70c0b1;">=</span><span> pixel_color </span><span style="color:#70c0b1;">+ </span><span style="color:#7aa6da;">ray_color</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>r, </span><span style="color:#70c0b1;">&amp;</span><span>world) </span><span style="color:#70c0b1;">*</span><span> scale;
+</span><span>                s </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>            }
-</span><span>            pixel_colors[pixel_index] = pixel_color;
-</span><span>            i += </span><span style="color:#d08770;">1</span><span>;
-</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_colors[pixel_index] </span><span style="color:#70c0b1;">=</span><span> pixel_color;
+</span><span>            i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
+</span><span>            pixel_index </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>        }
-</span><span>        i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>        j </span><span style="color:#70c0b1;">-= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    pixel_colors
 </span><span>}
@@ -282,24 +282,24 @@
 <p>今回追加した<code>Xorshift</code>は<code>Xorshift::new(seed)</code>のようにシード値を渡すことができるようになっています。<br />
 上記のコードでは<code>Xorshift::new(include!(&quot;rand_seed.txt&quot;))</code>と<code>rand_seed.txt</code>というテキストファイルの中身をそのまま渡しており、このテキストファイルの中身は<code>u32</code>型の整数値が入っています。<br />
 <code>rand_seed.txt</code>の中身を自分で決めたくなかったので下記のようなビルドスクリプトを用意してコンパイル時に生成するようにしています。値は現在時刻を元に決めています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>anyhow::Result;
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">use </span><span>anyhow::Result;
 </span><span>
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() -&gt; Result&lt;()&gt; {
-</span><span>    </span><span style="color:#b48ead;">use </span><span>std::fs::File;
-</span><span>    </span><span style="color:#b48ead;">use </span><span>std::io::Write as _;
-</span><span>    </span><span style="color:#b48ead;">use </span><span>std::time::SystemTime;
+</span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() -&gt; </span><span style="color:#e7c547;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#c397d8;">use </span><span>std::fs::File;
+</span><span>    </span><span style="color:#c397d8;">use </span><span>std::io::Write </span><span style="color:#70c0b1;">as _</span><span>;
+</span><span>    </span><span style="color:#c397d8;">use </span><span>std::time::SystemTime;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> n = SystemTime::now().</span><span style="color:#96b5b4;">duration_since</span><span>(SystemTime::</span><span style="color:#d08770;">UNIX_EPOCH</span><span>)?;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> seed = (n.</span><span style="color:#96b5b4;">as_secs</span><span>() &amp; </span><span style="color:#d08770;">0xffffffff</span><span>) as </span><span style="color:#b48ead;">u32</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let</span><span> n </span><span style="color:#70c0b1;">= </span><span>SystemTime::now().</span><span style="color:#7aa6da;">duration_since</span><span>(SystemTime::</span><span style="color:#eeeeee;">UNIX_EPOCH</span><span>)</span><span style="color:#70c0b1;">?</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let</span><span> seed </span><span style="color:#70c0b1;">= </span><span>(n.</span><span style="color:#7aa6da;">as_secs</span><span>() </span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">0xffffffff</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u32</span><span>;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> file = File::options()
-</span><span>        .</span><span style="color:#96b5b4;">write</span><span>(</span><span style="color:#d08770;">true</span><span>)
-</span><span>        .</span><span style="color:#96b5b4;">append</span><span>(</span><span style="color:#d08770;">false</span><span>)
-</span><span>        .</span><span style="color:#96b5b4;">create</span><span>(</span><span style="color:#d08770;">true</span><span>)
-</span><span>        .</span><span style="color:#96b5b4;">open</span><span>(&quot;</span><span style="color:#a3be8c;">./src/rand_seed.txt</span><span>&quot;)?;
-</span><span>    write!(file, &quot;</span><span style="color:#d08770;">{}</span><span>&quot;, seed)?;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> file </span><span style="color:#70c0b1;">= </span><span>File::options()
+</span><span>        .</span><span style="color:#7aa6da;">write</span><span>(</span><span style="color:#e78c45;">true</span><span>)
+</span><span>        .</span><span style="color:#7aa6da;">append</span><span>(</span><span style="color:#e78c45;">false</span><span>)
+</span><span>        .</span><span style="color:#7aa6da;">create</span><span>(</span><span style="color:#e78c45;">true</span><span>)
+</span><span>        .</span><span style="color:#7aa6da;">open</span><span>(</span><span style="color:#b9ca4a;">&quot;./src/rand_seed.txt&quot;</span><span>)</span><span style="color:#70c0b1;">?</span><span>;
+</span><span>    write!(file, </span><span style="color:#b9ca4a;">&quot;</span><span style="color:#eeeeee;">{}</span><span style="color:#b9ca4a;">&quot;</span><span>, seed)</span><span style="color:#70c0b1;">?</span><span>;
 </span><span>
-</span><span>    Ok(())
+</span><span>    </span><span style="color:#e7c547;">Ok</span><span>(())
 </span><span>}
 </span></code></pre>
 <h2 id="atogaki">あとがき</h2>

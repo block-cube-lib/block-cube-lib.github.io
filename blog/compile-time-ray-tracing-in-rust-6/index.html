@@ -132,43 +132,43 @@
 <h3 id="spherexing-wozhui-jia">Sphere型を追加</h3>
 <p>今までは関数に中心座標と半径を渡して計算していましたが今回から球が複数登場するため<code>Sphere</code>型を定義しています。<br />
 中心座標と半径を持っているだけの<code>struct</code>です。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Clone, Copy)]
-</span><span style="color:#b48ead;">pub struct </span><span>Sphere {
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">center</span><span>: Point3,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">radius</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#d54e53;">derive</span><span>(Clone, Copy)]
+</span><span style="color:#c397d8;">pub struct </span><span>Sphere {
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">center</span><span>: Point3,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">radius</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>Sphere {
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">new</span><span>(</span><span style="color:#bf616a;">center</span><span>: Point3, </span><span style="color:#bf616a;">radius</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{ </span><span style="color:#65737e;">/* 省略 */ </span><span>}
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">hit</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">r</span><span>: &amp;Ray, </span><span style="color:#bf616a;">t_min</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">t_max</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; Option&lt;HitRecord&gt; { </span><span style="color:#65737e;">/* 省略 */ </span><span>}
+</span><span style="color:#c397d8;">impl </span><span>Sphere {
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">new</span><span>(</span><span style="color:#e78c45;">center</span><span>: Point3, </span><span style="color:#e78c45;">radius</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#c397d8;">Self </span><span>{ </span><span style="color:#999999;">/* 省略 */ </span><span>}
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">hit</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">r</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Ray, </span><span style="color:#e78c45;">t_min</span><span>: </span><span style="color:#c397d8;">f64</span><span>, </span><span style="color:#e78c45;">t_max</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#e7c547;">Option</span><span>&lt;HitRecord&gt; { </span><span style="color:#999999;">/* 省略 */ </span><span>}
 </span><span>}
 </span></code></pre>
 <h3 id="reitoobuziekutonojiao-chai-pan-ding-wobao-chi-suruhitrecordxing-wozhui-jia">レイとオブジェクトの交差判定を保持する<code>HitRecord</code>型を追加</h3>
 <p>レイと球の交差した情報を保持するための型である<code>HitRecord</code>型を追加しました。
 交差した座標(<code>p</code>)、交差した箇所の法線(<code>normal</code>)、レイの始点との距離(<code>t</code>)、交差した箇所が球の表(外側)かどうか(<code>front_face</code>)を持っています。<br />
 ここは<a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html" title="Ray Tracing in One Weekend">Ray Tracing in One Weekend</a>と大きな違いはありません。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">pub struct </span><span>HitRecord {
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">p</span><span>: Point3,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">normal</span><span>: Vec3,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">t</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">front_face</span><span>: </span><span style="color:#b48ead;">bool</span><span>,
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">pub struct </span><span>HitRecord {
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">p</span><span>: Point3,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">normal</span><span>: Vec3,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">t</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">front_face</span><span>: </span><span style="color:#c397d8;">bool</span><span>,
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>HitRecord {
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">set_face_normal</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">r</span><span>: &amp;Ray, </span><span style="color:#bf616a;">outward_normal</span><span>: Vec3) {
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.front_face = </span><span style="color:#96b5b4;">dot</span><span>(&amp;r.</span><span style="color:#96b5b4;">direction</span><span>(), &amp;outward_normal) &lt; </span><span style="color:#d08770;">0.0</span><span>;
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.normal = </span><span style="color:#b48ead;">if </span><span style="color:#bf616a;">self</span><span>.front_face {
+</span><span style="color:#c397d8;">impl </span><span>HitRecord {
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">set_face_normal</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">r</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Ray, </span><span style="color:#e78c45;">outward_normal</span><span>: Vec3) {
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.front_face </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">dot</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>r.</span><span style="color:#7aa6da;">direction</span><span>(), </span><span style="color:#70c0b1;">&amp;</span><span>outward_normal) </span><span style="color:#70c0b1;">&lt; </span><span style="color:#e78c45;">0.0</span><span>;
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.normal </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">if </span><span style="color:#d54e53;">self</span><span>.front_face {
 </span><span>            outward_normal
-</span><span>        } </span><span style="color:#b48ead;">else </span><span>{
-</span><span>            -outward_normal
+</span><span>        } </span><span style="color:#c397d8;">else </span><span>{
+</span><span>            </span><span style="color:#70c0b1;">-</span><span>outward_normal
 </span><span>        };
 </span><span>    }
 </span><span>}
 </span></code></pre>
 <h3 id="reitojiao-chai-pan-ding-woxing-eruxing-nolie-ju-hittablewozhui-jia">レイと交差判定を行える型の列挙<code>Hittable</code>を追加</h3>
 <p><code>Hittable</code>の定義は以下のようになっており、現状では<code>Sphere</code>のみが要素として存在します。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Clone, Copy)]
-</span><span style="color:#b48ead;">pub enum </span><span>Hittable {
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#d54e53;">derive</span><span>(Clone, Copy)]
+</span><span style="color:#c397d8;">pub enum </span><span>Hittable {
 </span><span>    Sphere(Sphere),
 </span><span>}
 </span></code></pre>
@@ -179,49 +179,49 @@
 <code>HittableList</code>は<code>usize</code>型のコンパイル時定数<code>CAPACITY</code>を受け取ります。これは配列のサイズで、この数までであれば<code>Hittable</code>を保持できます。<code>add</code>関数呼び出し時に<code>CAPACITY</code>を超える場合にはコンパイルエラーが発生します。<br />
 配列の要素として持っているのが<code>Hittable</code>そのものではなく<code>Option&lt;Hittable&gt;</code>なのは空の要素を表現する必要があるからです。<br />
 <code>hit</code>関数では保持している<code>Some(Hittable)</code>全てに対して交差判定を行っています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">pub struct </span><span>HittableList&lt;</span><span style="color:#b48ead;">const</span><span> CAPACITY: </span><span style="color:#b48ead;">usize</span><span>&gt; {
-</span><span>    </span><span style="color:#bf616a;">size</span><span>: </span><span style="color:#b48ead;">usize</span><span>,
-</span><span>    </span><span style="color:#bf616a;">objects</span><span>: [Option&lt;Hittable&gt;; CAPACITY],
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">pub struct </span><span>HittableList&lt;</span><span style="color:#c397d8;">const</span><span> CAPACITY: </span><span style="color:#c397d8;">usize</span><span>&gt; {
+</span><span>    </span><span style="color:#d54e53;">size</span><span>: </span><span style="color:#c397d8;">usize</span><span>,
+</span><span>    </span><span style="color:#d54e53;">objects</span><span>: [</span><span style="color:#e7c547;">Option</span><span>&lt;Hittable&gt;; CAPACITY],
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> CAPACITY: </span><span style="color:#b48ead;">usize</span><span>&gt; HittableList&lt;CAPACITY&gt; {
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">new</span><span>() -&gt; </span><span style="color:#b48ead;">Self </span><span>{
-</span><span>        </span><span style="color:#b48ead;">Self </span><span>{
-</span><span>            size: </span><span style="color:#d08770;">0</span><span>,
-</span><span>            objects: [None; </span><span style="color:#d08770;">CAPACITY</span><span>],
+</span><span style="color:#c397d8;">impl</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> CAPACITY: </span><span style="color:#c397d8;">usize</span><span>&gt; HittableList&lt;CAPACITY&gt; {
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">new</span><span>() -&gt; </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>        </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>            size: </span><span style="color:#e78c45;">0</span><span>,
+</span><span>            objects: [</span><span style="color:#e7c547;">None</span><span>; </span><span style="color:#eeeeee;">CAPACITY</span><span>],
 </span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> CAPACITY: </span><span style="color:#b48ead;">usize</span><span>&gt; HittableList&lt;CAPACITY&gt; {
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">clear</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>) {
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.objects = [None; </span><span style="color:#d08770;">CAPACITY</span><span>];
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.size = </span><span style="color:#d08770;">0</span><span>;
+</span><span style="color:#c397d8;">impl</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> CAPACITY: </span><span style="color:#c397d8;">usize</span><span>&gt; HittableList&lt;CAPACITY&gt; {
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">clear</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>) {
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.objects </span><span style="color:#70c0b1;">= </span><span>[</span><span style="color:#e7c547;">None</span><span>; </span><span style="color:#eeeeee;">CAPACITY</span><span>];
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.size </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">add</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">hittable</span><span>: Hittable) {
-</span><span>        assert!(</span><span style="color:#bf616a;">self</span><span>.size &lt; </span><span style="color:#d08770;">CAPACITY</span><span>);
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.objects[</span><span style="color:#bf616a;">self</span><span>.size] = Some(hittable);
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.size += </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">add</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">hittable</span><span>: Hittable) {
+</span><span>        assert!(</span><span style="color:#d54e53;">self</span><span>.size </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">CAPACITY</span><span>);
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.objects[</span><span style="color:#d54e53;">self</span><span>.size] </span><span style="color:#70c0b1;">= </span><span style="color:#e7c547;">Some</span><span>(hittable);
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.size </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">hit</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">r</span><span>: &amp;Ray, </span><span style="color:#bf616a;">t_min</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">t_max</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; Option&lt;HitRecord&gt; {
-</span><span>        </span><span style="color:#b48ead;">let mut</span><span> result: Option&lt;HitRecord&gt; = None;
-</span><span>        </span><span style="color:#b48ead;">let mut</span><span> closest_so_far = t_max;
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">hit</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">r</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Ray, </span><span style="color:#e78c45;">t_min</span><span>: </span><span style="color:#c397d8;">f64</span><span>, </span><span style="color:#e78c45;">t_max</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#e7c547;">Option</span><span>&lt;HitRecord&gt; {
+</span><span>        </span><span style="color:#c397d8;">let mut</span><span> result: </span><span style="color:#e7c547;">Option</span><span>&lt;HitRecord&gt; </span><span style="color:#70c0b1;">= </span><span style="color:#e7c547;">None</span><span>;
+</span><span>        </span><span style="color:#c397d8;">let mut</span><span> closest_so_far </span><span style="color:#70c0b1;">=</span><span> t_max;
 </span><span>
-</span><span>        </span><span style="color:#b48ead;">let mut</span><span> index = </span><span style="color:#d08770;">0</span><span>;
-</span><span>        </span><span style="color:#b48ead;">while</span><span> index &lt; </span><span style="color:#bf616a;">self</span><span>.size {
-</span><span>            </span><span style="color:#b48ead;">let</span><span> hit_record = </span><span style="color:#b48ead;">match </span><span>&amp;</span><span style="color:#bf616a;">self</span><span>.objects[index] {
-</span><span>                Some(Hittable::Sphere(</span><span style="color:#b48ead;">ref</span><span> s)) =&gt; s.</span><span style="color:#96b5b4;">hit</span><span>(&amp;r, t_min, closest_so_far),
-</span><span>                _ =&gt; None,
+</span><span>        </span><span style="color:#c397d8;">let mut</span><span> index </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>        </span><span style="color:#c397d8;">while</span><span> index </span><span style="color:#70c0b1;">&lt; </span><span style="color:#d54e53;">self</span><span>.size {
+</span><span>            </span><span style="color:#c397d8;">let</span><span> hit_record </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">match </span><span style="color:#70c0b1;">&amp;</span><span style="color:#d54e53;">self</span><span>.objects[index] {
+</span><span>                </span><span style="color:#e7c547;">Some</span><span>(Hittable::Sphere(</span><span style="color:#c397d8;">ref</span><span> s)) </span><span style="color:#70c0b1;">=&gt;</span><span> s.</span><span style="color:#7aa6da;">hit</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>r, t_min, closest_so_far),
+</span><span>                </span><span style="color:#70c0b1;">_ =&gt; </span><span style="color:#e7c547;">None</span><span>,
 </span><span>            };
 </span><span>
-</span><span>            </span><span style="color:#b48ead;">if let </span><span>Some(hit_record) = hit_record {
-</span><span>                closest_so_far = hit_record.t;
-</span><span>                result = Some(hit_record);
+</span><span>            </span><span style="color:#c397d8;">if let </span><span style="color:#e7c547;">Some</span><span>(hit_record) </span><span style="color:#70c0b1;">=</span><span> hit_record {
+</span><span>                closest_so_far </span><span style="color:#70c0b1;">=</span><span> hit_record.t;
+</span><span>                result </span><span style="color:#70c0b1;">= </span><span style="color:#e7c547;">Some</span><span>(hit_record);
 </span><span>            }
 </span><span>
-</span><span>            index += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            index </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>        }
 </span><span>
 </span><span>        result
@@ -232,31 +232,31 @@
 <p><code>main.rs</code>の変更点だけ抜き出して説明します。
 まず<code>ray_color</code>関数です。<br />
 球ではなく<code>world: &amp;HittableList&lt;N&gt;</code>を受け取り<code>world</code>との交差判定を行います。交差した場合は交差した箇所の法線を返し、交差しなかった場合は背景色を返すという点は変わりません。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_color</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt;(</span><span style="color:#bf616a;">ray</span><span>: &amp;Ray, </span><span style="color:#bf616a;">world</span><span>: &amp;HittableList&lt;N&gt;) -&gt; Color {
-</span><span>    </span><span style="color:#b48ead;">if let </span><span>Some(rec) = world.</span><span style="color:#96b5b4;">hit</span><span>(&amp;ray, </span><span style="color:#d08770;">0.0</span><span>, std::f64::</span><span style="color:#d08770;">INFINITY</span><span>) {
-</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0.5 </span><span>* (rec.normal + Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>));
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_color</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt;(</span><span style="color:#e78c45;">ray</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Ray, </span><span style="color:#e78c45;">world</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>HittableList&lt;N&gt;) -&gt; Color {
+</span><span>    </span><span style="color:#c397d8;">if let </span><span style="color:#e7c547;">Some</span><span>(rec) </span><span style="color:#70c0b1;">=</span><span> world.</span><span style="color:#7aa6da;">hit</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>ray, </span><span style="color:#e78c45;">0.0</span><span>, std::f64::</span><span style="color:#eeeeee;">INFINITY</span><span>) {
+</span><span>        </span><span style="color:#c397d8;">return </span><span style="color:#e78c45;">0.5 </span><span style="color:#70c0b1;">* </span><span>(rec.normal </span><span style="color:#70c0b1;">+ </span><span>Color::new(</span><span style="color:#e78c45;">1.0</span><span>, </span><span style="color:#e78c45;">1.0</span><span>, </span><span style="color:#e78c45;">1.0</span><span>));
 </span><span>    }
-</span><span>    </span><span style="color:#b48ead;">let</span><span> unit_direction = </span><span style="color:#96b5b4;">unit_vector</span><span>(&amp;ray.</span><span style="color:#96b5b4;">direction</span><span>());
-</span><span>    </span><span style="color:#b48ead;">let</span><span> t = </span><span style="color:#d08770;">0.5 </span><span>* (unit_direction.y + </span><span style="color:#d08770;">1.0</span><span>);
-</span><span>    (</span><span style="color:#d08770;">1.0 </span><span>- t) * Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>) + t * Color::new(</span><span style="color:#d08770;">0.5</span><span>, </span><span style="color:#d08770;">0.7</span><span>, </span><span style="color:#d08770;">1.0</span><span>)
+</span><span>    </span><span style="color:#c397d8;">let</span><span> unit_direction </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">unit_vector</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>ray.</span><span style="color:#7aa6da;">direction</span><span>());
+</span><span>    </span><span style="color:#c397d8;">let</span><span> t </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.5 </span><span style="color:#70c0b1;">* </span><span>(unit_direction.y </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">1.0</span><span>);
+</span><span>    (</span><span style="color:#e78c45;">1.0 </span><span style="color:#70c0b1;">-</span><span> t) </span><span style="color:#70c0b1;">* </span><span>Color::new(</span><span style="color:#e78c45;">1.0</span><span>, </span><span style="color:#e78c45;">1.0</span><span>, </span><span style="color:#e78c45;">1.0</span><span>) </span><span style="color:#70c0b1;">+</span><span> t </span><span style="color:#70c0b1;">* </span><span>Color::new(</span><span style="color:#e78c45;">0.5</span><span>, </span><span style="color:#e78c45;">0.7</span><span>, </span><span style="color:#e78c45;">1.0</span><span>)
 </span><span>}
 </span></code></pre>
 <p>次に<code>world</code>の作成です。
 <code>HittableList&lt;2&gt;</code>型のworldを作成しそこに球を2つ追加しています。<br />
 このコードだけであれば定数ジェネリクスの引数を使用している部分以外は<code>HittableList</code>の中身が<code>vec</code>であった場合と変わらないように見えると思います。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#b48ead;">let mut</span><span> world: HittableList&lt;2&gt; = HittableList::&lt;2&gt;::new();
-</span><span>    world.</span><span style="color:#96b5b4;">add</span><span>(Hittable::Sphere(Sphere::new(
-</span><span>        Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, -</span><span style="color:#d08770;">1.0</span><span>),
-</span><span>        </span><span style="color:#d08770;">0.5</span><span>,
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#c397d8;">let mut</span><span> world: HittableList&lt;2&gt; </span><span style="color:#70c0b1;">= </span><span>HittableList::&lt;2&gt;::new();
+</span><span>    world.</span><span style="color:#7aa6da;">add</span><span>(Hittable::Sphere(Sphere::new(
+</span><span>        Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#70c0b1;">-</span><span style="color:#e78c45;">1.0</span><span>),
+</span><span>        </span><span style="color:#e78c45;">0.5</span><span>,
 </span><span>    )));
-</span><span>    world.</span><span style="color:#96b5b4;">add</span><span>(Hittable::Sphere(Sphere::new(
-</span><span>        Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, -</span><span style="color:#d08770;">100.5</span><span>, -</span><span style="color:#d08770;">1.0</span><span>),
-</span><span>        </span><span style="color:#d08770;">100.0</span><span>,
+</span><span>    world.</span><span style="color:#7aa6da;">add</span><span>(Hittable::Sphere(Sphere::new(
+</span><span>        Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#70c0b1;">-</span><span style="color:#e78c45;">100.5</span><span>, </span><span style="color:#70c0b1;">-</span><span style="color:#e78c45;">1.0</span><span>),
+</span><span>        </span><span style="color:#e78c45;">100.0</span><span>,
 </span><span>    )));
 </span></code></pre>
 <p>最後に<code>ray_color</code>の呼び出しの変更です。<br />
 第2引数に<code>&amp;world</code>を渡すようになりました。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>pixel_colors[pixel_index] = </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r, &amp;world);
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>pixel_colors[pixel_index] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">ray_color</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>r, </span><span style="color:#70c0b1;">&amp;</span><span>world);
 </span></code></pre>
 <h2 id="ray-tracing-in-one-weekendtonobian-geng-dian">Ray Tracing in One Weekendとの変更点</h2>
 <p>参考元の<a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html" title="Ray Tracing in One Weekend">Ray Tracing in One Weekend</a>大きく違う部分がいくつかあります。</p>
@@ -265,14 +265,14 @@
 これをRustで実装するのであれば<code>Vec&lt;Box&lt;Hittable&gt;&gt;</code>とか<code>Vec&lt;Rc&lt;Cell&lt;Hittable&gt;&gt;&gt;</code>になるかと思います。しかしそのどちらも<code>const fn</code>の中で使用することができないので<code>[Option&lt;Hittable&gt;; CAPACITY]</code>として実装しています。</p>
 <h3 id="hittablegatraitdehanakuenum"><code>Hittable</code>が<code>Trait</code>ではなく<code>Enum</code></h3>
 <p>参考元では<code>hittable</code>の定義は以下のようになっており純粋仮想関数の<code>hit</code>を持つクラス(interface)として実装されています。</p>
-<pre data-lang="cpp" style="background-color:#2b303b;color:#c0c5ce;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">hittable </span><span style="color:#eff1f5;">{
-</span><span style="color:#eff1f5;">    </span><span style="color:#b48ead;">public</span><span style="color:#eff1f5;">:
-</span><span style="color:#eff1f5;">        </span><span style="color:#b48ead;">virtual bool </span><span style="color:#8fa1b3;">hit</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">const</span><span style="color:#eff1f5;"> ray</span><span>&amp; </span><span style="color:#bf616a;">r</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">double </span><span style="color:#bf616a;">t_min</span><span style="color:#eff1f5;">, </span><span style="color:#b48ead;">double </span><span style="color:#bf616a;">t_max</span><span style="color:#eff1f5;">, hit_record</span><span>&amp; </span><span style="color:#bf616a;">rec</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">const </span><span>= </span><span style="color:#d08770;">0</span><span style="color:#eff1f5;">;
-</span><span style="color:#eff1f5;">}</span><span>;
+<pre data-lang="cpp" style="background-color:#000000;color:#dedede;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#c397d8;">class </span><span style="color:#e7c547;">hittable </span><span>{
+</span><span>    </span><span style="color:#c397d8;">public</span><span>:
+</span><span>        </span><span style="color:#c397d8;">virtual bool </span><span style="color:#7aa6da;">hit</span><span>(</span><span style="color:#c397d8;">const</span><span> ray</span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">r</span><span>, </span><span style="color:#c397d8;">double </span><span style="color:#e78c45;">t_min</span><span>, </span><span style="color:#c397d8;">double </span><span style="color:#e78c45;">t_max</span><span>, hit_record</span><span style="color:#70c0b1;">&amp; </span><span style="color:#e78c45;">rec</span><span>) </span><span style="color:#c397d8;">const </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>};
 </span></code></pre>
 <p>これをRustで実装するのであれば<code>Hittable</code>は<code>Trait</code>として以下のように実装するのが良いように思えます。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">trait </span><span>Hittable {
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">hit</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">r</span><span>: &amp;Ray, </span><span style="color:#bf616a;">t_min</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">t_max</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; Option&lt;HitRecord&gt;;
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">trait </span><span>Hittable {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">hit</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">r</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Ray, </span><span style="color:#e78c45;">t_min</span><span>: </span><span style="color:#c397d8;">f64</span><span>, </span><span style="color:#e78c45;">t_max</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#e7c547;">Option</span><span>&lt;HitRecord&gt;;
 </span><span>}
 </span></code></pre>
 <p>しかしそうすると<code>HittableList</code>が<code>Hittable</code>の配列を持つには<code>[Box&lt;Hittable&gt;; N]</code>のように必要があります。<br />

@@ -149,41 +149,41 @@
 <p>まずは<code>lib.rs</code>の内容からです。</p>
 <p>必要なfeatureを有効化、各モジュールの宣言、use宣言、<code>Vec3</code>のエイリアスとして<code>Point3</code>と<code>Color</code>の定義を行っています。<br />
 有効化したfeatureは<a href="https://qiita.com/block/items/d72a7e173ee0f1b196e6">Traitの関数をconst fnとして実装できるようになる(かもしれない)話</a>と<a href="../const-vec3">const fnで使用可能なVec3を定義する</a>で解説しています。</p>
-<pre data-lang="rs" style="background-color:#2b303b;color:#c0c5ce;" class="language-rs "><code class="language-rs" data-lang="rs"><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_trait_impl)]
-</span><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_fn_floating_point_arithmetic)]
-</span><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_mut_refs)]
-</span><span style="color:#b48ead;">pub mod </span><span>util;
-</span><span style="color:#b48ead;">pub mod </span><span>vec3;
+<pre data-lang="rs" style="background-color:#000000;color:#dedede;" class="language-rs "><code class="language-rs" data-lang="rs"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_trait_impl)]
+</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_fn_floating_point_arithmetic)]
+</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_mut_refs)]
+</span><span style="color:#c397d8;">pub mod </span><span>util;
+</span><span style="color:#c397d8;">pub mod </span><span>vec3;
 </span><span>
-</span><span style="color:#b48ead;">pub use </span><span>vec3::*;
+</span><span style="color:#c397d8;">pub use </span><span>vec3::</span><span style="color:#70c0b1;">*</span><span>;
 </span><span>
-</span><span style="color:#b48ead;">pub type </span><span>Point3 = Vec3;
-</span><span style="color:#b48ead;">pub type </span><span>Color = Vec3;
+</span><span style="color:#c397d8;">pub type </span><span>Point3 </span><span style="color:#70c0b1;">=</span><span> Vec3;
+</span><span style="color:#c397d8;">pub type </span><span>Color </span><span style="color:#70c0b1;">=</span><span> Vec3;
 </span></code></pre>
 <h2 id="util-rs">util.rs</h2>
 <p><code>util.rs</code>では<code>Vec3</code>の処理で使いたい関数の定義を行っています。具体的には<code>sqrt</code>と<code>abs</code>です。<br />
 どちらも組み込みの<code>f64</code>の関数として定義されていますが<code>const fn</code>では使えないので自前で定義しました。</p>
 <p>テストを除いた<code>util.rs</code>のコードです。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">sqrt</span><span>(</span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
-</span><span>    </span><span style="color:#b48ead;">if</span><span> s == </span><span style="color:#d08770;">0.0 </span><span>{
-</span><span>        </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0.0</span><span>;
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">sqrt</span><span>(</span><span style="color:#e78c45;">s</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#c397d8;">f64 </span><span>{
+</span><span>    </span><span style="color:#c397d8;">if</span><span> s </span><span style="color:#70c0b1;">== </span><span style="color:#e78c45;">0.0 </span><span>{
+</span><span>        </span><span style="color:#c397d8;">return </span><span style="color:#e78c45;">0.0</span><span>;
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> x = s / </span><span style="color:#d08770;">2.0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> _last_x = </span><span style="color:#d08770;">0.0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> x </span><span style="color:#70c0b1;">=</span><span> s </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">2.0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> _last_x </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.0</span><span>;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">while</span><span> x != _last_x {
-</span><span>        _last_x = x;
-</span><span>        x = (x + s / x) / </span><span style="color:#d08770;">2.0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">while</span><span> x </span><span style="color:#70c0b1;">!=</span><span> _last_x {
+</span><span>        _last_x </span><span style="color:#70c0b1;">=</span><span> x;
+</span><span>        x </span><span style="color:#70c0b1;">= </span><span>(x </span><span style="color:#70c0b1;">+</span><span> s </span><span style="color:#70c0b1;">/</span><span> x) </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">2.0</span><span>;
 </span><span>    }
 </span><span>    x
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">abs</span><span>(</span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
-</span><span>    </span><span style="color:#b48ead;">if</span><span> s &gt;= </span><span style="color:#d08770;">0.0 </span><span>{
+</span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">abs</span><span>(</span><span style="color:#e78c45;">s</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#c397d8;">f64 </span><span>{
+</span><span>    </span><span style="color:#c397d8;">if</span><span> s </span><span style="color:#70c0b1;">&gt;= </span><span style="color:#e78c45;">0.0 </span><span>{
 </span><span>        s
-</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
-</span><span>        -s
+</span><span>    } </span><span style="color:#c397d8;">else </span><span>{
+</span><span>        </span><span style="color:#70c0b1;">-</span><span>s
 </span><span>    }
 </span><span>}
 </span></code></pre>
@@ -194,43 +194,43 @@
 <code>Vec3</code>の定義は以下のようになっており、<code>x</code>, <code>y</code>, <code>z</code>には外部からもアクセスできるシンプルな作りになっています。<br />
 ここに<code>Add</code>, <code>AddAssign</code>, <code>Mul</code>,<code>Index</code>などの演算子と、<code>length_squred</code>, <code>length</code> <code>dot</code>, <code>corss</code>, <code>unit_vector</code>などの関数を実装しています。<br />
 (好みで言えば<code>unit_vector</code>という外部の関数よりは<code>v.normalized()</code>のような使い方ができる方が好きなのですが、<a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html#thevec3class">参考元</a>がこうなっているのでこのように実装しました)</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, PartialEq, Clone, Copy)]
-</span><span style="color:#b48ead;">pub struct </span><span>Vec3 {
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">z</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#d54e53;">derive</span><span>(Debug, PartialEq, Clone, Copy)]
+</span><span style="color:#c397d8;">pub struct </span><span>Vec3 {
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">x</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">y</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">z</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
 </span><span>}
 </span></code></pre>
 <p>少々長いですがテストを除いたコード全文も貼っておきます</p>
 <details>
 <summary>Vec3のテストを除いたコード全文</summary>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use crate</span><span>::util::*;
-</span><span style="color:#b48ead;">use </span><span>std::ops::*;
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">use crate</span><span>::util::</span><span style="color:#70c0b1;">*</span><span>;
+</span><span style="color:#c397d8;">use </span><span>std::ops::</span><span style="color:#70c0b1;">*</span><span>;
 </span><span>
-</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, PartialEq, Copy)]
-</span><span style="color:#b48ead;">pub struct </span><span>Vec3 {
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">z</span><span>: </span><span style="color:#b48ead;">f64</span><span>,
+</span><span>#[</span><span style="color:#d54e53;">derive</span><span>(Debug, PartialEq, Copy)]
+</span><span style="color:#c397d8;">pub struct </span><span>Vec3 {
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">x</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">y</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">z</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const std::default::Default for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">default</span><span>() -&gt; </span><span style="color:#b48ead;">Self </span><span>{
-</span><span>        Vec3::</span><span style="color:#d08770;">ZERO
+</span><span style="color:#c397d8;">impl </span><span>const std::default::Default for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">default</span><span>() -&gt; </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>        Vec3::</span><span style="color:#eeeeee;">ZERO
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Clone for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">clone</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span style="color:#c397d8;">impl </span><span>const Clone for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">clone</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>) -&gt; </span><span style="color:#c397d8;">Self </span><span>{
 </span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x,
-</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y,
-</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z,
+</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x,
+</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y,
+</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z,
 </span><span>        }
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">clone_from</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">source</span><span>: &amp;</span><span style="color:#b48ead;">Self</span><span>) {
-</span><span>        *</span><span style="color:#bf616a;">self </span><span>= Vec3 {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">clone_from</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">source</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">Self</span><span>) {
+</span><span>        </span><span style="color:#70c0b1;">*</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">=</span><span> Vec3 {
 </span><span>            x: source.x,
 </span><span>            y: source.y,
 </span><span>            z: source.z,
@@ -238,147 +238,147 @@
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>Vec3 {
-</span><span>    </span><span style="color:#b48ead;">pub const </span><span style="color:#d08770;">ZERO</span><span>: Vec3 = Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
+</span><span style="color:#c397d8;">impl </span><span>Vec3 {
+</span><span>    </span><span style="color:#c397d8;">pub const </span><span style="color:#eeeeee;">ZERO</span><span>: Vec3 </span><span style="color:#70c0b1;">= </span><span>Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>);
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">new</span><span>(</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">z</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
-</span><span>        </span><span style="color:#b48ead;">Self </span><span>{ x, y, z }
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">new</span><span>(</span><span style="color:#e78c45;">x</span><span>: </span><span style="color:#c397d8;">f64</span><span>, </span><span style="color:#e78c45;">y</span><span>: </span><span style="color:#c397d8;">f64</span><span>, </span><span style="color:#e78c45;">z</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#c397d8;">Self </span><span>{
+</span><span>        </span><span style="color:#c397d8;">Self </span><span>{ x, y, z }
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">length_squared</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.x * </span><span style="color:#bf616a;">self</span><span>.x + </span><span style="color:#bf616a;">self</span><span>.y * </span><span style="color:#bf616a;">self</span><span>.y + </span><span style="color:#bf616a;">self</span><span>.z * </span><span style="color:#bf616a;">self</span><span>.z
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">length_squared</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>) -&gt; </span><span style="color:#c397d8;">f64 </span><span>{
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">* </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+ </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">* </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+ </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">* </span><span style="color:#d54e53;">self</span><span>.z
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">length</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
-</span><span>        </span><span style="color:#96b5b4;">sqrt</span><span>(</span><span style="color:#bf616a;">self</span><span>.</span><span style="color:#96b5b4;">length_squared</span><span>())
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Neg for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = </span><span style="color:#b48ead;">Self</span><span>;
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">neg</span><span>(</span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
-</span><span>        Vec3::new(-</span><span style="color:#bf616a;">self</span><span>.x, -</span><span style="color:#bf616a;">self</span><span>.y, -</span><span style="color:#bf616a;">self</span><span>.z)
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">length</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>) -&gt; </span><span style="color:#c397d8;">f64 </span><span>{
+</span><span>        </span><span style="color:#7aa6da;">sqrt</span><span>(</span><span style="color:#d54e53;">self</span><span>.</span><span style="color:#7aa6da;">length_squared</span><span>())
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Index&lt;</span><span style="color:#b48ead;">usize</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = </span><span style="color:#b48ead;">f64</span><span>;
+</span><span style="color:#c397d8;">impl </span><span>const Neg for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">Self</span><span>;
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">neg</span><span>(</span><span style="color:#e78c45;">self</span><span>) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
+</span><span>        Vec3::new(</span><span style="color:#70c0b1;">-</span><span style="color:#d54e53;">self</span><span>.x, </span><span style="color:#70c0b1;">-</span><span style="color:#d54e53;">self</span><span>.y, </span><span style="color:#70c0b1;">-</span><span style="color:#d54e53;">self</span><span>.z)
+</span><span>    }
+</span><span>}
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">index</span><span>: </span><span style="color:#b48ead;">usize</span><span>) -&gt; &amp;</span><span style="color:#b48ead;">Self::</span><span>Output {
-</span><span>        </span><span style="color:#b48ead;">match</span><span> index {
-</span><span>            </span><span style="color:#d08770;">0 </span><span>=&gt; &amp;</span><span style="color:#bf616a;">self</span><span>.x,
-</span><span>            </span><span style="color:#d08770;">1 </span><span>=&gt; &amp;</span><span style="color:#bf616a;">self</span><span>.y,
-</span><span>            </span><span style="color:#d08770;">2 </span><span>=&gt; &amp;</span><span style="color:#bf616a;">self</span><span>.z,
-</span><span>            _ =&gt; panic!(&quot;</span><span style="color:#a3be8c;">out of range</span><span>&quot;),
+</span><span style="color:#c397d8;">impl </span><span>const Index&lt;</span><span style="color:#c397d8;">usize</span><span>&gt; for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">index</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">index</span><span>: </span><span style="color:#c397d8;">usize</span><span>) -&gt; </span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">Self::</span><span>Output {
+</span><span>        </span><span style="color:#c397d8;">match</span><span> index {
+</span><span>            </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.x,
+</span><span>            </span><span style="color:#e78c45;">1 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.y,
+</span><span>            </span><span style="color:#e78c45;">2 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.z,
+</span><span>            </span><span style="color:#70c0b1;">_ =&gt; </span><span>panic!(</span><span style="color:#b9ca4a;">&quot;out of range&quot;</span><span>),
 </span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const IndexMut&lt;</span><span style="color:#b48ead;">usize</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index_mut</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">index</span><span>: </span><span style="color:#b48ead;">usize</span><span>) -&gt; &amp;</span><span style="color:#b48ead;">mut Self::</span><span>Output {
-</span><span>        </span><span style="color:#b48ead;">match</span><span> index {
-</span><span>            </span><span style="color:#d08770;">0 </span><span>=&gt; &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>.x,
-</span><span>            </span><span style="color:#d08770;">1 </span><span>=&gt; &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>.y,
-</span><span>            </span><span style="color:#d08770;">2 </span><span>=&gt; &amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>.z,
-</span><span>            _ =&gt; panic!(&quot;</span><span style="color:#a3be8c;">out of range</span><span>&quot;),
+</span><span style="color:#c397d8;">impl </span><span>const IndexMut&lt;</span><span style="color:#c397d8;">usize</span><span>&gt; for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">index_mut</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">index</span><span>: </span><span style="color:#c397d8;">usize</span><span>) -&gt; </span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut Self::</span><span>Output {
+</span><span>        </span><span style="color:#c397d8;">match</span><span> index {
+</span><span>            </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.x,
+</span><span>            </span><span style="color:#e78c45;">1 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.y,
+</span><span>            </span><span style="color:#e78c45;">2 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.z,
+</span><span>            </span><span style="color:#70c0b1;">_ =&gt; </span><span>panic!(</span><span style="color:#b9ca4a;">&quot;out of range&quot;</span><span>),
 </span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Add&lt;Vec3&gt; for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = </span><span style="color:#b48ead;">Self</span><span>;
+</span><span style="color:#c397d8;">impl </span><span>const Add&lt;Vec3&gt; for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">Self</span><span>;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">add</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">add</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
 </span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x + rhs.x,
-</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y + rhs.y,
-</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z + rhs.z,
+</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+</span><span> rhs.x,
+</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+</span><span> rhs.y,
+</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">+</span><span> rhs.z,
 </span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Sub&lt;Vec3&gt; for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = </span><span style="color:#b48ead;">Self</span><span>;
+</span><span style="color:#c397d8;">impl </span><span>const Sub&lt;Vec3&gt; for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">Self</span><span>;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">sub</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">sub</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
 </span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x - rhs.x,
-</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y - rhs.y,
-</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z - rhs.z,
+</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">-</span><span> rhs.x,
+</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">-</span><span> rhs.y,
+</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">-</span><span> rhs.z,
 </span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Mul&lt;</span><span style="color:#b48ead;">f64</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = Vec3;
+</span><span style="color:#c397d8;">impl </span><span>const Mul&lt;</span><span style="color:#c397d8;">f64</span><span>&gt; for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">=</span><span> Vec3;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">mul</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">mul</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
 </span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x * rhs,
-</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y * rhs,
-</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z * rhs,
+</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">*</span><span> rhs,
+</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">*</span><span> rhs,
+</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">*</span><span> rhs,
 </span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const MulAssign&lt;</span><span style="color:#b48ead;">f64</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">mul_assign</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: </span><span style="color:#b48ead;">f64</span><span>) {
-</span><span>        *</span><span style="color:#bf616a;">self </span><span>= *</span><span style="color:#bf616a;">self </span><span>* rhs;
+</span><span style="color:#c397d8;">impl </span><span>const MulAssign&lt;</span><span style="color:#c397d8;">f64</span><span>&gt; for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">mul_assign</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: </span><span style="color:#c397d8;">f64</span><span>) {
+</span><span>        </span><span style="color:#70c0b1;">*</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">= *</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">*</span><span> rhs;
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Div&lt;</span><span style="color:#b48ead;">f64</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = Vec3;
+</span><span style="color:#c397d8;">impl </span><span>const Div&lt;</span><span style="color:#c397d8;">f64</span><span>&gt; for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">=</span><span> Vec3;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">div</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">div</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
 </span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#bf616a;">self</span><span>.x / rhs,
-</span><span>            y: </span><span style="color:#bf616a;">self</span><span>.y / rhs,
-</span><span>            z: </span><span style="color:#bf616a;">self</span><span>.z / rhs,
+</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">/</span><span> rhs,
+</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">/</span><span> rhs,
+</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">/</span><span> rhs,
 </span><span>        }
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const DivAssign&lt;</span><span style="color:#b48ead;">f64</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">div_assign</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: </span><span style="color:#b48ead;">f64</span><span>) {
-</span><span>        *</span><span style="color:#bf616a;">self </span><span>= *</span><span style="color:#bf616a;">self </span><span>/ rhs;
+</span><span style="color:#c397d8;">impl </span><span>const DivAssign&lt;</span><span style="color:#c397d8;">f64</span><span>&gt; for Vec3 {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">div_assign</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: </span><span style="color:#c397d8;">f64</span><span>) {
+</span><span>        </span><span style="color:#70c0b1;">*</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">= *</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">/</span><span> rhs;
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Mul&lt;Vec3&gt; for f64 {
-</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = Vec3;
+</span><span style="color:#c397d8;">impl </span><span>const Mul&lt;Vec3&gt; for f64 {
+</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">=</span><span> Vec3;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">mul</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
-</span><span>        rhs * </span><span style="color:#bf616a;">self
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">mul</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
+</span><span>        rhs </span><span style="color:#70c0b1;">* </span><span style="color:#d54e53;">self
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>const Div&lt;Vec3&gt; for f64 {
-</span><span>    </span><span style="color:#b48ead;">type </span><span>Output = Vec3;
+</span><span style="color:#c397d8;">impl </span><span>const Div&lt;Vec3&gt; for f64 {
+</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">=</span><span> Vec3;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">div</span><span>(</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Output {
-</span><span>        rhs / </span><span style="color:#bf616a;">self
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">div</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
+</span><span>        rhs </span><span style="color:#70c0b1;">/ </span><span style="color:#d54e53;">self
 </span><span>    }
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">dot</span><span>(</span><span style="color:#bf616a;">u</span><span>: &amp;Vec3, </span><span style="color:#bf616a;">v</span><span>: &amp;Vec3) -&gt; </span><span style="color:#b48ead;">f64 </span><span>{
-</span><span>    u.x * v.x + u.y * v.y + u.z * v.z
+</span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">dot</span><span>(</span><span style="color:#e78c45;">u</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Vec3, </span><span style="color:#e78c45;">v</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Vec3) -&gt; </span><span style="color:#c397d8;">f64 </span><span>{
+</span><span>    u.x </span><span style="color:#70c0b1;">*</span><span> v.x </span><span style="color:#70c0b1;">+</span><span> u.y </span><span style="color:#70c0b1;">*</span><span> v.y </span><span style="color:#70c0b1;">+</span><span> u.z </span><span style="color:#70c0b1;">*</span><span> v.z
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">cross</span><span>(</span><span style="color:#bf616a;">u</span><span>: &amp;Vec3, </span><span style="color:#bf616a;">v</span><span>: &amp;Vec3) -&gt; Vec3 {
+</span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">cross</span><span>(</span><span style="color:#e78c45;">u</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Vec3, </span><span style="color:#e78c45;">v</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Vec3) -&gt; Vec3 {
 </span><span>    Vec3::new(
-</span><span>        u.y * v.z - u.z * v.y,
-</span><span>        u.z * v.x - u.x * v.z,
-</span><span>        u.x * v.y - u.y * v.x,
+</span><span>        u.y </span><span style="color:#70c0b1;">*</span><span> v.z </span><span style="color:#70c0b1;">-</span><span> u.z </span><span style="color:#70c0b1;">*</span><span> v.y,
+</span><span>        u.z </span><span style="color:#70c0b1;">*</span><span> v.x </span><span style="color:#70c0b1;">-</span><span> u.x </span><span style="color:#70c0b1;">*</span><span> v.z,
+</span><span>        u.x </span><span style="color:#70c0b1;">*</span><span> v.y </span><span style="color:#70c0b1;">-</span><span> u.y </span><span style="color:#70c0b1;">*</span><span> v.x,
 </span><span>    )
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">unit_vector</span><span>(</span><span style="color:#bf616a;">v</span><span>: &amp;Vec3) -&gt; Vec3 {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> len = v.</span><span style="color:#96b5b4;">length</span><span>();
-</span><span>    </span><span style="color:#b48ead;">if </span><span>std::f64::</span><span style="color:#d08770;">EPSILON </span><span>&lt; </span><span style="color:#96b5b4;">abs</span><span>(len) {
-</span><span>        *v / len
-</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
-</span><span>        Vec3::</span><span style="color:#d08770;">ZERO
+</span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">unit_vector</span><span>(</span><span style="color:#e78c45;">v</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Vec3) -&gt; Vec3 {
+</span><span>    </span><span style="color:#c397d8;">let</span><span> len </span><span style="color:#70c0b1;">=</span><span> v.</span><span style="color:#7aa6da;">length</span><span>();
+</span><span>    </span><span style="color:#c397d8;">if </span><span>std::f64::</span><span style="color:#eeeeee;">EPSILON </span><span style="color:#70c0b1;">&lt; </span><span style="color:#7aa6da;">abs</span><span>(len) {
+</span><span>        </span><span style="color:#70c0b1;">*</span><span>v </span><span style="color:#70c0b1;">/</span><span> len
+</span><span>    } </span><span style="color:#c397d8;">else </span><span>{
+</span><span>        Vec3::</span><span style="color:#eeeeee;">ZERO
 </span><span>    }
 </span><span>}
 </span></code></pre>
@@ -388,62 +388,62 @@
 また<code>(f64, f64, f64)</code>から<code>(u8, u8, u8)</code>に変換する処理を<code>pixels_to_buffer()</code>関数に移動するなどの細かい変更もしています。</p>
 <details>
 <summary>main.rs全文</summary>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_fn_floating_point_arithmetic)] </span><span style="color:#65737e;">// const fnの中で浮動小数点演算を行うために必要
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_fn_floating_point_arithmetic)] </span><span style="color:#999999;">// const fnの中で浮動小数点演算を行うために必要
 </span><span>
-</span><span style="color:#b48ead;">use </span><span>image::ImageFormat;
-</span><span style="color:#b48ead;">use </span><span>ray_tracing_in_one_weekend_compile_time::Color;
+</span><span style="color:#c397d8;">use </span><span>image::ImageFormat;
+</span><span style="color:#c397d8;">use </span><span>ray_tracing_in_one_weekend_compile_time::Color;
 </span><span>
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IMAGE_WIDTH</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">256</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IMAGE_HEIGHT</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">256</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">PIXEL_COUNT</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>* </span><span style="color:#d08770;">IMAGE_HEIGHT</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IMAGE_WIDTH</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">256</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IMAGE_HEIGHT</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">256</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">* </span><span style="color:#eeeeee;">IMAGE_HEIGHT</span><span>;
 </span><span>
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() -&gt; anyhow::Result&lt;()&gt; {
-</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">PIXEL_COLORS</span><span>: [Color; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] = </span><span style="color:#96b5b4;">ray_trace</span><span>();
-</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">BUFFER</span><span>: [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>] = </span><span style="color:#96b5b4;">pixels_to_buffer</span><span>(</span><span style="color:#d08770;">PIXEL_COLORS</span><span>);
-</span><span>    </span><span style="color:#b48ead;">let</span><span> img = image::RgbImage::from_raw(</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">BUFFER</span><span>.</span><span style="color:#96b5b4;">to_vec</span><span>())
-</span><span>        .</span><span style="color:#96b5b4;">unwrap</span><span>();
-</span><span>    img.</span><span style="color:#96b5b4;">save_with_format</span><span>(&quot;</span><span style="color:#a3be8c;">./result.png</span><span>&quot;, ImageFormat::Png)?;
+</span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() -&gt; anyhow::</span><span style="color:#e7c547;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">PIXEL_COLORS</span><span>: [Color; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">ray_trace</span><span>();
+</span><span>    </span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">BUFFER</span><span>: [</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">pixels_to_buffer</span><span>(</span><span style="color:#eeeeee;">PIXEL_COLORS</span><span>);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> img </span><span style="color:#70c0b1;">= </span><span>image::RgbImage::from_raw(</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u32</span><span>, </span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u32</span><span>, </span><span style="color:#eeeeee;">BUFFER</span><span>.</span><span style="color:#7aa6da;">to_vec</span><span>())
+</span><span>        .</span><span style="color:#7aa6da;">unwrap</span><span>();
+</span><span>    img.</span><span style="color:#7aa6da;">save_with_format</span><span>(</span><span style="color:#b9ca4a;">&quot;./result.png&quot;</span><span>, ImageFormat::Png)</span><span style="color:#70c0b1;">?</span><span>;
 </span><span>
-</span><span>    Ok(())
+</span><span>    </span><span style="color:#e7c547;">Ok</span><span>(())
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] {
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [Color::</span><span style="color:#d08770;">ZERO</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
-</span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
-</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
-</span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
-</span><span>            pixel_colors[j as </span><span style="color:#b48ead;">usize </span><span>* </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>+ i] = Color::new(
-</span><span>                (i as </span><span style="color:#b48ead;">f64</span><span>) / ((</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>),
-</span><span>                j as </span><span style="color:#b48ead;">f64 </span><span>/ (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>,
-</span><span>                </span><span style="color:#d08770;">0.25</span><span>,
+</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] {
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_colors </span><span style="color:#70c0b1;">= </span><span>[Color::</span><span style="color:#eeeeee;">ZERO</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> j </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">i32</span><span>;
+</span><span>    </span><span style="color:#999999;">// forが使えないのでwhileで代用
+</span><span>    </span><span style="color:#c397d8;">while </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">&lt;=</span><span> j {
+</span><span>        </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span>{
+</span><span>            pixel_colors[j </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">* </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">+</span><span> i] </span><span style="color:#70c0b1;">= </span><span>Color::new(
+</span><span>                (i </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>) </span><span style="color:#70c0b1;">/ </span><span>((</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>),
+</span><span>                j </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>,
+</span><span>                </span><span style="color:#e78c45;">0.25</span><span>,
 </span><span>            );
-</span><span>            i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>        }
-</span><span>        i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>        j </span><span style="color:#70c0b1;">-= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    pixel_colors
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">pixels_to_buffer</span><span>(</span><span style="color:#bf616a;">pixels</span><span>: [Color; PIXEL_COUNT]) -&gt; [</span><span style="color:#b48ead;">u8</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>] {
-</span><span>    </span><span style="color:#65737e;">//let buf: Vec&lt;_&gt; = PIXEL_COLORS
-</span><span>    </span><span style="color:#65737e;">//    .iter()
-</span><span>    </span><span style="color:#65737e;">//    .map(|&amp;(r, g, b)| (r * 255.999, g * 255.999, b * 255.999))
-</span><span>    </span><span style="color:#65737e;">//    .map(|&amp;(r, g, b)| [r as u8, g as u8, b as u8])
-</span><span>    </span><span style="color:#65737e;">//    .flatten()
-</span><span>    </span><span style="color:#65737e;">//    .collect();
-</span><span>    </span><span style="color:#65737e;">//buf
+</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">pixels_to_buffer</span><span>(</span><span style="color:#e78c45;">pixels</span><span>: [Color; PIXEL_COUNT]) -&gt; [</span><span style="color:#c397d8;">u8</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>] {
+</span><span>    </span><span style="color:#999999;">//let buf: Vec&lt;_&gt; = PIXEL_COLORS
+</span><span>    </span><span style="color:#999999;">//    .iter()
+</span><span>    </span><span style="color:#999999;">//    .map(|&amp;(r, g, b)| (r * 255.999, g * 255.999, b * 255.999))
+</span><span>    </span><span style="color:#999999;">//    .map(|&amp;(r, g, b)| [r as u8, g as u8, b as u8])
+</span><span>    </span><span style="color:#999999;">//    .flatten()
+</span><span>    </span><span style="color:#999999;">//    .collect();
+</span><span>    </span><span style="color:#999999;">//buf
 </span><span>
-</span><span>    </span><span style="color:#65737e;">// 上と同じことをしている
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> buf = [</span><span style="color:#d08770;">0</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>* </span><span style="color:#d08770;">3</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">PIXEL_COUNT </span><span>{
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">0</span><span>] = (pixels[i].x * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>;
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">1</span><span>] = (pixels[i].y * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>;
-</span><span>        buf[i * </span><span style="color:#d08770;">3 </span><span>+ </span><span style="color:#d08770;">2</span><span>] = (pixels[i].z * </span><span style="color:#d08770;">255.999</span><span>) as </span><span style="color:#b48ead;">u8</span><span>;
-</span><span>        i += </span><span style="color:#d08770;">1</span><span>;
+</span><span>    </span><span style="color:#999999;">// 上と同じことをしている
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> buf </span><span style="color:#70c0b1;">= </span><span>[</span><span style="color:#e78c45;">0</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">PIXEL_COUNT </span><span>{
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">0</span><span>] </span><span style="color:#70c0b1;">= </span><span>(pixels[i].x </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>;
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">1</span><span>] </span><span style="color:#70c0b1;">= </span><span>(pixels[i].y </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>;
+</span><span>        buf[i </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">3 </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">2</span><span>] </span><span style="color:#70c0b1;">= </span><span>(pixels[i].z </span><span style="color:#70c0b1;">* </span><span style="color:#e78c45;">255.999</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">u8</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    buf
 </span><span>}

@@ -110,48 +110,48 @@
 <hr />
 <h2 id="he-nohua-ka">何の話か</h2>
 <p>以下のような<code>ArrayWrapper</code>という<code>struct</code>と<code>Foo</code>という<code>trait</code>があったとして</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">struct </span><span>ArrayWrapper&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt;([</span><span style="color:#b48ead;">i32</span><span>; N]);
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">struct </span><span>ArrayWrapper&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt;([</span><span style="color:#c397d8;">i32</span><span>; N]);
 </span><span>
-</span><span style="color:#b48ead;">trait </span><span>Foo {
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) {}
+</span><span style="color:#c397d8;">trait </span><span>Foo {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">foo</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>) {}
 </span><span>}
 </span></code></pre>
 <p>以下のように<code>N &lt; 5</code>などの条件に当てはまるときだけ<code>Foo</code>を実装したい場合にどうすればよいかという話です。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>ArrayWrapper([]).</span><span style="color:#96b5b4;">foo</span><span>();              </span><span style="color:#65737e;">// OK
-</span><span>ArrayWrapper([</span><span style="color:#d08770;">0</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>();             </span><span style="color:#65737e;">// OK
-</span><span>ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>();          </span><span style="color:#65737e;">// OK
-</span><span>ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>()        </span><span style="color:#65737e;">// OK
-</span><span>ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>()     </span><span style="color:#65737e;">// OK
-</span><span>ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>, </span><span style="color:#d08770;">4</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>(); </span><span style="color:#65737e;">// Error
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>ArrayWrapper([]).</span><span style="color:#7aa6da;">foo</span><span>();              </span><span style="color:#999999;">// OK
+</span><span>ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>();             </span><span style="color:#999999;">// OK
+</span><span>ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">1</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>();          </span><span style="color:#999999;">// OK
+</span><span>ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">1</span><span>, </span><span style="color:#e78c45;">2</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>()        </span><span style="color:#999999;">// OK
+</span><span>ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">1</span><span>, </span><span style="color:#e78c45;">2</span><span>, </span><span style="color:#e78c45;">3</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>()     </span><span style="color:#999999;">// OK
+</span><span>ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">1</span><span>, </span><span style="color:#e78c45;">2</span><span>, </span><span style="color:#e78c45;">3</span><span>, </span><span style="color:#e78c45;">4</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>(); </span><span style="color:#999999;">// Error
 </span></code></pre>
 <h2 id="sonoqian-ni">その前に</h2>
 <p>特定の<code>N</code>に対して<code>Foo</code>を実装するには</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">impl </span><span>Foo </span><span style="color:#b48ead;">for </span><span>ArrayWrapper&lt;0&gt; {}
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">impl </span><span>Foo </span><span style="color:#c397d8;">for </span><span>ArrayWrapper&lt;0&gt; {}
 </span><span>
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
-</span><span>    ArrayWrapper([]).</span><span style="color:#96b5b4;">foo</span><span>();  </span><span style="color:#65737e;">// OK
-</span><span>    ArrayWrapper([</span><span style="color:#d08770;">0</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>(); </span><span style="color:#65737e;">// Error
+</span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() {
+</span><span>    ArrayWrapper([]).</span><span style="color:#7aa6da;">foo</span><span>();  </span><span style="color:#999999;">// OK
+</span><span>    ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>(); </span><span style="color:#999999;">// Error
 </span><span>}
 </span></code></pre>
 <p>のようにしてやればよく、<br />
 すべての<code>N</code>に対して<code>Foo</code>を実装するには</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt; Foo </span><span style="color:#b48ead;">for </span><span>ArrayWrapper&lt;N&gt; {}
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">impl</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt; Foo </span><span style="color:#c397d8;">for </span><span>ArrayWrapper&lt;N&gt; {}
 </span><span>
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
-</span><span>    ArrayWrapper([]).</span><span style="color:#96b5b4;">foo</span><span>();     </span><span style="color:#65737e;">// OK
-</span><span>    ArrayWrapper([</span><span style="color:#d08770;">0</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>();    </span><span style="color:#65737e;">// OK
-</span><span>    ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>(); </span><span style="color:#65737e;">// OK
+</span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() {
+</span><span>    ArrayWrapper([]).</span><span style="color:#7aa6da;">foo</span><span>();     </span><span style="color:#999999;">// OK
+</span><span>    ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>();    </span><span style="color:#999999;">// OK
+</span><span>    ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">1</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>(); </span><span style="color:#999999;">// OK
 </span><span>}
 </span></code></pre>
 <p>としてやればよいです。</p>
 <h2 id="wheredetiao-jian-wozhui-jia-sitemiru">whereで条件を追加してみる</h2>
 <p>以下のように<code>where</code>で<code>N</code>の条件を追加してみます。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt; Foo </span><span style="color:#b48ead;">for </span><span>ArrayWrapper&lt;N&gt;
-</span><span style="color:#b48ead;">where</span><span> N: {N &lt; </span><span style="color:#d08770;">5</span><span>}, {}
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">impl</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt; Foo </span><span style="color:#c397d8;">for </span><span>ArrayWrapper&lt;N&gt;
+</span><span style="color:#c397d8;">where</span><span> N: {N </span><span style="color:#70c0b1;">&lt; </span><span style="color:#e78c45;">5</span><span>}, {}
 </span></code></pre>
 <p>するとコンパイルエラーが発生します。
 そもそも<code>where N: ...</code>みたいな形式は構文として認められていないようです。</p>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>error: expected one of `!` or `::`, found `&lt;`
+<pre style="background-color:#000000;color:#dedede;"><code><span>error: expected one of `!` or `::`, found `&lt;`
 </span><span> --&gt; src/main.rs:8:13
 </span><span>  |
 </span><span>8 | where N: {N &lt; 5}, {}
@@ -172,38 +172,38 @@
 <p><code>where N: ...</code>のように書けないという問題は実装条件用の<code>Trait</code>を定義するという方法で解決できます。<br />
 ただし<code>#![feature(generic_const_exprs)]</code>の使用が必要です。</p>
 <p>まず以下のように<code>FooCondition&lt;const C: bool&gt;</code>という<code>Trait</code>を定義します。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">trait </span><span>FooCondition&lt;const C: bool&gt; {}
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">trait </span><span>FooCondition&lt;const C: bool&gt; {}
 </span></code></pre>
 <p>次に<code>N &lt; 5</code>のときだけ<code>ArrayWrapper&lt;N&gt;</code>が<code>FooCondition</code>を実装するようにします。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt; FooCondition&lt;</span><span style="background-color:#bf616a;color:#2b303b;">{</span><span> N &lt; 5 </span><span style="background-color:#bf616a;color:#2b303b;">}</span><span>&gt; </span><span style="color:#b48ead;">for </span><span>ArrayWrapper&lt;N&gt; {}
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">impl</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt; FooCondition&lt;</span><span style="background-color:#df5f5f;color:#ced2cf;">{</span><span> N &lt; 5 </span><span style="background-color:#df5f5f;color:#ced2cf;">}</span><span>&gt; </span><span style="color:#c397d8;">for </span><span>ArrayWrapper&lt;N&gt; {}
 </span></code></pre>
 <p>最後に<code>FooCondition&lt;true&gt;</code>のときだけ<code>ArrayWrapper</code>が<code>Foo</code>を実装するようにします。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt; Foo </span><span style="color:#b48ead;">for </span><span>ArrayWrapper&lt;N&gt; </span><span style="color:#b48ead;">where </span><span>ArrayWrapper&lt;N&gt;: FooCondition&lt;true&gt; {}
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">impl</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt; Foo </span><span style="color:#c397d8;">for </span><span>ArrayWrapper&lt;N&gt; </span><span style="color:#c397d8;">where </span><span>ArrayWrapper&lt;N&gt;: FooCondition&lt;true&gt; {}
 </span></code></pre>
 <p>これで<code>N &lt; 5</code>のときに<code>ArrayWrapper&lt;N&gt;</code>が<code>Foo</code>を実装するということができました。</p>
 <hr />
 <p>コード全文</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">feature</span><span>(generic_const_exprs)]
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(generic_const_exprs)]
 </span><span>
-</span><span style="color:#b48ead;">struct </span><span>ArrayWrapper&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt;([</span><span style="color:#b48ead;">i32</span><span>; N]);
+</span><span style="color:#c397d8;">struct </span><span>ArrayWrapper&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt;([</span><span style="color:#c397d8;">i32</span><span>; N]);
 </span><span>
-</span><span style="color:#b48ead;">trait </span><span>Foo {
-</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) {}
+</span><span style="color:#c397d8;">trait </span><span>Foo {
+</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">foo</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>) {}
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">trait </span><span>FooCondition&lt;const C: bool&gt; {}
+</span><span style="color:#c397d8;">trait </span><span>FooCondition&lt;const C: bool&gt; {}
 </span><span>
-</span><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt; FooCondition&lt;</span><span style="background-color:#bf616a;color:#2b303b;">{</span><span> N &lt; 5 </span><span style="background-color:#bf616a;color:#2b303b;">}</span><span>&gt; </span><span style="color:#b48ead;">for </span><span>ArrayWrapper&lt;N&gt; {}
+</span><span style="color:#c397d8;">impl</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt; FooCondition&lt;</span><span style="background-color:#df5f5f;color:#ced2cf;">{</span><span> N &lt; 5 </span><span style="background-color:#df5f5f;color:#ced2cf;">}</span><span>&gt; </span><span style="color:#c397d8;">for </span><span>ArrayWrapper&lt;N&gt; {}
 </span><span>
-</span><span style="color:#b48ead;">impl</span><span>&lt;</span><span style="color:#b48ead;">const</span><span> N: </span><span style="color:#b48ead;">usize</span><span>&gt; Foo </span><span style="color:#b48ead;">for </span><span>ArrayWrapper&lt;N&gt; </span><span style="color:#b48ead;">where </span><span>ArrayWrapper&lt;N&gt;: FooCondition&lt;true&gt; {}
+</span><span style="color:#c397d8;">impl</span><span>&lt;</span><span style="color:#c397d8;">const</span><span> N: </span><span style="color:#c397d8;">usize</span><span>&gt; Foo </span><span style="color:#c397d8;">for </span><span>ArrayWrapper&lt;N&gt; </span><span style="color:#c397d8;">where </span><span>ArrayWrapper&lt;N&gt;: FooCondition&lt;true&gt; {}
 </span><span>
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
-</span><span>    ArrayWrapper([]).</span><span style="color:#96b5b4;">foo</span><span>(); </span><span style="color:#65737e;">// OK
-</span><span>    ArrayWrapper([</span><span style="color:#d08770;">0</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>(); </span><span style="color:#65737e;">// OK
-</span><span>    ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>(); </span><span style="color:#65737e;">// OK
-</span><span>    ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>(); </span><span style="color:#65737e;">// OK
-</span><span>    ArrayWrapper([</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">3</span><span>]).</span><span style="color:#96b5b4;">foo</span><span>(); </span><span style="color:#65737e;">// OK
-</span><span>    </span><span style="color:#65737e;">// ArrayWrapper([0, 1, 2, 3, 4]).foo(); // Error
+</span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() {
+</span><span>    ArrayWrapper([]).</span><span style="color:#7aa6da;">foo</span><span>(); </span><span style="color:#999999;">// OK
+</span><span>    ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>(); </span><span style="color:#999999;">// OK
+</span><span>    ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">1</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>(); </span><span style="color:#999999;">// OK
+</span><span>    ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">1</span><span>, </span><span style="color:#e78c45;">2</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>(); </span><span style="color:#999999;">// OK
+</span><span>    ArrayWrapper([</span><span style="color:#e78c45;">0</span><span>, </span><span style="color:#e78c45;">1</span><span>, </span><span style="color:#e78c45;">2</span><span>, </span><span style="color:#e78c45;">3</span><span>]).</span><span style="color:#7aa6da;">foo</span><span>(); </span><span style="color:#999999;">// OK
+</span><span>    </span><span style="color:#999999;">// ArrayWrapper([0, 1, 2, 3, 4]).foo(); // Error
 </span><span>}
 </span></code></pre>
 <hr />
@@ -211,7 +211,7 @@
 <p>stableでは<code>FooCondition&lt;{ N &lt; 5 }&gt;</code>のような条件式の中などでconst genericsの引数を使用できないという制限があるので
 <code>impl&lt;const N: usize&gt; FooCondition&lt;{ N &lt; 5 }&gt; for ArrayWrapper&lt;N&gt; {}</code>の<code>{ N &lt; 5 }</code>の部分のコンパイルを通すのに必要です。</p>
 <h3 id="feature-generic-const-exprs-woshi-yong-suruji-nozhu-yi">#![feature(generic_const_exprs)]を使用する際の注意</h3>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>warning: the feature `generic_const_exprs` is incomplete and may not be safe to use and/or cause compiler crashes
+<pre style="background-color:#000000;color:#dedede;"><code><span>warning: the feature `generic_const_exprs` is incomplete and may not be safe to use and/or cause compiler crashes
 </span><span> --&gt; src/main.rs:1:12
 </span><span>  |
 </span><span>1 | #![feature(generic_const_exprs)]

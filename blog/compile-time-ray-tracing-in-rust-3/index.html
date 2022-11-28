@@ -147,56 +147,56 @@
 <h3 id="ray-rs">ray.rs</h3>
 <p>まず<code>Ray</code>型の内容からです。
 レイの始点と方向を持つだけの<code>struct</code>です。特別注意が必要なことはないと思います。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use crate</span><span>::{Point3, Vec3};
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">use crate</span><span>::{Point3, Vec3};
 </span><span>
-</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Clone, Copy, Debug)]
-</span><span style="color:#b48ead;">pub struct </span><span>Ray {
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">orig</span><span>: Point3,
-</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">dir</span><span>: Vec3,
+</span><span>#[</span><span style="color:#d54e53;">derive</span><span>(Clone, Copy, Debug)]
+</span><span style="color:#c397d8;">pub struct </span><span>Ray {
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">orig</span><span>: Point3,
+</span><span>    </span><span style="color:#c397d8;">pub </span><span style="color:#d54e53;">dir</span><span>: Vec3,
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">impl </span><span>Ray {
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">new</span><span>(</span><span style="color:#bf616a;">origin</span><span>: &amp;Point3, </span><span style="color:#bf616a;">direction</span><span>: &amp;Vec3) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span style="color:#c397d8;">impl </span><span>Ray {
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">new</span><span>(</span><span style="color:#e78c45;">origin</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Point3, </span><span style="color:#e78c45;">direction</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Vec3) -&gt; </span><span style="color:#c397d8;">Self </span><span>{
 </span><span>        Ray {
-</span><span>            orig: origin.</span><span style="color:#96b5b4;">clone</span><span>(),
-</span><span>            dir: direction.</span><span style="color:#96b5b4;">clone</span><span>(),
+</span><span>            orig: origin.</span><span style="color:#7aa6da;">clone</span><span>(),
+</span><span>            dir: direction.</span><span style="color:#7aa6da;">clone</span><span>(),
 </span><span>        }
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">origin</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; Point3 {
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.orig
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">origin</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>) -&gt; Point3 {
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.orig
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">direction</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; Vec3 {
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.dir
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">direction</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>) -&gt; Vec3 {
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.dir
 </span><span>    }
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">pub const fn </span><span style="color:#8fa1b3;">at</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">t</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; Vec3 {
-</span><span>        </span><span style="color:#bf616a;">self</span><span>.orig + </span><span style="color:#bf616a;">self</span><span>.dir * t
+</span><span>    </span><span style="color:#c397d8;">pub const fn </span><span style="color:#7aa6da;">at</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">t</span><span>: </span><span style="color:#c397d8;">f64</span><span>) -&gt; Vec3 {
+</span><span>        </span><span style="color:#d54e53;">self</span><span>.orig </span><span style="color:#70c0b1;">+ </span><span style="color:#d54e53;">self</span><span>.dir </span><span style="color:#70c0b1;">*</span><span> t
 </span><span>    }
 </span><span>}
 </span></code></pre>
 <h3 id="lib-rs">lib.rs</h3>
 <p><code>lib.rs</code>の内容は<code>ray</code> moduleの宣言などの他<code>const_eval_limit</code>という<code>feature</code>の宣言が増えています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_trait_impl)]
-</span><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_fn_floating_point_arithmetic)]
-</span><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_mut_refs)]
-</span><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_eval_limit)]
-</span><span>#![</span><span style="color:#bf616a;">const_eval_limit </span><span>= &quot;</span><span style="color:#a3be8c;">0</span><span>&quot;]
-</span><span style="color:#b48ead;">pub mod </span><span>ray;
-</span><span style="color:#b48ead;">pub mod </span><span>util;
-</span><span style="color:#b48ead;">pub mod </span><span>vec3;
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_trait_impl)]
+</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_fn_floating_point_arithmetic)]
+</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_mut_refs)]
+</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_eval_limit)]
+</span><span>#![</span><span style="color:#d54e53;">const_eval_limit </span><span style="color:#70c0b1;">= </span><span style="color:#b9ca4a;">&quot;0&quot;</span><span>]
+</span><span style="color:#c397d8;">pub mod </span><span>ray;
+</span><span style="color:#c397d8;">pub mod </span><span>util;
+</span><span style="color:#c397d8;">pub mod </span><span>vec3;
 </span><span>
-</span><span style="color:#b48ead;">pub use </span><span>ray::*;
-</span><span style="color:#b48ead;">pub use </span><span>vec3::*;
+</span><span style="color:#c397d8;">pub use </span><span>ray::</span><span style="color:#70c0b1;">*</span><span>;
+</span><span style="color:#c397d8;">pub use </span><span>vec3::</span><span style="color:#70c0b1;">*</span><span>;
 </span><span>
-</span><span style="color:#b48ead;">pub type </span><span>Point3 = Vec3;
-</span><span style="color:#b48ead;">pub type </span><span>Color = Vec3;
+</span><span style="color:#c397d8;">pub type </span><span>Point3 </span><span style="color:#70c0b1;">=</span><span> Vec3;
+</span><span style="color:#c397d8;">pub type </span><span>Color </span><span style="color:#70c0b1;">=</span><span> Vec3;
 </span></code></pre>
 <h4 id="const-eval-limit">const_eval_limit</h4>
 <p><code>const_eval_limit</code>とは<code>const fn</code>の中でのステップ数の制限をコントロールするための<code>feature</code>です。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_eval_limit)]
-</span><span>#![</span><span style="color:#bf616a;">const_eval_limit </span><span>= &quot;</span><span style="color:#a3be8c;">N</span><span>&quot;]
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_eval_limit)]
+</span><span>#![</span><span style="color:#d54e53;">const_eval_limit </span><span style="color:#70c0b1;">= </span><span style="color:#b9ca4a;">&quot;N&quot;</span><span>]
 </span></code></pre>
 <p>とすることでステップ数の制限を<code>N</code>に設定できます。N = 0のときは無制限になります。<br />
 これを使用しないと<code>const fn</code>で<code>sqrt</code>を呼び出しただけでステップ数の上限に引っかかってしまいまともにコードを書けそうになかったので追加しました。</p>
@@ -204,116 +204,116 @@
 <p><code>main.rs</code>の内容を先に貼っておきます。
 変更点がない箇所は省略しています。</p>
 <details><summary>main.rs</summary>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_trait_impl)]
-</span><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_fn_floating_point_arithmetic)]
-</span><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_mut_refs)]
-</span><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_eval_limit)]
-</span><span>#![</span><span style="color:#bf616a;">const_eval_limit </span><span>= &quot;</span><span style="color:#a3be8c;">0</span><span>&quot;]
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_trait_impl)]
+</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_fn_floating_point_arithmetic)]
+</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_mut_refs)]
+</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_eval_limit)]
+</span><span>#![</span><span style="color:#d54e53;">const_eval_limit </span><span style="color:#70c0b1;">= </span><span style="color:#b9ca4a;">&quot;0&quot;</span><span>]
 </span><span>
-</span><span style="color:#b48ead;">use </span><span>image::ImageFormat;
-</span><span style="color:#b48ead;">use </span><span>ray_tracing_in_one_weekend_compile_time::*;
+</span><span style="color:#c397d8;">use </span><span>image::ImageFormat;
+</span><span style="color:#c397d8;">use </span><span>ray_tracing_in_one_weekend_compile_time::</span><span style="color:#70c0b1;">*</span><span>;
 </span><span>
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">ASPECT_RATIO</span><span>: </span><span style="color:#b48ead;">f64 </span><span>= </span><span style="color:#d08770;">16.0 </span><span>/ </span><span style="color:#d08770;">9.0</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IMAGE_WIDTH</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">400</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IMAGE_HEIGHT</span><span>: </span><span style="color:#b48ead;">usize </span><span>= (</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>as </span><span style="color:#b48ead;">f64 </span><span>/ </span><span style="color:#d08770;">ASPECT_RATIO</span><span>) as </span><span style="color:#b48ead;">usize</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">PIXEL_COUNT</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>* </span><span style="color:#d08770;">IMAGE_HEIGHT</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">ASPECT_RATIO</span><span>: </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">16.0 </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">9.0</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IMAGE_WIDTH</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">400</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IMAGE_HEIGHT</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">/ </span><span style="color:#eeeeee;">ASPECT_RATIO</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">usize</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">* </span><span style="color:#eeeeee;">IMAGE_HEIGHT</span><span>;
 </span><span>
-</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_color</span><span>(</span><span style="color:#bf616a;">ray</span><span>: &amp;Ray) -&gt; Color {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> unit_direction = </span><span style="color:#96b5b4;">unit_vector</span><span>(&amp;ray.</span><span style="color:#96b5b4;">direction</span><span>());
-</span><span>    </span><span style="color:#b48ead;">let</span><span> t = </span><span style="color:#d08770;">0.5 </span><span>* unit_direction.y + </span><span style="color:#d08770;">1.0</span><span>;
-</span><span>    (</span><span style="color:#d08770;">1.0 </span><span>- t) * Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>) + t * Color::new(</span><span style="color:#d08770;">0.5</span><span>, </span><span style="color:#d08770;">0.7</span><span>, </span><span style="color:#d08770;">1.0</span><span>)
+</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_color</span><span>(</span><span style="color:#e78c45;">ray</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Ray) -&gt; Color {
+</span><span>    </span><span style="color:#c397d8;">let</span><span> unit_direction </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">unit_vector</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>ray.</span><span style="color:#7aa6da;">direction</span><span>());
+</span><span>    </span><span style="color:#c397d8;">let</span><span> t </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.5 </span><span style="color:#70c0b1;">*</span><span> unit_direction.y </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">1.0</span><span>;
+</span><span>    (</span><span style="color:#e78c45;">1.0 </span><span style="color:#70c0b1;">-</span><span> t) </span><span style="color:#70c0b1;">* </span><span>Color::new(</span><span style="color:#e78c45;">1.0</span><span>, </span><span style="color:#e78c45;">1.0</span><span>, </span><span style="color:#e78c45;">1.0</span><span>) </span><span style="color:#70c0b1;">+</span><span> t </span><span style="color:#70c0b1;">* </span><span>Color::new(</span><span style="color:#e78c45;">0.5</span><span>, </span><span style="color:#e78c45;">0.7</span><span>, </span><span style="color:#e78c45;">1.0</span><span>)
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() -&gt; anyhow::Result&lt;()&gt; {
-</span><span>    </span><span style="color:#65737e;">// 省略
+</span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">main</span><span>() -&gt; anyhow::</span><span style="color:#e7c547;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#999999;">// 省略
 </span><span>}
 </span><span>
-</span><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> viewport_height = </span><span style="color:#d08770;">2.0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> viewport_width = viewport_height * </span><span style="color:#d08770;">ASPECT_RATIO</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> focal_length = </span><span style="color:#d08770;">1.0</span><span>;
+</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] {
+</span><span>    </span><span style="color:#c397d8;">let</span><span> viewport_height </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">2.0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let</span><span> viewport_width </span><span style="color:#70c0b1;">=</span><span> viewport_height </span><span style="color:#70c0b1;">* </span><span style="color:#eeeeee;">ASPECT_RATIO</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let</span><span> focal_length </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">1.0</span><span>;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> origin = Point3::</span><span style="color:#d08770;">ZERO</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> horizontal = Vec3::new(viewport_width, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
-</span><span>    </span><span style="color:#b48ead;">let</span><span> vertical = Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, viewport_height, </span><span style="color:#d08770;">0.0</span><span>);
-</span><span>    </span><span style="color:#b48ead;">let</span><span> lower_left_corner =
-</span><span>        origin - horizontal / </span><span style="color:#d08770;">2.0 </span><span>- vertical / </span><span style="color:#d08770;">2.0 </span><span>- Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, focal_length);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> origin </span><span style="color:#70c0b1;">= </span><span>Point3::</span><span style="color:#eeeeee;">ZERO</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let</span><span> horizontal </span><span style="color:#70c0b1;">= </span><span>Vec3::new(viewport_width, </span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> vertical </span><span style="color:#70c0b1;">= </span><span>Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, viewport_height, </span><span style="color:#e78c45;">0.0</span><span>);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> lower_left_corner </span><span style="color:#70c0b1;">=
+</span><span>        origin </span><span style="color:#70c0b1;">-</span><span> horizontal </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">2.0 </span><span style="color:#70c0b1;">-</span><span> vertical </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">2.0 </span><span style="color:#70c0b1;">- </span><span>Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>, focal_length);
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [Color::</span><span style="color:#d08770;">ZERO</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
-</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
-</span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
-</span><span>            </span><span style="color:#b48ead;">let</span><span> u = (i as </span><span style="color:#b48ead;">f64</span><span>) / (</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let</span><span> v = (j as </span><span style="color:#b48ead;">f64</span><span>) / (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let</span><span> r = Ray::new(
-</span><span>                &amp;origin,
-</span><span>                &amp;(lower_left_corner + u * horizontal + v * vertical - origin),
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_colors </span><span style="color:#70c0b1;">= </span><span>[Color::</span><span style="color:#eeeeee;">ZERO</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> j </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">i32</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_index </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#999999;">// forが使えないのでwhileで代用
+</span><span>    </span><span style="color:#c397d8;">while </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">&lt;=</span><span> j {
+</span><span>        </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span>{
+</span><span>            </span><span style="color:#c397d8;">let</span><span> u </span><span style="color:#70c0b1;">= </span><span>(i </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>) </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let</span><span> v </span><span style="color:#70c0b1;">= </span><span>(j </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>) </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let</span><span> r </span><span style="color:#70c0b1;">= </span><span>Ray::new(
+</span><span>                </span><span style="color:#70c0b1;">&amp;</span><span>origin,
+</span><span>                </span><span style="color:#70c0b1;">&amp;</span><span>(lower_left_corner </span><span style="color:#70c0b1;">+</span><span> u </span><span style="color:#70c0b1;">*</span><span> horizontal </span><span style="color:#70c0b1;">+</span><span> v </span><span style="color:#70c0b1;">*</span><span> vertical </span><span style="color:#70c0b1;">-</span><span> origin),
 </span><span>            );
-</span><span>            pixel_colors[pixel_index] = </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r);
-</span><span>            i += </span><span style="color:#d08770;">1</span><span>;
-</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_colors[pixel_index] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">ray_color</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>r);
+</span><span>            i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
+</span><span>            pixel_index </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>        }
-</span><span>        i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>        j </span><span style="color:#70c0b1;">-= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    pixel_colors
 </span><span>}
 </span><span>
-</span><span style="color:#65737e;">// 省略
+</span><span style="color:#999999;">// 省略
 </span></code></pre>
 </details>
 <p>まず<code>main.rs</code>でも<code>const_eval_limit</code>が追加されています。
 ループの中でステップ数の上限に引っかかるので上限なしにしてあります。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#bf616a;">feature</span><span>(const_eval_limit)]
-</span><span>#![</span><span style="color:#bf616a;">const_eval_limit </span><span>= &quot;</span><span style="color:#a3be8c;">0</span><span>&quot;]
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_eval_limit)]
+</span><span>#![</span><span style="color:#d54e53;">const_eval_limit </span><span style="color:#70c0b1;">= </span><span style="color:#b9ca4a;">&quot;0&quot;</span><span>]
 </span></code></pre>
 <p>画像は横400を基準としてアスペクト比16:9になるように設定しています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const </span><span style="color:#d08770;">ASPECT_RATIO</span><span>: </span><span style="color:#b48ead;">f64 </span><span>= </span><span style="color:#d08770;">16.0 </span><span>/ </span><span style="color:#d08770;">9.0</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IMAGE_WIDTH</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">400</span><span>;
-</span><span style="color:#b48ead;">const </span><span style="color:#d08770;">IMAGE_HEIGHT</span><span>: </span><span style="color:#b48ead;">usize </span><span>= (</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>as </span><span style="color:#b48ead;">f64 </span><span>/ </span><span style="color:#d08770;">ASPECT_RATIO</span><span>) as </span><span style="color:#b48ead;">usize</span><span>;
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">ASPECT_RATIO</span><span>: </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">16.0 </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">9.0</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IMAGE_WIDTH</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">400</span><span>;
+</span><span style="color:#c397d8;">const </span><span style="color:#eeeeee;">IMAGE_HEIGHT</span><span>: </span><span style="color:#c397d8;">usize </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64 </span><span style="color:#70c0b1;">/ </span><span style="color:#eeeeee;">ASPECT_RATIO</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">usize</span><span>;
 </span></code></pre>
 <p><code>ray_color</code>関数は引数の<code>Ray</code>を飛ばしてヒットした箇所の色を返す関数です。<br />
 現時点ではヒットするオブジェクトがないのでレイの向きを元に返す色を決めています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_color</span><span>(</span><span style="color:#bf616a;">ray</span><span>: &amp;Ray) -&gt; Color {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> unit_direction = </span><span style="color:#96b5b4;">unit_vector</span><span>(&amp;ray.</span><span style="color:#96b5b4;">direction</span><span>());
-</span><span>    </span><span style="color:#b48ead;">let</span><span> t = </span><span style="color:#d08770;">0.5 </span><span>* unit_direction.y + </span><span style="color:#d08770;">1.0</span><span>;
-</span><span>    (</span><span style="color:#d08770;">1.0 </span><span>- t) * Color::new(</span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>, </span><span style="color:#d08770;">1.0</span><span>) + t * Color::new(</span><span style="color:#d08770;">0.5</span><span>, </span><span style="color:#d08770;">0.7</span><span>, </span><span style="color:#d08770;">1.0</span><span>)
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_color</span><span>(</span><span style="color:#e78c45;">ray</span><span>: </span><span style="color:#70c0b1;">&amp;</span><span>Ray) -&gt; Color {
+</span><span>    </span><span style="color:#c397d8;">let</span><span> unit_direction </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">unit_vector</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>ray.</span><span style="color:#7aa6da;">direction</span><span>());
+</span><span>    </span><span style="color:#c397d8;">let</span><span> t </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.5 </span><span style="color:#70c0b1;">*</span><span> unit_direction.y </span><span style="color:#70c0b1;">+ </span><span style="color:#e78c45;">1.0</span><span>;
+</span><span>    (</span><span style="color:#e78c45;">1.0 </span><span style="color:#70c0b1;">-</span><span> t) </span><span style="color:#70c0b1;">* </span><span>Color::new(</span><span style="color:#e78c45;">1.0</span><span>, </span><span style="color:#e78c45;">1.0</span><span>, </span><span style="color:#e78c45;">1.0</span><span>) </span><span style="color:#70c0b1;">+</span><span> t </span><span style="color:#70c0b1;">* </span><span>Color::new(</span><span style="color:#e78c45;">0.5</span><span>, </span><span style="color:#e78c45;">0.7</span><span>, </span><span style="color:#e78c45;">1.0</span><span>)
 </span><span>}
 </span></code></pre>
 <p><code>ray_trace</code>関数ではピクセルごとにレイを生成して<code>ray_color</code>関数の返り値を配列に格納しています。</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">const fn </span><span style="color:#8fa1b3;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>] {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> viewport_height = </span><span style="color:#d08770;">2.0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> viewport_width = viewport_height * </span><span style="color:#d08770;">ASPECT_RATIO</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> focal_length = </span><span style="color:#d08770;">1.0</span><span>;
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">ray_trace</span><span>() -&gt; [Color; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>] {
+</span><span>    </span><span style="color:#c397d8;">let</span><span> viewport_height </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">2.0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let</span><span> viewport_width </span><span style="color:#70c0b1;">=</span><span> viewport_height </span><span style="color:#70c0b1;">* </span><span style="color:#eeeeee;">ASPECT_RATIO</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let</span><span> focal_length </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">1.0</span><span>;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> origin = Point3::</span><span style="color:#d08770;">ZERO</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> horizontal = Vec3::new(viewport_width, </span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>);
-</span><span>    </span><span style="color:#b48ead;">let</span><span> vertical = Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, viewport_height, </span><span style="color:#d08770;">0.0</span><span>);
-</span><span>    </span><span style="color:#b48ead;">let</span><span> lower_left_corner =
-</span><span>        origin - horizontal / </span><span style="color:#d08770;">2.0 </span><span>- vertical / </span><span style="color:#d08770;">2.0 </span><span>- Vec3::new(</span><span style="color:#d08770;">0.0</span><span>, </span><span style="color:#d08770;">0.0</span><span>, focal_length);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> origin </span><span style="color:#70c0b1;">= </span><span>Point3::</span><span style="color:#eeeeee;">ZERO</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let</span><span> horizontal </span><span style="color:#70c0b1;">= </span><span>Vec3::new(viewport_width, </span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> vertical </span><span style="color:#70c0b1;">= </span><span>Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, viewport_height, </span><span style="color:#e78c45;">0.0</span><span>);
+</span><span>    </span><span style="color:#c397d8;">let</span><span> lower_left_corner </span><span style="color:#70c0b1;">=
+</span><span>        origin </span><span style="color:#70c0b1;">-</span><span> horizontal </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">2.0 </span><span style="color:#70c0b1;">-</span><span> vertical </span><span style="color:#70c0b1;">/ </span><span style="color:#e78c45;">2.0 </span><span style="color:#70c0b1;">- </span><span>Vec3::new(</span><span style="color:#e78c45;">0.0</span><span>, </span><span style="color:#e78c45;">0.0</span><span>, focal_length);
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_colors = [Color::</span><span style="color:#d08770;">ZERO</span><span>; </span><span style="color:#d08770;">PIXEL_COUNT</span><span>];
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> j = (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">i32</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> pixel_index = </span><span style="color:#d08770;">0</span><span>;
-</span><span>    </span><span style="color:#65737e;">// forが使えないのでwhileで代用
-</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">0 </span><span>&lt;= j {
-</span><span>        </span><span style="color:#b48ead;">while</span><span> i &lt; </span><span style="color:#d08770;">IMAGE_WIDTH </span><span>{
-</span><span>            </span><span style="color:#b48ead;">let</span><span> u = (i as </span><span style="color:#b48ead;">f64</span><span>) / (</span><span style="color:#d08770;">IMAGE_WIDTH </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let</span><span> v = (j as </span><span style="color:#b48ead;">f64</span><span>) / (</span><span style="color:#d08770;">IMAGE_HEIGHT </span><span>- </span><span style="color:#d08770;">1</span><span>) as </span><span style="color:#b48ead;">f64</span><span>;
-</span><span>            </span><span style="color:#b48ead;">let</span><span> r = Ray::new(
-</span><span>                &amp;origin,
-</span><span>                &amp;(lower_left_corner + u * horizontal + v * vertical - origin),
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_colors </span><span style="color:#70c0b1;">= </span><span>[Color::</span><span style="color:#eeeeee;">ZERO</span><span>; </span><span style="color:#eeeeee;">PIXEL_COUNT</span><span>];
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> j </span><span style="color:#70c0b1;">= </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">i32</span><span>;
+</span><span>    </span><span style="color:#c397d8;">let mut</span><span> pixel_index </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>    </span><span style="color:#999999;">// forが使えないのでwhileで代用
+</span><span>    </span><span style="color:#c397d8;">while </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">&lt;=</span><span> j {
+</span><span>        </span><span style="color:#c397d8;">while</span><span> i </span><span style="color:#70c0b1;">&lt; </span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span>{
+</span><span>            </span><span style="color:#c397d8;">let</span><span> u </span><span style="color:#70c0b1;">= </span><span>(i </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>) </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_WIDTH </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let</span><span> v </span><span style="color:#70c0b1;">= </span><span>(j </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>) </span><span style="color:#70c0b1;">/ </span><span>(</span><span style="color:#eeeeee;">IMAGE_HEIGHT </span><span style="color:#70c0b1;">- </span><span style="color:#e78c45;">1</span><span>) </span><span style="color:#70c0b1;">as </span><span style="color:#c397d8;">f64</span><span>;
+</span><span>            </span><span style="color:#c397d8;">let</span><span> r </span><span style="color:#70c0b1;">= </span><span>Ray::new(
+</span><span>                </span><span style="color:#70c0b1;">&amp;</span><span>origin,
+</span><span>                </span><span style="color:#70c0b1;">&amp;</span><span>(lower_left_corner </span><span style="color:#70c0b1;">+</span><span> u </span><span style="color:#70c0b1;">*</span><span> horizontal </span><span style="color:#70c0b1;">+</span><span> v </span><span style="color:#70c0b1;">*</span><span> vertical </span><span style="color:#70c0b1;">-</span><span> origin),
 </span><span>            );
-</span><span>            pixel_colors[pixel_index] = </span><span style="color:#96b5b4;">ray_color</span><span>(&amp;r);
-</span><span>            i += </span><span style="color:#d08770;">1</span><span>;
-</span><span>            pixel_index += </span><span style="color:#d08770;">1</span><span>;
+</span><span>            pixel_colors[pixel_index] </span><span style="color:#70c0b1;">= </span><span style="color:#7aa6da;">ray_color</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span>r);
+</span><span>            i </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
+</span><span>            pixel_index </span><span style="color:#70c0b1;">+= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>        }
-</span><span>        i = </span><span style="color:#d08770;">0</span><span>;
-</span><span>        j -= </span><span style="color:#d08770;">1</span><span>;
+</span><span>        i </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0</span><span>;
+</span><span>        j </span><span style="color:#70c0b1;">-= </span><span style="color:#e78c45;">1</span><span>;
 </span><span>    }
 </span><span>    pixel_colors
 </span><span>}
