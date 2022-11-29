@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      Zolaで生成したブログの更新履歴をいい感じに表示する - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    目的
+記事のMarkdownのヘッダーに下記ような記述をして
+title = &amp;quot;タイトル&amp;quot;
+date = 2022-11-19T22:00:00+09:00
+[…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;change-log-in-content-zola&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9jaGFuZ2UtbG9nLWluLWNvbnRlbnQtem9sYS8=">
+    <meta property="og:title" content= "Zolaで生成したブログの更新履歴をいい感じに表示する" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="目的
+記事のMarkdownのヘッダーに下記ような記述をして
+title = &amp;amp;quot;タイトル&amp;amp;quot;
+date = 2022-11-19T22:00:00+09:00
+[…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "Zolaで生成したブログの更新履歴をいい感じに表示する" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  Zolaで生成したブログの更新履歴をいい感じに表示する
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2022&#x2F;11&#x2F;29 17:28</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/zola/">Zola</a></span>
+
+  
+
+</section>
+<p><h2 id="mu-de">目的</h2>
+<p>記事のMarkdownのヘッダーに下記ような記述をして</p>
+<pre data-lang="toml" style="background-color:#000000;color:#dedede;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#d54e53;">title </span><span>= </span><span style="color:#b9ca4a;">&quot;タイトル&quot;
+</span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-19T22:00:00+09:00
+</span><span>[</span><span style="color:#d54e53;">extra</span><span>]
+</span><span style="color:#d54e53;">updated_histories </span><span>= [
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-12-22T01:07:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;追記1&quot; </span><span>},
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-21T23:52:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正B&quot; </span><span>},
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-20T11:24:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正A&quot; </span><span>},
+</span><span>]
+</span></code></pre>
+<p>下の画像のように表示するというのが目的です。<br />
+<img src="/image/updated_histories_sample.png" alt="updated_histories_sample_image" /><br />
+このサイトであれば<a href="../compile-time-ray-tracing-in-rust-1">ここ</a>とかが更新履歴が複数あってわかりやすいです。</p>
+<h2 id="qian-ti">前提</h2>
+<p>Zolaのテーマのhtmlを自分で編集できる。<br />
+誰かが作ったテーマを使用している場合はgithubからインストールしていることが多いと思いますがその場合でも記事のテンプレート(多くの場合<code>post.html</code>)が編集できれば問題ないです。</p>
+<h2 id="yarukoto">やること</h2>
+<h3 id="tenpuretohuairubian-ji">テンプレートファイル編集</h3>
+<p>記事のテンプレートファイル(<code>page.html</code>とか)を開いて更新履歴を表示したい箇所に下記の記述を追加します。</p>
+<pre data-lang="html" style="background-color:#000000;color:#dedede;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#d54e53;">&lt;section class=</span><span style="color:#b9ca4a;">&quot;update_history&quot;</span><span style="color:#d54e53;">&gt;
+</span><span>  </span><span style="color:#d54e53;">&lt;table&gt;
+</span><span>    </span><span style="color:#d54e53;">&lt;tr&gt;
+</span><span>      </span><span style="color:#d54e53;">&lt;td&gt;&lt;span class = </span><span style="color:#b9ca4a;">&quot;date&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ page.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#d54e53;">&lt;/span&gt;&lt;/td&gt;
+</span><span>      </span><span style="color:#d54e53;">&lt;td&gt;</span><span>公開</span><span style="color:#d54e53;">&lt;/td&gt;
+</span><span>    </span><span style="color:#d54e53;">&lt;/tr&gt;
+</span><span>    {% if page.extra.updated_histories %}
+</span><span>      {% for item in page.extra.updated_histories | sort(attribute=&quot;date&quot;) %}
+</span><span>      </span><span style="color:#d54e53;">&lt;tr&gt;
+</span><span>        </span><span style="color:#d54e53;">&lt;td&gt;&lt;span class = </span><span style="color:#b9ca4a;">&quot;date&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ item.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#d54e53;">&lt;/span&gt;&lt;/td&gt;
+</span><span>        </span><span style="color:#d54e53;">&lt;td class=</span><span style="color:#b9ca4a;">&quot;update_history_content&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ item.content | markdown | safe }}</span><span style="color:#d54e53;">&lt;/td&gt;
+</span><span>      </span><span style="color:#d54e53;">&lt;/tr&gt;
+</span><span>      {% endfor %}
+</span><span>    {% endif %}
+</span><span>  </span><span style="color:#d54e53;">&lt;/table&gt;
+</span><span style="color:#d54e53;">&lt;/section&gt;
+</span></code></pre>
+<h3 id="markdownnigeng-xin-lu-li-wozhui-jia">Markdownに更新履歴を追加</h3>
+<p>記事のMarkdownに以下のように<code>[extra]</code> <code>updated_histories</code>を追加します。<br />
+<code>updated_histories</code>は<code>toml</code>の辞書形式で<code>date</code>(更新日時)と<code>content</code>(更新内容)を記述します。</p>
+<pre data-lang="toml" style="background-color:#000000;color:#dedede;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#d54e53;">extra</span><span>]
+</span><span style="color:#d54e53;">updated_histories </span><span>= [
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-12-22T01:07:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;追記1&quot; </span><span>},
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-21T23:52:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正B&quot; </span><span>},
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-20T11:24:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正A&quot; </span><span>},
+</span><span>]
+</span></code></pre>
+<h3 id="jie-guo">結果</h3>
+<p>cssにもよりますがおおよそこのように表示されると思います。<br />
+<img src="/image/updated_histories_sample.png" alt="updated_histories_sample_image" /></p>
+<h2 id="zatukurijie-shuo">ざっくり解説</h2>
+<p>まず<code>html</code>の方です。</p>
+<p>ここは更新履歴を表示するまとまりを記述しているだけです。<br />
+<code>section</code>ではなく<code>div</code>でも良いですし、<code>class</code>も別名で構いません。なんならこのタグ自体なくしても問題はないと思います。<br />
+ただあったほうがcssでスタイルをいじりやすいのでこうしています。</p>
+<pre data-lang="html" style="background-color:#000000;color:#dedede;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#d54e53;">&lt;section class=</span><span style="color:#b9ca4a;">&quot;update_history&quot;</span><span style="color:#d54e53;">&gt;
+</span><span>  </span><span style="color:#999999;">&lt;!-- 省略 --&gt;
+</span><span style="color:#d54e53;">&lt;/section&gt;
+</span></code></pre>
+<p>ここは投稿日を表示しています。<br />
+投稿日はヘッダーの<code>date</code>の内容が使用されます。<br />
+日付のフォーマットは<code>&quot;%Y/%m/%d %H:%M&quot;</code>を指定していますが好きに編集していただいて構いません。</p>
+<pre data-lang="html" style="background-color:#000000;color:#dedede;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#d54e53;">&lt;table&gt;
+</span><span>  </span><span style="color:#d54e53;">&lt;tr&gt;
+</span><span>    </span><span style="color:#d54e53;">&lt;td&gt;&lt;span class=</span><span style="color:#b9ca4a;">&quot;date&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ page.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#d54e53;">&lt;/span&gt;&lt;/td&gt;
+</span><span>    </span><span style="color:#d54e53;">&lt;td&gt;</span><span>公開</span><span style="color:#d54e53;">&lt;/td&gt;
+</span><span>  </span><span style="color:#d54e53;">&lt;/tr&gt;
+</span><span>  </span><span style="color:#999999;">&lt;!-- 省略 --&gt;
+</span><span style="color:#d54e53;">&lt;/table&gt;
+</span></code></pre>
+<p>今回のキモ1です。<br />
+1行目はMarkdownのヘッダーに<code>extra.updated_histories</code>が設定されている場合に更新履歴を表示するための条件です。<br />
+2行目の<code>{% for ... %}</code>では更新履歴は日付でソートを行い、要素をループで処理します。<br />
+4行目の日付表示は投稿日と同じです。<br />
+5行目は更新内容をMarkdownとして解釈し表示するための記述です。</p>
+<pre data-linenos data-lang="html" style="background-color:#000000;color:#dedede;" class="language-html "><code class="language-html" data-lang="html"><table><tbody><tr><td>1</td><td><span>{% if page.extra.updated_histories %}
+</span></td></tr><tr><td>2</td><td><span>  {% for item in page.extra.updated_histories | sort(attribute=&quot;date&quot;) %}
+</span></td></tr><tr><td>3</td><td><span>  </span><span style="color:#d54e53;">&lt;tr&gt;
+</span></td></tr><tr><td>4</td><td><span>    </span><span style="color:#d54e53;">&lt;td&gt;&lt;span class=</span><span style="color:#b9ca4a;">&quot;date&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ item.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#d54e53;">&lt;/span&gt;&lt;/td&gt;
+</span></td></tr><tr><td>5</td><td><span>    </span><span style="color:#d54e53;">&lt;td class=</span><span style="color:#b9ca4a;">&quot;update_history_content&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ item.content | markdown | safe }}</span><span style="color:#d54e53;">&lt;/td&gt;
+</span></td></tr><tr><td>6</td><td><span>  </span><span style="color:#d54e53;">&lt;/tr&gt;
+</span></td></tr><tr><td>7</td><td><span>  {% endfor %}
+</span></td></tr><tr><td>8</td><td><span>{% endif %}
+</span></td></tr></tbody></table></code></pre>
+<p>リストではなくテーブルとして表示しているのはフォントによっては日付と更新内容がきれいに並ばなかったからです。<br />
+好みでリストにしても問題ないです。</p>
+<p>次にMarkdown側の変更です。今回のキモ2です。
+ヘッダーにZolaが用意していない要素('extra<code>)の</code>updated_histories`を追加しそこに日付と更新内容を格納します。</p>
+<pre data-lang="toml" style="background-color:#000000;color:#dedede;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#d54e53;">extra</span><span>]
+</span><span style="color:#d54e53;">updated_histories </span><span>= [
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-12-22T01:07:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;追記1&quot; </span><span>},
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-21T23:52:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正B&quot; </span><span>},
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-20T11:24:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正A&quot; </span><span>},
+</span><span>]
+</span></code></pre>
+<p>contentはMarkdownとして解釈されるため</p>
+<pre data-lang="toml" style="background-color:#000000;color:#dedede;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#d54e53;">updated_histories </span><span>= [
+</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-12-22T01:07:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;**追記1**&quot; </span><span>}, </span><span style="color:#999999;"># 強調表示
+</span><span>]
+</span></code></pre>
+<p>みたいなこともできます。</p>
+<h2 id="atogaki">あとがき</h2>
+<p>これだけのことをやるのにもZolaとTeraの仕様を理解していないと難しかったです。<br />
+テーマ編集は苦しいですが楽しいです。</p>
+</p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="Zolaで生成したブログの更新履歴をいい感じに表示する - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
