@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      Discordのスラッシュコマンドの日本語ローカライズコマンド名にアルファベットを含むことができなさそう - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    RustのPoiseというcrate(ライブラリ)を使用してDiscordのbotを開発しているときに確認したことです。
+Poiseでは
+&#x2F;&#x2F;&#x2F; Discription
+#[poi…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;discord-bot-invalid-command-name-jp&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9kaXNjb3JkLWJvdC1pbnZhbGlkLWNvbW1hbmQtbmFtZS1qcC8=">
+    <meta property="og:title" content= "Discordのスラッシュコマンドの日本語ローカライズコマンド名にアルファベットを含むことができなさそう" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="RustのPoiseというcrate(ライブラリ)を使用してDiscordのbotを開発しているときに確認したことです。
+Poiseでは
+&amp;#x2F;&amp;#x2F;&amp;#x2F; Discription
+#[poi…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "Discordのスラッシュコマンドの日本語ローカライズコマンド名にアルファベットを含むことができなさそう" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  Discordのスラッシュコマンドの日本語ローカライズコマンド名にアルファベットを含むことができなさそう
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2023&#x2F;02&#x2F;24 12:55</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/discord/">Discord</a></span>
+
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/poise/">Poise</a></span>
+
+  
+
+</section>
+<p><p>Rustの<a href="https://github.com/serenity-rs/poise">Poise</a>というcrate(ライブラリ)を使用してDiscordのbotを開発しているときに確認したことです。</p>
+<p>Poiseでは</p>
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#999999;">/// Discription
+</span><span>#[</span><span style="color:#d54e53;">poise</span><span>::</span><span style="color:#d54e53;">command</span><span>(
+</span><span>    slash_command,
+</span><span>    </span><span style="color:#d54e53;">name_localized</span><span style="color:#7aa6da;">(</span><span style="color:#b9ca4a;">&quot;ja&quot;</span><span style="color:#7aa6da;">, </span><span style="color:#b9ca4a;">&quot;日本語コマンド名&quot;</span><span style="color:#7aa6da;">)</span><span>,
+</span><span>    </span><span style="color:#d54e53;">description_localized</span><span style="color:#7aa6da;">(</span><span style="color:#b9ca4a;">&quot;ja&quot;</span><span style="color:#7aa6da;">, </span><span style="color:#b9ca4a;">&quot;日本語説明文&quot;</span><span style="color:#7aa6da;">)
+</span><span>)]
+</span><span style="color:#c397d8;">pub</span><span> async </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">exsample_command</span><span>(</span><span style="color:#e78c45;">ctx</span><span>: Context&lt;&#39;</span><span style="color:#70c0b1;">_</span><span>&gt;) -&gt; </span><span style="color:#e7c547;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#999999;">/* 処理内容 */
+</span><span>}
+</span></code></pre>
+<p>のようにすることでスラッシュコマンドを開発することができ関数名がそのままコマンド名となり<code>name_localized</code>で指定したものがローカライズされたコマンド名となります。<br />
+この場合<code>/example_command</code>というコマンドでこのコマンドを実行することができますが、日本語環境であれば<code>/日本語コマンド名</code>というコマンドで実行する事ができます。</p>
+<p>さて本題ですが、このname_localizedで&quot;ja&quot;つまり日本語ローカライズしたコマンド名にアルファベットを含むことができなさそうという問題です。</p>
+<p>私はバンカラステージボットというスプラトゥーン3のステージ情報を表示するbotを開発しているのですが、その機能追加で<code>/Xマッチ</code>というコマンドを作成したくなりました。<br />
+以下のように定義します。</p>
+<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#999999;">/// Displays splatoon3 X battle schedule
+</span><span>#[</span><span style="color:#d54e53;">poise</span><span>::</span><span style="color:#d54e53;">command</span><span>(
+</span><span>    slash_command,
+</span><span>    </span><span style="color:#d54e53;">name_localized</span><span style="color:#7aa6da;">(</span><span style="color:#b9ca4a;">&quot;ja&quot;</span><span style="color:#7aa6da;">, </span><span style="color:#b9ca4a;">&quot;エックスマッチ&quot;</span><span style="color:#7aa6da;">)</span><span>,
+</span><span>    </span><span style="color:#d54e53;">description_localized</span><span style="color:#7aa6da;">(</span><span style="color:#b9ca4a;">&quot;ja&quot;</span><span style="color:#7aa6da;">, </span><span style="color:#b9ca4a;">&quot;Xマッチのスケジュールを取得する&quot;</span><span style="color:#7aa6da;">)
+</span><span>)]
+</span><span style="color:#c397d8;">pub</span><span> async </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">x_match</span><span>(
+</span><span>    </span><span style="color:#e78c45;">ctx</span><span>: Context&lt;&#39;</span><span style="color:#70c0b1;">_</span><span>&gt;,
+</span><span>    #[description = &quot;hour of the day. 0~23&quot;]
+</span><span>    #[description_localized(&quot;</span><span style="color:#e78c45;">ja</span><span>&quot;, &quot;</span><span style="color:#e78c45;">スケジュールを確認したい時間</span><span>。0~23</span><span style="color:#e78c45;">のいずれか</span><span>&quot;)]
+</span><span>    #[max = 23]
+</span><span>    </span><span style="color:#e78c45;">hour</span><span>: </span><span style="color:#e7c547;">Option</span><span>&lt;</span><span style="color:#c397d8;">u32</span><span>&gt;,
+</span><span>) -&gt; </span><span style="color:#e7c547;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#999999;">/* 処理内容 */
+</span><span>}
+</span></code></pre>
+<p>このコマンドを登録しようとしたところDiscordから以下のようなエラーが返ってきました。</p>
+<pre data-lang="sh" style="background-color:#000000;color:#dedede;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#d54e53;">Invalid</span><span style="color:#7aa6da;"> Form Body (name_localizations: Command name is invalid</span><span>)
+</span></code></pre>
+<p><code>name_localizations</code>で指定したコマンド名に問題がありそうなエラーですね。<br />
+調べてもわかりませんでしたがコードを書き換えつつ実行確認してみた感じでは日本語ローカライズしたコマンド名にアルファベットが含まれているとダメそうでした。<br />
+アルファベットを変更しても(例:<code>/Aマッチ</code>)戦闘以外にアルファベットが来ても(例:<code>/マッチX</code>)だめでした。</p>
+<h2 id="yu-tan">余談</h2>
+<p>そんなわけでバンカラステージボットのXマッチのスケジュールを取得するコマンドは<code>/エックスマッチ</code>, <code>/次のエックスマッチ</code>, <code>/エックスマッチアサリ</code>などになりました。<br />
+悲しいですね。</p>
+</p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="Discordのスラッシュコマンドの日本語ローカライズコマンド名にアルファベットを含むことができなさそう - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
+<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
+
+
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
