@@ -107,6 +107,10 @@
         <lastmod>2022-05-23T23:51:00+09:00</lastmod>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/rust-generics-specialization/</loc>
+        <lastmod>2023-05-11T10:41:00+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/rust-std-process-command/</loc>
         <lastmod>2019-12-26T18:30:00+09:00</lastmod>
     </url>
@@ -162,6 +166,9 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/gameci/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/generics/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/git-author/</loc>

@@ -105,54 +105,54 @@
 <hr />
 <p>今私はRustでコンパイル時レイトレーシングという試みをしているのですが、そこで必要になった<code>const fn</code>の中で使用できる<code>Vec3</code>を定義するためのに必要なことを書いていきます。<br />
 都度Rust Playgroundへのリンクを張っていますが、コンパイルに時間がかかることがありRust Playgroundではタイムアウトするかもしれません。</p>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">struct </span><span>Vec3 {
-</span><span>  </span><span style="color:#d54e53;">x</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>  </span><span style="color:#d54e53;">y</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>  </span><span style="color:#d54e53;">z</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>}
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">  </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">  </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">  </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
 <p>このような<code>Vec3</code>があるとして<code>const fn</code>の中で</p>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">const_function</span><span>() {
-</span><span>  </span><span style="color:#c397d8;">let mut</span><span> v1: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">1.0</span><span>, y: </span><span style="color:#e78c45;">2.0</span><span>, z: </span><span style="color:#e78c45;">3.0 </span><span>};
-</span><span>  </span><span style="color:#c397d8;">let</span><span> v2: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">2.0</span><span>, y: </span><span style="color:#e78c45;">3.0</span><span>, z: </span><span style="color:#e78c45;">4.0 </span><span>};
-</span><span>
-</span><span>  </span><span style="color:#c397d8;">let </span><span style="color:#70c0b1;">_ =</span><span> v1 </span><span style="color:#70c0b1;">+</span><span> v2; </span><span style="color:#999999;">// Add
-</span><span>  v </span><span style="color:#70c0b1;">+=</span><span> Vec3 { x: </span><span style="color:#e78c45;">2.0</span><span>, y: </span><span style="color:#e78c45;">3.0</span><span>, z: </span><span style="color:#e78c45;">4.0 </span><span>}; </span><span style="color:#999999;">// AddAssign
-</span><span>  v[</span><span style="color:#e78c45;">0</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.0</span><span>; </span><span style="color:#999999;">// IndexMut
-</span><span>}
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">const fn </span><span style="color:#7aa2f7;">const_function</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let </span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> v1</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let </span><span style="color:#89ddff;">_ =</span><span style="color:#9abdf5;"> v1 </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">; </span><span style="font-style:italic;color:#444b6a;">// Add
+</span><span style="color:#9abdf5;">  v </span><span style="color:#89ddff;">+=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">; </span><span style="font-style:italic;color:#444b6a;">// AddAssign
+</span><span style="color:#9abdf5;">  v[</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">] </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">0.0</span><span style="color:#89ddff;">; </span><span style="font-style:italic;color:#444b6a;">// IndexMut
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
 <p>上記のようなことができるようにします。</p>
 <h2 id="add">Add</h2>
 <p>まず<code>const fn</code>の中で動く<code>Add</code>を定義してみます。</p>
 <p>下記のように通常のAddを定義して<code>const fn</code>の中で使ってみたものをコンパイルしてみると</p>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">use </span><span>std::ops::</span><span style="color:#70c0b1;">*</span><span>;
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">use </span><span>std</span><span style="color:#89ddff;">::</span><span>ops</span><span style="color:#89ddff;">::*;
 </span><span>
-</span><span style="color:#c397d8;">struct </span><span>Vec3 {
-</span><span>    </span><span style="color:#d54e53;">x</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>    </span><span style="color:#d54e53;">y</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>    </span><span style="color:#d54e53;">z</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>}
+</span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">impl </span><span>Add&lt;Vec3&gt; </span><span style="color:#c397d8;">for </span><span>Vec3 {
-</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">Self</span><span>;
+</span><span style="color:#bb9af7;">impl </span><span>Add</span><span style="color:#89ddff;">&lt;</span><span>Vec3</span><span style="color:#89ddff;">&gt; for </span><span style="color:#c0caf5;">Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Output </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">add</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">rhs</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Output {
+</span><span style="color:#9abdf5;">        Vec3 {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            z</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">add</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
-</span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+</span><span> rhs.x,
-</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+</span><span> rhs.y,
-</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">+</span><span> rhs.z,
-</span><span>        }
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">const_function</span><span>() {
-</span><span>  </span><span style="color:#c397d8;">let</span><span> v1: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">1.0</span><span>, y: </span><span style="color:#e78c45;">2.0</span><span>, z: </span><span style="color:#e78c45;">3.0 </span><span>};
-</span><span>  </span><span style="color:#c397d8;">let</span><span> v2: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">2.0</span><span>, y: </span><span style="color:#e78c45;">3.0</span><span>, z: </span><span style="color:#e78c45;">4.0 </span><span>};
-</span><span>
-</span><span>  </span><span style="color:#c397d8;">let </span><span style="color:#70c0b1;">_ =</span><span> v1 </span><span style="color:#70c0b1;">+</span><span> v2; </span><span style="color:#999999;">// Add
-</span><span>}
+</span><span style="color:#bb9af7;">const fn </span><span style="color:#7aa2f7;">const_function</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> v1</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let </span><span style="color:#89ddff;">_ =</span><span style="color:#9abdf5;"> v1 </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">; </span><span style="font-style:italic;color:#444b6a;">// Add
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
-<pre style="background-color:#000000;color:#dedede;"><code><span>   Compiling playground v0.0.1 (/playground)
+<pre style="background-color:#1d1f29;color:#afbad4;"><code><span>   Compiling playground v0.0.1 (/playground)
 </span><span>error[E0015]: calls in constant functions are limited to constant functions, tuple structs and tuple variants
 </span><span>  --&gt; src/lib.rs:25:11
 </span><span>   |
@@ -168,37 +168,37 @@
 <code>impl Add&lt;Vec3&gt; for Vec3</code>を<code>impl const Add&lt;Vec3&gt; for Vec3</code>に書き換えます。</p>
 <details>
 <summary>コード全文</summary>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_trait_impl)]
-</span><span style="color:#c397d8;">use </span><span>std::ops::</span><span style="color:#70c0b1;">*</span><span>;
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>const_trait_impl</span><span style="color:#9abdf5;">)]
+</span><span style="color:#89ddff;">use </span><span>std</span><span style="color:#89ddff;">::</span><span>ops</span><span style="color:#89ddff;">::*;
 </span><span>
-</span><span style="color:#c397d8;">struct </span><span>Vec3 {
-</span><span>    </span><span style="color:#d54e53;">x</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>    </span><span style="color:#d54e53;">y</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>    </span><span style="color:#d54e53;">z</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>}
+</span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">impl </span><span>const Add&lt;Vec3&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">Self</span><span>;
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const Add</span><span style="color:#89ddff;">&lt;</span><span>Vec3</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Output </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">add</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">rhs</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Output {
+</span><span style="color:#9abdf5;">        Vec3 {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            z</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">add</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
-</span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+</span><span> rhs.x,
-</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+</span><span> rhs.y,
-</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">+</span><span> rhs.z,
-</span><span>        }
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">const_function</span><span>() {
-</span><span>  </span><span style="color:#c397d8;">let</span><span> v1: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">1.0</span><span>, y: </span><span style="color:#e78c45;">2.0</span><span>, z: </span><span style="color:#e78c45;">3.0 </span><span>};
-</span><span>  </span><span style="color:#c397d8;">let</span><span> v2: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">2.0</span><span>, y: </span><span style="color:#e78c45;">3.0</span><span>, z: </span><span style="color:#e78c45;">4.0 </span><span>};
-</span><span>
-</span><span>  </span><span style="color:#c397d8;">let </span><span style="color:#70c0b1;">_ =</span><span> v1 </span><span style="color:#70c0b1;">+</span><span> v2; </span><span style="color:#999999;">// Add
-</span><span>}
+</span><span style="color:#bb9af7;">const fn </span><span style="color:#7aa2f7;">const_function</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> v1</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let </span><span style="color:#89ddff;">_ =</span><span style="color:#9abdf5;"> v1 </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">; </span><span style="font-style:italic;color:#444b6a;">// Add
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
 </details>
 <p>すると今度はこのようなエラーが出ます。</p>
-<pre style="background-color:#000000;color:#dedede;"><code><span>   Compiling playground v0.0.1 (/playground)
+<pre style="background-color:#1d1f29;color:#afbad4;"><code><span>   Compiling playground v0.0.1 (/playground)
 </span><span>error[E0658]: floating point arithmetic is not allowed in constant functions
 </span><span>  --&gt; src/lib.rs:15:16
 </span><span>   |
@@ -234,25 +234,25 @@
 <p>変更後のコードは差分が少ないので載せませんが<a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=2b6bd9cb82fc038e2bfadf76c234053d">Rust Playgroundで確認</a>できるので気になる方はリンク先を確認してみてください。</p>
 <h2 id="addassign">AddAssign</h2>
 <p>次に<code>AddAssign</code>を定義します。</p>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">impl </span><span>const AddAssign&lt;Vec3&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">add_assign</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) {
-</span><span>        </span><span style="color:#70c0b1;">*</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">=</span><span> Vec3 {
-</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+</span><span> rhs.x,
-</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+</span><span> rhs.y,
-</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">+</span><span> rhs.z,
-</span><span>        }
-</span><span>    }
-</span><span>}
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const AddAssign</span><span style="color:#89ddff;">&lt;</span><span>Vec3</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">add_assign</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">rhs</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3) {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">*</span><span style="color:#f7768e;">self </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            z</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">const_function</span><span>() {
-</span><span>  </span><span style="color:#c397d8;">let mut</span><span> v1: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">1.0</span><span>, y: </span><span style="color:#e78c45;">2.0</span><span>, z: </span><span style="color:#e78c45;">3.0 </span><span>};
-</span><span>  </span><span style="color:#c397d8;">let</span><span> v2: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">2.0</span><span>, y: </span><span style="color:#e78c45;">3.0</span><span>, z: </span><span style="color:#e78c45;">4.0 </span><span>};
-</span><span>  
-</span><span>  v1 </span><span style="color:#70c0b1;">+=</span><span> v2;
-</span><span>}
+</span><span style="color:#bb9af7;">const fn </span><span style="color:#7aa2f7;">const_function</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let </span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> v1</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">  </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">  
+</span><span style="color:#9abdf5;">  v1 </span><span style="color:#89ddff;">+=</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
 <p>上記のように<code>Add</code>と同じように<code>impl const AddAssign</code>で定義して<code>const fn</code>で使用してみると</p>
-<pre style="background-color:#000000;color:#dedede;"><code><span>   Compiling playground v0.0.1 (/playground)
+<pre style="background-color:#1d1f29;color:#afbad4;"><code><span>   Compiling playground v0.0.1 (/playground)
 </span><span>error[E0658]: mutable references are not allowed in constant functions
 </span><span>  --&gt; src/lib.rs:25:19
 </span><span>   |
@@ -279,150 +279,150 @@
 <p>これは<code>&amp;mut</code>な変数を引数にする関数が<code>const fn</code>の中で使えないという内容で<code>#![feature(const_mut_refs)]</code>を追加してやることで解決できます。</p>
 <details>
 <summary>コード全文</summary>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_trait_impl)]
-</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_fn_floating_point_arithmetic)]
-</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_mut_refs)]
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>const_trait_impl</span><span style="color:#9abdf5;">)]
+</span><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>const_fn_floating_point_arithmetic</span><span style="color:#9abdf5;">)]
+</span><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>const_mut_refs</span><span style="color:#9abdf5;">)]
 </span><span>
-</span><span style="color:#c397d8;">use </span><span>std::ops::</span><span style="color:#70c0b1;">*</span><span>;
+</span><span style="color:#89ddff;">use </span><span>std</span><span style="color:#89ddff;">::</span><span>ops</span><span style="color:#89ddff;">::*;
 </span><span>
-</span><span style="color:#c397d8;">struct </span><span>Vec3 {
-</span><span>    </span><span style="color:#d54e53;">x</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>    </span><span style="color:#d54e53;">y</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>    </span><span style="color:#d54e53;">z</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>}
+</span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">impl </span><span>const Add&lt;Vec3&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">Self</span><span>;
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const Add</span><span style="color:#89ddff;">&lt;</span><span>Vec3</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Output </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">add</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">rhs</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Output {
+</span><span style="color:#9abdf5;">        Vec3 {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            z</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">add</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
-</span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+</span><span> rhs.x,
-</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+</span><span> rhs.y,
-</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">+</span><span> rhs.z,
-</span><span>        }
-</span><span>    }
-</span><span>}
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const AddAssign</span><span style="color:#89ddff;">&lt;</span><span>Vec3</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">add_assign</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">rhs</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3) {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">*</span><span style="color:#f7768e;">self </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            z</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">impl </span><span>const AddAssign&lt;Vec3&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">add_assign</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) {
-</span><span>        </span><span style="color:#70c0b1;">*</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">=</span><span> Vec3 {
-</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+</span><span> rhs.x,
-</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+</span><span> rhs.y,
-</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">+</span><span> rhs.z,
-</span><span>        }
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">const_function</span><span>() {
-</span><span>    </span><span style="color:#c397d8;">let mut</span><span> v1: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">1.0</span><span>, y: </span><span style="color:#e78c45;">2.0</span><span>, z: </span><span style="color:#e78c45;">3.0 </span><span>};
-</span><span>    </span><span style="color:#c397d8;">let</span><span> v2: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">2.0</span><span>, y: </span><span style="color:#e78c45;">3.0</span><span>, z: </span><span style="color:#e78c45;">4.0 </span><span>};
-</span><span>    
-</span><span>    v1 </span><span style="color:#70c0b1;">+=</span><span> v2;
-</span><span>}
+</span><span style="color:#bb9af7;">const fn </span><span style="color:#7aa2f7;">const_function</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let </span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> v1</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    
+</span><span style="color:#9abdf5;">    v1 </span><span style="color:#89ddff;">+=</span><span style="color:#9abdf5;"> v2</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
 </details>
 <p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=227a07ebe8a5143859a0087606415855">Rust Playgroundで確認</a></p>
 <h2 id="indexmut">IndexMut</h2>
 <p>続いて<code>IndexMut</code>を定義します。<br />
 <code>IndexMut</code>の定義は<code>Index</code>の定義が必要なので両方定義します。</p>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">impl </span><span>const Index&lt;</span><span style="color:#c397d8;">usize</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">f64</span><span>;
-</span><span>    
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">index</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">i</span><span>: </span><span style="color:#c397d8;">usize</span><span>) -&gt; </span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">Self::</span><span>Output {
-</span><span>        </span><span style="color:#c397d8;">match</span><span> i {
-</span><span>            </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.x,
-</span><span>            </span><span style="color:#e78c45;">1 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.y,
-</span><span>            </span><span style="color:#e78c45;">2 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.z,
-</span><span>            </span><span style="color:#70c0b1;">_ =&gt; </span><span>panic!(</span><span style="color:#b9ca4a;">&quot;out of range.&quot;</span><span>),
-</span><span>        }
-</span><span>    }
-</span><span>}
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const Index</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Output </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">index</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">i</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; &amp;</span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Output {
+</span><span style="color:#9abdf5;">        </span><span style="color:#bb9af7;">match</span><span style="color:#9abdf5;"> i {
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">0 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">1 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">2 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#89ddff;">_ =&gt; </span><span style="color:#9abdf5;">panic!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">out of range.</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">impl </span><span>const IndexMut&lt;</span><span style="color:#c397d8;">usize</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">index_mut</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">i</span><span>: </span><span style="color:#c397d8;">usize</span><span>) -&gt; </span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut Self::</span><span>Output {
-</span><span>        </span><span style="color:#c397d8;">match</span><span> i {
-</span><span>            </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.x,
-</span><span>            </span><span style="color:#e78c45;">1 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.y,
-</span><span>            </span><span style="color:#e78c45;">2 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.z,
-</span><span>            </span><span style="color:#70c0b1;">_ =&gt; </span><span>panic!(</span><span style="color:#b9ca4a;">&quot;out of range.&quot;</span><span>),
-</span><span>        }
-</span><span>    }
-</span><span>}
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const IndexMut</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">index_mut</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">i</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; &amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Output {
+</span><span style="color:#9abdf5;">        </span><span style="color:#bb9af7;">match</span><span style="color:#9abdf5;"> i {
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">0 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">1 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">2 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#89ddff;">_ =&gt; </span><span style="color:#9abdf5;">panic!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">out of range.</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
 <p>ここまでに
 <code>#![feature(const_trait_impl)]</code>, <code>#![feature(const_fn_floating_point_arithmetic)]</code>, <code>#![feature(const_mut_refs)]</code>を有効にしているため、特別なことをする必要はありません。<br />
 <code>index</code>と<code>index_mut</code>の中で<code>panic!</code>を使用していますが、これは何もせずとも<code>const fn</code>の中で使用できます。</p>
 <p>これで</p>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">const_function</span><span>() {
-</span><span>    </span><span style="color:#c397d8;">let mut</span><span> v: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">1.0</span><span>, y: </span><span style="color:#e78c45;">2.0</span><span>, z: </span><span style="color:#e78c45;">3.0 </span><span>};
-</span><span>    v[</span><span style="color:#e78c45;">0</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.0</span><span>;
-</span><span>}
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">const fn </span><span style="color:#7aa2f7;">const_function</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let </span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> v</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    v[</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">] </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">0.0</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
 <p>という処理のコンパイルが通るようになりました。</p>
 <details>
 <summary>コード全文</summary>
-<pre data-lang="rust" style="background-color:#000000;color:#dedede;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_trait_impl)]
-</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_fn_floating_point_arithmetic)]
-</span><span>#![</span><span style="color:#d54e53;">feature</span><span>(const_mut_refs)]
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>const_trait_impl</span><span style="color:#9abdf5;">)]
+</span><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>const_fn_floating_point_arithmetic</span><span style="color:#9abdf5;">)]
+</span><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>const_mut_refs</span><span style="color:#9abdf5;">)]
 </span><span>
-</span><span style="color:#c397d8;">use </span><span>std::ops::</span><span style="color:#70c0b1;">*</span><span>;
+</span><span style="color:#89ddff;">use </span><span>std</span><span style="color:#89ddff;">::</span><span>ops</span><span style="color:#89ddff;">::*;
 </span><span>
-</span><span style="color:#c397d8;">struct </span><span>Vec3 {
-</span><span>    </span><span style="color:#d54e53;">x</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>    </span><span style="color:#d54e53;">y</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>    </span><span style="color:#d54e53;">z</span><span>: </span><span style="color:#c397d8;">f64</span><span>,
-</span><span>}
+</span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f64</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">impl </span><span>const Add&lt;Vec3&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">Self</span><span>;
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const Add</span><span style="color:#89ddff;">&lt;</span><span>Vec3</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Output </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">add</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">rhs</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Output {
+</span><span style="color:#9abdf5;">        Vec3 {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            z</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">add</span><span>(</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) -&gt; </span><span style="color:#c397d8;">Self::</span><span>Output {
-</span><span>        Vec3 {
-</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+</span><span> rhs.x,
-</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+</span><span> rhs.y,
-</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">+</span><span> rhs.z,
-</span><span>        }
-</span><span>    }
-</span><span>}
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const AddAssign</span><span style="color:#89ddff;">&lt;</span><span>Vec3</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">add_assign</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">rhs</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3) {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">*</span><span style="color:#f7768e;">self </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            z</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z </span><span style="color:#89ddff;">+</span><span style="color:#9abdf5;"> rhs</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">impl </span><span>const AddAssign&lt;Vec3&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">add_assign</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">rhs</span><span>: Vec3) {
-</span><span>        </span><span style="color:#70c0b1;">*</span><span style="color:#d54e53;">self </span><span style="color:#70c0b1;">=</span><span> Vec3 {
-</span><span>            x: </span><span style="color:#d54e53;">self</span><span>.x </span><span style="color:#70c0b1;">+</span><span> rhs.x,
-</span><span>            y: </span><span style="color:#d54e53;">self</span><span>.y </span><span style="color:#70c0b1;">+</span><span> rhs.y,
-</span><span>            z: </span><span style="color:#d54e53;">self</span><span>.z </span><span style="color:#70c0b1;">+</span><span> rhs.z,
-</span><span>        }
-</span><span>    }
-</span><span>}
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const Index</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Output </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">index</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">i</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; &amp;</span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Output {
+</span><span style="color:#9abdf5;">        </span><span style="color:#bb9af7;">match</span><span style="color:#9abdf5;"> i {
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">0 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">1 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">2 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#89ddff;">_ =&gt; </span><span style="color:#9abdf5;">panic!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">out of range.</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span style="color:#c397d8;">impl </span><span>const Index&lt;</span><span style="color:#c397d8;">usize</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">type </span><span>Output </span><span style="color:#70c0b1;">= </span><span style="color:#c397d8;">f64</span><span>;
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">const IndexMut</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">for Vec3 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">index_mut</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">, </span><span style="color:#e0af68;">i</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; &amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Output {
+</span><span style="color:#9abdf5;">        </span><span style="color:#bb9af7;">match</span><span style="color:#9abdf5;"> i {
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">0 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">1 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#ff9e64;">2 </span><span style="color:#89ddff;">=&gt; </span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            </span><span style="color:#89ddff;">_ =&gt; </span><span style="color:#9abdf5;">panic!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">out of range.</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
 </span><span>
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">index</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">i</span><span>: </span><span style="color:#c397d8;">usize</span><span>) -&gt; </span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">Self::</span><span>Output {
-</span><span>        </span><span style="color:#c397d8;">match</span><span> i {
-</span><span>            </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.x,
-</span><span>            </span><span style="color:#e78c45;">1 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.y,
-</span><span>            </span><span style="color:#e78c45;">2 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#d54e53;">self</span><span>.z,
-</span><span>            </span><span style="color:#70c0b1;">_ =&gt; </span><span>panic!(</span><span style="color:#b9ca4a;">&quot;out of range.&quot;</span><span>),
-</span><span>        }
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span style="color:#c397d8;">impl </span><span>const IndexMut&lt;</span><span style="color:#c397d8;">usize</span><span>&gt; for Vec3 {
-</span><span>    </span><span style="color:#c397d8;">fn </span><span style="color:#7aa6da;">index_mut</span><span>(</span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut </span><span style="color:#e78c45;">self</span><span>, </span><span style="color:#e78c45;">i</span><span>: </span><span style="color:#c397d8;">usize</span><span>) -&gt; </span><span style="color:#70c0b1;">&amp;</span><span style="color:#c397d8;">mut Self::</span><span>Output {
-</span><span>        </span><span style="color:#c397d8;">match</span><span> i {
-</span><span>            </span><span style="color:#e78c45;">0 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.x,
-</span><span>            </span><span style="color:#e78c45;">1 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.y,
-</span><span>            </span><span style="color:#e78c45;">2 </span><span style="color:#70c0b1;">=&gt; &amp;</span><span style="color:#c397d8;">mut </span><span style="color:#d54e53;">self</span><span>.z,
-</span><span>            </span><span style="color:#70c0b1;">_ =&gt; </span><span>panic!(</span><span style="color:#b9ca4a;">&quot;out of range.&quot;</span><span>),
-</span><span>        }
-</span><span>    }
-</span><span>}
-</span><span>
-</span><span style="color:#c397d8;">const fn </span><span style="color:#7aa6da;">const_function</span><span>() {
-</span><span>    </span><span style="color:#c397d8;">let mut</span><span> v: Vec3 </span><span style="color:#70c0b1;">=</span><span> Vec3 { x: </span><span style="color:#e78c45;">1.0</span><span>, y: </span><span style="color:#e78c45;">2.0</span><span>, z: </span><span style="color:#e78c45;">3.0 </span><span>};
-</span><span>    v[</span><span style="color:#e78c45;">0</span><span>] </span><span style="color:#70c0b1;">= </span><span style="color:#e78c45;">0.0</span><span>;
-</span><span>}
+</span><span style="color:#bb9af7;">const fn </span><span style="color:#7aa2f7;">const_function</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let </span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> v</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Vec3 </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Vec3 { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">3.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    v[</span><span style="color:#ff9e64;">0</span><span style="color:#9abdf5;">] </span><span style="color:#89ddff;">= </span><span style="color:#ff9e64;">0.0</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
 </span></code></pre>
 </details>
 <p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=0765cedc3493bc26e70bb195653b6670">Rust Playgroundで確認</a><br />
@@ -430,7 +430,7 @@
 <h3 id="panic-nei-denobian-shu-mai-meip-mihadekinai">panic!内での変数埋め込みはできない</h3>
 <p><code>panic!</code>が使えるなら<code>panic!(&quot;out of range. index = {i}&quot;)</code>のようにどの値が渡されたことで範囲外アクセスが発生したのかをコンパイルエラーのメッセージに表示したくなると思います。<br />
 しかし普通に書いても下記のようなコンパイルエラーが発生してしまいます。</p>
-<pre style="background-color:#000000;color:#dedede;"><code><span>   Compiling playground v0.0.1 (/playground)
+<pre style="background-color:#1d1f29;color:#afbad4;"><code><span>   Compiling playground v0.0.1 (/playground)
 </span><span>error[E0658]: function pointer casts are not allowed in constant functions
 </span><span>  --&gt; src/lib.rs:43:48
 </span><span>   |

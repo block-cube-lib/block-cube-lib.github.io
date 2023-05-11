@@ -116,10 +116,10 @@ UniversalRPからカメラにRendererを設定できるようになりました�
 <p>実はUniversalRPではCameraを追加すると一緒に<code>UniversalAdditionalCameraData</code>というコンポーネントがついてきます。<br />
 <img src="/image/universal_additional_camera_data.png" alt="image" /></p>
 <p>この中に<code>SetRenderer</code>という関数があるので、その関数を使用することでScriptからRendererを変更できます。</p>
-<pre data-lang="cs" style="background-color:#000000;color:#dedede;" class="language-cs "><code class="language-cs" data-lang="cs"><span style="color:#999999;">// UniversalAdditionalCameraDataを使用するには
-</span><span style="color:#999999;">// using UnityEngine.Rendering.Universal;が必要
-</span><span style="color:#c397d8;">var </span><span style="color:#d54e53;">cameraData </span><span style="color:#70c0b1;">= </span><span style="color:#d54e53;">camera</span><span>.</span><span style="color:#d54e53;">GetComponent</span><span style="color:#7aa6da;">&lt;</span><span style="color:#e7c547;">UniversalAdditionalCameraData</span><span style="color:#7aa6da;">&gt;()</span><span>;
-</span><span style="color:#d54e53;">cameraData</span><span>.</span><span style="color:#d54e53;">SetRenderer</span><span style="color:#7aa6da;">(</span><span style="color:#d54e53;">rendererIndex</span><span style="color:#7aa6da;">)</span><span>; </span><span style="color:#999999;">// Rendererのindexを指定する
+<pre data-lang="cs" style="background-color:#1d1f29;color:#afbad4;" class="language-cs "><code class="language-cs" data-lang="cs"><span style="font-style:italic;color:#444b6a;">// UniversalAdditionalCameraDataを使用するには
+</span><span style="font-style:italic;color:#444b6a;">// using UnityEngine.Rendering.Universal;が必要
+</span><span style="color:#bb9af7;">var </span><span style="color:#c0caf5;">cameraData </span><span style="color:#89ddff;">= </span><span style="color:#c0caf5;">camera</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">GetComponent</span><span style="color:#89ddff;">&lt;</span><span style="color:#0db9d7;">UniversalAdditionalCameraData</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">;
+</span><span style="color:#c0caf5;">cameraData</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">SetRenderer</span><span style="color:#9abdf5;">(</span><span style="color:#c0caf5;">rendererIndex</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">; </span><span style="font-style:italic;color:#444b6a;">// Rendererのindexを指定する
 </span></code></pre>
 <p><code>SetRenderer</code>の引数はRendererのindexです。<br />
 手元で試したところ</p>

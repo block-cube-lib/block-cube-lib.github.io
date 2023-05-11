@@ -107,14 +107,14 @@ date = 2022-11-19T22:00:00+09:00
 </section>
 <p><h2 id="mu-de">目的</h2>
 <p>記事のMarkdownのヘッダーに下記ような記述をして</p>
-<pre data-lang="toml" style="background-color:#000000;color:#dedede;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#d54e53;">title </span><span>= </span><span style="color:#b9ca4a;">&quot;タイトル&quot;
-</span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-19T22:00:00+09:00
-</span><span>[</span><span style="color:#d54e53;">extra</span><span>]
-</span><span style="color:#d54e53;">updated_histories </span><span>= [
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-12-22T01:07:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;追記1&quot; </span><span>},
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-21T23:52:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正B&quot; </span><span>},
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-20T11:24:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正A&quot; </span><span>},
-</span><span>]
+<pre data-lang="toml" style="background-color:#1d1f29;color:#afbad4;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#f7768e;">title </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">タイトル</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-11-19T22:00:00+09:00
+</span><span style="color:#89ddff;">[</span><span style="color:#c0caf5;">extra</span><span style="color:#89ddff;">]
+</span><span style="color:#f7768e;">updated_histories </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-12-22T01:07:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">追記1</span><span style="color:#89ddff;">&quot; },
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-11-21T23:52:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">修正B</span><span style="color:#89ddff;">&quot; },
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-11-20T11:24:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">修正A</span><span style="color:#89ddff;">&quot; },
+</span><span style="color:#9abdf5;">]
 </span></code></pre>
 <p>下の画像のように表示するというのが目的です。<br />
 <img src="/image/updated_histories_sample.png" alt="updated_histories_sample_image" /><br />
@@ -125,32 +125,32 @@ date = 2022-11-19T22:00:00+09:00
 <h2 id="yarukoto">やること</h2>
 <h3 id="tenpuretohuairubian-ji">テンプレートファイル編集</h3>
 <p>記事のテンプレートファイル(<code>page.html</code>とか)を開いて更新履歴を表示したい箇所に下記の記述を追加します。</p>
-<pre data-lang="html" style="background-color:#000000;color:#dedede;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#d54e53;">&lt;section class=</span><span style="color:#b9ca4a;">&quot;update_history&quot;</span><span style="color:#d54e53;">&gt;
-</span><span>  </span><span style="color:#d54e53;">&lt;table&gt;
-</span><span>    </span><span style="color:#d54e53;">&lt;tr&gt;
-</span><span>      </span><span style="color:#d54e53;">&lt;td&gt;&lt;span class = </span><span style="color:#b9ca4a;">&quot;date&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ page.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#d54e53;">&lt;/span&gt;&lt;/td&gt;
-</span><span>      </span><span style="color:#d54e53;">&lt;td&gt;</span><span>公開</span><span style="color:#d54e53;">&lt;/td&gt;
-</span><span>    </span><span style="color:#d54e53;">&lt;/tr&gt;
-</span><span>    {% if page.extra.updated_histories %}
-</span><span>      {% for item in page.extra.updated_histories | sort(attribute=&quot;date&quot;) %}
-</span><span>      </span><span style="color:#d54e53;">&lt;tr&gt;
-</span><span>        </span><span style="color:#d54e53;">&lt;td&gt;&lt;span class = </span><span style="color:#b9ca4a;">&quot;date&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ item.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#d54e53;">&lt;/span&gt;&lt;/td&gt;
-</span><span>        </span><span style="color:#d54e53;">&lt;td class=</span><span style="color:#b9ca4a;">&quot;update_history_content&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ item.content | markdown | safe }}</span><span style="color:#d54e53;">&lt;/td&gt;
-</span><span>      </span><span style="color:#d54e53;">&lt;/tr&gt;
-</span><span>      {% endfor %}
-</span><span>    {% endif %}
-</span><span>  </span><span style="color:#d54e53;">&lt;/table&gt;
-</span><span style="color:#d54e53;">&lt;/section&gt;
+<pre data-lang="html" style="background-color:#1d1f29;color:#afbad4;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">section </span><span style="color:#9ece6a;">class</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">update_history</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">  </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">table</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">    </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">      </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;&lt;</span><span style="color:#f7768e;">span </span><span style="color:#9ece6a;">class </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">date</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">{{ page.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">span</span><span style="color:#ba3c97;">&gt;&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">      </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">公開</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">    </span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">    {% if page.extra.updated_histories %}
+</span><span style="color:#9aa5ce;">      {% for item in page.extra.updated_histories | sort(attribute=&quot;date&quot;) %}
+</span><span style="color:#9aa5ce;">      </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">        </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;&lt;</span><span style="color:#f7768e;">span </span><span style="color:#9ece6a;">class </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">date</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">{{ item.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">span</span><span style="color:#ba3c97;">&gt;&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">        </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td </span><span style="color:#9ece6a;">class</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">update_history_content</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">{{ item.content | markdown | safe }}</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">      </span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">      {% endfor %}
+</span><span style="color:#9aa5ce;">    {% endif %}
+</span><span style="color:#9aa5ce;">  </span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">table</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">section</span><span style="color:#ba3c97;">&gt;
 </span></code></pre>
 <h3 id="markdownnigeng-xin-lu-li-wozhui-jia">Markdownに更新履歴を追加</h3>
 <p>記事のMarkdownに以下のように<code>[extra]</code> <code>updated_histories</code>を追加します。<br />
 <code>updated_histories</code>は<code>toml</code>の辞書形式で<code>date</code>(更新日時)と<code>content</code>(更新内容)を記述します。</p>
-<pre data-lang="toml" style="background-color:#000000;color:#dedede;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#d54e53;">extra</span><span>]
-</span><span style="color:#d54e53;">updated_histories </span><span>= [
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-12-22T01:07:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;追記1&quot; </span><span>},
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-21T23:52:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正B&quot; </span><span>},
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-20T11:24:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正A&quot; </span><span>},
-</span><span>]
+<pre data-lang="toml" style="background-color:#1d1f29;color:#afbad4;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#89ddff;">[</span><span style="color:#c0caf5;">extra</span><span style="color:#89ddff;">]
+</span><span style="color:#f7768e;">updated_histories </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-12-22T01:07:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">追記1</span><span style="color:#89ddff;">&quot; },
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-11-21T23:52:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">修正B</span><span style="color:#89ddff;">&quot; },
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-11-20T11:24:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">修正A</span><span style="color:#89ddff;">&quot; },
+</span><span style="color:#9abdf5;">]
 </span></code></pre>
 <h3 id="jie-guo">結果</h3>
 <p>cssにもよりますがおおよそこのように表示されると思います。<br />
@@ -160,50 +160,50 @@ date = 2022-11-19T22:00:00+09:00
 <p>ここは更新履歴を表示するまとまりを記述しているだけです。<br />
 <code>section</code>ではなく<code>div</code>でも良いですし、<code>class</code>も別名で構いません。なんならこのタグ自体なくしても問題はないと思います。<br />
 ただあったほうがcssでスタイルをいじりやすいのでこうしています。</p>
-<pre data-lang="html" style="background-color:#000000;color:#dedede;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#d54e53;">&lt;section class=</span><span style="color:#b9ca4a;">&quot;update_history&quot;</span><span style="color:#d54e53;">&gt;
-</span><span>  </span><span style="color:#999999;">&lt;!-- 省略 --&gt;
-</span><span style="color:#d54e53;">&lt;/section&gt;
+<pre data-lang="html" style="background-color:#1d1f29;color:#afbad4;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">section </span><span style="color:#9ece6a;">class</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">update_history</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">  </span><span style="font-style:italic;color:#444b6a;">&lt;!-- 省略 --&gt;
+</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">section</span><span style="color:#ba3c97;">&gt;
 </span></code></pre>
 <p>ここは投稿日を表示しています。<br />
 投稿日はヘッダーの<code>date</code>の内容が使用されます。<br />
 日付のフォーマットは<code>&quot;%Y/%m/%d %H:%M&quot;</code>を指定していますが好きに編集していただいて構いません。</p>
-<pre data-lang="html" style="background-color:#000000;color:#dedede;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#d54e53;">&lt;table&gt;
-</span><span>  </span><span style="color:#d54e53;">&lt;tr&gt;
-</span><span>    </span><span style="color:#d54e53;">&lt;td&gt;&lt;span class=</span><span style="color:#b9ca4a;">&quot;date&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ page.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#d54e53;">&lt;/span&gt;&lt;/td&gt;
-</span><span>    </span><span style="color:#d54e53;">&lt;td&gt;</span><span>公開</span><span style="color:#d54e53;">&lt;/td&gt;
-</span><span>  </span><span style="color:#d54e53;">&lt;/tr&gt;
-</span><span>  </span><span style="color:#999999;">&lt;!-- 省略 --&gt;
-</span><span style="color:#d54e53;">&lt;/table&gt;
+<pre data-lang="html" style="background-color:#1d1f29;color:#afbad4;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">table</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">  </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">    </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;&lt;</span><span style="color:#f7768e;">span </span><span style="color:#9ece6a;">class</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">date</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">{{ page.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">span</span><span style="color:#ba3c97;">&gt;&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">    </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">公開</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">  </span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
+</span><span style="color:#9aa5ce;">  </span><span style="font-style:italic;color:#444b6a;">&lt;!-- 省略 --&gt;
+</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">table</span><span style="color:#ba3c97;">&gt;
 </span></code></pre>
 <p>今回のキモ1です。<br />
 1行目はMarkdownのヘッダーに<code>extra.updated_histories</code>が設定されている場合に更新履歴を表示するための条件です。<br />
 2行目の<code>{% for ... %}</code>では更新履歴は日付でソートを行い、要素をループで処理します。<br />
 4行目の日付表示は投稿日と同じです。<br />
 5行目は更新内容をMarkdownとして解釈し表示するための記述です。</p>
-<pre data-linenos data-lang="html" style="background-color:#000000;color:#dedede;" class="language-html "><code class="language-html" data-lang="html"><table><tbody><tr><td>1</td><td><span>{% if page.extra.updated_histories %}
-</span></td></tr><tr><td>2</td><td><span>  {% for item in page.extra.updated_histories | sort(attribute=&quot;date&quot;) %}
-</span></td></tr><tr><td>3</td><td><span>  </span><span style="color:#d54e53;">&lt;tr&gt;
-</span></td></tr><tr><td>4</td><td><span>    </span><span style="color:#d54e53;">&lt;td&gt;&lt;span class=</span><span style="color:#b9ca4a;">&quot;date&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ item.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#d54e53;">&lt;/span&gt;&lt;/td&gt;
-</span></td></tr><tr><td>5</td><td><span>    </span><span style="color:#d54e53;">&lt;td class=</span><span style="color:#b9ca4a;">&quot;update_history_content&quot;</span><span style="color:#d54e53;">&gt;</span><span>{{ item.content | markdown | safe }}</span><span style="color:#d54e53;">&lt;/td&gt;
-</span></td></tr><tr><td>6</td><td><span>  </span><span style="color:#d54e53;">&lt;/tr&gt;
-</span></td></tr><tr><td>7</td><td><span>  {% endfor %}
-</span></td></tr><tr><td>8</td><td><span>{% endif %}
+<pre data-linenos data-lang="html" style="background-color:#1d1f29;color:#afbad4;" class="language-html "><code class="language-html" data-lang="html"><table><tbody><tr><td>1</td><td><span style="color:#9aa5ce;">{% if page.extra.updated_histories %}
+</span></td></tr><tr><td>2</td><td><span style="color:#9aa5ce;">  {% for item in page.extra.updated_histories | sort(attribute=&quot;date&quot;) %}
+</span></td></tr><tr><td>3</td><td><span style="color:#9aa5ce;">  </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
+</span></td></tr><tr><td>4</td><td><span style="color:#9aa5ce;">    </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;&lt;</span><span style="color:#f7768e;">span </span><span style="color:#9ece6a;">class</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">date</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">{{ item.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">span</span><span style="color:#ba3c97;">&gt;&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;
+</span></td></tr><tr><td>5</td><td><span style="color:#9aa5ce;">    </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td </span><span style="color:#9ece6a;">class</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">update_history_content</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">{{ item.content | markdown | safe }}</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;
+</span></td></tr><tr><td>6</td><td><span style="color:#9aa5ce;">  </span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
+</span></td></tr><tr><td>7</td><td><span style="color:#9aa5ce;">  {% endfor %}
+</span></td></tr><tr><td>8</td><td><span style="color:#9aa5ce;">{% endif %}
 </span></td></tr></tbody></table></code></pre>
 <p>リストではなくテーブルとして表示しているのはフォントによっては日付と更新内容がきれいに並ばなかったからです。<br />
 好みでリストにしても問題ないです。</p>
 <p>次にMarkdown側の変更です。今回のキモ2です。
 ヘッダーにZolaが用意していない要素('extra<code>)の</code>updated_histories`を追加しそこに日付と更新内容を格納します。</p>
-<pre data-lang="toml" style="background-color:#000000;color:#dedede;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#d54e53;">extra</span><span>]
-</span><span style="color:#d54e53;">updated_histories </span><span>= [
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-12-22T01:07:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;追記1&quot; </span><span>},
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-21T23:52:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正B&quot; </span><span>},
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-11-20T11:24:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;修正A&quot; </span><span>},
-</span><span>]
+<pre data-lang="toml" style="background-color:#1d1f29;color:#afbad4;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#89ddff;">[</span><span style="color:#c0caf5;">extra</span><span style="color:#89ddff;">]
+</span><span style="color:#f7768e;">updated_histories </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-12-22T01:07:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">追記1</span><span style="color:#89ddff;">&quot; },
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-11-21T23:52:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">修正B</span><span style="color:#89ddff;">&quot; },
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-11-20T11:24:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">修正A</span><span style="color:#89ddff;">&quot; },
+</span><span style="color:#9abdf5;">]
 </span></code></pre>
 <p>contentはMarkdownとして解釈されるため</p>
-<pre data-lang="toml" style="background-color:#000000;color:#dedede;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#d54e53;">updated_histories </span><span>= [
-</span><span>  { </span><span style="color:#d54e53;">date </span><span>= </span><span style="color:#eeeeee;">2022-12-22T01:07:00+09:00</span><span>, </span><span style="color:#d54e53;">content </span><span>= </span><span style="color:#b9ca4a;">&quot;**追記1**&quot; </span><span>}, </span><span style="color:#999999;"># 強調表示
-</span><span>]
+<pre data-lang="toml" style="background-color:#1d1f29;color:#afbad4;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#f7768e;">updated_histories </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
+</span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-12-22T01:07:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">**追記1**</span><span style="color:#89ddff;">&quot; }, </span><span style="font-style:italic;color:#444b6a;"># 強調表示
+</span><span style="color:#9abdf5;">]
 </span></code></pre>
 <p>みたいなこともできます。</p>
 <h2 id="atogaki">あとがき</h2>
