@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      Rustの関連型のデフォルトについて - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    2023&#x2F;07&#x2F;06現在、stable環境ではRustの関連型(associated type)のデフォルトは定義できません。
+The Rust RFC Bookの2532-ass…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;rust-associated-type-defaults&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9ydXN0LWFzc29jaWF0ZWQtdHlwZS1kZWZhdWx0cy8=">
+    <meta property="og:title" content= "Rustの関連型のデフォルトについて" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="2023&amp;#x2F;07&amp;#x2F;06現在、stable環境ではRustの関連型(associated type)のデフォルトは定義できません。
+The Rust RFC Bookの2532-ass…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "Rustの関連型のデフォルトについて" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  Rustの関連型のデフォルトについて
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2023&#x2F;07&#x2F;07 01:31</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/rust/">Rust</a></span>
+
+  
+
+</section>
+<p><p>2023/07/06現在、stable環境ではRustの関連型(associated type)のデフォルトは定義できません。</p>
+<p>The Rust RFC Bookの<a href="https://rust-lang.github.io/rfcs/2532-associated-type-defaults.html">2532-associated-type-defaults</a>に詳細が書かれています。<br />
+<a href="https://github.com/rust-lang/rust/issues/29661">issue</a>を見ると半数ほどのタスクが終わっているのと、nightly環境では<code>#![feature(associated_type_defaults)]</code>をつけることで動作させられることが確認できます。</p>
+<p>試しにnightly環境で以下のようなコードを書いてみたところコンパイルが通りました</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>associated_type_defaults</span><span style="color:#9abdf5;">)]
+</span><span>
+</span><span style="color:#bb9af7;">trait </span><span style="color:#c0caf5;">Foo </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">AT </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">i32</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">A</span><span style="color:#89ddff;">;
+</span><span>
+</span><span style="color:#bb9af7;">impl </span><span>Foo </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">A </span><span style="color:#9abdf5;">{}
+</span><span>
+</span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">main</span><span style="color:#9abdf5;">() {}
+</span></code></pre>
+<p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=e92187ec665da49547b042309f2d13ba">Rust Playgroundで確認</a></p>
+<p>stable環境では<code>Foo</code>の中の<code>type AT = i32</code>の部分でコンパイルエラーが発生します。</p>
+<hr />
+<p>色々と <del>悪用</del> 活用できそうな機能ですがいい感じのコードを書けなかったので何かあれば更新します。</p>
+</p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="Rustの関連型のデフォルトについて - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
+<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
+
+
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
