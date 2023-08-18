@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      自由なエディタでMarkdownを書いてスライドを作成できるmarp-cli - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    Marpというツールを使うと、Markdownでスライドを作成できます。
+MarpはVSCodeの拡張機能としても提供されていますが、marp-cliを使うと、自由なエディタでMa…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;marp-cli&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9tYXJwLWNsaS8=">
+    <meta property="og:title" content= "自由なエディタでMarkdownを書いてスライドを作成できるmarp-cli" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="Marpというツールを使うと、Markdownでスライドを作成できます。
+MarpはVSCodeの拡張機能としても提供されていますが、marp-cliを使うと、自由なエディタでMa…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "自由なエディタでMarkdownを書いてスライドを作成できるmarp-cli" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    
+    <div class="container">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
+      <nav>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+        
+        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+        
+      </nav>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  自由なエディタでMarkdownを書いてスライドを作成できるmarp-cli
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2023&#x2F;08&#x2F;19 00:02</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/marp/">Marp</a></span>
+
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/marp-cli/">marp-cli</a></span>
+
+  
+
+</section>
+<p><p><a href="https://marp.app/">Marp</a>というツールを使うと、Markdownでスライドを作成できます。<br />
+Marpは<a href="https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode">VSCodeの拡張機能</a>としても提供されていますが、<a href="https://github.com/marp-team/marp-cli">marp-cli</a>を使うと、自由なエディタでMarkdownを書いてスライドを作成できます。</p>
+<h2 id="insutorufang-fa">インストール方法</h2>
+<p>パッケージマネージャーを使用する場合
+macOSでは</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">brew install marp-cli
+</span></code></pre>
+<p>Windowsでは</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">scoop install marp
+</span></code></pre>
+<p>でインストールできます。</p>
+<p>npmを使用してローカルインストールする方法やスタンドアローンバイナリを使用する方法もあるのでそちらの方が好みの場合は<a href="https://github.com/marp-team/marp-cli">marp-cli</a>のREADMEを参照してください。</p>
+<h2 id="shi-ifang">使い方</h2>
+<h3 id="htmlhuairunibian-huan-suru">HTMLファイルに変換する</h3>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp slide-deck.md
+</span></code></pre>
+<p>で<code>slide-deck.md</code>から<code>slide-deck.html</code>というファイルに変換できます。
+<code>-o</code>オプションで出力先を指定できます。以下のコマンドでは<code>output.html</code>というファイルに変換できます。</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp slide.md</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">o</span><span style="color:#7aa2f7;"> output.output.html
+</span></code></pre>
+<h3 id="pdfhuairunibian-huan-suru">PDFファイルに変換する</h3>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">pdf</span><span style="color:#7aa2f7;"> slide-deck.md </span><span style="font-style:italic;color:#444b6a;"># slide-deck.pdfに変換
+</span><span style="color:#7aa2f7;">marp slide-deck.md</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">o</span><span style="color:#7aa2f7;"> converted.pdf </span><span style="font-style:italic;color:#444b6a;"># convereted.pdfに変換
+</span></code></pre>
+<h3 id="pptxhuairunibian-huan-suru">pptxファイルに変換する</h3>
+<p>パワーポイント形式のファイルにも変換できます。</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">pptx</span><span style="color:#7aa2f7;"> slide-deck.md </span><span style="font-style:italic;color:#444b6a;"># slide-deck.pptxに変換
+</span><span style="color:#7aa2f7;">marp slide-deck.md</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">o</span><span style="color:#7aa2f7;"> converted.pptx </span><span style="font-style:italic;color:#444b6a;"># convereted.pptxに変換
+</span></code></pre>
+<h3 id="png-jpeghuairunibian-huan-suru-fu-shu-huairu">PNG/JPEGファイルに変換する(複数ファイル)</h3>
+<p><code>--images</code>オプションを使用するとPNG/JPEGファイルに変換できます。</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="font-style:italic;color:#444b6a;"># 複数のPNGファイルに変換
+</span><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">images</span><span style="color:#7aa2f7;"> png slide-deck.md
+</span><span>
+</span><span style="font-style:italic;color:#444b6a;"># 複数のJPEGファイルに変換
+</span><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">images</span><span style="color:#7aa2f7;"> jpeg slide-deck.md
+</span></code></pre>
+<p><code>slide-deck.pp1.png</code>, <code>slide-deck.002.png</code>のようなファイルが生成されます。</p>
+<h3 id="bian-huan-modo">変換モード</h3>
+<h4 id="watchmodo">Watchモード</h4>
+<p><code>--watch</code>/<code>-w</code>オプションを使用すると、ファイルを監視して変更があった場合に自動で変換してくれます。
+下記のコマンドを実行すると、<code>slide-deck.md</code>を監視して変更があった場合に自動で<code>slide-deck.html</code>に変換してくれます。</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp slide-deck.md</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">w
+</span></code></pre>
+<h4 id="servermodo">Serverモード</h4>
+<p><code>--server</code>/<code>-s</code>s`オプションを使用すると、ローカルサーバーを起動してスライドを表示してくれます。
+サーバーモードの場合の引数はディレクトリなので注意が必要です。</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp ./slides</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">s </span><span style="font-style:italic;color:#444b6a;"># ./slidesディレクトリをルートとしてサーバーを起動
+</span></code></pre>
+<h3 id="csswoshi-yong-suru">cssを適用する</h3>
+<p><code>--theme</code>オプションを使用すると、スライドにcssを適用できます。</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp slide-deck.md</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">theme</span><span style="color:#7aa2f7;"> theme.css
+</span></code></pre>
+<h3 id="deirekutoriwozhi-ding-sitebian-huan-suru">ディレクトリを指定して変換する</h3>
+<p><code>--input-dir</code>,<code>-I</code>オプションを使用すると、ディレクトリ内の全てのMarkdownファイルに対して変換できます。</p>
+<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">I</span><span style="color:#7aa2f7;"> ./slides </span><span style="font-style:italic;color:#444b6a;"># ./slidesディレクトリ内の全てのMarkdownファイルを変換
+</span></code></pre>
+<p>この場合は<code>--theme</code>オプションなしでも<code>./slides</code>以下のテーマを使用することができます。</p>
+<hr />
+<p>ほかにもオプションがあるので、詳しくは<a href="https://github.com/marp-team/marp-cli">marp-cli</a>のREADMEや<code>marp --help</code>を参照してください。</p>
+</p>
+<hr>
+<p class="share_buttons">
+  <a class="twitter-share-button" data-text="自由なエディタでMarkdownを書いてスライドを作成できるmarp-cli - blockの巣" href="https://twitter.com/intent/tweet">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
+<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
+
+
+
+    </div>
+  </section>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
