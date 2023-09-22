@@ -55,27 +55,25 @@ let a = (1_i32);      …">
 <body>
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
   <header class="header">
-    
     <div class="container" id="ga_cookie_accept_menu"></div>
-    
-    <div class="container">
+    <div class="container" id="title">
       <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
-      <nav>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
-        
-      </nav>
     </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
   </header>
-  <section class="section">
+  <main class="section">
     <div class="container">
       
 <h1 class="title">
@@ -101,6 +99,14 @@ let a = (1_i32);      …">
   
 
 </section>
+<section class="container" id="page-index">
+  
+<ul>
+  
+</ul>
+
+</section>
+<hr>
 <p><p>RustではTupleの変数・型の宣言時に末尾に<code>,</code>を付けることができます。<br />
 以下のように書いたときそれぞれの型は以下のようになります。</p>
 <pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">let</span><span> a </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">1_</span><span style="color:#bb9af7;">i32</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;          </span><span style="font-style:italic;color:#444b6a;">// i32
@@ -124,7 +130,7 @@ let a = (1_i32);      …">
 
 
     </div>
-  </section>
+  </main>
   <footer>
     
     

@@ -59,27 +59,25 @@
 <body>
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
   <header class="header">
-    
     <div class="container" id="ga_cookie_accept_menu"></div>
-    
-    <div class="container">
+    <div class="container" id="title">
       <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
-      <nav>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
-        
-      </nav>
     </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
   </header>
-  <section class="section">
+  <main class="section">
     <div class="container">
       
 <h1 class="title">
@@ -113,6 +111,64 @@
   
 
 </section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#jin-hui-nobian-geng-dian">今回の変更点</a></li>
+  <ul>
+     
+    <li><a href="#spherexing-wozhui-jia">Sphere型を追加</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#reitoobuziekutonojiao-chai-pan-ding-wobao-chi-suruhitrecordxing-wozhui-jia">レイとオブジェクトの交差判定を保持するHitRecord型を追加</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#reitojiao-chai-pan-ding-woxing-eruxing-nolie-ju-hittablewozhui-jia">レイと交差判定を行える型の列挙Hittableを追加</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#hittablewofu-shu-bao-chi-suruhittablelistwozhui-jia">Hittableを複数保持するHittableListを追加</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#reitonojiao-chai-pan-ding-wodan-yi-noqiu-todehanakuwarudotoxing-uyounisuru">レイとの交差判定を単一の球とではなくワールドと行うようにする</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#ray-tracing-in-one-weekendtonobian-geng-dian">Ray Tracing in One Weekendとの変更点</a></li>
+  <ul>
+     
+    <li><a href="#hittablelistgabao-chi-siteirubian-shu-ga-sumato-pointanodong-de-pei-lie-dehanai">HittableListが保持している変数が(スマート)ポインタの動的配列ではない</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#hittablegatraitdehanakuenum">HittableがTraitではなくEnum</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#atogaki">あとがき</a></li>
+  <ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
 <p><p><a href="../compile-time-ray-tracing-in-rust-5">前回記事</a><br />
 <a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a><br />
 記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/bcc80697fd56821fc0f2ef09a2f092284c9bf3ae"><code>bcc80697fd56821fc0f2ef09a2f092284c9bf3ae</code></a>のものです。</p>
@@ -295,7 +351,7 @@
 
 
     </div>
-  </section>
+  </main>
   <footer>
     
     

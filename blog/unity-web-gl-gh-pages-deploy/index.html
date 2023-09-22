@@ -55,27 +55,25 @@ D…">
 <body>
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
   <header class="header">
-    
     <div class="container" id="ga_cookie_accept_menu"></div>
-    
-    <div class="container">
+    <div class="container" id="title">
       <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
-      <nav>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
-        
-      </nav>
     </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
   </header>
-  <section class="section">
+  <main class="section">
     <div class="container">
       
 <h1 class="title">
@@ -121,6 +119,79 @@ D…">
   
 
 </section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#unitynopuroziekutonoshe-ding">Unityのプロジェクトの設定</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#githubnoripozitorinigithubnoraisensuqing-bao-wodeng-lu-suru">GitHubのリポジトリにGitHubのライセンス情報を登録する</a></li>
+  <ul>
+     
+    <li><a href="#githubdeshi-yong-surutamenoakuteibesiyonhuairuworikuesutosuru">GitHubで使用するためのアクティベーションファイルをリクエストする</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#akuteibesiyonhuairuwoshi-yong-siteraisensuwoqu-de-suru">アクティベーションファイルを使用してライセンスを取得する</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#githubnoripozitorinosecretsniraisensuwodeng-lu-suru">GitHubのリポジトリのSecretsにライセンスを登録する</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#github-actionsdewebglbirudositegithub-pagesnideploysuru">GitHub ActionsでWebGLビルドしてGitHub PagesにDeployする</a></li>
+  <ul>
+     
+    <li><a href="#github-pagesdenogong-kai-she-ding">GitHub Pagesでの公開設定</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#meinburantinipushsitatokiyapull-requestgamazisaretatokinizi-dong-debirudo-deploysuru">メインブランチにpushしたときやpull requestがマージされたときに自動でビルド&amp;Deployする</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#sonota">その他</a></li>
+  <ul>
+     
+    <li><a href="#project-settingsdedecompression-fallbackwowu-xiao-nisitamamaya-suo-sitachang-he">Project SettingsでDecompression Fallbackを無効にしたまま圧縮した場合</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#unitynobaziyonga2020-ltsban-noli-you">Unityのバージョンが2020 LTS版の理由</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#birudoshi-nikiyatusiyuwoli-yong-suru">ビルド時にキャッシュを利用する</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#atogaki">あとがき</a></li>
+  <ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
 <p><p>GameCIを使用してしてUnityのプロジェクトをGitHub ActionsでWebGLビルドしてGitHub PagesにDeployする方法です。</p>
 <p><a href="https://github.com/block-cube-lib/unity-webgl-gh-pages-deploy-sample">サンプルのリポジトリ</a><br />
 <a href="https://block-cube-lib.github.io/unity-webgl-gh-pages-deploy-sample/">Deploy結果</a></p>
@@ -288,7 +359,7 @@ workflowの実行が完了すると<code>gh-pages</code>というブランチに
 
 
     </div>
-  </section>
+  </main>
   <footer>
     
     

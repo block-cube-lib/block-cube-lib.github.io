@@ -55,27 +55,25 @@
 <body>
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
   <header class="header">
-    
     <div class="container" id="ga_cookie_accept_menu"></div>
-    
-    <div class="container">
+    <div class="container" id="title">
       <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
-      <nav>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
-        
-      </nav>
     </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
   </header>
-  <section class="section">
+  <main class="section">
     <div class="container">
       
 <h1 class="title">
@@ -101,6 +99,39 @@
   
 
 </section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#add">Add</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#addassign">AddAssign</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#indexmut">IndexMut</a></li>
+  <ul>
+     
+    <li><a href="#panic-nei-denobian-shu-mai-meip-mihadekinai">panic!内での変数埋め込みはできない</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#matome">まとめ</a></li>
+  <ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
 <p><p>この記事はRust v1.60.0-nightlyで動作確認しています。</p>
 <hr />
 <p>今私はRustでコンパイル時レイトレーシングという試みをしているのですが、そこで必要になった<code>const fn</code>の中で使用できる<code>Vec3</code>を定義するためのに必要なことを書いていきます。<br />
@@ -470,7 +501,7 @@
 
 
     </div>
-  </section>
+  </main>
   <footer>
     
     

@@ -59,27 +59,25 @@ date = 2022-11-19T22:00:00+09:00
 <body>
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
   <header class="header">
-    
     <div class="container" id="ga_cookie_accept_menu"></div>
-    
-    <div class="container">
+    <div class="container" id="title">
       <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
-      <nav>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
-        
-      </nav>
     </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
   </header>
-  <section class="section">
+  <main class="section">
     <div class="container">
       
 <h1 class="title">
@@ -105,6 +103,54 @@ date = 2022-11-19T22:00:00+09:00
   
 
 </section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#mu-de">目的</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#qian-ti">前提</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#yarukoto">やること</a></li>
+  <ul>
+     
+    <li><a href="#tenpuretohuairubian-ji">テンプレートファイル編集</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#markdownnigeng-xin-lu-li-wozhui-jia">Markdownに更新履歴を追加</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#jie-guo">結果</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#zatukurijie-shuo">ざっくり解説</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#atogaki">あとがき</a></li>
+  <ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
 <p><h2 id="mu-de">目的</h2>
 <p>記事のMarkdownのヘッダーに下記ような記述をして</p>
 <pre data-lang="toml" style="background-color:#1d1f29;color:#afbad4;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#f7768e;">title </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">タイトル</span><span style="color:#89ddff;">&quot;
@@ -143,7 +189,7 @@ date = 2022-11-19T22:00:00+09:00
 </span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">section</span><span style="color:#ba3c97;">&gt;
 </span></code></pre>
 <h3 id="markdownnigeng-xin-lu-li-wozhui-jia">Markdownに更新履歴を追加</h3>
-<p>記事のMarkdownに以下のように<code>[extra]</code> <code>updated_histories</code>を追加します。<br />
+<p>記事のMarkdownに以下のように <code>[extra]</code> <code>updated_histories</code>を追加します。<br />
 <code>updated_histories</code>は<code>toml</code>の辞書形式で<code>date</code>(更新日時)と<code>content</code>(更新内容)を記述します。</p>
 <pre data-lang="toml" style="background-color:#1d1f29;color:#afbad4;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#89ddff;">[</span><span style="color:#c0caf5;">extra</span><span style="color:#89ddff;">]
 </span><span style="color:#f7768e;">updated_histories </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
@@ -192,7 +238,7 @@ date = 2022-11-19T22:00:00+09:00
 <p>リストではなくテーブルとして表示しているのはフォントによっては日付と更新内容がきれいに並ばなかったからです。<br />
 好みでリストにしても問題ないです。</p>
 <p>次にMarkdown側の変更です。今回のキモ2です。
-ヘッダーにZolaが用意していない要素('extra<code>)の</code>updated_histories`を追加しそこに日付と更新内容を格納します。</p>
+ヘッダーにZolaが用意していない要素(<code>extra</code>)の<code>updated_histories</code>を追加しそこに日付と更新内容を格納します。</p>
 <pre data-lang="toml" style="background-color:#1d1f29;color:#afbad4;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#89ddff;">[</span><span style="color:#c0caf5;">extra</span><span style="color:#89ddff;">]
 </span><span style="color:#f7768e;">updated_histories </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">[
 </span><span>  </span><span style="color:#89ddff;">{ </span><span style="color:#f7768e;">date </span><span style="color:#89ddff;">= </span><span style="color:#e0af68;">2022-12-22T01:07:00+09:00</span><span style="color:#89ddff;">, </span><span style="color:#f7768e;">content </span><span style="color:#89ddff;">= &quot;</span><span style="color:#9ece6a;">追記1</span><span style="color:#89ddff;">&quot; },
@@ -222,7 +268,7 @@ date = 2022-11-19T22:00:00+09:00
 
 
     </div>
-  </section>
+  </main>
   <footer>
     
     

@@ -59,27 +59,25 @@
 <body>
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
   <header class="header">
-    
     <div class="container" id="ga_cookie_accept_menu"></div>
-    
-    <div class="container">
+    <div class="container" id="title">
       <a href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;">blockの巣</a>
-      <nav>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
-        
-        <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
-        
-      </nav>
     </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
   </header>
-  <section class="section">
+  <main class="section">
     <div class="container">
       
 <h1 class="title">
@@ -113,6 +111,44 @@
   
 
 </section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#jin-hui-nobian-geng-dian">今回の変更点</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#cameragou-zao-ti-wozhui-jia">Camera構造体を追加</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#luan-shu-sheng-cheng-noshi-zu-miwozhui-jia">乱数生成の仕組みを追加</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#antieiriasinguchu-li-wozhui-jia">アンチエイリアシング処理を追加</a></li>
+  <ul>
+     
+    <li><a href="#xorshiftnoseedzhi-nituite">Xorshiftのseed値について</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#atogaki">あとがき</a></li>
+  <ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
 <p><p><a href="../compile-time-ray-tracing-in-rust-6">前回記事</a><br />
 <a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust">リポジトリ</a><br />
 記事の内容はコミットID<a href="https://github.com/block-cube-lib/compile-time-ray-tracing-in-rust/tree/80bd3b43d920d02c989dad6a7723400ab18e8bac"><code>80bd3b43d920d02c989dad6a7723400ab18e8bac</code></a>のものです。</p>
@@ -121,7 +157,7 @@
 手元の環境で前回まではコンパイルに2分かからなかったですが今回からコンパイル時間が10時間を超えるようになりました。</p>
 <p>レンダリング結果<br />
 <img src="/image/compile-time-ray-tracing-in-rust/image6.png" alt="レンダリング結果" /><br />
-前回の結果(下の画像)と比べると球の周囲のジャギーが減っているのがわかると思います。
+前回の結果(下の画像)と比べると球の周囲のジャギーが減っているのがわかると思います。<br />
 <img src="/image/compile-time-ray-tracing-in-rust/image5.png" alt="前回のレンダリング結果" /></p>
 <p>この記事の内容を実装したときのRustのバージョンは<code>1.61.0-nightly (3d6970d50 2022-02-28)</code>です。</p>
 <h2 id="jin-hui-nobian-geng-dian">今回の変更点</h2>
@@ -319,7 +355,7 @@
 
 
     </div>
-  </section>
+  </main>
   <footer>
     
     
