@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      const genericsの引数によってベクトル型の定義を変えたもので行列型を定義したかった - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    nightlyの話です。
+タイトルだけだと何がしたいのかわからないですね。
+以前書いた
+Rustのconst genericsの引数によって型の定義を変える(っぽいこと)
+に関連す…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;failed-attempt-const-generics-vector-matrix&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9mYWlsZWQtYXR0ZW1wdC1jb25zdC1nZW5lcmljcy12ZWN0b3ItbWF0cml4Lw==">
+    <meta property="og:title" content= "const genericsの引数によってベクトル型の定義を変えたもので行列型を定義したかった" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="nightlyの話です。
+タイトルだけだと何がしたいのかわからないですね。
+以前書いた
+Rustのconst genericsの引数によって型の定義を変える(っぽいこと)
+に関連す…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "const genericsの引数によってベクトル型の定義を変えたもので行列型を定義したかった" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    <div class="container" id="title">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io">blockの巣</a>
+    </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io/blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io/tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io/about&#x2F;">About</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io/works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="https:&#x2F;&#x2F;block-cube-lib.github.io/privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
+  </header>
+  <main class="section">
+    <div class="container">
+      
+<h1 class="title">
+  const genericsの引数によってベクトル型の定義を変えたもので行列型を定義したかった
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2024&#x2F;02&#x2F;21 15:25</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/rust/">Rust</a></span>
+
+  
+
+</section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#vectorxing-noding-yi">Vector型の定義</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#matrixxing-noding-yi">Matrix型の定義</a></li>
+  <ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
+<p><p>nightlyの話です。<br />
+タイトルだけだと何がしたいのかわからないですね。</p>
+<p>以前書いた
+<a href="../rust-generics-specialization">Rustのconst genericsの引数によって型の定義を変える(っぽいこと)</a>
+に関連するような話です。</p>
+<hr />
+<p>やりたいことは</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Matrix</span><span style="color:#89ddff;">&lt;</span><span>T, </span><span style="font-style:italic;color:#9d7cd8;">const</span><span> ROW</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span>, </span><span style="font-style:italic;color:#9d7cd8;">const</span><span> COL</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">elements</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> [Vector</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">T, COL</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">; ROW],
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>という定義で行列型を定義する。ただし、<code>Vector</code>型は引数の定数によって要素を以下のように変えたい。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#444b6a;">// 1次元ベクトル
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vector1</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">}
+</span><span style="font-style:italic;color:#444b6a;">// 2次元ベクトル
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vector2</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">}
+</span><span style="font-style:italic;color:#444b6a;">// 3次元ベクトル
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vector3</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">}
+</span><span style="font-style:italic;color:#444b6a;">// 4次元ベクトル
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vector4</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">w</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">}
+</span><span style="font-style:italic;color:#444b6a;">// 5次元ベクトル以上
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">ArrayWrapper</span><span style="color:#89ddff;">&lt;</span><span>T, </span><span style="font-style:italic;color:#9d7cd8;">const</span><span> N</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#7dcfff;">elements</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> [T; N],
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>つまり
+<code>Matrix&lt;f32, 1, 2&gt;</code>であれば</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Matrix </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">elements</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> [Vector2</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">; 1],
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p><code>Matrix&lt;f32, 3, 4&gt;</code>であれば</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Matrix </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">elements</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> [Vector4</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">; 3],
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p><code>Matrix&lt;f32, 3, 5&gt;</code>であれば</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Matrix </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">elements</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> [ArrayWrapper</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">, 5</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">; 2],
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>のようになる。</p>
+<h2 id="vectorxing-noding-yi">Vector型の定義</h2>
+<p>これにはまず<code>Vector&lt;T, D&gt;</code>を定義する必要があるが、これは冒頭に書いた
+<a href="../rust-generics-specialization">Rustのconst genericsの引数によって型の定義を変える(っぽいこと)</a>
+の内容でほぼ解決できます。
+リンク先の内容では<code>D &gt; 5</code>の場合にエラーとなるのですが、以下のように<code>VectorTypeHolder</code>に<code>USE_ARRAY_WRAPPER</code>という引数を追加して、<code>D &gt;= 5</code>の場合に<code>ArrayWrapper</code>を使うようにすれば解決できます。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#444b6a;">// #![feature(generic_const_exprs)]が必要
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">trait </span><span style="color:#c0caf5;">VectorTypeHolder</span><span>&lt;T, const D: usize, const USE_ARRAY_WRAPPER: bool&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Vector</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">VectorTypeResolver</span><span style="color:#89ddff;">&lt;</span><span>T, </span><span style="font-style:italic;color:#9d7cd8;">const</span><span> D</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">_marker</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">std</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">marker</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">PhantomData</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">fn</span><span style="color:#9abdf5;">() </span><span style="color:#89ddff;">-&gt; </span><span style="color:#9abdf5;">[T</span><span style="color:#89ddff;">; </span><span style="color:#ff9e64;">D</span><span style="color:#9abdf5;">]</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">impl</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span>VectorTypeHolder</span><span style="color:#89ddff;">&lt;</span><span>T, 1, false</span><span style="color:#89ddff;">&gt; for </span><span style="color:#c0caf5;">VectorTypeResolver</span><span style="color:#89ddff;">&lt;</span><span>T, 1</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Vector </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">Vector1</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">T</span><span style="color:#89ddff;">&gt;;
+</span><span style="color:#9abdf5;">}
+</span><span style="color:#bb9af7;">impl</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span>VectorTypeHolder</span><span style="color:#89ddff;">&lt;</span><span>T, 2, false</span><span style="color:#89ddff;">&gt; for </span><span style="color:#c0caf5;">VectorTypeResolver</span><span style="color:#89ddff;">&lt;</span><span>T, 2</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Vector </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">Vector2</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">T</span><span style="color:#89ddff;">&gt;;
+</span><span style="color:#9abdf5;">}
+</span><span style="color:#bb9af7;">impl</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span>VectorTypeHolder</span><span style="color:#89ddff;">&lt;</span><span>T, 3, false</span><span style="color:#89ddff;">&gt; for </span><span style="color:#c0caf5;">VectorTypeResolver</span><span style="color:#89ddff;">&lt;</span><span>T, 3</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Vector </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">Vector3</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">T</span><span style="color:#89ddff;">&gt;;
+</span><span style="color:#9abdf5;">}
+</span><span style="color:#bb9af7;">impl</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span>VectorTypeHolder</span><span style="color:#89ddff;">&lt;</span><span>T, 4, false</span><span style="color:#89ddff;">&gt; for </span><span style="color:#c0caf5;">VectorTypeResolver</span><span style="color:#89ddff;">&lt;</span><span>T, 4</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Vector </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">Vector4</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">T</span><span style="color:#89ddff;">&gt;;
+</span><span style="color:#9abdf5;">}
+</span><span style="color:#bb9af7;">impl</span><span style="color:#89ddff;">&lt;</span><span>T, </span><span style="font-style:italic;color:#9d7cd8;">const</span><span> N</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span>VectorTypeHolder</span><span style="color:#89ddff;">&lt;</span><span>T, N, true</span><span style="color:#89ddff;">&gt; for </span><span style="color:#c0caf5;">VectorTypeResolver</span><span style="color:#89ddff;">&lt;</span><span>T, N</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Vector </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">ArrayWrapper</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">T, N</span><span style="color:#89ddff;">&gt;;
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="font-style:italic;color:#444b6a;">// D &gt;= 5の場合に`USE_ARRAY_WRAPPER`をtrueにすることでArrayWrapperを使うようにする
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Vector</span><span style="color:#bb9af7;">&lt;</span><span>T</span><span style="color:#89ddff;">, </span><span style="color:#bb9af7;">const</span><span> D</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize&gt; </span><span style="color:#89ddff;">= &lt;</span><span>VectorTypeResolver</span><span style="color:#89ddff;">&lt;</span><span>T, D</span><span style="color:#89ddff;">&gt; as </span><span>VectorTypeHolder</span><span style="color:#89ddff;">&lt;</span><span>T, D, </span><span style="color:#ff5370;">{</span><span>D </span><span style="color:#89ddff;">&gt;= </span><span style="color:#ff9e64;">5</span><span>}</span><span style="color:#bb9af7;">&gt;&gt;</span><span style="color:#89ddff;">::</span><span>Vector</span><span style="color:#89ddff;">;
+</span></code></pre>
+<p>以下のようなコードを書くと確認できます。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">main</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">    </span><span style="color:#89ddff;">use </span><span style="color:#9abdf5;">std</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">any</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">type_name</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    println!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#c0caf5;">{}</span><span style="color:#89ddff;">&quot;, </span><span style="color:#9abdf5;">type_name</span><span style="color:#89ddff;">::&lt;</span><span style="color:#9abdf5;">Vector</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">, 1</span><span style="color:#89ddff;">&gt;&gt;</span><span style="color:#9abdf5;">())</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    println!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#c0caf5;">{}</span><span style="color:#89ddff;">&quot;, </span><span style="color:#9abdf5;">type_name</span><span style="color:#89ddff;">::&lt;</span><span style="color:#9abdf5;">Vector</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">, 2</span><span style="color:#89ddff;">&gt;&gt;</span><span style="color:#9abdf5;">())</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    println!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#c0caf5;">{}</span><span style="color:#89ddff;">&quot;, </span><span style="color:#9abdf5;">type_name</span><span style="color:#89ddff;">::&lt;</span><span style="color:#9abdf5;">Vector</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">, 3</span><span style="color:#89ddff;">&gt;&gt;</span><span style="color:#9abdf5;">())</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    println!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#c0caf5;">{}</span><span style="color:#89ddff;">&quot;, </span><span style="color:#9abdf5;">type_name</span><span style="color:#89ddff;">::&lt;</span><span style="color:#9abdf5;">Vector</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">, 4</span><span style="color:#89ddff;">&gt;&gt;</span><span style="color:#9abdf5;">())</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    println!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#c0caf5;">{}</span><span style="color:#89ddff;">&quot;, </span><span style="color:#9abdf5;">type_name</span><span style="color:#89ddff;">::&lt;</span><span style="color:#9abdf5;">Vector</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">, 5</span><span style="color:#89ddff;">&gt;&gt;</span><span style="color:#9abdf5;">())</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    println!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#c0caf5;">{}</span><span style="color:#89ddff;">&quot;, </span><span style="color:#9abdf5;">type_name</span><span style="color:#89ddff;">::&lt;</span><span style="color:#9abdf5;">Vector</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">, 6</span><span style="color:#89ddff;">&gt;&gt;</span><span style="color:#9abdf5;">())</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>出力</p>
+<pre style="background-color:#1d1f29;color:#afbad4;"><code><span>playground::Vector1&lt;f32&gt;
+</span><span>playground::Vector2&lt;f32&gt;
+</span><span>playground::Vector3&lt;f32&gt;
+</span><span>playground::Vector4&lt;f32&gt;
+</span><span>playground::ArrayWrapper&lt;f32, 5&gt;
+</span><span>playground::ArrayWrapper&lt;f32, 6&gt;
+</span></code></pre>
+<p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=b6435677cc9454e33223a6c43f57a6c7">Rust Playground</a></p>
+<h2 id="matrixxing-noding-yi">Matrix型の定義</h2>
+<p>ここまでできたのであればあとは簡単に見えます。<code>Vector&lt;T, D&gt;</code>は既に定義されているので</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Matrix</span><span style="color:#89ddff;">&lt;</span><span>T, </span><span style="font-style:italic;color:#9d7cd8;">const</span><span> ROW</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span>, </span><span style="font-style:italic;color:#9d7cd8;">const</span><span> COL</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">usize</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">elements</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> [Vector</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">T, COL</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">; ROW],
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>でOKに感じますが以下のようなコンパイルエラーが発生します。</p>
+<pre style="background-color:#1d1f29;color:#afbad4;"><code><span>error[E0308]: mismatched types
+</span><span>  --&gt; src/main.rs:52:15
+</span><span>   |
+</span><span>52 |     elements: [Vector&lt;T, COL&gt;; ROW],
+</span><span>   |               ^^^^^^^^^^^^^^^^^^^^^ expected `{D &gt;= 5}`, found `true`
+</span><span>   |
+</span><span>   = note: expected constant `{D &gt;= 5}`
+</span><span>              found constant `true`
+</span><span>
+</span><span>For more information about this error, try `rustc --explain E0308`.
+</span><span>warning: `playground` (bin &quot;playground&quot;) generated 1 warning
+</span><span>error: could not compile `playground` (bin &quot;playground&quot;) due to 1 previous error; 1 warning emitted
+</span></code></pre>
+<p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=d179591bdfde48d397f590df5dfc3702">Rust Playground</a></p>
+<p>型が不一致だそうです。何故……<br />
+何もわからないですができなかったことを覚えておくために記事を書きました。うまいことやる方法をご存知の方がいれば教えてください。</p>
+</p>
+<hr>
+<div class="container share_buttons">
+  <div><a class="twitter-share-button" data-text="const genericsの引数によってベクトル型の定義を変えたもので行列型を定義したかった - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+  <div>
+    <a href="https://donshare.net/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://donshare.net/image/tootbutton.png" width="100" height="20"></a>
+  </div>
+  <div>
+    <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
+  </div>
+</div>
+
+  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
+<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
+
+
+
+    </div>
+  </main>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
