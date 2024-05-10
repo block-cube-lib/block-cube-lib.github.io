@@ -83,6 +83,10 @@
         <lastmod>2024-02-21T15:25:00+09:00</lastmod>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/github-codespaces-zola/</loc>
+        <lastmod>2024-05-10T23:49:00+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/google-analytics/</loc>
         <lastmod>2022-02-03T10:53:00+09:00</lastmod>
     </url>
@@ -206,6 +210,9 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/github-actions/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/github-codespaces/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/github-pages/</loc>
