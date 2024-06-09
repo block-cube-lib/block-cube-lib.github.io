@@ -13,37 +13,37 @@
   
   <title>
     
-      This Week in block 2024年5月 2週目 - blockの巣
+      This Week in block 3 (2024&#x2F;5&#x2F;19 ~ 2024&#x2F;5&#x2F;25) - blockの巣
     
   </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="
   
-    2024年の5月第2週目(5月6日〜5月11日)でやったこととか。
-M5DialのファームウェアをRustで書く
-Bluetoothでキーボードとして認識させることはできた。マウス…
+    2024&#x2F;05&#x2F;19 ~ 2024&#x2F;05&#x2F;25でやったこととか。
+NeovimのプラグインマネージャーをLazyからdpp.vimに移行(完了)
+dpp.vimへの移行の際、必要な…
   
 ">
 
    <!-- begin ogp -->
-    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;this-week-in-block-202405-2&#x2F;">
-    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy90aGlzLXdlZWstaW4tYmxvY2stMjAyNDA1LTIv">
-    <meta property="og:title" content= "This Week in block 2024年5月 2週目" >
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;this-week-in-block&#x2F;this-week-in-block-3&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vdGhpcy13ZWVrLWluLWJsb2NrL3RoaXMtd2Vlay1pbi1ibG9jay0zLw==">
+    <meta property="og:title" content= "This Week in block 3 (2024&#x2F;5&#x2F;19 ~ 2024&#x2F;5&#x2F;25)" >
     
     
       
           <meta property="og:type" constnt="article">
       
     
-    <meta property="og:description" content="2024年の5月第2週目(5月6日〜5月11日)でやったこととか。
-M5DialのファームウェアをRustで書く
-Bluetoothでキーボードとして認識させることはできた。マウス…">
+    <meta property="og:description" content="2024&amp;#x2F;05&amp;#x2F;19 ~ 2024&amp;#x2F;05&amp;#x2F;25でやったこととか。
+NeovimのプラグインマネージャーをLazyからdpp.vimに移行(完了)
+dpp.vimへの移行の際、必要な…">
     <!-- begin twitter ogp -->
     
       <meta name="twitter:card" content="summary_large_image">
       <meta name="twitter:site" content="@block_cube_lib">
-      <meta name="twitter:title" content= "This Week in block 2024年5月 2週目" >
+      <meta name="twitter:title" content= "This Week in block 3 (2024&#x2F;5&#x2F;19 ~ 2024&#x2F;5&#x2F;25)" >
     
     <!-- end twitter ogp -->
    <!-- end ogp -->
@@ -77,16 +77,26 @@ Bluetoothでキーボードとして認識させることはできた。マウ�
     <div class="container">
       
 <h1 class="title">
-  This Week in block 2024年5月 2週目
+  This Week in block 3 (2024&#x2F;5&#x2F;19 ~ 2024&#x2F;5&#x2F;25)
 </h1>
   <section class="update_history">
     <table>
       <tr>
         <td>
-  <span class = "date">2024&#x2F;05&#x2F;11 18:20</span>
+  <span class = "date">2024&#x2F;05&#x2F;26 02:27</span>
 </td>
         <td>公開</td>
       </tr>
+      
+        
+        <tr>
+          <td>
+  <span class = "date">2024&#x2F;06&#x2F;09 15:52</span>
+</td>
+          <td class="update_history_content"><p>階層とタイトルと内容の一部</p>
+</td>
+        </tr>
+        
       
     </table>
   </section>
@@ -103,12 +113,12 @@ Bluetoothでキーボードとして認識させることはできた。マウ�
   
 <ul>
    
-  <li><a href="#m5dialnohuamuueaworustdeshu-ku">M5DialのファームウェアをRustで書く</a></li>
+  <li><a href="#neovimnopuraguinmaneziyawolazykaradpp-vimniyi-xing-wan-liao">NeovimのプラグインマネージャーをLazyからdpp.vimに移行(完了)</a></li>
   <ul>
     
   </ul>
    
-  <li><a href="#github-codespacesdeburoguwogeng-xin-dekiruyounisita">GitHub Codespacesでブログを更新できるようにした</a></li>
+  <li><a href="#chromekuo-zhang-nokai-fa">Chrome拡張の開発</a></li>
   <ul>
     
   </ul>
@@ -132,39 +142,33 @@ Bluetoothでキーボードとして認識させることはできた。マウ�
 
 </section>
 <hr>
-<p><p>2024年の5月第2週目(5月6日〜5月11日)でやったこととか。</p>
-<h2 id="m5dialnohuamuueaworustdeshu-ku">M5DialのファームウェアをRustで書く</h2>
-<p>Bluetoothでキーボードとして認識させることはできた。マウスとしては認識させられていない。<br />
-ほどんど<a href="https://github.com/taks/esp32-nimble">Nimble</a>のサンプルだけでどうにかなった。便利。<br />
-画面描画がとても遅いのでそのあたりどうするか悩んでる。</p>
-<h2 id="github-codespacesdeburoguwogeng-xin-dekiruyounisita">GitHub Codespacesでブログを更新できるようにした</h2>
-<p>記事書いた。<br />
-<a href="https://block-cube-lib.github.io/blog/github-codespaces-zola/">GitHub CodesacesでZolaの記事を書く</a><br />
-現在の<code>Dockerfile</code>だと最新の<code>Neovim</code>を使えない関係でVSCodeのNeovim拡張を入れられないのでストレス。</p>
+<p><p>2024/05/19 ~ 2024/05/25でやったこととか。</p>
+<h2 id="neovimnopuraguinmaneziyawolazykaradpp-vimniyi-xing-wan-liao">NeovimのプラグインマネージャーをLazyからdpp.vimに移行(完了)</h2>
+<p><code>dpp.vim</code>への移行の際、必要なプラグインを見直していたが結果的にほぼそのまま移行した。<br />
+途中</p>
+<pre style="background-color:#1d1f29;color:#afbad4;"><code><span>Failed to load plugin &#39;dpp&#39;: TypeError: Could not find constraint in the list of versions: @core/unknownutil@3.18.1
+</span></code></pre>
+<p>というエラーが発生したが、deno cacheを削除したら発生しなくなった。<a href="https://x.com/ShougoMatsu/status/1792302404605784263">Shougoさんありがとうございます。</a></p>
+<p>installとupdateを呼びやすくするための<a href="https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-3/dpp.vim(dpp-ext-installer)%E3%81%AEinstall%E3%81%A8update%E3%82%92%E5%B0%91%E3%81%97%E4%BD%BF%E3%81%84%E3%82%84%E3%81%99%E3%81%8F%E3%81%99%E3%82%8B">小ネタ</a>記事を書いたりもした。</p>
+<h2 id="chromekuo-zhang-nokai-fa">Chrome拡張の開発</h2>
+<p>サイトによってクリップボードにコピーする内容を変えられる拡張機能を作っている。<br />
+機能を作ることより使いやすくする作業が大変。</p>
 <h2 id="du-ndaben">読んだ本</h2>
-<p><strong><a href="https://gihyo.jp/book/2024/978-4-297-14037-3">Bluetooth無線化講座</a></strong><br />
-読み終わった。現在ESP32を使用したBLEキーボードの作成を行いたいを思っているため購入しました。<br />
-Bluetoothの実装前に概念を頭に入れれたので助かった。</p>
-<p><strong>t<a href="https://www.oreilly.co.jp/books/9784814400515/">詳解 Rustアトミック操作とロック</a></strong><br />
-少しずつ読んでいる。<br />
-今9章なのでもう少しで読み終わるはず。多分。<br />
-ロックの実装でシステムコールを避けて高速化しようとする話は結局高速化に繋らないこともあったりそもそも環境ごとに効果が違ったりと面白かった。</p>
+<p><strong><a href="https://www.lambdanote.com/products/cpu">プログラマーのためのCPU入門 ― CPUは如何にしてソフトウェアを高速に実行するか</a></strong><br />
+I/Oアクセスの辺りとキャッシュコヒーレンスの辺りを読んでた。<br />
+こういうのは読めば読むほどよく出来ているなと関心する。まだまだCPUの気持ちにはなれなさそう。</p>
 <h2 id="yaritaikototoka">やりたいこととか</h2>
 <ul>
-<li>RustとWebAssemblyでゲーム開発するやつが途中なので続きをやりたい</li>
-<li>ブログ内のURLにOGPを表示できるようにしたい</li>
+<li>RustとWebAssemblyでゲーム開発するやつが途中なので続きをやりたい(先週から引き続き)</li>
+<li>Codespacesでブログ書く環境ををもう少し快適にしたい
+せめてNeovimwを使用できるように</li>
 </ul>
 <h2 id="sonota">その他</h2>
-<ul>
-<li>息子が体調を崩した日が会社の読書会の日だったので読書会には不参加</li>
-<li>会社で目標設定を考えることがありましたがそもそも前回の目標を忘れているなどしたのでちゃんと目に見えるところに目標置いておく必要があると思いました</li>
-<li>珍しく黄鉄鉱以外の鉱石を買った</li>
-<li>オフィスに鉱石を飾った</li>
-</ul>
+<p>今週は以前までより時間があった気がするがとくに何かできていたわけではなかったように思う。</p>
 </p>
 <hr>
 <div class="container share_buttons">
-  <div><a class="twitter-share-button" data-text="This Week in block 2024年5月 2週目 - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+  <div><a class="twitter-share-button" data-text="This Week in block 3 (2024&#x2F;5&#x2F;19 ~ 2024&#x2F;5&#x2F;25) - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </div>
   <div>

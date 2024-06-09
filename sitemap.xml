@@ -139,18 +139,6 @@
         <lastmod>2023-05-30T13:07:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/this-week-in-block-202405-2/</loc>
-        <lastmod>2024-05-11T18:20:00+09:00</lastmod>
-    </url>
-    <url>
-        <loc>https://block-cube-lib.github.io/blog/this-week-in-block-202405-3/</loc>
-        <lastmod>2024-05-18T23:50:00+09:00</lastmod>
-    </url>
-    <url>
-        <loc>https://block-cube-lib.github.io/blog/this-week-in-block-202405-5/</loc>
-        <lastmod>2024-06-02T00:11:30+09:00</lastmod>
-    </url>
-    <url>
         <loc>https://block-cube-lib.github.io/blog/treesitter-cs-user-defined-array-type-highlight/</loc>
         <lastmod>2023-05-26T09:43:32+09:00</lastmod>
     </url>
@@ -300,6 +288,29 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/zola/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/this-week-in-block/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-1/</loc>
+        <lastmod>2024-05-11T18:20:00+09:00</lastmod>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-2/</loc>
+        <lastmod>2024-05-18T23:50:00+09:00</lastmod>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-3/</loc>
+        <lastmod>2024-05-26T02:27:00+09:00</lastmod>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-4/</loc>
+        <lastmod>2024-06-02T00:11:30+09:00</lastmod>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-5/</loc>
+        <lastmod>2024-06-09T20:45:00+09:00</lastmod>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/works/</loc>

@@ -13,37 +13,37 @@
   
   <title>
     
-      This Week in block 2024年5月 3週目 - blockの巣
+      This Week in block 1 (2024&#x2F;05&#x2F;6 ~ 2024&#x2F;05&#x2F;11) - blockの巣
     
   </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="
   
-    2024年の5月3週目(5月12日〜5月18日)でやったこととか。
+    2024&#x2F;05&#x2F;6 ~ 2024&#x2F;05&#x2F;11でやったこととか。
 M5DialのファームウェアをRustで書く
-Bluetoothでマウスとしては認識させられた。処理速度?に難が…
+Bluetoothでキーボードとして認識させることはできた。マウスとし…
   
 ">
 
    <!-- begin ogp -->
-    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;this-week-in-block-202405-3&#x2F;">
-    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy90aGlzLXdlZWstaW4tYmxvY2stMjAyNDA1LTMv">
-    <meta property="og:title" content= "This Week in block 2024年5月 3週目" >
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;this-week-in-block&#x2F;this-week-in-block-1&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vdGhpcy13ZWVrLWluLWJsb2NrL3RoaXMtd2Vlay1pbi1ibG9jay0xLw==">
+    <meta property="og:title" content= "This Week in block 1 (2024&#x2F;05&#x2F;6 ~ 2024&#x2F;05&#x2F;11)" >
     
     
       
           <meta property="og:type" constnt="article">
       
     
-    <meta property="og:description" content="2024年の5月3週目(5月12日〜5月18日)でやったこととか。
+    <meta property="og:description" content="2024&amp;#x2F;05&amp;#x2F;6 ~ 2024&amp;#x2F;05&amp;#x2F;11でやったこととか。
 M5DialのファームウェアをRustで書く
-Bluetoothでマウスとしては認識させられた。処理速度?に難が…">
+Bluetoothでキーボードとして認識させることはできた。マウスとし…">
     <!-- begin twitter ogp -->
     
       <meta name="twitter:card" content="summary_large_image">
       <meta name="twitter:site" content="@block_cube_lib">
-      <meta name="twitter:title" content= "This Week in block 2024年5月 3週目" >
+      <meta name="twitter:title" content= "This Week in block 1 (2024&#x2F;05&#x2F;6 ~ 2024&#x2F;05&#x2F;11)" >
     
     <!-- end twitter ogp -->
    <!-- end ogp -->
@@ -77,16 +77,26 @@ Bluetoothでマウスとしては認識させられた。処理速度?に難が�
     <div class="container">
       
 <h1 class="title">
-  This Week in block 2024年5月 3週目
+  This Week in block 1 (2024&#x2F;05&#x2F;6 ~ 2024&#x2F;05&#x2F;11)
 </h1>
   <section class="update_history">
     <table>
       <tr>
         <td>
-  <span class = "date">2024&#x2F;05&#x2F;18 23:50</span>
+  <span class = "date">2024&#x2F;05&#x2F;11 18:20</span>
 </td>
         <td>公開</td>
       </tr>
+      
+        
+        <tr>
+          <td>
+  <span class = "date">2024&#x2F;06&#x2F;09 15:52</span>
+</td>
+          <td class="update_history_content"><p>階層とタイトルと内容の一部</p>
+</td>
+        </tr>
+        
       
     </table>
   </section>
@@ -108,7 +118,7 @@ Bluetoothでマウスとしては認識させられた。処理速度?に難が�
     
   </ul>
    
-  <li><a href="#neovimnopuraguinmaneziyawolazykaradpp-vimniyi-xing-tu-zhong">NeovimのプラグインマネージャーをLazyからdpp.vimに移行(途中)</a></li>
+  <li><a href="#github-codespacesdeburoguwogeng-xin-dekiruyounisita">GitHub Codespacesでブログを更新できるようにした</a></li>
   <ul>
     
   </ul>
@@ -132,35 +142,39 @@ Bluetoothでマウスとしては認識させられた。処理速度?に難が�
 
 </section>
 <hr>
-<p><p>2024年の5月3週目(5月12日〜5月18日)でやったこととか。</p>
+<p><p>2024/05/6 ~ 2024/05/11でやったこととか。</p>
 <h2 id="m5dialnohuamuueaworustdeshu-ku">M5DialのファームウェアをRustで書く</h2>
-<p>Bluetoothでマウスとしては認識させられた。処理速度?に難があるので要改善。</p>
-<h2 id="neovimnopuraguinmaneziyawolazykaradpp-vimniyi-xing-tu-zhong">NeovimのプラグインマネージャーをLazyからdpp.vimに移行(途中)</h2>
-<p>Neovim 0.10.0がリリースされたのでプラグインマネージャーを<code>dpp.vim</code>に移行するための作業中。<br />
-ついでにプラグインの見直しをしている。<br />
-何故か<code>Failed to load plugin 'dpp': TypeError: Could not find constraint in the list of versions: @core/unknownutil@3.18.1</code>というエラーが発生したので<code>@core/unknownutil</code>のバージョンを<code>3.18.0</code>に変更して導入している。</p>
+<p>Bluetoothでキーボードとして認識させることはできた。マウスとしては認識させられていない。<br />
+ほどんど<a href="https://github.com/taks/esp32-nimble">Nimble</a>のサンプルだけでどうにかなった。便利。<br />
+画面描画がとても遅いのでそのあたりどうするか悩んでる。</p>
+<h2 id="github-codespacesdeburoguwogeng-xin-dekiruyounisita">GitHub Codespacesでブログを更新できるようにした</h2>
+<p>記事書いた。<br />
+<a href="https://block-cube-lib.github.io/blog/github-codespaces-zola/">GitHub CodesacesでZolaの記事を書く</a><br />
+現在の<code>Dockerfile</code>だと最新の<code>Neovim</code>を使えない関係でVSCodeのNeovim拡張を入れられないのでストレス。</p>
 <h2 id="du-ndaben">読んだ本</h2>
-<p><strong><a href="https://www.oreilly.co.jp/books/9784814400515/">詳解 Rustアトミック操作とロック</a></strong><br />
-読み終わった。<br />
-今週読んだのは<code>RwLock</code>の辺りとそれ以降。だいぶ面白かった。<br />
-あとセマフォの使い所がわからん。
-正直長い期間かけて読んでたので全体をあまり覚えていない。また読み返したい。</p>
-<p><strong><a href="https://www.lambdanote.com/products/cpu">プログラマーのためのCPU入門 ― CPUは如何にしてソフトウェアを高速に実行するか</a></strong><br />
-以前途中まで読んでたのを再開。<br />
-TLBの辺りとI/Oアクセスの辺りを読んでた。</p>
+<p><strong><a href="https://gihyo.jp/book/2024/978-4-297-14037-3">Bluetooth無線化講座</a></strong><br />
+読み終わった。現在ESP32を使用したBLEキーボードの作成を行いたいを思っているため購入しました。<br />
+Bluetoothの実装前に概念を頭に入れれたので助かった。</p>
+<p><strong>t<a href="https://www.oreilly.co.jp/books/9784814400515/">詳解 Rustアトミック操作とロック</a></strong><br />
+少しずつ読んでいる。<br />
+今9章なのでもう少しで読み終わるはず。多分。<br />
+ロックの実装でシステムコールを避けて高速化しようとする話は結局高速化に繋らないこともあったりそもそも環境ごとに効果が違ったりと面白かった。</p>
 <h2 id="yaritaikototoka">やりたいこととか</h2>
 <ul>
-<li>RustとWebAssemblyでゲーム開発するやつが途中なので続きをやりたい(先週から引き続き)</li>
+<li>RustとWebAssemblyでゲーム開発するやつが途中なので続きをやりたい</li>
+<li>ブログ内のURLにOGPを表示できるようにしたい</li>
 </ul>
 <h2 id="sonota">その他</h2>
 <ul>
-<li>仕事忙しい</li>
-<li>ゲームしたい</li>
+<li>息子が体調を崩した日が会社の読書会の日だったので読書会には不参加</li>
+<li>会社で目標設定を考えることがありましたがそもそも前回の目標を忘れているなどしたのでちゃんと目に見えるところに目標置いておく必要があると思いました</li>
+<li>珍しく黄鉄鉱以外の鉱石を買った</li>
+<li>オフィスに鉱石を飾った</li>
 </ul>
 </p>
 <hr>
 <div class="container share_buttons">
-  <div><a class="twitter-share-button" data-text="This Week in block 2024年5月 3週目 - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+  <div><a class="twitter-share-button" data-text="This Week in block 1 (2024&#x2F;05&#x2F;6 ~ 2024&#x2F;05&#x2F;11) - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </div>
   <div>
