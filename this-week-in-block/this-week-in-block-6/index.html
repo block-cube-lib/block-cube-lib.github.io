@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      This Week in block 6 (2024&#x2F;06&#x2F;09 ~ 2024&#x2F;06&#x2F;15) - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    2024&#x2F;06&#x2F;09 ~ 2024&#x2F;06&#x2F;15でやったこととか。
+Chrome拡張の開発
+まだ続いている。あと少しで終わるが実装にかけられる時間がなかった。
+完成していないがUIを…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;this-week-in-block&#x2F;this-week-in-block-6&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vdGhpcy13ZWVrLWluLWJsb2NrL3RoaXMtd2Vlay1pbi1ibG9jay02Lw==">
+    <meta property="og:title" content= "This Week in block 6 (2024&#x2F;06&#x2F;09 ~ 2024&#x2F;06&#x2F;15)" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="2024&amp;#x2F;06&amp;#x2F;09 ~ 2024&amp;#x2F;06&amp;#x2F;15でやったこととか。
+Chrome拡張の開発
+まだ続いている。あと少しで終わるが実装にかけられる時間がなかった。
+完成していないがUIを…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "This Week in block 6 (2024&#x2F;06&#x2F;09 ~ 2024&#x2F;06&#x2F;15)" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    <div class="container" id="title">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io">blockの巣</a>
+    </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
+  </header>
+  <main class="section">
+    <div class="container">
+      
+<h1 class="title">
+  This Week in block 6 (2024&#x2F;06&#x2F;09 ~ 2024&#x2F;06&#x2F;15)
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2024&#x2F;06&#x2F;16 00:45</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/this-week-in-block/">This Week in block</a></span>
+
+  
+
+</section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#chromekuo-zhang-nokai-fa">Chrome拡張の開発</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#du-ndaben">読んだ本</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#yaritaikototoka">やりたいこととか</a></li>
+  <ul>
+     
+    <li><a href="#yin-kisok-ki">引き続き</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#sonota">その他</a></li>
+  <ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
+<p><p>2024/06/09 ~ 2024/06/15でやったこととか。</p>
+<h2 id="chromekuo-zhang-nokai-fa">Chrome拡張の開発</h2>
+<p>まだ続いている。あと少しで終わるが実装にかけられる時間がなかった。<br />
+完成していないがUIを変更したくなったりで追加で工数かかりそう。</p>
+<h2 id="du-ndaben">読んだ本</h2>
+<p><strong><a href="https://www.lambdanote.com/products/cpu">プログラマーのためのCPU入門 ― CPUは如何にしてソフトウェアを高速に実行するか</a></strong><br />
+付録まで辿り着いた。そこであたらしい概念が登場していたりして面白い。</p>
+<h2 id="yaritaikototoka">やりたいこととか</h2>
+<h3 id="yin-kisok-ki">引き続き</h3>
+<ul>
+<li>RustとWebAssemblyでゲーム開発</li>
+<li>Codespacesでブログ書く環境ををもう少し快適にしたい</li>
+<li>M5DialをBLEのポインタデバイスとして使えるようにする</li>
+<li>キーボードの設計</li>
+</ul>
+<h2 id="sonota">その他</h2>
+<p>Rust 1.79.0がリリースされたのでそのあたりの内容をしっかり確認しておきたい。<br />
+得に<code>Inline const expressions</code>が気になるのと、 <code>Extending automatic temporary lifetime extension </code>が恩恵が大きそう。</p>
+</p>
+<hr>
+<div class="container share_buttons">
+  <div><a class="twitter-share-button" data-text="This Week in block 6 (2024&#x2F;06&#x2F;09 ~ 2024&#x2F;06&#x2F;15) - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+  <div>
+    <a href="https://donshare.net/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://donshare.net/image/tootbutton.png" width="100" height="20"></a>
+  </div>
+  <div>
+    <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
+  </div>
+</div>
+
+  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
+<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
+
+
+
+    </div>
+  </main>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
