@@ -316,7 +316,7 @@
 </span></code></pre>
 <h3 id="xorshiftnoseedzhi-nituite">Xorshiftのseed値について</h3>
 <p>今回追加した<code>Xorshift</code>は<code>Xorshift::new(seed)</code>のようにシード値を渡すことができるようになっています。<br />
-上記のコードでは<code>Xorshift::new(include!(&quot;rand_seed.txt&quot;))</code>と<code>rand_seed.txt</code>というテキストファイルの中身をそのまま渡しており、このテキストファイルの中身は<code>u32</code>型の整数値が入っています。<br />
+上記のコードでは<code>Xorshift::new(include!("rand_seed.txt"))</code>と<code>rand_seed.txt</code>というテキストファイルの中身をそのまま渡しており、このテキストファイルの中身は<code>u32</code>型の整数値が入っています。<br />
 <code>rand_seed.txt</code>の中身を自分で決めたくなかったので下記のようなビルドスクリプトを用意してコンパイル時に生成するようにしています。値は現在時刻を元に決めています。</p>
 <pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">use </span><span>anyhow</span><span style="color:#89ddff;">::</span><span>Result</span><span style="color:#89ddff;">;
 </span><span>

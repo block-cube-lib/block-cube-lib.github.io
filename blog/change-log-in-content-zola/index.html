@@ -212,7 +212,7 @@ date = 2022-11-19T22:00:00+09:00
 </span></code></pre>
 <p>ここは投稿日を表示しています。<br />
 投稿日はヘッダーの<code>date</code>の内容が使用されます。<br />
-日付のフォーマットは<code>&quot;%Y/%m/%d %H:%M&quot;</code>を指定していますが好きに編集していただいて構いません。</p>
+日付のフォーマットは<code>"%Y/%m/%d %H:%M"</code>を指定していますが好きに編集していただいて構いません。</p>
 <pre data-lang="html" style="background-color:#1d1f29;color:#afbad4;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">table</span><span style="color:#ba3c97;">&gt;
 </span><span style="color:#9aa5ce;">  </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">tr</span><span style="color:#ba3c97;">&gt;
 </span><span style="color:#9aa5ce;">    </span><span style="color:#ba3c97;">&lt;</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;&lt;</span><span style="color:#f7768e;">span </span><span style="color:#9ece6a;">class</span><span style="color:#89ddff;">=&quot;</span><span style="color:#9ece6a;">date</span><span style="color:#89ddff;">&quot;</span><span style="color:#ba3c97;">&gt;</span><span style="color:#9aa5ce;">{{ page.date | date(format=&quot;%Y/%m/%d %H:%M&quot;) }}</span><span style="color:#ba3c97;">&lt;/</span><span style="color:#f7768e;">span</span><span style="color:#ba3c97;">&gt;&lt;/</span><span style="color:#f7768e;">td</span><span style="color:#ba3c97;">&gt;

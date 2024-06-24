@@ -157,7 +157,7 @@ UnityでMessagePackを使用するときにIL2CP…">
 <h2 id="shi-xing-sitakomandotoeranei-rong">実行したコマンドとエラー内容</h2>
 <p><code>dotnet tool install --global MessagePack.Generator</code>で<code>mpc</code>をインストールし<br />
 Unityのプロジェクトのルートフォルダで<br />
-<code>mpc -i &quot;./Assembly-CSharp.csproj&quot; -o &quot;./Assets/Generated/MessagePackGenerated.cs&quot;</code>を実行しました。
+<code>mpc -i "./Assembly-CSharp.csproj" -o "./Assets/Generated/MessagePackGenerated.cs"</code>を実行しました。
 READMEとはinputとoutputが異なりますがcsprojを指定し書き出し先のファイルを指定しているという点は同じです。</p>
 <p>すると</p>
 <pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">__________________________________________________
@@ -186,7 +186,7 @@ READMEとはinputとoutputが異なりますがcsprojを指定し書き出し先
 <p>というエラーが出て失敗しました。</p>
 <p>dotnetのバージョンを変更しても<code>mpc</code>のインストールをローカルで試してもグローバルで試してもだめでした。</p>
 <h2 id="jie-jue-fang-fa">解決方法</h2>
-<p><code>mpc -i &quot;./&quot; -o &quot;./Assets/Generated/MessagePackGenerated.cs&quot;</code>
+<p><code>mpc -i "./" -o "./Assets/Generated/MessagePackGenerated.cs"</code>
 のようにcsprojを指定せずにディレクトリを指定することで解決しました。</p>
 <p>ちなみにREADMEには.NET Core 3 Runtimeを使用するように書かれていますが<a href="https://github.com/neuecc/MessagePack-CSharp/releases">Release</a>の内容を見るに.Net5でも大丈夫だと思います。
 私はdotnet sdk <code>5.0.408</code>で問題なく実行できました。</p>

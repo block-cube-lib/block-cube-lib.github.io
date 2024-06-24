@@ -459,7 +459,7 @@
 <p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=0765cedc3493bc26e70bb195653b6670">Rust Playgroundで確認</a><br />
 コンパイルに時間がかかることがありRust Playgroundではタイムアウトするかもしれません。</p>
 <h3 id="panic-nei-denobian-shu-mai-meip-mihadekinai">panic!内での変数埋め込みはできない</h3>
-<p><code>panic!</code>が使えるなら<code>panic!(&quot;out of range. index = {i}&quot;)</code>のようにどの値が渡されたことで範囲外アクセスが発生したのかをコンパイルエラーのメッセージに表示したくなると思います。<br />
+<p><code>panic!</code>が使えるなら<code>panic!("out of range. index = {i}")</code>のようにどの値が渡されたことで範囲外アクセスが発生したのかをコンパイルエラーのメッセージに表示したくなると思います。<br />
 しかし普通に書いても下記のようなコンパイルエラーが発生してしまいます。</p>
 <pre style="background-color:#1d1f29;color:#afbad4;"><code><span>   Compiling playground v0.0.1 (/playground)
 </span><span>error[E0658]: function pointer casts are not allowed in constant functions
