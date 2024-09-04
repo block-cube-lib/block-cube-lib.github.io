@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      【Rust】Vec3&lt;T&gt;のTが何であってもlength()が浮動小数点型を返すようにする - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    やりたいこと
+以下のような構造体Vec3&amp;lt;T&amp;gt;があるとします。Tは整数型も浮動小数点型も取りうるとします。
+struct Vec3&amp;lt;T&amp;gt; {
+    x: …
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;impl-vec-length-diff-type-in-rust&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9pbXBsLXZlYy1sZW5ndGgtZGlmZi10eXBlLWluLXJ1c3Qv">
+    <meta property="og:title" content= "【Rust】Vec3&lt;T&gt;のTが何であってもlength()が浮動小数点型を返すようにする" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="やりたいこと
+以下のような構造体Vec3&amp;amp;lt;T&amp;amp;gt;があるとします。Tは整数型も浮動小数点型も取りうるとします。
+struct Vec3&amp;amp;lt;T&amp;amp;gt; {
+    x: …">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "【Rust】Vec3&lt;T&gt;のTが何であってもlength()が浮動小数点型を返すようにする" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    <div class="container" id="title">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io">blockの巣</a>
+    </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
+  </header>
+  <main class="section">
+    <div class="container">
+      
+<h1 class="title">
+  【Rust】Vec3&lt;T&gt;のTが何であってもlength()が浮動小数点型を返すようにする
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2024&#x2F;09&#x2F;05 00:05</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/rust/">Rust</a></span>
+
+  
+
+</section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#yaritaikoto">やりたいこと</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#kodo">コード</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#jie-shuo">解説</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#owarini">おわりに</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#omake">おまけ</a></li>
+  <ul>
+     
+    <li><a href="#normalize-zheng-gui-hua-shi-zhuang">normalize(正規化)実装</a></li>
+    <ul>
+      
+    </ul>
+     
+    <li><a href="#feature">feature</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
+<p><h2 id="yaritaikoto">やりたいこと</h2>
+<p>以下のような構造体<code>Vec3&lt;T&gt;</code>があるとします。Tは整数型も浮動小数点型も取りうるとします。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vec3</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>これに対して長さを取得する関数<code>length()</code>を実装したいです。<br />
+しかし長さを求めるにはには平方根を計算する必要があり、整数型の場合は平方根を取ると多くの場合浮動小数点型になってしまいます。<br />
+そのため<code>fn length(&amp;self) -&gt; T</code>とすることはできません。<br />
+そこで<code>T = f32</code>や<code>T = f64</code>ならば<code>fn length(&amp;self) -&gt; T</code>となり、<code>T = i32</code>や<code>T = i64</code>ならば<code>fn length(&amp;self) -&gt; f64</code>となるような実装を行います。</p>
+<h2 id="kodo">コード</h2>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">trait </span><span style="color:#c0caf5;">VectorElement </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">FloatCalcType</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> VectorElement </span><span style="color:#89ddff;">+ </span><span style="color:#9abdf5;">num</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Float</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">as_float_type</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">impl </span><span>VectorElement </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">i32 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">FloatCalcType </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">as_float_type</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">*</span><span style="color:#f7768e;">self </span><span style="color:#89ddff;">as </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">impl </span><span>VectorElement </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">f64 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">FloatCalcType </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">as_float_type</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">*</span><span style="color:#f7768e;">self
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Vec3</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">:</span><span> VectorElement</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">z</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">impl</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">:</span><span> VectorElement</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">Vec3</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">length</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">T</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">use </span><span style="color:#9abdf5;">num</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Float </span><span style="color:#89ddff;">as _;
+</span><span style="color:#9abdf5;">        (</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">powi</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">)
+</span><span style="color:#9abdf5;">            </span><span style="color:#89ddff;">+ </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">powi</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">)
+</span><span style="color:#9abdf5;">            </span><span style="color:#89ddff;">+ </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">powi</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">))
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">sqrt</span><span style="color:#9abdf5;">()
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">main</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">    </span><span style="color:#89ddff;">use </span><span style="color:#9abdf5;">std</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">any</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">{Any</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> TypeId}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> f64_vec </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">Vec3</span><span style="color:#89ddff;">::&lt;</span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">        x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4.0</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2.0</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4.0</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">    }</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> f64_vec_len </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> f64_vec</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">length</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    assert_eq!(f64_vec_len</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">6.0</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    assert_eq!(f64_vec_len</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">type_id</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">, </span><span style="color:#9abdf5;">TypeId</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">of</span><span style="color:#89ddff;">::&lt;</span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">())</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> i32_vec </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">Vec3</span><span style="color:#89ddff;">::&lt;</span><span style="color:#bb9af7;">i32</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{ x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> z</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">4 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> i32_vec_len </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> i32_vec</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">length</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    assert_eq!(i32_vec_len</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">6.0</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    assert_eq!(i32_vec_len</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">type_id</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">, </span><span style="color:#9abdf5;">TypeId</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">of</span><span style="color:#89ddff;">::&lt;</span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">())</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p><a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;gist=95f85c43a9499bf668f1a344f80a0e28">Rust Playgroundで実行</a></p>
+<h2 id="jie-shuo">解説</h2>
+<p>まず浮動小数点が絡む計算をどの型で行うかを決めるために、<code>VectorElement</code>トレイトを定義します。<br />
+これは浮動小数点型を満たしていて欲しいのと、Vec3の要素としても使用したいため<code>VectorElement + num::Float</code>としています。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">trait </span><span style="color:#c0caf5;">VectorElement </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">FloatCalcType</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> VectorElement </span><span style="color:#89ddff;">+ </span><span style="color:#9abdf5;">num</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Float</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">as_float_type</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p><code>as_float_type</code>は<code>T</code>を<code>T::FloatCalcType</code>に変換する関数ですが<code>num::NumCast</code>などで代替可能なので必須ではないです。</p>
+<p>次に<code>Vec3</code>の要素として使用する型に対して<code>VectorElement</code>トレイトを実装します。ここでは<code>i32</code>と<code>f64</code>に対して実装しています。<br />
+<code>i32</code>の場合は<code>FloatCalcType</code>を<code>f64</code>にしています。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">impl </span><span>VectorElement </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">i32 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">FloatCalcType </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">as_float_type</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">*</span><span style="color:#f7768e;">self </span><span style="color:#89ddff;">as </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">impl </span><span>VectorElement </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">f64 </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">FloatCalcType </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">as_float_type</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">*</span><span style="color:#f7768e;">self
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>最後に<code>Vec3</code>に対して<code>length()</code>を実装します。<br />
+<code>length()</code>は<code>T::FloatCalcType</code>を返すようにします。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">impl</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">:</span><span> VectorElement</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">Vec3</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">length</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">T</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">FloatCalcType {
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">use </span><span style="color:#9abdf5;">num</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">Float </span><span style="color:#89ddff;">as _;
+</span><span style="color:#9abdf5;">        (</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">powi</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">)
+</span><span style="color:#9abdf5;">            </span><span style="color:#89ddff;">+ </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">powi</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">)
+</span><span style="color:#9abdf5;">            </span><span style="color:#89ddff;">+ </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">powi</span><span style="color:#9abdf5;">(</span><span style="color:#ff9e64;">2</span><span style="color:#9abdf5;">))
+</span><span style="color:#9abdf5;">        </span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">sqrt</span><span style="color:#9abdf5;">()
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>これで<code>Vec3</code>の要素が整数型でも浮動小数点型でも<code>length()</code>が正しく計算できるようになりました。</p>
+<h2 id="owarini">おわりに</h2>
+<p>正直これくらいであれば</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">Vec</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f64</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#444b6a;">// length実装
+</span><span style="color:#9abdf5;">}
+</span><span style="color:#bb9af7;">impl </span><span style="color:#c0caf5;">Vec</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">i32</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#444b6a;">// length実装
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>としてやっても良いか思いますが、今回の方法であれば</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">impl </span><span>VectorElement </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">i16 </span><span style="color:#9abdf5;">{ </span><span style="font-style:italic;color:#444b6a;">/* ... */ </span><span style="color:#9abdf5;">}
+</span><span style="color:#bb9af7;">impl </span><span>VectorElement </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">f32 </span><span style="color:#9abdf5;">{ </span><span style="font-style:italic;color:#444b6a;">/* ... */ </span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>のように要素型に対してトレイトを実装するだけ<code>Vec3</code>のコードを変更することなく対応要素型を増やすことができます。</p>
+<h2 id="omake">おまけ</h2>
+<h3 id="normalize-zheng-gui-hua-shi-zhuang">normalize(正規化)実装</h3>
+<p>戻り値を要素が浮動小数点型の<code>Vec3</code>にすることもできます。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">impl</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">:</span><span> VectorElement</span><span style="color:#89ddff;">&gt; </span><span style="color:#c0caf5;">Vec3</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">normalized</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&amp;</span><span style="color:#e0af68;">self</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#9abdf5;">Vec3</span><span style="color:#89ddff;">&lt;&lt;</span><span style="color:#9abdf5;">T </span><span style="color:#89ddff;">as</span><span style="color:#9abdf5;"> VectorElement</span><span style="color:#89ddff;">&gt;::</span><span style="color:#9abdf5;">FloatCalcType</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">        </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> length </span><span style="color:#89ddff;">= </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">length</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">        Vec3 {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">() </span><span style="color:#89ddff;">/</span><span style="color:#9abdf5;"> length</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">() </span><span style="color:#89ddff;">/</span><span style="color:#9abdf5;"> length</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            z</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">z</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">as_float_type</span><span style="color:#9abdf5;">() </span><span style="color:#89ddff;">/</span><span style="color:#9abdf5;"> length</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<h3 id="feature">feature</h3>
+<p>外部から利用するときにfeatureによって<code>FloatCalcType</code>を変更するということもできそうな気がしますね。</p>
+</p>
+<hr>
+<div class="container share_buttons">
+  <div><a class="twitter-share-button" data-text="【Rust】Vec3&lt;T&gt;のTが何であってもlength()が浮動小数点型を返すようにする - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+  <div>
+    <a href="https://donshare.net/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://donshare.net/image/tootbutton.png" width="100" height="20"></a>
+  </div>
+  <div>
+    <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
+  </div>
+</div>
+
+  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
+<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
+
+
+
+    </div>
+  </main>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
