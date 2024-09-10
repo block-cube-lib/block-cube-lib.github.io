@@ -91,6 +91,10 @@
         <lastmod>2022-02-03T10:53:00+09:00</lastmod>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/impl-rand-for-user-defined-type/</loc>
+        <lastmod>2024-09-10T14:40:14+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/impl-trait-conditions-const-generics-argument/</loc>
         <lastmod>2022-03-10T22:31:00+09:00</lastmod>
     </url>

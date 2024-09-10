@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      【Rust】ユーザー定義型にrandクレートの乱数生成を実装する - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    この記事はRust 1.81.0とrand 0.8.5で動作確認しています。
+
+下記のようなPoint2Dに対して、randクレートを使って乱数生成を実装する。
+#[derive(…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;impl-rand-for-user-defined-type&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9pbXBsLXJhbmQtZm9yLXVzZXItZGVmaW5lZC10eXBlLw==">
+    <meta property="og:title" content= "【Rust】ユーザー定義型にrandクレートの乱数生成を実装する" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="この記事はRust 1.81.0とrand 0.8.5で動作確認しています。
+
+下記のようなPoint2Dに対して、randクレートを使って乱数生成を実装する。
+#[derive(…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "【Rust】ユーザー定義型にrandクレートの乱数生成を実装する" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    <div class="container" id="title">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io">blockの巣</a>
+    </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
+  </header>
+  <main class="section">
+    <div class="container">
+      
+<h1 class="title">
+  【Rust】ユーザー定義型にrandクレートの乱数生成を実装する
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2024&#x2F;09&#x2F;10 14:40</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/rust/">Rust</a></span>
+
+  
+
+</section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#zhi-nofan-wei-wozhi-ding-sinailuan-shu-sheng-cheng">値の範囲を指定しない乱数生成</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#zhi-nofan-wei-wozhi-ding-suruluan-shu-sheng-cheng">値の範囲を指定する乱数生成</a></li>
+  <ul>
+     
+    <li><a href="#pointnoyao-su-xing-wogenericsnisitachang-he-nouniformsamplernoshi-zhuang">Pointの要素型をGenericsにした場合のUniformSamplerの実装</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
+<p><p>この記事は<code>Rust 1.81.0</code>と<code>rand 0.8.5</code>で動作確認しています。</p>
+<hr />
+<p>下記のような<code>Point2D</code>に対して、<a href="https://docs.rs/rand/latest/rand/index.html"><code>rand</code></a>クレートを使って乱数生成を実装する。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">#</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">derive</span><span style="color:#9abdf5;">(</span><span>Debug</span><span style="color:#9abdf5;">)]
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Point </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">f32</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<h2 id="zhi-nofan-wei-wozhi-ding-sinailuan-shu-sheng-cheng">値の範囲を指定しない乱数生成</h2>
+<p>値の範囲を指定しない生成であれば<code>Distribution&lt;Point&gt;</code>に<code>Standard</code>を実装すれば良い。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">use </span><span>rand</span><span style="color:#89ddff;">::</span><span>prelude</span><span style="color:#89ddff;">::*;
+</span><span style="color:#89ddff;">use </span><span>rand</span><span style="color:#89ddff;">::</span><span>distributions</span><span style="color:#89ddff;">::</span><span>Standard</span><span style="color:#89ddff;">;
+</span><span>
+</span><span style="color:#bb9af7;">impl </span><span>Distribution</span><span style="color:#89ddff;">&lt;</span><span>Point</span><span style="color:#89ddff;">&gt; for </span><span style="color:#c0caf5;">Standard
+</span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">sample</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">R</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Rng </span><span style="color:#89ddff;">+ </span><span style="color:#ff5370;">?</span><span style="color:#0db9d7;">Sized</span><span style="color:#bb9af7;">&gt;</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">&amp;</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> rng</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> R) </span><span style="color:#89ddff;">-&gt;</span><span style="color:#9abdf5;"> Point {
+</span><span style="color:#9abdf5;">        Point { x</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> rng</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">gen</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> rng</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">gen</span><span style="color:#9abdf5;">() }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">main</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let </span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> rng </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">rand</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">thread_rng()</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> p</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Point </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> rng</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">gen</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    println!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#c0caf5;">{:?}</span><span style="color:#89ddff;">&quot;,</span><span style="color:#9abdf5;"> p)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<h2 id="zhi-nofan-wei-wozhi-ding-suruluan-shu-sheng-cheng">値の範囲を指定する乱数生成</h2>
+<p>範囲を指定する方は若干複雑ですが、必要なのは<code>UniformSampler</code>と<code>SampleUniform</code>を実装すること。<br />
+<code>UniformSampler</code>は<code>Uniform</code>を使って範囲を指定するためのトレイトで、<code>SampleUniform</code>は<code>UniformSampler</code>を使って乱数生成を行うためのトレイト。
+注意する点として、Pointがprivateだとコンパイルエラーになる。</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">use </span><span>rand</span><span style="color:#89ddff;">::</span><span>distributions</span><span style="color:#89ddff;">::</span><span>uniform</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">{SampleBorrow</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> SampleUniform</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> UniformSampler}</span><span style="color:#89ddff;">;
+</span><span style="color:#89ddff;">use </span><span>rand</span><span style="color:#89ddff;">::</span><span>distributions</span><span style="color:#89ddff;">::</span><span>Uniform</span><span style="color:#89ddff;">;
+</span><span style="color:#89ddff;">use </span><span>rand</span><span style="color:#89ddff;">::</span><span>prelude</span><span style="color:#89ddff;">::*;
+</span><span>
+</span><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">UniformPoint </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x_sampler</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">Uniform</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y_sampler</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">Uniform</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">f32</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">,
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">impl </span><span>UniformSampler </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">UniformPoint </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">X </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> Point</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">new</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">B1, B2</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">low</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> B1, </span><span style="color:#e0af68;">high</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> B2) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self
+</span><span style="color:#9abdf5;">    </span><span style="color:#89ddff;">where
+</span><span style="color:#9abdf5;">        B1</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">SampleBorrow</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">X</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;"> + Sized,
+</span><span style="color:#9abdf5;">        B2</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">SampleBorrow</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">X</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;"> + Sized,
+</span><span style="color:#9abdf5;">    {
+</span><span style="color:#9abdf5;">        </span><span style="color:#bb9af7;">Self </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">            x_sampler</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">Uniform</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">new(low</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">borrow</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> high</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">borrow</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y_sampler</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">Uniform</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">new(low</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">borrow</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> high</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">borrow</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">new_inclusive</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">B1, B2</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">low</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> B1, </span><span style="color:#e0af68;">high</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> B2) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self
+</span><span style="color:#9abdf5;">    </span><span style="color:#89ddff;">where
+</span><span style="color:#9abdf5;">        B1</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">SampleBorrow</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">X</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;"> + Sized,
+</span><span style="color:#9abdf5;">        B2</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">SampleBorrow</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">X</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;"> + Sized,
+</span><span style="color:#9abdf5;">    {
+</span><span style="color:#9abdf5;">        </span><span style="color:#bb9af7;">Self </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">            x_sampler</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">Uniform</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">new_inclusive(low</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">borrow</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> high</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">borrow</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y_sampler</span><span style="color:#89ddff;">: </span><span style="color:#9abdf5;">Uniform</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">new_inclusive(low</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">borrow</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> high</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">borrow</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">sample</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">R</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> Rng </span><span style="color:#89ddff;">+ </span><span style="color:#ff5370;">?</span><span style="color:#0db9d7;">Sized</span><span style="color:#bb9af7;">&gt;</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">&amp;</span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> rng</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> R) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#bb9af7;">Self</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">X {
+</span><span style="color:#9abdf5;">        Point {
+</span><span style="color:#9abdf5;">            x</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">x_sampler</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">sample</span><span style="color:#9abdf5;">(rng)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">            y</span><span style="color:#89ddff;">: </span><span style="color:#f7768e;">self</span><span style="color:#89ddff;">.</span><span style="color:#9abdf5;">y_sampler</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">sample</span><span style="color:#9abdf5;">(rng)</span><span style="color:#89ddff;">,
+</span><span style="color:#9abdf5;">        }
+</span><span style="color:#9abdf5;">    }
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">impl </span><span>SampleUniform </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">Point </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">Sampler </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> UniformPoint</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span><span>
+</span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">main</span><span style="color:#9abdf5;">() {
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let </span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> rng </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">rand</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">thread_rng()</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> uniform </span><span style="color:#89ddff;">= </span><span style="color:#9abdf5;">UniformPoint</span><span style="color:#89ddff;">::</span><span style="color:#9abdf5;">new(Point { x</span><span style="color:#89ddff;">: -</span><span style="color:#ff9e64;">10.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: -</span><span style="color:#ff9e64;">5.0 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> Point { x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">10.0</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">5.0 </span><span style="color:#9abdf5;">})</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">let</span><span style="color:#9abdf5;"> p </span><span style="color:#89ddff;">=</span><span style="color:#9abdf5;"> uniform</span><span style="color:#89ddff;">.</span><span style="color:#0db9d7;">sample</span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">&amp;</span><span style="font-style:italic;color:#9d7cd8;">mut</span><span style="color:#9abdf5;"> rng)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">    println!(</span><span style="color:#89ddff;">&quot;</span><span style="color:#c0caf5;">{:?}</span><span style="color:#89ddff;">&quot;,</span><span style="color:#9abdf5;"> p)</span><span style="color:#89ddff;">;
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>上記の例では<code>x</code>と<code>y</code>の範囲を<code>Point</code>2つで受け取っているが、別の型でも問題ないはず。</p>
+<h3 id="pointnoyao-su-xing-wogenericsnisitachang-he-nouniformsamplernoshi-zhuang">Pointの要素型をGenericsにした場合のUniformSamplerの実装</h3>
+<p>細かいコードは省略するが</p>
+<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#9d7cd8;">pub </span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Point</span><span style="color:#89ddff;">&lt;</span><span>T</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">    </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">:</span><span style="color:#9abdf5;"> T,
+</span><span style="color:#9abdf5;">}
+</span></code></pre>
+<p>という型に対してであれば、<code>UniformPoint&lt;T&gt;</code>の<code>T</code>が<code>SampleUniform</code>を実装していることを条件にすれば良い。</p>
+</p>
+<hr>
+<div class="container share_buttons">
+  <div><a class="twitter-share-button" data-text="【Rust】ユーザー定義型にrandクレートの乱数生成を実装する - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+  <div>
+    <a href="https://donshare.net/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://donshare.net/image/tootbutton.png" width="100" height="20"></a>
+  </div>
+  <div>
+    <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
+  </div>
+</div>
+
+  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
+<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
+
+
+
+    </div>
+  </main>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>
