@@ -27,10 +27,6 @@
         <lastmod>2021-06-10T20:48:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/cfm-buds-pro-2-purchased/</loc>
-        <lastmod>2024-12-18T10:07:28+09:00</lastmod>
-    </url>
-    <url>
         <loc>https://block-cube-lib.github.io/blog/change-log-in-content-zola/</loc>
         <lastmod>2022-11-29T17:28:00+09:00</lastmod>
     </url>
@@ -41,6 +37,10 @@
     <url>
         <loc>https://block-cube-lib.github.io/blog/childcare-leave/</loc>
         <lastmod>2021-08-25T22:20:00+09:00</lastmod>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/blog/cmf-buds-pro-2-purchased/</loc>
+        <lastmod>2024-12-18T10:07:28+09:00</lastmod>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-1/</loc>
