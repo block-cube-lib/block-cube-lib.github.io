@@ -164,66 +164,49 @@ MarpはVSCodeの拡張機能としても提供されていますが、marp-cli�
 
 </section>
 <hr>
-<p><p><a href="https://marp.app/">Marp</a>というツールを使うと、Markdownでスライドを作成できます。<br />
-Marpは<a href="https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode">VSCodeの拡張機能</a>としても提供されていますが、<a href="https://github.com/marp-team/marp-cli">marp-cli</a>を使うと、自由なエディタでMarkdownを書いてスライドを作成できます。</p>
+<p><p><a rel="external" href="https://marp.app/">Marp</a>というツールを使うと、Markdownでスライドを作成できます。<br />
+Marpは<a rel="external" href="https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode">VSCodeの拡張機能</a>としても提供されていますが、<a rel="external" href="https://github.com/marp-team/marp-cli">marp-cli</a>を使うと、自由なエディタでMarkdownを書いてスライドを作成できます。</p>
 <h2 id="insutorufang-fa">インストール方法</h2>
 <p>パッケージマネージャーを使用する場合
 macOSでは</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">brew install marp-cli
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">brew</span><span style="color: #9ECE6A;"> install marp-cli</span></span></code></pre>
 <p>Windowsでは</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">scoop install marp
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">scoop</span><span style="color: #9ECE6A;"> install marp</span></span></code></pre>
 <p>でインストールできます。</p>
-<p>npmを使用してローカルインストールする方法やスタンドアローンバイナリを使用する方法もあるのでそちらの方が好みの場合は<a href="https://github.com/marp-team/marp-cli">marp-cli</a>のREADMEを参照してください。</p>
+<p>npmを使用してローカルインストールする方法やスタンドアローンバイナリを使用する方法もあるのでそちらの方が好みの場合は<a rel="external" href="https://github.com/marp-team/marp-cli">marp-cli</a>のREADMEを参照してください。</p>
 <h2 id="shi-ifang">使い方</h2>
 <h3 id="htmlhuairunibian-huan-suru">HTMLファイルに変換する</h3>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp slide-deck.md
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #9ECE6A;"> slide-deck.md</span></span></code></pre>
 <p>で<code>slide-deck.md</code>から<code>slide-deck.html</code>というファイルに変換できます。
 <code>-o</code>オプションで出力先を指定できます。以下のコマンドでは<code>output.html</code>というファイルに変換できます。</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp slide.md</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">o</span><span style="color:#7aa2f7;"> output.output.html
-</span></code></pre>
-<h3 id="pdfhuairunibian-huan-suru">PDFファイルに変換する</h3>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">pdf</span><span style="color:#7aa2f7;"> slide-deck.md </span><span style="font-style:italic;color:#444b6a;"># slide-deck.pdfに変換
-</span><span style="color:#7aa2f7;">marp slide-deck.md</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">o</span><span style="color:#7aa2f7;"> converted.pdf </span><span style="font-style:italic;color:#444b6a;"># convereted.pdfに変換
-</span></code></pre>
-<h3 id="pptxhuairunibian-huan-suru">pptxファイルに変換する</h3>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #9ECE6A;"> slide.md</span><span style="color: #E0AF68;"> -o</span><span style="color: #9ECE6A;"> output.output.html</span></span></code></pre><h3 id="pdfhuairunibian-huan-suru">PDFファイルに変換する</h3>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #E0AF68;"> --pdf</span><span style="color: #9ECE6A;"> slide-deck.md</span><span style="color: #51597D;font-style: italic;"> # slide-deck.pdfに変換</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #9ECE6A;"> slide-deck.md</span><span style="color: #E0AF68;"> -o</span><span style="color: #9ECE6A;"> converted.pdf</span><span style="color: #51597D;font-style: italic;"> # convereted.pdfに変換</span></span></code></pre><h3 id="pptxhuairunibian-huan-suru">pptxファイルに変換する</h3>
 <p>パワーポイント形式のファイルにも変換できます。</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">pptx</span><span style="color:#7aa2f7;"> slide-deck.md </span><span style="font-style:italic;color:#444b6a;"># slide-deck.pptxに変換
-</span><span style="color:#7aa2f7;">marp slide-deck.md</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">o</span><span style="color:#7aa2f7;"> converted.pptx </span><span style="font-style:italic;color:#444b6a;"># convereted.pptxに変換
-</span></code></pre>
-<h3 id="png-jpeghuairunibian-huan-suru-fu-shu-huairu">PNG/JPEGファイルに変換する(複数ファイル)</h3>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #E0AF68;"> --pptx</span><span style="color: #9ECE6A;"> slide-deck.md</span><span style="color: #51597D;font-style: italic;"> # slide-deck.pptxに変換</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #9ECE6A;"> slide-deck.md</span><span style="color: #E0AF68;"> -o</span><span style="color: #9ECE6A;"> converted.pptx</span><span style="color: #51597D;font-style: italic;"> # convereted.pptxに変換</span></span></code></pre><h3 id="png-jpeghuairunibian-huan-suru-fu-shu-huairu">PNG/JPEGファイルに変換する(複数ファイル)</h3>
 <p><code>--images</code>オプションを使用するとPNG/JPEGファイルに変換できます。</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="font-style:italic;color:#444b6a;"># 複数のPNGファイルに変換
-</span><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">images</span><span style="color:#7aa2f7;"> png slide-deck.md
-</span><span>
-</span><span style="font-style:italic;color:#444b6a;"># 複数のJPEGファイルに変換
-</span><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">images</span><span style="color:#7aa2f7;"> jpeg slide-deck.md
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #51597D;font-style: italic;"># 複数のPNGファイルに変換</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #E0AF68;"> --images</span><span style="color: #9ECE6A;"> png slide-deck.md</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;"># 複数のJPEGファイルに変換</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #E0AF68;"> --images</span><span style="color: #9ECE6A;"> jpeg slide-deck.md</span></span></code></pre>
 <p><code>slide-deck.pp1.png</code>, <code>slide-deck.002.png</code>のようなファイルが生成されます。</p>
 <h3 id="bian-huan-modo">変換モード</h3>
 <h4 id="watchmodo">Watchモード</h4>
 <p><code>--watch</code>/<code>-w</code>オプションを使用すると、ファイルを監視して変更があった場合に自動で変換してくれます。
 下記のコマンドを実行すると、<code>slide-deck.md</code>を監視して変更があった場合に自動で<code>slide-deck.html</code>に変換してくれます。</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp slide-deck.md</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">w
-</span></code></pre>
-<h4 id="servermodo">Serverモード</h4>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #9ECE6A;"> slide-deck.md</span><span style="color: #E0AF68;"> -w</span></span></code></pre><h4 id="servermodo">Serverモード</h4>
 <p><code>--server</code>/<code>-s</code>s`オプションを使用すると、ローカルサーバーを起動してスライドを表示してくれます。
 サーバーモードの場合の引数はディレクトリなので注意が必要です。</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp ./slides</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">s </span><span style="font-style:italic;color:#444b6a;"># ./slidesディレクトリをルートとしてサーバーを起動
-</span></code></pre>
-<h3 id="csswoshi-yong-suru">cssを適用する</h3>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #9ECE6A;"> ./slides</span><span style="color: #E0AF68;"> -s</span><span style="color: #51597D;font-style: italic;"> # ./slidesディレクトリをルートとしてサーバーを起動</span></span></code></pre><h3 id="csswoshi-yong-suru">cssを適用する</h3>
 <p><code>--theme</code>オプションを使用すると、スライドにcssを適用できます。</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp slide-deck.md</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">theme</span><span style="color:#7aa2f7;"> theme.css
-</span></code></pre>
-<h3 id="deirekutoriwozhi-ding-sitebian-huan-suru">ディレクトリを指定して変換する</h3>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #9ECE6A;"> slide-deck.md</span><span style="color: #E0AF68;"> --theme</span><span style="color: #9ECE6A;"> theme.css</span></span></code></pre><h3 id="deirekutoriwozhi-ding-sitebian-huan-suru">ディレクトリを指定して変換する</h3>
 <p><code>--input-dir</code>,<code>-I</code>オプションを使用すると、ディレクトリ内の全てのMarkdownファイルに対して変換できます。</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">marp</span><span style="color:#89ddff;"> -</span><span style="color:#e0af68;">I</span><span style="color:#7aa2f7;"> ./slides </span><span style="font-style:italic;color:#444b6a;"># ./slidesディレクトリ内の全てのMarkdownファイルを変換
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">marp</span><span style="color: #E0AF68;"> -I</span><span style="color: #9ECE6A;"> ./slides</span><span style="color: #51597D;font-style: italic;"> # ./slidesディレクトリ内の全てのMarkdownファイルを変換</span></span></code></pre>
 <p>この場合は<code>--theme</code>オプションなしでも<code>./slides</code>以下のテーマを使用することができます。</p>
 <hr />
-<p>ほかにもオプションがあるので、詳しくは<a href="https://github.com/marp-team/marp-cli">marp-cli</a>のREADMEや<code>marp --help</code>を参照してください。</p>
+<p>ほかにもオプションがあるので、詳しくは<a rel="external" href="https://github.com/marp-team/marp-cli">marp-cli</a>のREADMEや<code>marp --help</code>を参照してください。</p>
 </p>
 <hr>
 <div class="container share_buttons">
@@ -237,10 +220,6 @@ macOSでは</p>
     <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
   </div>
 </div>
-
-  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
-<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
-
 
 
     </div>

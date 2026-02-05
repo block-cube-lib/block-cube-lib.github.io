@@ -193,8 +193,8 @@ D…">
 </section>
 <hr>
 <p><p>GameCIを使用してしてUnityのプロジェクトをGitHub ActionsでWebGLビルドしてGitHub PagesにDeployする方法です。</p>
-<p><a href="https://github.com/block-cube-lib/unity-webgl-gh-pages-deploy-sample">サンプルのリポジトリ</a><br />
-<a href="https://block-cube-lib.github.io/unity-webgl-gh-pages-deploy-sample/">Deploy結果</a></p>
+<p><a rel="external" href="https://github.com/block-cube-lib/unity-webgl-gh-pages-deploy-sample">サンプルのリポジトリ</a><br />
+<a rel="external" href="https://block-cube-lib.github.io/unity-webgl-gh-pages-deploy-sample/">Deploy結果</a></p>
 <p>Unityのバージョンは2020 LTS版(2020.3.4f1)で確認しています。
 現在の最新版の2021 LTS版ではない理由は最後に書きます。</p>
 <hr />
@@ -213,30 +213,29 @@ D…">
 この手順は最初の1回だけで大丈夫です。</p>
 <h3 id="githubdeshi-yong-surutamenoakuteibesiyonhuairuworikuesutosuru">GitHubで使用するためのアクティベーションファイルをリクエストする</h3>
 <p>まずはUnityのライセンスをアクティベーションする必要があります。<br />
-GameCIの<a href="https://game.ci/docs/github/activation">Activation</a>で公開されているとおりに行います。<br />
+GameCIの<a rel="external" href="https://game.ci/docs/github/activation">Activation</a>で公開されているとおりに行います。<br />
 <strong>注意</strong><br />
-ここで説明するのはPersonal licenseをアクティベーションする方法です。Professional licenseは方法が異なるので<a href="https://game.ci/docs/github/activation">Activation</a>を確認してください。</p>
+ここで説明するのはPersonal licenseをアクティベーションする方法です。Professional licenseは方法が異なるので<a rel="external" href="https://game.ci/docs/github/activation">Activation</a>を確認してください。</p>
 <p><code>.github/workflows/activation.yml</code>というファイル名で以下の内容を保存しpushします。</p>
-<pre data-lang="yaml" style="background-color:#1d1f29;color:#afbad4;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Acquire activation file
-</span><span style="color:#ff9e64;">on</span><span style="color:#89ddff;">:
-</span><span>  </span><span style="color:#f7768e;">workflow_dispatch</span><span style="color:#89ddff;">: {}
-</span><span style="color:#f7768e;">jobs</span><span style="color:#89ddff;">:
-</span><span>  </span><span style="color:#f7768e;">activation</span><span style="color:#89ddff;">:
-</span><span>    </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Request manual activation file 🔑
-</span><span>    </span><span style="color:#f7768e;">runs-on</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">ubuntu-latest
-</span><span>    </span><span style="color:#f7768e;">steps</span><span style="color:#89ddff;">:
-</span><span>      </span><span style="font-style:italic;color:#444b6a;"># Request manual activation file
-</span><span>      </span><span style="color:#9abdf5;">- </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Request manual activation file
-</span><span>        </span><span style="color:#f7768e;">id</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">getManualLicenseFile
-</span><span>        </span><span style="color:#f7768e;">uses</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">game-ci/unity-request-activation-file@v2
-</span><span>      </span><span style="font-style:italic;color:#444b6a;"># Upload artifact (Unity_v20XX.X.XXXX.alf)
-</span><span>      </span><span style="color:#9abdf5;">- </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Expose as artifact
-</span><span>        </span><span style="color:#f7768e;">uses</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">actions/upload-artifact@v2
-</span><span>        </span><span style="color:#f7768e;">with</span><span style="color:#89ddff;">:
-</span><span>          </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">${{ steps.getManualLicenseFile.outputs.filePath }}
-</span><span>          </span><span style="color:#f7768e;">path</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">${{ steps.getManualLicenseFile.outputs.filePath }}
-</span><span>
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="yaml"><span class="giallo-l"><span style="color: #F7768E;">name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Acquire activation file</span></span>
+<span class="giallo-l"><span style="color: #FF9E64;">on</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">  workflow_dispatch</span><span style="color: #89DDFF;">: {}</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">jobs</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">  activation</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Request manual activation file 🔑</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    runs-on</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> ubuntu-latest</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    steps</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">      # Request manual activation file</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">      -</span><span style="color: #F7768E;"> name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Request manual activation file</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        id</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> getManualLicenseFile</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        uses</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> game-ci/unity-request-activation-file@v2</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">      # Upload artifact (Unity_v20XX.X.XXXX.alf)</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">      -</span><span style="color: #F7768E;"> name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Expose as artifact</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        uses</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> actions/upload-artifact@v2</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        with</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> ${{ steps.getManualLicenseFile.outputs.filePath }}</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          path</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> ${{ steps.getManualLicenseFile.outputs.filePath }}</span></span>
+<span class="giallo-l"></span></code></pre>
 <p>GitHubのリポジトリのActionsから<code>Acquire activation file</code>というWorkflowが実行可能になっているため<code>Run workflow</code>を選択します。<br />
 <img src="/image/unity-web-gl-gh-pages-deploy/acquire_activation_file_run_workflow.png" alt="acquire_activation_file_run_workflow" /></p>
 <p>Workflowが実行されるのでしばらく待ちます。<br />
@@ -265,44 +264,43 @@ Nextを押すとライセンスファイルをダウンロードできる画面�
 全て追加すると以下のようにRepository secretsに<code>UNITY_EMAIL</code>, <code>UNITY_LICENSE</code>, <code>UNITY_PASSWORD</code>が並びます。<br />
 <img src="/image/unity-web-gl-gh-pages-deploy/secrets.png" alt="secrets" /></p>
 <p><strong>注意</strong><br />
-ここで追加する<code>UNITY_PASSWORD</code>に特殊文字が含まれていると問題が発生するということが<a href="https://game.ci/docs/github/builder">Builder</a>の項目に書かれていました。</p>
+ここで追加する<code>UNITY_PASSWORD</code>に特殊文字が含まれていると問題が発生するということが<a rel="external" href="https://game.ci/docs/github/builder">Builder</a>の項目に書かれていました。</p>
 <h2 id="github-actionsdewebglbirudositegithub-pagesnideploysuru">GitHub ActionsでWebGLビルドしてGitHub PagesにDeployする</h2>
 <p><code>.github/workflows/main.yml</code>というファイル名で以下の内容を保存しpushします。</p>
-<pre data-lang="yaml" style="background-color:#1d1f29;color:#afbad4;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">WebGL build and Deploy
-</span><span style="color:#ff9e64;">on</span><span style="color:#89ddff;">:
-</span><span>  </span><span style="color:#f7768e;">workflow_dispatch</span><span style="color:#89ddff;">: {}
-</span><span style="color:#f7768e;">jobs</span><span style="color:#89ddff;">:
-</span><span>  </span><span style="color:#f7768e;">build</span><span style="color:#89ddff;">:
-</span><span>    </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">WebGL build
-</span><span>    </span><span style="color:#f7768e;">runs-on</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">ubuntu-latest
-</span><span>    </span><span style="color:#f7768e;">steps</span><span style="color:#89ddff;">:
-</span><span>      </span><span style="color:#9abdf5;">- </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Check out
-</span><span>        </span><span style="color:#f7768e;">uses</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">actions/checkout@v2
-</span><span>
-</span><span>      </span><span style="color:#9abdf5;">- </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">WebGL build
-</span><span>        </span><span style="color:#f7768e;">uses</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">game-ci/unity-builder@v2
-</span><span>        </span><span style="color:#f7768e;">env</span><span style="color:#89ddff;">:
-</span><span>          </span><span style="color:#f7768e;">UNITY_LICENSE</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">${{ secrets.UNITY_LICENSE }}
-</span><span>          </span><span style="color:#f7768e;">UNITY_EMAIL</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">${{ secrets.UNITY_EMAIL }}
-</span><span>          </span><span style="color:#f7768e;">UNITY_PASSWORD</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">${{ secrets.UNITY_PASSWORD }}
-</span><span>        </span><span style="color:#f7768e;">with</span><span style="color:#89ddff;">:
-</span><span>          </span><span style="color:#f7768e;">targetPlatform</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">WebGL
-</span><span>          </span><span style="color:#f7768e;">unityVersion</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">2020.3.4f1 </span><span style="font-style:italic;color:#444b6a;"># 使用するUnityのバージョンに書き換えてください
-</span><span>
-</span><span>      </span><span style="color:#9abdf5;">- </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Deploy
-</span><span>        </span><span style="color:#f7768e;">uses</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">JamesIves/github-pages-deploy-action@4.1.3
-</span><span>        </span><span style="color:#f7768e;">with</span><span style="color:#89ddff;">:
-</span><span>          </span><span style="color:#f7768e;">branch</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">gh-pages </span><span style="font-style:italic;color:#444b6a;"># gh-pagesブランチにdeployする
-</span><span>          </span><span style="color:#f7768e;">folder</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">build/WebGL/WebGL </span><span style="font-style:italic;color:#444b6a;"># ビルド結果のWebGL/WebGLフォルダの中身をdeployする
-</span><span>
-</span><span>      </span><span style="font-style:italic;color:#444b6a;"># ビルド結果をダウンロードできるようにする
-</span><span>      </span><span style="font-style:italic;color:#444b6a;"># 必要なければ消しても大丈夫です
-</span><span>      </span><span style="color:#9abdf5;">- </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Upload the WebGL Build
-</span><span>        </span><span style="color:#f7768e;">uses</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">actions/upload-artifact@v2
-</span><span>        </span><span style="color:#f7768e;">with</span><span style="color:#89ddff;">:
-</span><span>          </span><span style="color:#f7768e;">name</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Build
-</span><span>          </span><span style="color:#f7768e;">path</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">build
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="yaml"><span class="giallo-l"><span style="color: #F7768E;">name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> WebGL build and Deploy</span></span>
+<span class="giallo-l"><span style="color: #FF9E64;">on</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">  workflow_dispatch</span><span style="color: #89DDFF;">: {}</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">jobs</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">  build</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> WebGL build</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    runs-on</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> ubuntu-latest</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    steps</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">      -</span><span style="color: #F7768E;"> name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Check out</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        uses</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> actions/checkout@v2</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">      -</span><span style="color: #F7768E;"> name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> WebGL build</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        uses</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> game-ci/unity-builder@v2</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        env</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          UNITY_LICENSE</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> ${{ secrets.UNITY_LICENSE }}</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          UNITY_EMAIL</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> ${{ secrets.UNITY_EMAIL }}</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          UNITY_PASSWORD</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> ${{ secrets.UNITY_PASSWORD }}</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        with</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          targetPlatform</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> WebGL</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          unityVersion</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> 2020.3.4f1</span><span style="color: #51597D;font-style: italic;"> # 使用するUnityのバージョンに書き換えてください</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">      -</span><span style="color: #F7768E;"> name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Deploy</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        uses</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> JamesIves/github-pages-deploy-action@4.1.3</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        with</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          branch</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> gh-pages</span><span style="color: #51597D;font-style: italic;"> # gh-pagesブランチにdeployする</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          folder</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> build/WebGL/WebGL</span><span style="color: #51597D;font-style: italic;"> # ビルド結果のWebGL/WebGLフォルダの中身をdeployする</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">      # ビルド結果をダウンロードできるようにする</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">      # 必要なければ消しても大丈夫です</span></span>
+<span class="giallo-l"><span style="color: #9ABDF5;">      -</span><span style="color: #F7768E;"> name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Upload the WebGL Build</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        uses</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> actions/upload-artifact@v2</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">        with</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          name</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Build</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">          path</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> build</span></span></code></pre>
 <p>すると<code>WebGL build and Deploy</code>というworkflowが選択できるようになっているので<code>Run workflow</code>で実行します。<br />
 <img src="/image/unity-web-gl-gh-pages-deploy/webgl_build_and_deploy.png" alt="webgl_build_and_deploy" />
 workflowの実行が完了すると<code>gh-pages</code>というブランチにビルド結果がpushされます。<br />
@@ -314,14 +312,13 @@ workflowの実行が完了すると<code>gh-pages</code>というブランチに
 <img src="/image/unity-web-gl-gh-pages-deploy/publish_gh-pages.png" alt="publish_gh-pages" /></p>
 <h3 id="meinburantinipushsitatokiyapull-requestgamazisaretatokinizi-dong-debirudo-deploysuru">メインブランチにpushしたときやpull requestがマージされたときに自動でビルド&amp;Deployする</h3>
 <p>現在<code>on:</code>の中に<code>workflow_dispatch</code>しか書かれていませんがそれを下記の内容に書き換えてください。</p>
-<pre data-lang="yaml" style="background-color:#1d1f29;color:#afbad4;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#ff9e64;">on</span><span style="color:#89ddff;">:
-</span><span>  </span><span style="color:#f7768e;">push</span><span style="color:#89ddff;">:
-</span><span>    </span><span style="color:#f7768e;">branches</span><span style="color:#89ddff;">: [ </span><span style="color:#9ece6a;">main </span><span style="color:#89ddff;">] </span><span style="font-style:italic;color:#444b6a;"># mainはメインブランチの名前に書き換えてください
-</span><span>  </span><span style="color:#f7768e;">pull_request</span><span style="color:#89ddff;">:
-</span><span>    </span><span style="color:#f7768e;">branches</span><span style="color:#89ddff;">: [ </span><span style="color:#9ece6a;">main </span><span style="color:#89ddff;">] </span><span style="font-style:italic;color:#444b6a;"># mainはメインブランチの名前に書き換えてください
-</span><span>
-</span><span>  </span><span style="color:#f7768e;">workflow_dispatch</span><span style="color:#89ddff;">: {}
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="yaml"><span class="giallo-l"><span style="color: #FF9E64;">on</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">  push</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    branches</span><span style="color: #89DDFF;">: [</span><span style="color: #9ECE6A;"> main</span><span style="color: #89DDFF;"> ]</span><span style="color: #51597D;font-style: italic;"> # mainはメインブランチの名前に書き換えてください</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">  pull_request</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    branches</span><span style="color: #89DDFF;">: [</span><span style="color: #9ECE6A;"> main</span><span style="color: #89DDFF;"> ]</span><span style="color: #51597D;font-style: italic;"> # mainはメインブランチの名前に書き換えてください</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F7768E;">  workflow_dispatch</span><span style="color: #89DDFF;">: {}</span></span></code></pre>
 <p>これでメインブランチに変更があったときに自動でビルド&amp;Deployされます。</p>
 <h2 id="sonota">その他</h2>
 <h3 id="project-settingsdedecompression-fallbackwowu-xiao-nisitamamaya-suo-sitachang-he">Project Settingsで<code>Decompression Fallback</code>を無効にしたまま圧縮した場合</h3>
@@ -334,15 +331,13 @@ workflowの実行が完了すると<code>gh-pages</code>というブランチに
 <h3 id="birudoshi-nikiyatusiyuwoli-yong-suru">ビルド時にキャッシュを利用する</h3>
 <p>キャッシュを利用することでビルドを高速化できます。<br />
 それにはUnityから公開されている<code>actions/cache@v2</code>を<code>steps</code>の中のビルドの手前に以下の内容を追加するだけです。</p>
-<pre data-lang="yaml" style="background-color:#1d1f29;color:#afbad4;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#9abdf5;">- </span><span style="color:#f7768e;">uses</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">actions/cache@v2
-</span><span>  </span><span style="color:#f7768e;">with</span><span style="color:#89ddff;">:
-</span><span>    </span><span style="color:#f7768e;">path</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">path/to/your/project/Library </span><span style="font-style:italic;color:#444b6a;"># プロジェクトのLibraryフォルダへのパスに書き換えてください
-</span><span>    </span><span style="color:#f7768e;">key</span><span style="color:#89ddff;">: </span><span style="color:#9ece6a;">Library-MyProjectName-TargetPlatform </span><span style="font-style:italic;color:#444b6a;"># MyProjectNameとTargetPlatformはプロジェクト名とターゲットのプラットフォームに書き換えてください
-</span><span>    </span><span style="color:#f7768e;">restore-keys</span><span style="color:#89ddff;">: </span><span style="font-style:italic;color:#bb9af7;">|
-</span><span style="color:#9ece6a;">      Library-MyProjectName- # MyProjectNameはプロジェクト名に書き換えてください
-</span><span style="color:#9ece6a;">      Library-
-</span></code></pre>
-<h2 id="atogaki">あとがき</h2>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="yaml"><span class="giallo-l"><span style="color: #9ABDF5;">-</span><span style="color: #F7768E;"> uses</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> actions/cache@v2</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">  with</span><span style="color: #89DDFF;">:</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    path</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> path/to/your/project/Library</span><span style="color: #51597D;font-style: italic;"> # プロジェクトのLibraryフォルダへのパスに書き換えてください</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    key</span><span style="color: #89DDFF;">:</span><span style="color: #9ECE6A;"> Library-MyProjectName-TargetPlatform</span><span style="color: #51597D;font-style: italic;"> # MyProjectNameとTargetPlatformはプロジェクト名とターゲットのプラットフォームに書き換えてください</span></span>
+<span class="giallo-l"><span style="color: #F7768E;">    restore-keys</span><span style="color: #89DDFF;">:</span><span style="color: #BB9AF7;"> |</span></span>
+<span class="giallo-l"><span style="color: #9ECE6A;">      Library-MyProjectName- # MyProjectNameはプロジェクト名に書き換えてください</span></span>
+<span class="giallo-l"><span style="color: #9ECE6A;">      Library-</span></span></code></pre><h2 id="atogaki">あとがき</h2>
 <p>ライセンスの登録など若干面倒な作業がありますが一度設定してしまえばあとはプロジェクトに変更があるたびに自動でビルドされDeployまでされるので快適です。</p>
 <p>最終的にメインブランチにpushしたときに自動ビルド&amp;Deployを行いビルド時にキャッシュを有効にしているものをサンプルとしてGitHubで公開しています。
 リンクはページの先頭にあります。</p>
@@ -359,10 +354,6 @@ workflowの実行が完了すると<code>gh-pages</code>というブランチに
     <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
   </div>
 </div>
-
-  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
-<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
-
 
 
     </div>

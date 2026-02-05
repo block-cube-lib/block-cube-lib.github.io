@@ -26,8 +26,7 @@
 }
 
 let p = Point { x: 1, y: 2 };
-
-のように初期化できるのは普通に知られている…
+のように初期化できるのは普通に知られていると…
   
 ">
 
@@ -47,8 +46,7 @@ let p = Point { x: 1, y: 2 };
 }
 
 let p = Point { x: 1, y: 2 };
-
-のように初期化できるのは普通に知られている…">
+のように初期化できるのは普通に知られていると…">
     <!-- begin twitter ogp -->
     
       <meta name="twitter:card" content="summary_large_image">
@@ -117,20 +115,18 @@ let p = Point { x: 1, y: 2 };
 
 </section>
 <hr>
-<p><pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Point </span><span style="color:#9abdf5;">{
-</span><span style="color:#9abdf5;">  </span><span style="color:#7dcfff;">x</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">i32</span><span style="color:#9abdf5;">,
-</span><span style="color:#9abdf5;">  </span><span style="color:#7dcfff;">y</span><span style="color:#89ddff;">: </span><span style="color:#bb9af7;">i32</span><span style="color:#9abdf5;">,
-</span><span style="color:#9abdf5;">}
-</span><span>
-</span><span style="color:#bb9af7;">let</span><span> p </span><span style="color:#89ddff;">=</span><span> Point </span><span style="color:#9abdf5;">{ x</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1</span><span style="color:#89ddff;">,</span><span style="color:#9abdf5;"> y</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
-</span></code></pre>
+<p><pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="rust"><span class="giallo-l"><span style="color: #BB9AF7;">struct</span><span style="color: #C0CAF5;"> Point</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">  x</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> i32</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">  y</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> i32</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">let</span><span style="color: #C0CAF5;"> p</span><span style="color: #89DDFF;"> =</span><span style="color: #C0CAF5;"> Point</span><span style="color: #89DDFF;"> {</span><span style="color: #C0CAF5;"> x</span><span style="color: #89DDFF;">:</span><span style="color: #FF9E64;"> 1</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> y</span><span style="color: #89DDFF;">:</span><span style="color: #FF9E64;"> 2</span><span style="color: #89DDFF;"> };</span></span></code></pre>
 <p>のように初期化できるのは普通に知られていると思いますが、実はTuple Structも</p>
-<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">Point </span><span style="color:#9abdf5;">(</span><span style="color:#bb9af7;">i32</span><span>, </span><span style="color:#bb9af7;">i32</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">;
-</span><span>
-</span><span style="color:#bb9af7;">let</span><span> p </span><span style="color:#89ddff;">=</span><span> Point </span><span style="color:#9abdf5;">{ </span><span style="color:#ff9e64;">0</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">1</span><span style="color:#89ddff;">, </span><span style="color:#ff9e64;">1</span><span style="color:#89ddff;">: </span><span style="color:#ff9e64;">2 </span><span style="color:#9abdf5;">}</span><span style="color:#89ddff;">;
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="rust"><span class="giallo-l"><span style="color: #BB9AF7;">struct</span><span style="color: #C0CAF5;"> Point</span><span style="color: #89DDFF;"> (</span><span style="color: #C0CAF5;">i32</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> i32</span><span style="color: #89DDFF;">);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">let</span><span style="color: #C0CAF5;"> p</span><span style="color: #89DDFF;"> =</span><span style="color: #C0CAF5;"> Point</span><span style="color: #89DDFF;"> {</span><span style="color: #FF9E64;"> 0</span><span style="color: #89DDFF;">:</span><span style="color: #FF9E64;"> 1</span><span style="color: #89DDFF;">,</span><span style="color: #FF9E64;"> 1</span><span style="color: #89DDFF;">:</span><span style="color: #FF9E64;"> 2</span><span style="color: #89DDFF;"> };</span></span></code></pre>
 <p>のように初期化できます。<br />
-<a href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=%23%5Bderive%28Debug%29%5D%0Astruct+Point%28i32%2C+i32%29%3B%0A%0Afn+main%28%29+%7B%0A++++let+p+%3D+Point+%7B+0%3A+10%2C+1%3A+20+%7D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+p%29%3B%0A%7D%0A">Rust Playgroundで実行する</a></p>
+<a rel="external" href="https://play.rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021&amp;code=%23%5Bderive%28Debug%29%5D%0Astruct+Point%28i32%2C+i32%29%3B%0A%0Afn+main%28%29+%7B%0A++++let+p+%3D+Point+%7B+0%3A+10%2C+1%3A+20+%7D%3B%0A++++println%21%28%22%7B%3A%3F%7D%22%2C+p%29%3B%0A%7D%0A">Rust Playgroundで実行する</a></p>
 <p><code>let p = Point(1, 2);</code>のような初期化しか知らなかったので驚きました。</p>
 </p>
 <hr>
@@ -145,10 +141,6 @@ let p = Point { x: 1, y: 2 };
     <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
   </div>
 </div>
-
-  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
-<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
-
 
 
     </div>

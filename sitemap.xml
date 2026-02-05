@@ -83,6 +83,10 @@
         <lastmod>2023-02-24T12:55:00+09:00</lastmod>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/esp-idf-svc-project-rust-version-up/</loc>
+        <lastmod>2026-02-05T23:02:05+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/failed-attempt-const-generics-vector-matrix/</loc>
         <lastmod>2024-02-21T15:25:00+09:00</lastmod>
     </url>
@@ -211,6 +215,12 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/earphones/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/esp-idf-svc/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/esp32/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/game-development/</loc>

@@ -122,11 +122,10 @@ UniversalRPからカメラにRendererを設定できるようになりました�
 <p>実はUniversalRPではCameraを追加すると一緒に<code>UniversalAdditionalCameraData</code>というコンポーネントがついてきます。<br />
 <img src="/image/universal_additional_camera_data.png" alt="image" /></p>
 <p>この中に<code>SetRenderer</code>という関数があるので、その関数を使用することでScriptからRendererを変更できます。</p>
-<pre data-lang="cs" style="background-color:#1d1f29;color:#afbad4;" class="language-cs "><code class="language-cs" data-lang="cs"><span style="font-style:italic;color:#444b6a;">// UniversalAdditionalCameraDataを使用するには
-</span><span style="font-style:italic;color:#444b6a;">// using UnityEngine.Rendering.Universal;が必要
-</span><span style="color:#bb9af7;">var </span><span style="color:#c0caf5;">cameraData </span><span style="color:#89ddff;">= </span><span style="color:#c0caf5;">camera</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">GetComponent</span><span style="color:#89ddff;">&lt;</span><span style="color:#0db9d7;">UniversalAdditionalCameraData</span><span style="color:#89ddff;">&gt;</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">;
-</span><span style="color:#c0caf5;">cameraData</span><span style="color:#89ddff;">.</span><span style="color:#7aa2f7;">SetRenderer</span><span style="color:#9abdf5;">(</span><span style="color:#c0caf5;">rendererIndex</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">; </span><span style="font-style:italic;color:#444b6a;">// Rendererのindexを指定する
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="csharp"><span class="giallo-l"><span style="color: #51597D;font-style: italic;">// UniversalAdditionalCameraDataを使用するには</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">// using UnityEngine.Rendering.Universal;が必要</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">var</span><span style="color: #C0CAF5;"> cameraData</span><span style="color: #89DDFF;"> =</span><span style="color: #C0CAF5;"> camera</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">GetComponent</span><span style="color: #89DDFF;">&lt;</span><span style="color: #C0CAF5;">UniversalAdditionalCameraData</span><span style="color: #89DDFF;">&gt;();</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">cameraData</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">SetRenderer</span><span style="color: #89DDFF;">(</span><span style="color: #C0CAF5;">rendererIndex</span><span style="color: #89DDFF;">);</span><span style="color: #51597D;font-style: italic;"> // Rendererのindexを指定する</span></span></code></pre>
 <p><code>SetRenderer</code>の引数はRendererのindexです。<br />
 手元で試したところ</p>
 <ul>
@@ -153,10 +152,6 @@ UniversalRPからカメラにRendererを設定できるようになりました�
     <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
   </div>
 </div>
-
-  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
-<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
-
 
 
     </div>

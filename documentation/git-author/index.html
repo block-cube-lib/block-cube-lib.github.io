@@ -89,7 +89,7 @@ Overview
   
 </section>
 <p><p>git author ver 2.0.0の日本語ドキュメントです。<br />
-<a href="https://github.com/block-cube-lib/git-author-rs">リポジトリ</a></p>
+<a rel="external" href="https://github.com/block-cube-lib/git-author-rs">リポジトリ</a></p>
 <p>旧バージョン(ver 1.0)のドキュメントは<a href="../archive/git-author-1-0">こちら</a></p>
 <h2 id="overview">Overview</h2>
 <ul>
@@ -99,51 +99,43 @@ Overview
 </ul>
 <h2 id="installation">Installation</h2>
 <p>Cargoが使える必要があります。</p>
-<pre style="background-color:#1d1f29;color:#afbad4;"><code><span>$ cargo install git-author
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="plain"><span class="giallo-l"><span>$ cargo install git-author</span></span></code></pre>
 <p>でインストールできます。</p>
 <h2 id="usage">Usage</h2>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="font-style:italic;color:#444b6a;"># get
-</span><span style="color:#7aa2f7;">$ git author </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">config file location</span><span style="color:#bb9af7;">]
-</span><span style="color:#7aa2f7;">$ git author get </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">config file location</span><span style="color:#bb9af7;">]
-</span><span style="font-style:italic;color:#444b6a;"># set
-</span><span style="color:#7aa2f7;">$ git author set </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">config file location</span><span style="color:#bb9af7;">] </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">name</span><span style="color:#89ddff;">&gt; &lt;</span><span style="color:#7aa2f7;">email</span><span style="color:#89ddff;">&gt;
-</span><span style="font-style:italic;color:#444b6a;"># unset
-</span><span style="color:#7aa2f7;">$ git author unset </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">config file location</span><span style="color:#bb9af7;">]
-</span><span style="font-style:italic;color:#444b6a;">## replace-simple
-</span><span style="color:#7aa2f7;">$ git author replace simple </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">old-name</span><span style="color:#89ddff;">&gt; &lt;</span><span style="color:#7aa2f7;">old-email</span><span style="color:#89ddff;">&gt; </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">new</span><span style="color:#89ddff;">-</span><span style="color:#7aa2f7;">name</span><span style="color:#bb9af7;">] [</span><span style="color:#7aa2f7;">new</span><span style="color:#89ddff;">-</span><span style="color:#7aa2f7;">email</span><span style="color:#bb9af7;">]
-</span><span style="font-style:italic;color:#444b6a;">## replace-detail
-</span><span style="color:#7aa2f7;">$ git author replace detail</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">filter-author </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">name</span><span style="color:#89ddff;">&gt; &lt;</span><span style="color:#7aa2f7;">email</span><span style="color:#89ddff;">&gt; -</span><span style="color:#7aa2f7;">-filter-committer </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">name</span><span style="color:#89ddff;">&gt; &lt;</span><span style="color:#7aa2f7;">email</span><span style="color:#89ddff;">&gt; -</span><span style="color:#7aa2f7;">-replace-target </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">replace-target</span><span style="color:#89ddff;">&gt;
-</span></code></pre>
-<h2 id="description">Description</h2>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #51597D;font-style: italic;"># get</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author</span><span> [config</span><span style="color: #9ECE6A;"> file location]</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author get</span><span> [config</span><span style="color: #9ECE6A;"> file location]</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;"># set</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author set</span><span> [config</span><span style="color: #9ECE6A;"> file location]</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">nam</span><span>e</span><span style="color: #89DDFF;">&gt; &lt;</span><span style="color: #9ECE6A;">emai</span><span>l</span><span style="color: #89DDFF;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;"># unset</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author unset</span><span> [config</span><span style="color: #9ECE6A;"> file location]</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">## replace-simple</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author replace simple</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">old-nam</span><span>e</span><span style="color: #89DDFF;">&gt; &lt;</span><span style="color: #9ECE6A;">old-emai</span><span>l</span><span style="color: #89DDFF;">&gt;</span><span> [new-name] </span><span style="color: #89DDFF;">[</span><span>new-email</span><span style="color: #89DDFF;">]</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">## replace-detail</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author replace detail</span><span style="color: #E0AF68;"> --filter-author</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">nam</span><span>e</span><span style="color: #89DDFF;">&gt; &lt;</span><span style="color: #9ECE6A;">emai</span><span>l</span><span style="color: #89DDFF;">&gt;</span><span style="color: #E0AF68;"> --filter-committer</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">nam</span><span>e</span><span style="color: #89DDFF;">&gt; &lt;</span><span style="color: #9ECE6A;">emai</span><span>l</span><span style="color: #89DDFF;">&gt;</span><span style="color: #E0AF68;"> --replace-target</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">replace-targe</span><span>t</span><span style="color: #89DDFF;">&gt;</span></span></code></pre><h2 id="description">Description</h2>
 <h3 id="get">get</h3>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">$ git author </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">config file location</span><span style="color:#bb9af7;">]
-</span><span style="color:#7aa2f7;">$ git author get </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">config file location</span><span style="color:#bb9af7;">]
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author</span><span> [config</span><span style="color: #9ECE6A;"> file location]</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author get</span><span> [config</span><span style="color: #9ECE6A;"> file location]</span></span></code></pre>
 <p><code>git author</code>または<code>git author get</code>でuser.nameとuser.emailを取得できます。<br />
 <img src="/image/works/git-author/2.0/get.png" alt="get" /></p>
 <h3 id="set">set</h3>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">$ git author set </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">config file location</span><span style="color:#bb9af7;">] </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">name</span><span style="color:#89ddff;">&gt; &lt;</span><span style="color:#7aa2f7;">email</span><span style="color:#89ddff;">&gt;
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author set</span><span> [config</span><span style="color: #9ECE6A;"> file location]</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">nam</span><span>e</span><span style="color: #89DDFF;">&gt; &lt;</span><span style="color: #9ECE6A;">emai</span><span>l</span><span style="color: #89DDFF;">&gt;</span></span></code></pre>
 <p>user.nameとuser.emailを設定できます。<br />
 <img src="/image/works/git-author/2.0/set.png" alt="set" /></p>
 <h3 id="unset">unset</h3>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">$ git author unset </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">config file location</span><span style="color:#bb9af7;">]
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author unset</span><span> [config</span><span style="color: #9ECE6A;"> file location]</span></span></code></pre>
 <p>user.nameとuser.emailの設定を削除できます。<br />
 <img src="/image/works/git-author/2.0/unset.png" alt="unset" /></p>
 <h3 id="replace">replace</h3>
 <p>過去のコミットのAuthorとCommitterを書き換えます。<br />
 サブコマンドとして<code>simple</code>と<code>detail</code>が存在します。</p>
 <h4 id="simple">simple</h4>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">$ git author replace simple </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">old-name</span><span style="color:#89ddff;">&gt; &lt;</span><span style="color:#7aa2f7;">old-email</span><span style="color:#89ddff;">&gt; </span><span style="color:#bb9af7;">[</span><span style="color:#7aa2f7;">new</span><span style="color:#89ddff;">-</span><span style="color:#7aa2f7;">name</span><span style="color:#bb9af7;">] [</span><span style="color:#7aa2f7;">new</span><span style="color:#89ddff;">-</span><span style="color:#7aa2f7;">email</span><span style="color:#bb9af7;">]
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author replace simple</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">old-nam</span><span>e</span><span style="color: #89DDFF;">&gt; &lt;</span><span style="color: #9ECE6A;">old-emai</span><span>l</span><span style="color: #89DDFF;">&gt;</span><span> [new-name] </span><span style="color: #89DDFF;">[</span><span>new-email</span><span style="color: #89DDFF;">]</span></span></code></pre>
 <p>過去のコミットのAuthor/Committerの<code>old-name &lt;old-email&gt;</code>を<code>new-name &lt;new-email&gt;</code>に置き換えます。<br />
 <code>new-name</code>と<code>new-email</code>を省略した場合は<code>git author</code>で取得できるnameとemailを使用します。<br />
 <img src="/image/works/git-author/2.0/replace-simple.png" alt="replace-simple" /></p>
 <h4 id="detail">detail</h4>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">$ git author replace detail</span><span style="color:#89ddff;"> --</span><span style="color:#e0af68;">filter-author </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">name</span><span style="color:#89ddff;">&gt; &lt;</span><span style="color:#7aa2f7;">email</span><span style="color:#89ddff;">&gt; -</span><span style="color:#7aa2f7;">-filter-committer </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">name</span><span style="color:#89ddff;">&gt; &lt;</span><span style="color:#7aa2f7;">email</span><span style="color:#89ddff;">&gt; -</span><span style="color:#7aa2f7;">-replace-target </span><span style="color:#89ddff;">&lt;</span><span style="color:#7aa2f7;">replace-target</span><span style="color:#89ddff;">&gt;
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">$</span><span style="color: #9ECE6A;"> git author replace detail</span><span style="color: #E0AF68;"> --filter-author</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">nam</span><span>e</span><span style="color: #89DDFF;">&gt; &lt;</span><span style="color: #9ECE6A;">emai</span><span>l</span><span style="color: #89DDFF;">&gt;</span><span style="color: #E0AF68;"> --filter-committer</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">nam</span><span>e</span><span style="color: #89DDFF;">&gt; &lt;</span><span style="color: #9ECE6A;">emai</span><span>l</span><span style="color: #89DDFF;">&gt;</span><span style="color: #E0AF68;"> --replace-target</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">replace-targe</span><span>t</span><span style="color: #89DDFF;">&gt;</span></span></code></pre>
 <p>指定した条件のコミットのAuthorとCommitterのいずれかまたは両方のnameとemailを置き換えます。</p>
 <h5 id="options">options</h5>
 <h6 id="huirutaringutiao-jian">フィルタリング条件</h6>
@@ -193,7 +185,7 @@ Committerでフィルタリングする場合に指定する。<br />
 </ul>
 <p><img src="/image/works/git-author/2.0/replace-detail.png" alt="replace-detail" /></p>
 <h2 id="license">License</h2>
-<p><a href="https://github.com/block-cube-lib/git-author-rs/blob/master/LICENSE">MIT</a></p>
+<p><a rel="external" href="https://github.com/block-cube-lib/git-author-rs/blob/master/LICENSE">MIT</a></p>
 </p>
 
 

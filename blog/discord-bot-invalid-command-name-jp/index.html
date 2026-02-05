@@ -118,42 +118,39 @@ Poiseでは
 
 </section>
 <hr>
-<p><p>Rustの<a href="https://github.com/serenity-rs/poise">Poise</a>というcrate(ライブラリ)を使用してDiscordのbotを開発しているときに確認したことです。</p>
+<p><p>Rustの<a rel="external" href="https://github.com/serenity-rs/poise">Poise</a>というcrate(ライブラリ)を使用してDiscordのbotを開発しているときに確認したことです。</p>
 <p>Poiseでは</p>
-<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#444b6a;">/// Discription
-</span><span style="color:#89ddff;">#</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">poise</span><span>::</span><span style="color:#c0caf5;">command</span><span style="color:#9abdf5;">(
-</span><span>    slash_command</span><span style="color:#89ddff;">,
-</span><span>    </span><span style="color:#7aa2f7;">name_localized</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">ja</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#9ece6a;">日本語コマンド名</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
-</span><span>    </span><span style="color:#7aa2f7;">description_localized</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">ja</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#9ece6a;">日本語説明文</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)
-</span><span style="color:#9abdf5;">)]
-</span><span style="font-style:italic;color:#9d7cd8;">pub</span><span> async </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">exsample_command</span><span style="color:#9abdf5;">(</span><span style="color:#e0af68;">ctx</span><span style="color:#89ddff;">: </span><span>Context</span><span style="color:#89ddff;">&lt;</span><span>&#39;</span><span style="color:#89ddff;">_&gt;</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#0db9d7;">Result</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
-</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#444b6a;">/* 処理内容 */
-</span><span style="color:#9abdf5;">}
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="rust"><span class="giallo-l"><span style="color: #51597D;font-style: italic;">/// Discription</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">#[</span><span>poise</span><span style="color: #89DDFF;">::</span><span>command</span><span style="color: #89DDFF;">(</span></span>
+<span class="giallo-l"><span>    slash_command</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span>    name_localized</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #9ECE6A;">ja</span><span style="color: #89DDFF;">&quot;, &quot;</span><span style="color: #9ECE6A;">日本語コマンド名</span><span style="color: #89DDFF;">&quot;),</span></span>
+<span class="giallo-l"><span>    description_localized</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #9ECE6A;">ja</span><span style="color: #89DDFF;">&quot;, &quot;</span><span style="color: #9ECE6A;">日本語説明文</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">)]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">pub async fn</span><span style="color: #7AA2F7;"> exsample_command</span><span style="color: #89DDFF;">(</span><span style="color: #C0CAF5;">ctx</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> Context</span><span style="color: #89DDFF;">&lt;&#39;</span><span style="color: #C0CAF5;">_</span><span style="color: #89DDFF;">&gt;) -&gt;</span><span style="color: #C0CAF5;"> Result</span><span style="color: #89DDFF;">&lt;()&gt; {</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    /* 処理内容 */</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span></code></pre>
 <p>のようにすることでスラッシュコマンドを開発することができ関数名がそのままコマンド名となり<code>name_localized</code>で指定したものがローカライズされたコマンド名となります。<br />
 この場合<code>/example_command</code>というコマンドでこのコマンドを実行することができますが、日本語環境であれば<code>/日本語コマンド名</code>というコマンドで実行する事ができます。</p>
 <p>さて本題ですが、このname_localizedで"ja"つまり日本語ローカライズしたコマンド名にアルファベットを含むことができなさそうという問題です。</p>
 <p>私はバンカラステージボットというスプラトゥーン3のステージ情報を表示するbotを開発しているのですが、その機能追加で<code>/Xマッチ</code>というコマンドを作成したくなりました。<br />
 以下のように定義します。</p>
-<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#444b6a;">/// Displays splatoon3 X battle schedule
-</span><span style="color:#89ddff;">#</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">poise</span><span>::</span><span style="color:#c0caf5;">command</span><span style="color:#9abdf5;">(
-</span><span>    slash_command</span><span style="color:#89ddff;">,
-</span><span>    </span><span style="color:#7aa2f7;">name_localized</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">ja</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#9ece6a;">エックスマッチ</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)</span><span style="color:#89ddff;">,
-</span><span>    </span><span style="color:#7aa2f7;">description_localized</span><span style="color:#9abdf5;">(</span><span style="color:#89ddff;">&quot;</span><span style="color:#9ece6a;">ja</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#9ece6a;">Xマッチのスケジュールを取得する</span><span style="color:#89ddff;">&quot;</span><span style="color:#9abdf5;">)
-</span><span style="color:#9abdf5;">)]
-</span><span style="font-style:italic;color:#9d7cd8;">pub</span><span> async </span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">x_match</span><span style="color:#9abdf5;">(
-</span><span>    </span><span style="color:#e0af68;">ctx</span><span style="color:#89ddff;">: </span><span>Context</span><span style="color:#89ddff;">&lt;</span><span>&#39;</span><span style="color:#89ddff;">_&gt;</span><span>,
-</span><span>    #[description = &quot;hour of the day. 0~23&quot;]
-</span><span>    #[description_localized</span><span style="color:#9abdf5;">(</span><span>&quot;</span><span style="color:#e0af68;">ja</span><span>&quot;</span><span style="color:#89ddff;">,</span><span> &quot;</span><span style="color:#e0af68;">スケジュールを確認したい時間</span><span>。0~23</span><span style="color:#e0af68;">のいずれか</span><span>&quot;</span><span style="color:#9abdf5;">)</span><span>]
-</span><span>    #[max = 23]
-</span><span>    </span><span style="color:#e0af68;">hour</span><span style="color:#89ddff;">: </span><span style="color:#0db9d7;">Option</span><span style="color:#89ddff;">&lt;</span><span style="color:#bb9af7;">u32</span><span style="color:#89ddff;">&gt;</span><span>,
-</span><span style="color:#9abdf5;">) </span><span style="color:#89ddff;">-&gt; </span><span style="color:#0db9d7;">Result</span><span style="color:#89ddff;">&lt;</span><span style="color:#9abdf5;">()</span><span style="color:#89ddff;">&gt; </span><span style="color:#9abdf5;">{
-</span><span style="color:#9abdf5;">    </span><span style="font-style:italic;color:#444b6a;">/* 処理内容 */
-</span><span style="color:#9abdf5;">}
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="rust"><span class="giallo-l"><span style="color: #51597D;font-style: italic;">/// Displays splatoon3 X battle schedule</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">#[</span><span>poise</span><span style="color: #89DDFF;">::</span><span>command</span><span style="color: #89DDFF;">(</span></span>
+<span class="giallo-l"><span>    slash_command</span><span style="color: #89DDFF;">,</span></span>
+<span class="giallo-l"><span>    name_localized</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #9ECE6A;">ja</span><span style="color: #89DDFF;">&quot;, &quot;</span><span style="color: #9ECE6A;">エックスマッチ</span><span style="color: #89DDFF;">&quot;),</span></span>
+<span class="giallo-l"><span>    description_localized</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #9ECE6A;">ja</span><span style="color: #89DDFF;">&quot;, &quot;</span><span style="color: #9ECE6A;">Xマッチのスケジュールを取得する</span><span style="color: #89DDFF;">&quot;)</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">)]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">pub async fn</span><span style="color: #7AA2F7;"> x_match</span><span style="color: #89DDFF;">(</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    ctx</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> Context</span><span style="color: #89DDFF;">&lt;&#39;</span><span style="color: #C0CAF5;">_</span><span style="color: #89DDFF;">&gt;,</span></span>
+<span class="giallo-l"><span>    #</span><span style="color: #89DDFF;">[</span><span style="color: #C0CAF5;">description</span><span style="color: #89DDFF;"> = &quot;</span><span style="color: #9ECE6A;">hour of the day. 0~23</span><span style="color: #89DDFF;">&quot;]</span></span>
+<span class="giallo-l"><span>    #</span><span style="color: #89DDFF;">[</span><span style="color: #7AA2F7;">description_localized</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #9ECE6A;">ja</span><span style="color: #89DDFF;">&quot;, &quot;</span><span style="color: #9ECE6A;">スケジュールを確認したい時間。0~23のいずれか</span><span style="color: #89DDFF;">&quot;)]</span></span>
+<span class="giallo-l"><span>    #</span><span style="color: #89DDFF;">[</span><span style="color: #C0CAF5;">max</span><span style="color: #89DDFF;"> =</span><span style="color: #FF9E64;"> 23</span><span style="color: #89DDFF;">]</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    hour</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> Option</span><span style="color: #89DDFF;">&lt;</span><span style="color: #C0CAF5;">u32</span><span style="color: #89DDFF;">&gt;,</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">) -&gt;</span><span style="color: #C0CAF5;"> Result</span><span style="color: #89DDFF;">&lt;()&gt; {</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    /* 処理内容 */</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span></code></pre>
 <p>このコマンドを登録しようとしたところDiscordから以下のようなエラーが返ってきました。</p>
-<pre data-lang="sh" style="background-color:#1d1f29;color:#afbad4;" class="language-sh "><code class="language-sh" data-lang="sh"><span style="color:#7aa2f7;">Invalid Form Body (name_localizations: Command name is invalid</span><span>)
-</span></code></pre>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">Invalid</span><span style="color: #9ECE6A;"> Form Body</span><span> (name_localizations:</span><span style="color: #9ECE6A;"> Command name is invalid</span><span>)</span></span></code></pre>
 <p><code>name_localizations</code>で指定したコマンド名に問題がありそうなエラーですね。<br />
 調べてもわかりませんでしたがコードを書き換えつつ実行確認してみた感じでは日本語ローカライズしたコマンド名にアルファベットが含まれているとダメそうでした。<br />
 アルファベットを変更しても(例:<code>/Aマッチ</code>)戦闘以外にアルファベットが来ても(例:<code>/マッチX</code>)だめでした。</p>
@@ -173,10 +170,6 @@ Poiseでは
     <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
   </div>
 </div>
-
-  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
-<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
-
 
 
     </div>

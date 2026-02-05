@@ -106,22 +106,21 @@ The Rust RFC Bookの2532-ass…">
 </section>
 <hr>
 <p><p>2023/07/06現在、stable環境ではRustの関連型(associated type)のデフォルトは定義できません。</p>
-<p>The Rust RFC Bookの<a href="https://rust-lang.github.io/rfcs/2532-associated-type-defaults.html">2532-associated-type-defaults</a>に詳細が書かれています。<br />
-<a href="https://github.com/rust-lang/rust/issues/29661">issue</a>を見ると半数ほどのタスクが終わっているのと、nightly環境では<code>#![feature(associated_type_defaults)]</code>をつけることで動作させられることが確認できます。</p>
+<p>The Rust RFC Bookの<a rel="external" href="https://rust-lang.github.io/rfcs/2532-associated-type-defaults.html">2532-associated-type-defaults</a>に詳細が書かれています。<br />
+<a rel="external" href="https://github.com/rust-lang/rust/issues/29661">issue</a>を見ると半数ほどのタスクが終わっているのと、nightly環境では<code>#![feature(associated_type_defaults)]</code>をつけることで動作させられることが確認できます。</p>
 <p>試しにnightly環境で以下のようなコードを書いてみたところコンパイルが通りました</p>
-<pre data-lang="rust" style="background-color:#1d1f29;color:#afbad4;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#89ddff;">#!</span><span style="color:#9abdf5;">[</span><span style="color:#c0caf5;">feature</span><span style="color:#9abdf5;">(</span><span>associated_type_defaults</span><span style="color:#9abdf5;">)]
-</span><span>
-</span><span style="color:#bb9af7;">trait </span><span style="color:#c0caf5;">Foo </span><span style="color:#9abdf5;">{
-</span><span style="color:#9abdf5;">    </span><span style="color:#bb9af7;">type </span><span style="color:#c0caf5;">AT </span><span style="color:#89ddff;">= </span><span style="color:#bb9af7;">i32</span><span style="color:#89ddff;">;
-</span><span style="color:#9abdf5;">}
-</span><span>
-</span><span style="color:#bb9af7;">struct </span><span style="color:#c0caf5;">A</span><span style="color:#89ddff;">;
-</span><span>
-</span><span style="color:#bb9af7;">impl </span><span>Foo </span><span style="color:#89ddff;">for </span><span style="color:#c0caf5;">A </span><span style="color:#9abdf5;">{}
-</span><span>
-</span><span style="color:#bb9af7;">fn </span><span style="color:#7aa2f7;">main</span><span style="color:#9abdf5;">() {}
-</span></code></pre>
-<p><a href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=e92187ec665da49547b042309f2d13ba">Rust Playgroundで確認</a></p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="rust"><span class="giallo-l"><span style="color: #89DDFF;">#</span><span>!</span><span style="color: #89DDFF;">[</span><span>feature</span><span style="color: #89DDFF;">(</span><span>associated_type_defaults</span><span style="color: #89DDFF;">)]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">trait</span><span style="color: #C0CAF5;"> Foo</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    type</span><span style="color: #C0CAF5;"> AT</span><span style="color: #89DDFF;"> =</span><span style="color: #C0CAF5;"> i32</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">struct</span><span style="color: #C0CAF5;"> A</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">impl</span><span style="color: #C0CAF5;"> Foo</span><span style="color: #BB9AF7;"> for</span><span style="color: #C0CAF5;"> A</span><span style="color: #89DDFF;"> {}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">fn</span><span style="color: #7AA2F7;"> main</span><span style="color: #89DDFF;">() {}</span></span></code></pre>
+<p><a rel="external" href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2021&amp;gist=e92187ec665da49547b042309f2d13ba">Rust Playgroundで確認</a></p>
 <p>stable環境では<code>Foo</code>の中の<code>type AT = i32</code>の部分でコンパイルエラーが発生します。</p>
 <hr />
 <p>色々と <del>悪用</del> 活用できそうな機能ですがいい感じのコードを書けなかったので何かあれば更新します。</p>
@@ -138,10 +137,6 @@ The Rust RFC Bookの2532-ass…">
     <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
   </div>
 </div>
-
-  <script src="https://codoc.jp/js/cms.js" data-css="blue" data-usercode="a1YRHEx5Vg" charset="UTF-8" defer></script>
-<div id="codoc-entry-Jrk5cYu5tw" class="codoc-entries" data-without-body="1" data-support-message="よければ支援をお願いいたします"></div>
-
 
 
     </div>
