@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HH0FEX22FQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HH0FEX22FQ');
+    window['ga-disable-G-HH0FEX22FQ'] = true;
+  </script>
+  
+  <title>
+    
+      【Nigtly Rust】コンパイル時と実行時で処理を呼び分けるconst_eval_select - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    この記事は2026-04-19のnightlyビルドで動作の確認をしています
+const_eval_selectとは
+コンテキスト(constコンテキストかどうか)によって呼び出す…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;rust-const-eval-select&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9ydXN0LWNvbnN0LWV2YWwtc2VsZWN0Lw==">
+    <meta property="og:title" content= "【Nigtly Rust】コンパイル時と実行時で処理を呼び分けるconst_eval_select" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="この記事は2026-04-19のnightlyビルドで動作の確認をしています
+const_eval_selectとは
+コンテキスト(constコンテキストかどうか)によって呼び出す…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "【Nigtly Rust】コンパイル時と実行時で処理を呼び分けるconst_eval_select" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container" id="ga_cookie_accept_menu"></div>
+    <div class="container" id="title">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io">blockの巣</a>
+    </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
+  </header>
+  <main class="section">
+    <div class="container">
+      
+<h1 class="title">
+  【Nigtly Rust】コンパイル時と実行時で処理を呼び分けるconst_eval_select
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2026&#x2F;04&#x2F;21 01:59</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/nightly/">Nightly</a></span>
+
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/rust/">Rust</a></span>
+
+  
+
+</section>
+<section class="container" id="page-index">
+  
+<ul>
+   
+  <li><a href="#const-eval-selecttoha">const_eval_selectとは</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#shi-ifang">使い方</a></li>
+  <ul>
+     
+    <li><a href="#li">例</a></li>
+    <ul>
+      
+    </ul>
+    
+  </ul>
+   
+  <li><a href="#zhu-yi-dian">注意点</a></li>
+  <ul>
+    
+  </ul>
+   
+  <li><a href="#matome">まとめ</a></li>
+  <ul>
+    
+  </ul>
+  
+</ul>
+
+</section>
+<hr>
+<p><p>この記事は2026-04-19のnightlyビルドで動作の確認をしています</p>
+<h2 id="const-eval-selecttoha"><code>const_eval_select</code>とは</h2>
+<p>コンテキスト(<code>const</code>コンテキストかどうか)によって呼び出す関数を切り替えられるようにするための機能です。</p>
+<p><a rel="external" href="https://doc.rust-lang.org/std/intrinsics/fn.const_eval_select.html"><code>std::intrinsics::const_eval_select</code></a></p>
+<h2 id="shi-ifang">使い方</h2>
+<p><code>const_eval_select(関数に渡す引数, コンパイル時に呼び出す関数, 実行時に呼び出す関数)</code> のように使用します。<br />
+<code>const_eval_select(args, const_fn, runtime_fn)</code>のようにすることで、<br />
+コンパイル時には <code>const_fn(args)</code>、実行時には <code>const_fn(args)</code>に置き換えられます。<br />
+第一引数に渡すのは第二、第三引数に渡す関数の呼び出しに使用する引数のタプルです。</p>
+<h3 id="li">例</h3>
+<p>平方根を求める関数(<code>sqrt</code>)をコンパイル時にも使えるようにするための例です。<br />
+実行時にはf64の<code>sqrt</code>を呼び出しますが、コンパイル時にはニュートン法を用いて平方根を求める関数を呼び出すようにしています。</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="rust"><span class="giallo-l"><span style="color: #89DDFF;">#</span><span>!</span><span style="color: #89DDFF;">[</span><span>feature</span><span style="color: #89DDFF;">(</span><span>core_intrinsics</span><span style="color: #89DDFF;">)]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">#</span><span>!</span><span style="color: #89DDFF;">[</span><span>feature</span><span style="color: #89DDFF;">(</span><span>const_eval_select</span><span style="color: #89DDFF;">)]</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89DDFF;">use</span><span style="color: #0DB9D7;"> std</span><span style="color: #89DDFF;">::</span><span style="color: #0DB9D7;">intrinsics</span><span style="color: #89DDFF;">::</span><span>const_eval_select</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">// コンパイル時に呼び出される関数</span></span>
+<span class="giallo-l"><span style="color: #9D7CD8;font-style: italic;">const</span><span style="color: #89DDFF;"> fn</span><span style="color: #7AA2F7;"> ct_sqrt_f64</span><span style="color: #89DDFF;">(</span><span style="color: #C0CAF5;">x</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> f64</span><span style="color: #89DDFF;">) -&gt;</span><span style="color: #C0CAF5;"> f64</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    if</span><span style="color: #C0CAF5;"> x</span><span style="color: #BB9AF7;"> &lt;</span><span style="color: #FF9E64;"> 0</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">0</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        return</span><span style="color: #C0CAF5;"> f64</span><span style="color: #89DDFF;">::</span><span style="color: #FF9E64;">NAN</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    }</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    if</span><span style="color: #C0CAF5;"> x</span><span style="color: #BB9AF7;"> ==</span><span style="color: #FF9E64;"> 0</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">0</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        return</span><span style="color: #FF9E64;"> 0</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">0</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    }</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    let</span><span style="color: #9D7CD8;font-style: italic;"> mut</span><span style="color: #C0CAF5;"> guess</span><span style="color: #89DDFF;"> =</span><span style="color: #C0CAF5;"> x</span><span style="color: #89DDFF;"> /</span><span style="color: #FF9E64;"> 2</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">0</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    loop</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        let</span><span style="color: #C0CAF5;"> new_guess</span><span style="color: #89DDFF;"> =</span><span style="color: #FF9E64;"> 0</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">5</span><span style="color: #89DDFF;"> * (</span><span style="color: #C0CAF5;">guess</span><span style="color: #89DDFF;"> + (</span><span style="color: #C0CAF5;">x</span><span style="color: #89DDFF;"> /</span><span style="color: #C0CAF5;"> guess</span><span style="color: #89DDFF;">));</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">        if</span><span style="color: #89DDFF;"> (</span><span style="color: #C0CAF5;">guess</span><span style="color: #89DDFF;"> -</span><span style="color: #C0CAF5;"> new_guess</span><span style="color: #89DDFF;">).</span><span style="color: #7AA2F7;">abs</span><span style="color: #89DDFF;">() &lt;</span><span style="color: #FF9E64;"> 1</span><span style="color: #89DDFF;">e-</span><span style="color: #FF9E64;">10</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">            break</span><span style="color: #C0CAF5;"> new_guess</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">        }</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">        guess</span><span style="color: #89DDFF;"> =</span><span style="color: #C0CAF5;"> new_guess</span><span style="color: #89DDFF;">;</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">    }</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">// 実行時に呼び出される関数</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">fn</span><span style="color: #7AA2F7;"> rt_sqrt_f64</span><span style="color: #89DDFF;">(</span><span style="color: #C0CAF5;">x</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> f64</span><span style="color: #89DDFF;">) -&gt;</span><span style="color: #C0CAF5;"> f64</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">    x</span><span style="color: #89DDFF;">.</span><span style="color: #7AA2F7;">sqrt</span><span style="color: #89DDFF;">()</span><span style="color: #51597D;font-style: italic;"> // f64のsqrtを呼ぶ</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">// 呼び分けを行うラッパー関数</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">pub</span><span style="color: #9D7CD8;font-style: italic;"> const</span><span style="color: #89DDFF;"> fn</span><span style="color: #7AA2F7;"> sqrt</span><span style="color: #89DDFF;">(</span><span style="color: #C0CAF5;">x</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> f64</span><span style="color: #89DDFF;">) -&gt;</span><span style="color: #C0CAF5;"> f64</span><span style="color: #89DDFF;"> {</span></span>
+<span class="giallo-l"><span style="color: #51597D;font-style: italic;">    // 引数のタプル, コンパイル時関数, 実行時関数を渡す</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    const_eval_select</span><span style="color: #89DDFF;">((</span><span style="color: #C0CAF5;">x</span><span style="color: #89DDFF;">,),</span><span style="color: #C0CAF5;"> ct_sqrt_f64</span><span style="color: #89DDFF;">,</span><span style="color: #C0CAF5;"> rt_sqrt_f64</span><span style="color: #89DDFF;">)</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span></code></pre>
+<p>呼び出し側は通常の関数呼び出しのように使うことができます。</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="rust"><span class="giallo-l"><span style="color: #89DDFF;">fn</span><span style="color: #7AA2F7;"> main</span><span style="color: #89DDFF;">() {</span></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    const</span><span style="color: #FF9E64;"> COMPILE_TIME_RESULT</span><span style="color: #89DDFF;">:</span><span style="color: #C0CAF5;"> f64</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> sqrt</span><span style="color: #89DDFF;">(</span><span style="color: #FF9E64;">2</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">0</span><span style="color: #89DDFF;">);</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    println!</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #9ECE6A;">Compile-time sqrt(2.0) = </span><span style="color: #89DDFF;">{}&quot;,</span><span style="color: #FF9E64;"> COMPILE_TIME_RESULT</span><span style="color: #89DDFF;">);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #BB9AF7;">    let</span><span style="color: #C0CAF5;"> runtime_result</span><span style="color: #89DDFF;"> =</span><span style="color: #7AA2F7;"> sqrt</span><span style="color: #89DDFF;">(</span><span style="color: #FF9E64;">2</span><span style="color: #89DDFF;">.</span><span style="color: #FF9E64;">0</span><span style="color: #89DDFF;">);</span></span>
+<span class="giallo-l"><span style="color: #7AA2F7;">    println!</span><span style="color: #89DDFF;">(&quot;</span><span style="color: #9ECE6A;">Runtime sqrt(2.0) = </span><span style="color: #89DDFF;">{}&quot;,</span><span style="color: #C0CAF5;"> runtime_result</span><span style="color: #89DDFF;">);</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">}</span></span></code></pre>
+<p><a rel="external" href="https://play.rust-lang.org/?version=nightly&amp;mode=debug&amp;edition=2024&amp;gist=c091c544e631944fe9d9037c23e14229">Rust Playgroundで実行する</a></p>
+<h2 id="zhu-yi-dian">注意点</h2>
+<p><code>const_eval_select</code>に渡す2つの関数は、同じ引数を取り同じ型の値を返す必要があります。</p>
+<p>また<code>core_intrinsics</code>を有効にすることで以下の警告が出ます。</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">warning:</span><span style="color: #9ECE6A;"> the feature</span><span style="color: #89DDFF;"> `</span><span style="color: #C0CAF5;">core_intrinsics</span><span style="color: #89DDFF;">`</span><span style="color: #C0CAF5;"> is</span><span style="color: #9ECE6A;"> internal to the compiler or standard library</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;"> --</span><span>&gt;</span><span style="color: #9ECE6A;"> src/main.rs:1:12</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">  |</span></span>
+<span class="giallo-l"><span style="color: #C0CAF5;">1</span><span style="color: #89DDFF;"> |</span><span style="color: #51597D;font-style: italic;"> #![feature(core_intrinsics)]</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">  |</span><span style="color: #C0CAF5;">            ^^^^^^^^^^^^^^^</span></span>
+<span class="giallo-l"><span style="color: #89DDFF;">  |</span></span>
+<span class="giallo-l"><span style="color: #9ECE6A;">  = note: using it is strongly discouraged</span></span>
+<span class="giallo-l"><span style="color: #9ECE6A;">  = note:</span><span style="color: #89DDFF;"> `</span><span style="color: #51597D;font-style: italic;">#[warn(internal_features)]</span><span style="color: #89DDFF;">`</span><span style="color: #C0CAF5;"> on</span><span style="color: #9ECE6A;"> by default</span></span></code></pre>
+<p>「<code>core_intrinsics</code>はコンパイラもしくは標準ライブラリの内部機能です」という警告で、おそらくユーザー側で使用することは推奨されていないです。<br />
+どうしても使用したい場合は警告を抑制して使用することになると思います。</p>
+<h2 id="matome">まとめ</h2>
+<ul>
+<li><code>const_eval_select</code>を使用することでコンパイル時に呼ぶ関数と実行時に呼ぶ関数を切り替えることができる</li>
+<li><code>const_eval_select</code>には引数のタプル、コンパイル時に呼び出す関数、実行時に呼び出す関数を渡す</li>
+<li>使用するために<code>core_intrinsics</code>を有効にすると警告が出る</li>
+</ul>
+</p>
+<hr>
+<div class="container share_buttons">
+  <div><a class="twitter-share-button" data-text="【Nigtly Rust】コンパイル時と実行時で処理を呼び分けるconst_eval_select - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+  <div>
+    <a href="https://donshare.net/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://donshare.net/image/tootbutton.png" width="100" height="20"></a>
+  </div>
+  <div>
+    <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
+  </div>
+</div>
+
+
+    </div>
+  </main>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+
+  
+  <script>
+    const ga_tracking_id = "G-HH0FEX22FQ";
+    const ga_accept_message = `<ul>
+<li>当サイトではアクセス解析ツールGoogle Analyticsを使用しています</li>
+<li>Google Analyticsはトラフィックデータの収集のためにCookieを使用します</li>
+<li>データ収集の同意の状態はPrivacy Policyからいつでもリセットできます</li>
+<li>サイトの閲覧数などを確認したいので同意していただけると嬉しいです</li>
+</ul>
+`;
+    const privacy_policy_url = "https://block-cube-lib.github.io/privacy-policy/";
+  </script>
+  <script src="https://block-cube-lib.github.io/js/ga-cookie-accept.js"></script>
+  
+</body>
+
+</html>

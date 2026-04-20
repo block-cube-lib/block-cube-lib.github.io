@@ -143,6 +143,10 @@
         <lastmod>2023-07-07T01:31:54+09:00</lastmod>
     </url>
     <url>
+        <loc>https://block-cube-lib.github.io/blog/rust-const-eval-select/</loc>
+        <lastmod>2026-04-21T01:59:00+09:00</lastmod>
+    </url>
+    <url>
         <loc>https://block-cube-lib.github.io/blog/rust-generics-specialization/</loc>
         <lastmod>2023-05-11T10:41:00+09:00</lastmod>
     </url>
@@ -266,6 +270,9 @@
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/neovim/</loc>
+    </url>
+    <url>
+        <loc>https://block-cube-lib.github.io/tags/nightly/</loc>
     </url>
     <url>
         <loc>https://block-cube-lib.github.io/tags/poise/</loc>
