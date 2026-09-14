@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<head>
+  
+  <script data-goatcounter="https:&#x2F;&#x2F;block.goatcounter.com&#x2F;count"
+        async src="//gc.zgo.at/count.js"></script>
+  
+  <title>
+    
+      git mergeでコンフリクトしたときにどちらかのファイルで上書きする(restore) - blockの巣
+    
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="
+  
+    git mergeでコンフリクトしたときにどちらかのファイルで上書きするの内容のcheckoutではなくrestoreを使用する版です。
+git merge &amp;lt;branch-…
+  
+">
+
+   <!-- begin ogp -->
+    <meta property="og:url" content="https:&#x2F;&#x2F;block-cube-lib.github.io&#x2F;blog&#x2F;git-conflict-resolve-restore&#x2F;">
+    <meta property="og:image" content="https://j3mhco9ey2.execute-api.us-east-2.amazonaws.com/default/ogp_image_generator?encoded_url=aHR0cHM6Ly9ibG9jay1jdWJlLWxpYi5naXRodWIuaW8vYmxvZy9naXQtY29uZmxpY3QtcmVzb2x2ZS1yZXN0b3JlLw==">
+    <meta property="og:title" content= "git mergeでコンフリクトしたときにどちらかのファイルで上書きする(restore)" >
+    
+    
+      
+          <meta property="og:type" constnt="article">
+      
+    
+    <meta property="og:description" content="git mergeでコンフリクトしたときにどちらかのファイルで上書きするの内容のcheckoutではなくrestoreを使用する版です。
+git merge &amp;amp;lt;branch-…">
+    <!-- begin twitter ogp -->
+    
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@block_cube_lib">
+      <meta name="twitter:title" content= "git mergeでコンフリクトしたときにどちらかのファイルで上書きする(restore)" >
+    
+    <!-- end twitter ogp -->
+   <!-- end ogp -->
+  <link rel="stylesheet" type="text/css" href="https://block-cube-lib.github.io/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+  <header class="header">
+    <div class="container" id="title">
+      <a href="https:&#x2F;&#x2F;block-cube-lib.github.io">blockの巣</a>
+    </div>
+    <nav id="site-nav">
+      
+      <a class="nav_content" href="&#x2F;blog&#x2F;">Blog</a>
+      
+      <a class="nav_content" href="&#x2F;tags&#x2F;">Tags</a>
+      
+      <a class="nav_content" href="&#x2F;about&#x2F;">About</a>
+      
+      <a class="nav_content" href="&#x2F;works&#x2F;">Works</a>
+      
+      <a class="nav_content" href="&#x2F;privacy-policy&#x2F;">Privacy Policy</a>
+      
+    </nav>
+  </header>
+  <main class="section">
+    <div class="container">
+      
+<h1 class="title">
+  git mergeでコンフリクトしたときにどちらかのファイルで上書きする(restore)
+</h1>
+  <section class="update_history">
+    <table>
+      <tr>
+        <td>
+  <span class = "date">2026&#x2F;09&#x2F;14 23:11</span>
+</td>
+        <td>公開</td>
+      </tr>
+      
+    </table>
+  </section>
+<section class="tags">
+  
+  
+  
+  <span class = "tag"><a href="https://block-cube-lib.github.io/tags/git/">git</a></span>
+
+  
+
+</section>
+<section class="container" id="page-index">
+  
+<ul>
+  
+</ul>
+
+</section>
+<hr>
+<p><p><a href="../git-conflict-resolve">git mergeでコンフリクトしたときにどちらかのファイルで上書きする</a>の内容の<code>checkout</code>ではなく<code>restore</code>を使用する版です。</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">git</span><span style="color: #9ECE6A;"> merge</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">branch-nam</span><span>e</span><span style="color: #89DDFF;">&gt;</span></span></code></pre>
+<p>したときにファイルがコンフリクトして解決する方法</p>
+<p>手元のファイル優先</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">git</span><span style="color: #9ECE6A;"> restore</span><span style="color: #E0AF68;"> --ours</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">conflicted-fil</span><span>e</span><span style="color: #89DDFF;">&gt;</span></span></code></pre>
+<p>マージするブランチのファイル優先</p>
+<pre class="giallo" style="color: #A9B1D6; background-color: #1A1B26;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #C0CAF5;">git</span><span style="color: #9ECE6A;"> restore</span><span style="color: #E0AF68;"> --theirs</span><span style="color: #89DDFF;"> &lt;</span><span style="color: #9ECE6A;">conflicted-fil</span><span>e</span><span style="color: #89DDFF;">&gt;</span></span></code></pre></p>
+<hr>
+<div class="container share_buttons">
+  <div><a class="twitter-share-button" data-text="git mergeでコンフリクトしたときにどちらかのファイルで上書きする(restore) - blockの巣" href="https://twitter.com/intent/tweet" data-size="large">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+  <div>
+    <a href="https://donshare.net/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://donshare.net/image/tootbutton.png" width="100" height="20"></a>
+  </div>
+  <div>
+    <a href="https://misskeyshare.link/share.html?text=" onclick="window.open(this.href+encodeURI(decodeURI(document.title))+'&url='+encodeURI(decodeURI(location.href)), '', 'width=500,height=400'); return false;"><img src="https://misskeyshare.link/image/notebutton.webp" width="80" height="20"></a>
+  </div>
+</div>
+
+    </div>
+  </main>
+  <footer>
+    
+    
+    copyright 2019 block.
+    
+    
+  </footer>
+</body>
+
+</html>
