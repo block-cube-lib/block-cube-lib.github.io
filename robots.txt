@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 Allow: /
-Sitemap: https://block-cube-lib.github.io/sitemap.xml
+Sitemap: https://block-lab.dev/sitemap.xml

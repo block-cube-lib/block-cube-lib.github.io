@@ -1,423 +1,423 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://block-cube-lib.github.io/</loc>
+        <loc>https://block-lab.dev/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/about/</loc>
+        <loc>https://block-lab.dev/about/</loc>
         <lastmod>2026-07-06T11:28:53+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/</loc>
+        <loc>https://block-lab.dev/blog/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/add-support/</loc>
+        <loc>https://block-lab.dev/blog/add-support/</loc>
         <lastmod>2022-12-14T12:40:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/advent-calendar-2021/</loc>
+        <loc>https://block-lab.dev/blog/advent-calendar-2021/</loc>
         <lastmod>2022-01-18T22:00:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/advent-calendar-2022/</loc>
+        <loc>https://block-lab.dev/blog/advent-calendar-2022/</loc>
         <lastmod>2022-12-27T17:27:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/blog-deployed-github-actions/</loc>
+        <loc>https://block-lab.dev/blog/blog-deployed-github-actions/</loc>
         <lastmod>2021-06-10T20:48:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/change-log-in-content-zola/</loc>
+        <loc>https://block-lab.dev/blog/change-log-in-content-zola/</loc>
         <lastmod>2022-11-29T17:28:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/change-site-generator/</loc>
+        <loc>https://block-lab.dev/blog/change-site-generator/</loc>
         <lastmod>2021-01-19T22:10:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/childcare-leave/</loc>
+        <loc>https://block-lab.dev/blog/childcare-leave/</loc>
         <lastmod>2021-08-25T22:20:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/cmf-buds-pro-2-purchased/</loc>
+        <loc>https://block-lab.dev/blog/cmf-buds-pro-2-purchased/</loc>
         <lastmod>2024-12-18T10:07:28+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-1/</loc>
+        <loc>https://block-lab.dev/blog/compile-time-ray-tracing-in-rust-1/</loc>
         <lastmod>2022-01-21T22:28:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-2/</loc>
+        <loc>https://block-lab.dev/blog/compile-time-ray-tracing-in-rust-2/</loc>
         <lastmod>2022-01-31T12:35:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-3/</loc>
+        <loc>https://block-lab.dev/blog/compile-time-ray-tracing-in-rust-3/</loc>
         <lastmod>2022-02-04T00:20:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-4/</loc>
+        <loc>https://block-lab.dev/blog/compile-time-ray-tracing-in-rust-4/</loc>
         <lastmod>2022-02-05T01:12:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-5/</loc>
+        <loc>https://block-lab.dev/blog/compile-time-ray-tracing-in-rust-5/</loc>
         <lastmod>2022-02-16T22:02:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-6/</loc>
+        <loc>https://block-lab.dev/blog/compile-time-ray-tracing-in-rust-6/</loc>
         <lastmod>2022-03-31T00:22:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/compile-time-ray-tracing-in-rust-7/</loc>
+        <loc>https://block-lab.dev/blog/compile-time-ray-tracing-in-rust-7/</loc>
         <lastmod>2022-04-07T13:03:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/const-vec3/</loc>
+        <loc>https://block-lab.dev/blog/const-vec3/</loc>
         <lastmod>2022-01-27T13:25:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/create-todays-muscle-training/</loc>
+        <loc>https://block-lab.dev/blog/create-todays-muscle-training/</loc>
         <lastmod>2022-03-07T13:00:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/discord-bot-invalid-command-name-jp/</loc>
+        <loc>https://block-lab.dev/blog/discord-bot-invalid-command-name-jp/</loc>
         <lastmod>2023-02-24T12:55:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/esp-idf-svc-project-rust-version-up/</loc>
+        <loc>https://block-lab.dev/blog/esp-idf-svc-project-rust-version-up/</loc>
         <lastmod>2026-02-05T23:02:05+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/failed-attempt-const-generics-vector-matrix/</loc>
+        <loc>https://block-lab.dev/blog/failed-attempt-const-generics-vector-matrix/</loc>
         <lastmod>2024-02-21T15:25:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/git-conflict-resolve-restore/</loc>
+        <loc>https://block-lab.dev/blog/git-conflict-resolve-restore/</loc>
         <lastmod>2026-09-14T23:11:33+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/git-conflict-resolve/</loc>
+        <loc>https://block-lab.dev/blog/git-conflict-resolve/</loc>
         <lastmod>2025-08-21T12:44:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/github-codespaces-zola/</loc>
+        <loc>https://block-lab.dev/blog/github-codespaces-zola/</loc>
         <lastmod>2024-05-10T23:49:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/google-analytics/</loc>
+        <loc>https://block-lab.dev/blog/google-analytics/</loc>
         <lastmod>2022-02-03T10:53:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/impl-rand-for-user-defined-type/</loc>
+        <loc>https://block-lab.dev/blog/impl-rand-for-user-defined-type/</loc>
         <lastmod>2024-09-10T14:40:14+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/impl-trait-conditions-const-generics-argument/</loc>
+        <loc>https://block-lab.dev/blog/impl-trait-conditions-const-generics-argument/</loc>
         <lastmod>2022-03-10T22:31:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/impl-vec-length-diff-type-in-rust/</loc>
+        <loc>https://block-lab.dev/blog/impl-vec-length-diff-type-in-rust/</loc>
         <lastmod>2024-09-05T00:05:14+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/keyboard-advent-calendar-2019/</loc>
+        <loc>https://block-lab.dev/blog/keyboard-advent-calendar-2019/</loc>
         <lastmod>2019-12-22T23:50:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/marp-cli/</loc>
+        <loc>https://block-lab.dev/blog/marp-cli/</loc>
         <lastmod>2023-08-19T00:02:20+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/open-website/</loc>
+        <loc>https://block-lab.dev/blog/open-website/</loc>
         <lastmod>2019-09-17T21:12:20+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/ponos-advent-calendar-2019/</loc>
+        <loc>https://block-lab.dev/blog/ponos-advent-calendar-2019/</loc>
         <lastmod>2019-12-03T12:40:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/ponos-advent-calendar-2021/</loc>
+        <loc>https://block-lab.dev/blog/ponos-advent-calendar-2021/</loc>
         <lastmod>2021-12-07T23:40:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/resolve-message-pack-generate-error/</loc>
+        <loc>https://block-lab.dev/blog/resolve-message-pack-generate-error/</loc>
         <lastmod>2022-05-23T23:51:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/rust-associated-type-defaults/</loc>
+        <loc>https://block-lab.dev/blog/rust-associated-type-defaults/</loc>
         <lastmod>2023-07-07T01:31:54+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/rust-const-eval-select/</loc>
+        <loc>https://block-lab.dev/blog/rust-const-eval-select/</loc>
         <lastmod>2026-04-21T01:59:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/rust-generics-specialization/</loc>
+        <loc>https://block-lab.dev/blog/rust-generics-specialization/</loc>
         <lastmod>2023-05-11T10:41:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/rust-initialize-tuple-struct/</loc>
+        <loc>https://block-lab.dev/blog/rust-initialize-tuple-struct/</loc>
         <lastmod>2023-05-27T01:40:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/rust-std-process-command/</loc>
+        <loc>https://block-lab.dev/blog/rust-std-process-command/</loc>
         <lastmod>2019-12-26T18:30:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/rust-tuple-comma/</loc>
+        <loc>https://block-lab.dev/blog/rust-tuple-comma/</loc>
         <lastmod>2023-05-30T13:07:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/treesitter-cs-user-defined-array-type-highlight/</loc>
+        <loc>https://block-lab.dev/blog/treesitter-cs-user-defined-array-type-highlight/</loc>
         <lastmod>2023-05-26T09:43:32+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/unite2019/</loc>
+        <loc>https://block-lab.dev/blog/unite2019/</loc>
         <lastmod>2019-09-25T22:01:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/unity-change-camera-renderer-from-script/</loc>
+        <loc>https://block-lab.dev/blog/unity-change-camera-renderer-from-script/</loc>
         <lastmod>2020-01-09T19:07:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/unity-kyoto-0/</loc>
+        <loc>https://block-lab.dev/blog/unity-kyoto-0/</loc>
         <lastmod>2019-12-24T18:30:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/unity-web-gl-gh-pages-deploy/</loc>
+        <loc>https://block-lab.dev/blog/unity-web-gl-gh-pages-deploy/</loc>
         <lastmod>2022-04-25T21:30:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/update-site-theme-2023-09/</loc>
+        <loc>https://block-lab.dev/blog/update-site-theme-2023-09/</loc>
         <lastmod>2023-09-23T01:44:29+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/blog/what-can-console-output-be-used-for-game-dev/</loc>
+        <loc>https://block-lab.dev/blog/what-can-console-output-be-used-for-game-dev/</loc>
         <lastmod>2021-02-07T23:29:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/documentation/archive/git-author-1-0/</loc>
+        <loc>https://block-lab.dev/documentation/archive/git-author-1-0/</loc>
         <lastmod>2019-12-01T22:00:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/documentation/git-author/</loc>
+        <loc>https://block-lab.dev/documentation/git-author/</loc>
         <lastmod>2020-01-08T13:10:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/privacy-policy/</loc>
+        <loc>https://block-lab.dev/privacy-policy/</loc>
         <lastmod>2026-04-28T01:04:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/</loc>
+        <loc>https://block-lab.dev/tags/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/advent-calendar/</loc>
+        <loc>https://block-lab.dev/tags/advent-calendar/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/c/</loc>
+        <loc>https://block-lab.dev/tags/c/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/compile-time-ray-tracing-in-rust/</loc>
+        <loc>https://block-lab.dev/tags/compile-time-ray-tracing-in-rust/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/discord/</loc>
+        <loc>https://block-lab.dev/tags/discord/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/earphones/</loc>
+        <loc>https://block-lab.dev/tags/earphones/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/esp-idf-svc/</loc>
+        <loc>https://block-lab.dev/tags/esp-idf-svc/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/esp32/</loc>
+        <loc>https://block-lab.dev/tags/esp32/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/game-development/</loc>
+        <loc>https://block-lab.dev/tags/game-development/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/gameci/</loc>
+        <loc>https://block-lab.dev/tags/gameci/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/generics/</loc>
+        <loc>https://block-lab.dev/tags/generics/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/git-author/</loc>
+        <loc>https://block-lab.dev/tags/git-author/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/git/</loc>
+        <loc>https://block-lab.dev/tags/git/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/github-actions/</loc>
+        <loc>https://block-lab.dev/tags/github-actions/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/github-codespaces/</loc>
+        <loc>https://block-lab.dev/tags/github-codespaces/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/github-pages/</loc>
+        <loc>https://block-lab.dev/tags/github-pages/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/github/</loc>
+        <loc>https://block-lab.dev/tags/github/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/google-analytics/</loc>
+        <loc>https://block-lab.dev/tags/google-analytics/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/keyboard/</loc>
+        <loc>https://block-lab.dev/tags/keyboard/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/marp-cli/</loc>
+        <loc>https://block-lab.dev/tags/marp-cli/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/marp/</loc>
+        <loc>https://block-lab.dev/tags/marp/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/messagepack/</loc>
+        <loc>https://block-lab.dev/tags/messagepack/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/neovim/</loc>
+        <loc>https://block-lab.dev/tags/neovim/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/nightly/</loc>
+        <loc>https://block-lab.dev/tags/nightly/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/poise/</loc>
+        <loc>https://block-lab.dev/tags/poise/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2019/</loc>
+        <loc>https://block-lab.dev/tags/ponos-advent-calendar-2019/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2021/</loc>
+        <loc>https://block-lab.dev/tags/ponos-advent-calendar-2021/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/ponos-advent-calendar-2022/</loc>
+        <loc>https://block-lab.dev/tags/ponos-advent-calendar-2022/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/ray-tracing/</loc>
+        <loc>https://block-lab.dev/tags/ray-tracing/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/rust-advent-calendar-2021/</loc>
+        <loc>https://block-lab.dev/tags/rust-advent-calendar-2021/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/rust-advent-calendar-2022/</loc>
+        <loc>https://block-lab.dev/tags/rust-advent-calendar-2022/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/rust/</loc>
+        <loc>https://block-lab.dev/tags/rust/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/this-week-in-block/</loc>
+        <loc>https://block-lab.dev/tags/this-week-in-block/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/tree-sitter/</loc>
+        <loc>https://block-lab.dev/tags/tree-sitter/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/unite/</loc>
+        <loc>https://block-lab.dev/tags/unite/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/unity/</loc>
+        <loc>https://block-lab.dev/tags/unity/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/unitykyoto/</loc>
+        <loc>https://block-lab.dev/tags/unitykyoto/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/universalrp/</loc>
+        <loc>https://block-lab.dev/tags/universalrp/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/webgl/</loc>
+        <loc>https://block-lab.dev/tags/webgl/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/yew/</loc>
+        <loc>https://block-lab.dev/tags/yew/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/tags/zola/</loc>
+        <loc>https://block-lab.dev/tags/zola/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/</loc>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-1/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-1/</loc>
         <lastmod>2024-05-11T18:20:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-10/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-10/</loc>
         <lastmod>2024-07-15T23:59:01+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-11/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-11/</loc>
         <lastmod>2024-07-23T21:11:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-12/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-12/</loc>
         <lastmod>2024-08-02T00:02:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-13/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-13/</loc>
         <lastmod>2024-08-10T00:00:42+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-14/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-14/</loc>
         <lastmod>2024-08-16T22:18:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-15/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-15/</loc>
         <lastmod>2024-08-23T16:08:14+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-16/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-16/</loc>
         <lastmod>2024-08-26T19:15:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-17/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-17/</loc>
         <lastmod>2024-09-05T00:03:39+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-18/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-18/</loc>
         <lastmod>2024-09-13T16:49:23+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-19/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-19/</loc>
         <lastmod>2025-08-25T13:49:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-2/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-2/</loc>
         <lastmod>2024-05-18T23:50:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-20/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-20/</loc>
         <lastmod>2025-09-01T13:30:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-21/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-21/</loc>
         <lastmod>2025-09-06T18:15:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-3/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-3/</loc>
         <lastmod>2024-05-26T02:27:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-4/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-4/</loc>
         <lastmod>2024-06-02T00:11:30+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-5/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-5/</loc>
         <lastmod>2024-06-09T20:45:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-6/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-6/</loc>
         <lastmod>2024-06-16T00:45:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-7/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-7/</loc>
         <lastmod>2024-06-24T12:35:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-8/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-8/</loc>
         <lastmod>2024-07-01T12:31:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/this-week-in-block/this-week-in-block-9/</loc>
+        <loc>https://block-lab.dev/this-week-in-block/this-week-in-block-9/</loc>
         <lastmod>2024-07-07T16:29:00+09:00</lastmod>
     </url>
     <url>
-        <loc>https://block-cube-lib.github.io/works/</loc>
+        <loc>https://block-lab.dev/works/</loc>
         <lastmod>2022-03-07T23:33:00+09:00</lastmod>
     </url>
 </urlset>
