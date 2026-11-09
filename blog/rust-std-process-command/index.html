@@ -182,6 +182,34 @@
     
     
   </footer>
+  <!-- access-counter beacon (self-hosted, runs alongside GoatCounter during the trial period) -->
+  <script>
+  (function () {
+    var ENDPOINT = "https://count.block-lab.dev/count";
+    try {
+      var params = new URLSearchParams(location.search);
+      if (params.get("nocount") === "1") { localStorage.setItem("ac-nocount", "1"); return; }
+      if (params.get("nocount") === "0") { localStorage.removeItem("ac-nocount"); }
+      if (localStorage.getItem("ac-nocount") === "1") return;
+    } catch (e) {}
+    var sent = false;
+    function send() {
+      if (sent) return;
+      sent = true;
+      var payload = JSON.stringify({ p: location.pathname, r: document.referrer || "" });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(ENDPOINT, new Blob([payload], { type: "text/plain" }));
+      } else {
+        fetch(ENDPOINT, { method: "POST", body: payload, headers: { "Content-Type": "text/plain" }, keepalive: true }).catch(function () {});
+      }
+    }
+    if (document.prerendering) {
+      document.addEventListener("prerenderingchange", send, { once: true });
+    } else {
+      send();
+    }
+  })();
+  </script>
 </body>
 
 </html>
