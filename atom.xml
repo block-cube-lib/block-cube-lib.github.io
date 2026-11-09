@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
     <title>block lab</title>
     <subtitle>京都でゲームプログラマをしている立方体のサイト。Unity&#x2F;C#&#x2F;Rustを主食にしています。</subtitle>
     <link rel="self" type="application/atom+xml" href="https://block-lab.dev/atom.xml"/>
@@ -7,7 +7,7 @@
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2026-09-14T23:11:33+09:00</updated>
     <id>https://block-lab.dev/atom.xml</id>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>git mergeでコンフリクトしたときにどちらかのファイルで上書きする(restore)</title>
         <published>2026-09-14T23:11:33+09:00</published>
         <updated>2026-09-14T23:11:33+09:00</updated>
@@ -32,7 +32,7 @@
 &lt;pre class=&quot;giallo&quot; style=&quot;color: #A9B1D6; background-color: #1A1B26;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #C0CAF5;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span style=&quot;color: #9ECE6A;&quot;&gt; restore&lt;&#x2F;span&gt;&lt;span style=&quot;color: #E0AF68;&quot;&gt; --theirs&lt;&#x2F;span&gt;&lt;span style=&quot;color: #89DDFF;&quot;&gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color: #9ECE6A;&quot;&gt;conflicted-fil&lt;&#x2F;span&gt;&lt;span&gt;e&lt;&#x2F;span&gt;&lt;span style=&quot;color: #89DDFF;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>【Nigtly Rust】コンパイル時と実行時で処理を呼び分けるconst_eval_select</title>
         <published>2026-04-21T01:59:00+09:00</published>
         <updated>2026-04-21T01:59:00+09:00</updated>
@@ -124,7 +124,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>esp-idf-svc(Rust + ESP32)のプロジェクトのRustのバージョンを上げる</title>
         <published>2026-02-05T23:02:05+09:00</published>
         <updated>2026-02-05T23:02:05+09:00</updated>
@@ -150,7 +150,7 @@
 &lt;pre class=&quot;giallo&quot; style=&quot;color: #A9B1D6; background-color: #1A1B26;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #C0CAF5;&quot;&gt;rustup&lt;&#x2F;span&gt;&lt;span style=&quot;color: #9ECE6A;&quot;&gt; update&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 21 (2025&#x2F;08&#x2F;29 ~ 2025&#x2F;09&#x2F;05)</title>
         <published>2025-09-06T18:15:00+09:00</published>
         <updated>2025-09-06T18:15:00+09:00</updated>
@@ -190,7 +190,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 20 (2025&#x2F;08&#x2F;23 ~ 2025&#x2F;08&#x2F;29)</title>
         <published>2025-09-01T13:30:00+09:00</published>
         <updated>2025-09-01T13:30:00+09:00</updated>
@@ -218,7 +218,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 19 (2025&#x2F;08&#x2F;16 ~ 2025&#x2F;08&#x2F;22)</title>
         <published>2025-08-25T13:49:00+09:00</published>
         <updated>2025-08-25T13:49:00+09:00</updated>
@@ -272,7 +272,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>git mergeでコンフリクトしたときにどちらかのファイルで上書きする</title>
         <published>2025-08-21T12:44:00+09:00</published>
         <updated>2025-08-21T12:44:00+09:00</updated>
@@ -296,7 +296,7 @@
 &lt;pre class=&quot;giallo&quot; style=&quot;color: #A9B1D6; background-color: #1A1B26;&quot;&gt;&lt;code data-lang=&quot;shellscript&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #C0CAF5;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span style=&quot;color: #9ECE6A;&quot;&gt; checkout&lt;&#x2F;span&gt;&lt;span style=&quot;color: #E0AF68;&quot;&gt; --theirs&lt;&#x2F;span&gt;&lt;span style=&quot;color: #89DDFF;&quot;&gt; &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color: #9ECE6A;&quot;&gt;conflicted-fil&lt;&#x2F;span&gt;&lt;span&gt;e&lt;&#x2F;span&gt;&lt;span style=&quot;color: #89DDFF;&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>CMF Buds Pro 2買った</title>
         <published>2024-12-18T10:07:28+09:00</published>
         <updated>2024-12-18T10:07:28+09:00</updated>
@@ -351,7 +351,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 18 (2024&#x2F;09&#x2F;01 ~ 2024&#x2F;09&#x2F;07)</title>
         <published>2024-09-13T16:49:23+09:00</published>
         <updated>2024-09-13T16:49:23+09:00</updated>
@@ -389,7 +389,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>【Rust】ユーザー定義型にrandクレートの乱数生成を実装する</title>
         <published>2024-09-10T14:40:14+09:00</published>
         <updated>2024-09-10T14:40:14+09:00</updated>
@@ -494,7 +494,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>【Rust】Vec3&lt;T&gt;のTが何であってもlength()が浮動小数点型を返すようにする</title>
         <published>2024-09-05T00:05:14+09:00</published>
         <updated>2024-09-05T00:05:14+09:00</updated>
@@ -640,7 +640,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 17 (2024&#x2F;08&#x2F;25 ~ 2024&#x2F;08&#x2F;31)</title>
         <published>2024-09-05T00:03:39+09:00</published>
         <updated>2024-09-05T00:03:39+09:00</updated>
@@ -677,7 +677,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 16 (2024&#x2F;08&#x2F;18 ~ 2024&#x2F;08&#x2F;24)</title>
         <published>2024-08-26T19:15:00+09:00</published>
         <updated>2024-08-26T19:15:00+09:00</updated>
@@ -714,7 +714,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 15 (2024&#x2F;08&#x2F;11 ~ 2024&#x2F;08&#x2F;17)</title>
         <published>2024-08-23T16:08:14+09:00</published>
         <updated>2024-08-23T16:08:14+09:00</updated>
@@ -747,7 +747,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 14 (2024&#x2F;08&#x2F;04 ~ 2024&#x2F;08&#x2F;10)</title>
         <published>2024-08-16T22:18:00+09:00</published>
         <updated>2024-08-16T22:18:00+09:00</updated>
@@ -779,7 +779,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 13 (2024&#x2F;07&#x2F;28 ~ 2024&#x2F;08&#x2F;03)</title>
         <published>2024-08-10T00:00:42+09:00</published>
         <updated>2024-08-10T00:00:42+09:00</updated>
@@ -811,7 +811,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 12 (2024&#x2F;07&#x2F;21 ~ 2024&#x2F;07&#x2F;27)</title>
         <published>2024-08-02T00:02:00+09:00</published>
         <updated>2024-08-02T00:02:00+09:00</updated>
@@ -845,7 +845,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 11 (2024&#x2F;07&#x2F;14 ~ 2024&#x2F;07&#x2F;20)</title>
         <published>2024-07-23T21:11:00+09:00</published>
         <updated>2024-07-23T21:11:00+09:00</updated>
@@ -882,7 +882,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 10 (2024&#x2F;07&#x2F;07 ~ 2024&#x2F;07&#x2F;13)</title>
         <published>2024-07-15T23:59:01+09:00</published>
         <updated>2024-07-15T23:59:01+09:00</updated>
@@ -928,7 +928,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 9 (2024&#x2F;06&#x2F;30 ~ 2024&#x2F;07&#x2F;06)</title>
         <published>2024-07-07T16:29:00+09:00</published>
         <updated>2024-07-07T16:29:00+09:00</updated>
@@ -961,7 +961,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 8 (2024&#x2F;06&#x2F;23 ~ 2024&#x2F;06&#x2F;29)</title>
         <published>2024-07-01T12:31:00+09:00</published>
         <updated>2024-07-01T12:31:00+09:00</updated>
@@ -1010,7 +1010,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 7 (2024&#x2F;06&#x2F;16 ~ 2024&#x2F;06&#x2F;22)</title>
         <published>2024-06-24T12:35:00+09:00</published>
         <updated>2024-06-24T12:35:00+09:00</updated>
@@ -1048,7 +1048,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 6 (2024&#x2F;06&#x2F;09 ~ 2024&#x2F;06&#x2F;15)</title>
         <published>2024-06-16T00:45:00+09:00</published>
         <updated>2024-06-16T00:45:00+09:00</updated>
@@ -1085,7 +1085,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 5 (2024&#x2F;06&#x2F;02 ~ 2024&#x2F;06&#x2F;08)</title>
         <published>2024-06-09T20:45:00+09:00</published>
         <updated>2024-06-09T20:45:00+09:00</updated>
@@ -1123,7 +1123,7 @@
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 4 (2024&#x2F;05&#x2F;26 ~ 2024&#x2F;06&#x2F;01)</title>
         <published>2024-06-02T00:11:30+09:00</published>
         <updated>2024-06-02T00:11:30+09:00</updated>
@@ -1160,7 +1160,7 @@ CPUが処理効率向上のためにメモリアクセスの順序を入れ替�
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 3 (2024&#x2F;5&#x2F;19 ~ 2024&#x2F;5&#x2F;25)</title>
         <published>2024-05-26T02:27:00+09:00</published>
         <updated>2024-05-26T02:27:00+09:00</updated>
@@ -1201,7 +1201,7 @@ I&#x2F;Oアクセスの辺りとキャッシュコヒーレンスの辺りを読
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 2 (2024&#x2F;05&#x2F;12 ~ 2024&#x2F;05&#x2F;18)</title>
         <published>2024-05-18T23:50:00+09:00</published>
         <updated>2024-05-18T23:50:00+09:00</updated>
@@ -1245,7 +1245,7 @@ TLBの辺りとI&#x2F;Oアクセスの辺りを読んでた。&lt;&#x2F;p&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>This Week in block 1 (2024&#x2F;05&#x2F;6 ~ 2024&#x2F;05&#x2F;11)</title>
         <published>2024-05-11T18:20:00+09:00</published>
         <updated>2024-05-11T18:20:00+09:00</updated>
@@ -1293,7 +1293,7 @@ Bluetoothの実装前に概念を頭に入れれたので助かった。&lt;&#x2
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>GitHub CodesacesでZolaの記事を書く</title>
         <published>2024-05-10T23:49:00+09:00</published>
         <updated>2024-05-10T23:49:00+09:00</updated>
@@ -1355,7 +1355,7 @@ Bluetoothの実装前に概念を頭に入れれたので助かった。&lt;&#x2
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>const genericsの引数によってベクトル型の定義を変えたもので行列型を定義したかった</title>
         <published>2024-02-21T15:25:00+09:00</published>
         <updated>2024-02-21T15:25:00+09:00</updated>
@@ -1496,7 +1496,7 @@ Bluetoothの実装前に概念を頭に入れれたので助かった。&lt;&#x2
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>サイトの見た目を変えた</title>
         <published>2023-09-23T01:44:29+09:00</published>
         <updated>2023-09-23T01:44:29+09:00</updated>
@@ -1518,7 +1518,7 @@ Bluetoothの実装前に概念を頭に入れれたので助かった。&lt;&#x2
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>自由なエディタでMarkdownを書いてスライドを作成できるmarp-cli</title>
         <published>2023-08-19T00:02:20+09:00</published>
         <updated>2023-08-19T00:02:20+09:00</updated>
@@ -1580,7 +1580,7 @@ macOSでは&lt;&#x2F;p&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustの関連型のデフォルトについて</title>
         <published>2023-07-07T01:31:54+09:00</published>
         <updated>2023-07-07T01:31:54+09:00</updated>
@@ -1618,7 +1618,7 @@ macOSでは&lt;&#x2F;p&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustの要素1つのTupleとカンマ</title>
         <published>2023-05-30T13:07:00+09:00</published>
         <updated>2023-05-30T13:07:00+09:00</updated>
@@ -1646,7 +1646,7 @@ macOSでは&lt;&#x2F;p&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Tuple Structも通常の構造体のように初期化できる</title>
         <published>2023-05-27T01:40:00+09:00</published>
         <updated>2023-05-27T01:40:00+09:00</updated>
@@ -1678,7 +1678,7 @@ macOSでは&lt;&#x2F;p&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>nvim-treesitterでC#のユーザー定義型の配列の型をハイライトさせる</title>
         <published>2023-05-26T09:43:32+09:00</published>
         <updated>2023-05-26T09:43:32+09:00</updated>
@@ -1713,7 +1713,7 @@ macOSでは&lt;&#x2F;p&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustのconst genericsの引数によって型の定義を変える(っぽいこと)</title>
         <published>2023-05-11T10:41:00+09:00</published>
         <updated>2023-05-11T10:41:00+09:00</updated>
@@ -1859,7 +1859,7 @@ traitを実装するときconst genericsの値を指定して実装すること�
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Discordのスラッシュコマンドの日本語ローカライズコマンド名にアルファベットを含むことができなさそう</title>
         <published>2023-02-24T12:55:00+09:00</published>
         <updated>2023-02-24T12:55:00+09:00</updated>
@@ -1917,7 +1917,7 @@ traitを実装するときconst genericsの値を指定して実装すること�
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>2022年に参加したAdvent Calendar</title>
         <published>2022-12-27T17:27:00+09:00</published>
         <updated>2022-12-27T17:27:00+09:00</updated>
@@ -1950,7 +1950,7 @@ Rustの方は自分以外誰が喜ぶのか…&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>記事に投げ銭をできるようにした + 投げ銭設置方法</title>
         <published>2022-12-14T12:40:00+09:00</published>
         <updated>2022-12-14T12:40:00+09:00</updated>
@@ -1985,7 +1985,7 @@ Rustの方は自分以外誰が喜ぶのか…&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Zolaで生成したブログの更新履歴をいい感じに表示する</title>
         <published>2022-11-29T17:28:00+09:00</published>
         <updated>2022-11-29T17:28:00+09:00</updated>
@@ -2098,7 +2098,7 @@ Rustの方は自分以外誰が喜ぶのか…&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>MessagePack.Generator(MPC)で発生するエラーを解決する</title>
         <published>2022-05-23T23:51:00+09:00</published>
         <updated>2022-05-23T23:51:00+09:00</updated>
@@ -2160,7 +2160,7 @@ READMEとはinputとoutputが異なりますがcsprojを指定し書き出し先
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>GitHub ActionsでUnityのWebGLビルドしてGitHub PagesにDeployする</title>
         <published>2022-04-25T21:30:00+09:00</published>
         <updated>2022-04-25T21:30:00+09:00</updated>
@@ -2328,7 +2328,7 @@ workflowの実行が完了すると&lt;code&gt;gh-pages&lt;&#x2F;code&gt;とい�
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustでコンパイル時レイトレーシング7</title>
         <published>2022-04-07T13:03:00+09:00</published>
         <updated>2022-04-07T13:03:00+09:00</updated>
@@ -2533,7 +2533,7 @@ workflowの実行が完了すると&lt;code&gt;gh-pages&lt;&#x2F;code&gt;とい�
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustでコンパイル時レイトレーシング6</title>
         <published>2022-03-31T00:22:00+09:00</published>
         <updated>2022-03-31T00:22:00+09:00</updated>
@@ -2708,7 +2708,7 @@ workflowの実行が完了すると&lt;code&gt;gh-pages&lt;&#x2F;code&gt;とい�
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>const genericsの引数が条件を満たすときのみTraitを実装する</title>
         <published>2022-03-10T22:31:00+09:00</published>
         <updated>2022-03-10T22:31:00+09:00</updated>
@@ -2836,7 +2836,7 @@ stableで使えるようになったら更新すると思います。&lt;&#x2F;p
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Yewで日替わりの筋トレのお題を出すWebアプリ作った</title>
         <published>2022-03-07T13:00:00+09:00</published>
         <updated>2022-03-07T13:00:00+09:00</updated>
@@ -2899,7 +2899,7 @@ stableで使えるようになったら更新すると思います。&lt;&#x2F;p
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustでコンパイル時レイトレーシング5</title>
         <published>2022-02-16T22:02:00+09:00</published>
         <updated>2022-02-16T22:02:00+09:00</updated>
@@ -2964,7 +2964,7 @@ stableで使えるようになったら更新すると思います。&lt;&#x2F;p
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustでコンパイル時レイトレーシング4</title>
         <published>2022-02-05T01:12:00+09:00</published>
         <updated>2022-02-05T01:12:00+09:00</updated>
@@ -3022,7 +3022,7 @@ stableで使えるようになったら更新すると思います。&lt;&#x2F;p
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustでコンパイル時レイトレーシング3</title>
         <published>2022-02-04T00:20:00+09:00</published>
         <updated>2022-02-04T00:20:00+09:00</updated>
@@ -3221,7 +3221,7 @@ stableで使えるようになったら更新すると思います。&lt;&#x2F;p
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Google Analyticsでアクセス解析できるようにした</title>
         <published>2022-02-03T10:53:00+09:00</published>
         <updated>2022-02-03T10:53:00+09:00</updated>
@@ -3244,7 +3244,7 @@ Cookieの使用に同意した場合も同意しなかった場合もPrivacy Pol
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustでコンパイル時レイトレーシング2</title>
         <published>2022-01-31T12:35:00+09:00</published>
         <updated>2022-01-31T12:35:00+09:00</updated>
@@ -3572,7 +3572,7 @@ Cookieの使用に同意した場合も同意しなかった場合もPrivacy Pol
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>const fnで使用可能なVec3を定義する</title>
         <published>2022-01-27T13:25:00+09:00</published>
         <updated>2022-01-27T13:25:00+09:00</updated>
@@ -3930,7 +3930,7 @@ Cookieの使用に同意した場合も同意しなかった場合もPrivacy Pol
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustでコンパイル時レイトレーシング1</title>
         <published>2022-01-21T22:28:00+09:00</published>
         <updated>2022-01-21T22:28:00+09:00</updated>
@@ -4101,7 +4101,7 @@ Cookieの使用に同意した場合も同意しなかった場合もPrivacy Pol
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>2021年に参加したAdvent Calendar</title>
         <published>2022-01-18T22:00:00+09:00</published>
         <updated>2022-01-18T22:00:00+09:00</updated>
@@ -4145,7 +4145,7 @@ Qiitaで書くRustの記事は&lt;code&gt;const fn&lt;&#x2F;code&gt;関連ばっ
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>PONOS Advent Calendar 2021に参加しました</title>
         <published>2021-12-07T23:40:00+09:00</published>
         <updated>2021-12-07T23:40:00+09:00</updated>
@@ -4169,7 +4169,7 @@ Qiitaで書くRustの記事は&lt;code&gt;const fn&lt;&#x2F;code&gt;関連ばっ
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>子供が産まれて2ヶ月くらい育休をとった</title>
         <published>2021-08-25T22:20:00+09:00</published>
         <updated>2021-08-25T22:20:00+09:00</updated>
@@ -4240,7 +4240,7 @@ Qiitaで書くRustの記事は&lt;code&gt;const fn&lt;&#x2F;code&gt;関連ばっ
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>ブログをGitHub Actionsでデプロイするようにしました</title>
         <published>2021-06-10T20:48:00+09:00</published>
         <updated>2021-06-10T20:48:00+09:00</updated>
@@ -4269,7 +4269,7 @@ Qiitaで書くRustの記事は&lt;code&gt;const fn&lt;&#x2F;code&gt;関連ばっ
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>黒い画面に文字を出すことがゲーム開発の何に使えるのか(役立つのか)</title>
         <published>2021-02-07T23:29:00+09:00</published>
         <updated>2021-02-07T23:29:00+09:00</updated>
@@ -4314,7 +4314,7 @@ C++ならこういうコード。&lt;&#x2F;p&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Static Site GeneratorをZolaに変更しました</title>
         <published>2021-01-19T22:10:00+09:00</published>
         <updated>2021-01-19T22:10:00+09:00</updated>
@@ -4343,7 +4343,7 @@ Cookie使用しないでアクセス解析できればと思っています。&l
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Cameraに設定されたRendererをスクリプトから変更する</title>
         <published>2020-01-09T19:07:00+09:00</published>
         <updated>2020-01-09T19:07:00+09:00</updated>
@@ -4388,7 +4388,7 @@ Cookie使用しないでアクセス解析できればと思っています。&l
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Git Author</title>
         <published>2020-01-08T13:10:00+09:00</published>
         <updated>2020-01-08T13:10:00+09:00</updated>
@@ -4505,7 +4505,7 @@ Committerでフィルタリングする場合に指定する。&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Rustのstd::process::Commandで引っかかったところ</title>
         <published>2019-12-26T18:30:00+09:00</published>
         <updated>2019-12-26T18:30:00+09:00</updated>
@@ -4569,7 +4569,7 @@ Committerでフィルタリングする場合に指定する。&lt;br &#x2F;&gt;
 &lt;span class=&quot;giallo-l&quot;&gt;&lt;span style=&quot;color: #89DDFF;&quot;&gt;}&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;</content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Unity×KYOTO Vol.0で発表しました</title>
         <published>2019-12-24T18:30:00+09:00</published>
         <updated>2019-12-24T18:30:00+09:00</updated>
@@ -4678,7 +4678,7 @@ PostProcessing Stackの存在を知った時点で&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>HHKBから自作キーボードに乗り換えた話</title>
         <published>2019-12-22T23:50:00+09:00</published>
         <updated>2019-12-22T23:50:00+09:00</updated>
@@ -4727,7 +4727,7 @@ PostProcessing Stackの存在を知った時点で&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>PONOS Advent Calendar 2019に参加しました</title>
         <published>2019-12-03T12:40:00+09:00</published>
         <updated>2019-12-03T12:40:00+09:00</updated>
@@ -4750,7 +4750,7 @@ PostProcessing Stackの存在を知った時点で&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Git Author</title>
         <published>2019-12-01T22:00:00+09:00</published>
         <updated>2019-12-01T22:00:00+09:00</updated>
@@ -4792,7 +4792,7 @@ PostProcessing Stackの存在を知った時点で&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Works</title>
         <published>2019-11-29T14:12:40+09:00</published>
         <updated>2022-03-07T23:33:00+09:00</updated>
@@ -4829,7 +4829,7 @@ PostProcessing Stackの存在を知った時点で&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>Unite Tokyo 2019 Day1に参加しました</title>
         <published>2019-09-25T22:01:00+09:00</published>
         <updated>2019-09-25T22:01:00+09:00</updated>
@@ -4903,7 +4903,7 @@ PostProcessing Stackの存在を知った時点で&lt;br &#x2F;&gt;
 </content>
         
     </entry>
-    <entry xml:lang="en">
+    <entry xml:lang="ja">
         <title>サイト開設しました</title>
         <published>2019-09-17T21:12:20+09:00</published>
         <updated>2019-09-17T21:12:20+09:00</updated>
