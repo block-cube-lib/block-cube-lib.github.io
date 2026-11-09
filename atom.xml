@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
     <title>block lab</title>
-    <subtitle>京都でゲームプログラマをしている立方体のサイト。Unity&#x2F;C#&#x2F;Rustを主食にしています。</subtitle>
+    <subtitle>京都でゲームプログラマをしている立方体のサイト。仕事でUnity&#x2F;C#を使い趣味で主にRustを書いています。</subtitle>
     <link rel="self" type="application/atom+xml" href="https://block-lab.dev/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://block-lab.dev"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
