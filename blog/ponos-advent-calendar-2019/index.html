@@ -144,9 +144,12 @@ gitで複数のユーザーを使い分ける人用サブコ…">
   <script>
   (function () {
     var ENDPOINT = "https://count.block-lab.dev/count";
+    var params = new URLSearchParams(location.search);
+    if (params.get("nocount") === "1") {
+      try { localStorage.setItem("ac-nocount", "1"); } catch (e) {}
+      return;
+    }
     try {
-      var params = new URLSearchParams(location.search);
-      if (params.get("nocount") === "1") { localStorage.setItem("ac-nocount", "1"); return; }
       if (params.get("nocount") === "0") { localStorage.removeItem("ac-nocount"); }
       if (localStorage.getItem("ac-nocount") === "1") return;
     } catch (e) {}
